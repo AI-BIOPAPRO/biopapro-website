@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BIOPAPRO DESIGN SYSTEM v4
+   ─────────────────────────────────────────────────────────────────────────────
+   Philosophy:  Muji precision × Patagonia material honesty × Scandinavian warmth
+   Lead:        Birchwood cream — natural, warm, premium, trustworthy
+   Rule:        70% warm light surfaces · 30% deep warm dark (mfr/stats/certs)
+   Avoid:       Pure black, pure white, cool grey, neon, "eco startup" green
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* ── Typography ── */
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans:    var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+  --font-mono:    var(--font-jetbrains), "JetBrains Mono", "SF Mono", monospace;
+
+  /* ─────────────────────────────────────────────────────────
+     WARM SURFACES — 70% of site
+     Birch cream → parchment → card white.
+     These feel like natural materials, not web UI.
+     ───────────────────────────────────────────────────────── */
+  --color-birch:        #F6F1E8;   /* Page background — birch bark in warm light */
+  --color-parchment:    #EFE6D7;   /* Alt sections — aged parchment */
+  --color-card:         #FBF8F2;   /* Card surface — warm white */
+  --color-pale:         #E8DCCB;   /* Inset panels, code blocks */
+
+  /* Aliased as bg/surface for Tailwind utility classes */
+  --color-bg:           #F6F1E8;
+  --color-surface:      #FBF8F2;
+  --color-surface-alt:  #EFE6D7;
+
+  /* ─────────────────────────────────────────────────────────
+     TEXT — warm browns, never cool grey
+     ───────────────────────────────────────────────────────── */
+  --color-ink:          #2C241B;   /* Primary — very dark warm brown */
+  --color-ink-light:    #4A3D32;   /* Secondary — raised for legibility */
+  --color-ink-muted:    #6B5D50;   /* Captions, labels — raised for legibility */
+
+  /* ─────────────────────────────────────────────────────────
+     WOOD ACCENT — primary brand colour
+     Represents the birchwood material itself.
+     Used for: CTAs, highlights, active states, counters.
+     ───────────────────────────────────────────────────────── */
+  --color-wood:         #C89A5B;   /* Warm amber — sunlit birchwood */
+  --color-wood-dark:    #8C6239;   /* Deep wood — hover/active */
+  --color-wood-deep:    #5C3D1E;   /* Darkest wood — used sparingly */
+  --color-wood-light:   #E5C99A;   /* Light wood — decorative fills */
+  --color-wood-pale:    #F0E4CE;   /* Ghost wood — subtle tints */
+  --color-wood-ghost:   rgba(200, 154, 91, 0.08);
+
+  /* ─────────────────────────────────────────────────────────
+     FOREST — used for sustainability sections
+     Deep green secondary accent — earthy, not neon.
+     ───────────────────────────────────────────────────────── */
+  --color-forest:       #4F6B4A;   /* Deep forest */
+  --color-forest-light: #738A6E;   /* Mid-tone forest */
+  --color-forest-pale:  #D4DFD0;   /* Light forest wash */
+
+  /* ─────────────────────────────────────────────────────────
+     BORDERS
+     ───────────────────────────────────────────────────────── */
+  --color-border:       #DDD3C5;   /* Standard — warm grey-brown */
+  --color-border-light: #EDE5D8;   /* Hairline */
+
+  /* ─────────────────────────────────────────────────────────
+     DARK SECTIONS — 30% of site
+     Manufacturing · Statistics · Global map · Certifications
+     Deep warm brown-black, like cross-cut birchwood in shadow.
+     NOT pure black, NOT cool charcoal.
+     ───────────────────────────────────────────────────────── */
+  --color-dark:         #1D1610;   /* Dark section bg — deep warm brown */
+  --color-dark-raised:  #2C2118;   /* Elevated on dark */
+  --color-dark-border:  #3D2E22;   /* Border on dark */
+  --color-dark-text:    #F6F1E8;   /* Text on dark — birch cream */
+  --color-dark-muted:   rgba(230, 210, 185, 0.65);
+
+  /* ─────────────────────────────────────────────────────────
+     PRIMARY BRAND GREEN — Biopapro identity
+     All components using text-green / bg-green / border-green
+     now render in the authentic Biopapro brand green.
+     ───────────────────────────────────────────────────────── */
+  --color-green:        #4A7A3D;   /* Primary Biopapro green */
+  --color-green-deep:   #2D5228;   /* Deep — hover, active, strong text */
+  --color-green-forest: #1B3317;   /* Forest — darkest, used sparingly */
+  --color-green-light:  #7AAE6B;   /* Mid-tone — highlights */
+  --color-green-pale:   #C8DFC0;   /* Pale — fills, tints */
+  --color-green-ghost:  rgba(74, 122, 61, 0.08);
+
+  /* Legacy aliases — all route to green */
+  --color-gold:         #4A7A3D;
+  --color-gold-deep:    #2D5228;
+  --color-gold-light:   #7AAE6B;
+
+  --color-ink-secondary: #2C2118;
+  --color-ink-tertiary:  #3D2E22;
+  --color-border-dark:   #3D2E22;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BASE STYLES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: auto; /* Lenis handles smooth scroll */
+  }
+
+  body {
+    background-color: #F6F1E8;
+    color: #2C241B;
+    font-family: var(--font-inter), Inter, system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(74, 122, 61, 0.2);
+    color: #1B3317;
+  }
+
+  /* Scrollbar — brand green */
+  ::-webkit-scrollbar       { width: 4px; }
+  ::-webkit-scrollbar-track { background: #F6F1E8; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(74, 122, 61, 0.35);
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #4A7A3D; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   PAPER TEXTURE — light sections
+   Organic noise on warm cream background.
+   multiply blend: slightly deepens surface warmth.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.paper {
+  position: relative;
+}
+
+.paper::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1;
+  animation: noise-shift 10s steps(10) infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   WOOD GRAIN — decorative texture overlay for material sections
+   Use as a background-image overlay on product panels.
+   screen blend: warms and lifts on dark brown surfaces.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.grain {
+  position: relative;
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.045;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+  animation: noise-shift 8s steps(10) infinite;
+}
+
+@keyframes noise-shift {
+  0%   { transform: translate(0, 0);    }
+  10%  { transform: translate(-2%, -3%); }
+  20%  { transform: translate(3%,   2%); }
+  30%  { transform: translate(-1%,  3%); }
+  40%  { transform: translate(2%,  -1%); }
+  50%  { transform: translate(-3%,  1%); }
+  60%  { transform: translate(2%,  -3%); }
+  70%  { transform: translate(-1%, -1%); }
+  80%  { transform: translate(1%,   3%); }
+  90%  { transform: translate(-3%,  2%); }
+  100% { transform: translate(0,    0);  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SCROLLBAR HIDE
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.scrollbar-none                    { scrollbar-width: none; -ms-overflow-style: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TYPOGRAPHY UTILITIES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@utility text-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   ANIMATIONS
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes scroll-line {
+  0%   { transform: scaleY(0); transform-origin: top;    }
+  50%  { transform: scaleY(1); transform-origin: top;    }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.animate-scroll-line {
+  animation: scroll-line 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+@keyframes pulse-warm {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.animate-pulse-warm {
+  animation: pulse-warm 2.5s ease-in-out infinite;
+}

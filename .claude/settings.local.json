@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3002/products\" -UseBasicParsing -TimeoutSec 15)",
+      "PowerShell(Start-Sleep -Seconds 5; Invoke-WebRequest -Uri \"http://localhost:3002/products\" -UseBasicParsing -TimeoutSec 20 | Select-Object StatusCode, @{n=\"Bytes\";e={$_.RawContent.Length}})",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3002/\" -UseBasicParsing -TimeoutSec 10)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/products\" -UseBasicParsing -TimeoutSec 15)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/\" -UseBasicParsing -TimeoutSec 12)",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\Dell\\\\Downloads\\\\Biopapro-new-website\\\\components\\\\global-presence\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\Dell\\\\Downloads\\\\Biopapro-new-website\\\\app\\\\global-presence\")",
+      "PowerShell(Start-Sleep -Seconds 5; $ports = @\\(3000,3001\\); foreach \\($p in $ports\\) { try { $r = Invoke-WebRequest \"http://localhost:$p/global-presence\" -UseBasicParsing -TimeoutSec 8; Write-Output \"Port $p : $\\($r.StatusCode\\)\" } catch { Write-Output \"Port $p : FAIL\" } })",
+      "PowerShell(Start-Sleep -Seconds 5; $p = @\\(3000,3001,3002\\); foreach \\($port in $p\\) { try { $r = Invoke-WebRequest \"http://localhost:$port/global-presence\" -UseBasicParsing -TimeoutSec 6; Write-Output \"$port OK $\\($r.StatusCode\\)\" } catch { Write-Output \"$port FAIL\" } })",
+      "PowerShell(Start-Sleep -Seconds 20; $p = @\\(3000,3001,3002\\); foreach \\($port in $p\\) { try { $r = Invoke-WebRequest \"http://localhost:$port/global-presence\" -UseBasicParsing -TimeoutSec 8; Write-Output \"$port OK $\\($r.StatusCode\\)\" } catch { Write-Output \"$port FAIL\" } })",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/global-presence)",
+      "Bash(npm install *)",
+      "Bash(npm list *)",
+      "Bash(node -e \"require\\('react-simple-maps'\\); console.log\\('ok'\\)\")",
+      "Bash(curl -L \"https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json\" -o public/world-110m.json)",
+      "Bash(python -c \"import sys,json; p=json.load\\(sys.stdin\\); print\\(p.get\\('types',''\\), p.get\\('typings',''\\), p.get\\('exports',''\\)\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3456/global-presence)",
+      "Bash(curl -s http://localhost:3456/global-presence)",
+      "Bash(npx playwright *)",
+      "Bash(where chromium *)",
+      "Bash(where chrome *)",
+      "Bash(where \"chromium-browser\")",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Bash(node -e ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3456/)"
+    ]
+  }
+}
