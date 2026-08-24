@@ -280,7 +280,7 @@ export default function DocumentaryStrip() {
     <>
       {/* ══ DESKTOP: pinned horizontal strip ══ */}
       {isDesktop && (
-        <section ref={sectionRef} style={{ height: "500vh" }} className="relative">
+        <section ref={sectionRef} style={{ height: "500vh" }} className="relative z-[55]">
           {/* Sticky viewport frame */}
           <div
             ref={stickyRef}

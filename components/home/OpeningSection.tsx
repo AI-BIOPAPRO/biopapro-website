@@ -72,7 +72,7 @@ export default function OpeningSection() {
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
-            "linear-gradient(108deg, rgba(12,22,10,0.88) 0%, rgba(12,22,10,0.72) 38%, rgba(12,22,10,0.32) 65%, rgba(12,22,10,0.08) 100%)",
+            "linear-gradient(108deg, rgba(12,22,10,0.92) 0%, rgba(12,22,10,0.82) 46%, rgba(12,22,10,0.4) 68%, rgba(12,22,10,0.1) 100%)",
         }}
         aria-hidden="true"
       />
@@ -139,7 +139,7 @@ export default function OpeningSection() {
         </motion.div>
 
         {/* ── CENTRE: The primary brand statement ── */}
-        <div className="flex flex-col justify-center flex-1 max-w-[800px] lg:max-w-[860px]
+        <div className="flex flex-col justify-center flex-1 max-w-[600px] lg:max-w-[620px]
                         py-8 md:py-12">
 
           {/* Context label */}
