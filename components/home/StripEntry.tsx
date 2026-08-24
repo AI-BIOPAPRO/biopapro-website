@@ -105,36 +105,6 @@ export default function StripEntry() {
           ))}
         </motion.div>
 
-        {/* Central statement */}
-        <motion.div style={{ opacity: textOpacity, y: textY }}>
-          <p className="font-mono text-[9px] text-green-light/50 tracking-[0.28em] uppercase mb-5">
-            The manufacturing story
-          </p>
-          <h2
-            className="font-display font-light text-dark-text leading-[0.92] tracking-[-0.02em] max-w-[700px]"
-            style={{ fontSize: "clamp(2.4rem, 4.5vw, 4.2rem)" }}
-          >
-            From a Siberian forest
-            <br />
-            to tables in 18 countries.
-            <br />
-            <span className="text-green-light">The complete story.</span>
-          </h2>
-        </motion.div>
-
-        {/* Scroll instruction */}
-        <motion.div
-          style={{ opacity: textOpacity }}
-          className="mt-12 md:mt-16 flex items-center gap-4"
-        >
-          <div className="w-px h-10 overflow-hidden flex-shrink-0">
-            <div className="w-full h-full bg-gradient-to-b from-transparent via-green-light/40 to-transparent animate-scroll-line" />
-          </div>
-          <span className="font-mono text-[8.5px] text-dark-muted tracking-[0.22em] uppercase">
-            Scroll to begin the journey
-          </span>
-        </motion.div>
-
         {/* Preview of first act */}
         <motion.div
           style={{ opacity: textOpacity }}

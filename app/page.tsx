@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import OpeningSection            from "@/components/home/OpeningSection";
-import StripEntry               from "@/components/home/StripEntry";
-import DocumentaryStrip         from "@/components/home/DocumentaryStrip";
 import WhyWoodWon               from "@/components/home/WhyWoodWon";
 import ImpactCounter            from "@/components/home/ImpactCounter";
 import ManufacturingCredibility from "@/components/home/ManufacturingCredibility";
@@ -43,12 +41,6 @@ export default function HomePage() {
     <main>
       {/* S1  — Opening: product photography, value proposition, immediate clarity */}
       <OpeningSection />
-
-      {/* S2  — Strip Entry: narrative threshold, light → dark transition */}
-      <StripEntry />
-
-      {/* S3  — Documentary Strip: Forest → Material → Manufacturing → Product → Global */}
-      <DocumentaryStrip />
 
       {/* S4  — Why Wood Won: decisive plastic vs birchwood case */}
       <WhyWoodWon />

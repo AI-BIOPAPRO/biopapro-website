@@ -85,8 +85,11 @@ export default function Navbar() {
                     "relative text-[11px] font-medium tracking-[0.1em] uppercase transition-colors duration-200 py-1 group",
                     pathname === link.href
                       ? "text-green-deep"
-                      : "text-ink-light hover:text-ink"
+                      : scrolled
+                        ? "text-ink-light hover:text-ink"
+                        : "text-white hover:text-green-light"
                   )}
+                  style={!scrolled && pathname !== link.href ? { textShadow: "0 1px 6px rgba(0,0,0,0.55)" } : undefined}
                 >
                   {link.label}
                   <span
@@ -111,7 +114,11 @@ export default function Navbar() {
 
               <button
                 onClick={() => setMenuOpen((v) => !v)}
-                className="lg:hidden w-10 h-10 flex items-center justify-center text-ink hover:text-green-deep transition-colors duration-200"
+                className={cn(
+                  "lg:hidden w-10 h-10 flex items-center justify-center transition-colors duration-200",
+                  scrolled || menuOpen ? "text-ink hover:text-green-deep" : "text-white hover:text-green-light"
+                )}
+                style={!scrolled && !menuOpen ? { filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.55))" } : undefined}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
               >

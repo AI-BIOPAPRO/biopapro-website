@@ -20,7 +20,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView, AnimatePresence } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import SectionLabel from "@/components/shared/SectionLabel";
 
@@ -137,7 +137,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       ref={ref}
       initial={{ opacity: 0, y: 22 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.62, ease: EASE, delay: index * 0.07 }}
+      transition={{ duration: 0.4, ease: EASE, delay: index * 0.04 }}
       className={`group relative flex flex-col bg-card border border-border hover:border-wood/40 hover:shadow-md transition-all duration-400 overflow-hidden cursor-pointer ${
         product.highlight ? "lg:col-span-2" : ""
       }`}
@@ -322,20 +322,11 @@ export default function ProductEcosystem() {
         </motion.div>
 
         {/* ── Product grid ── */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.28 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-auto"
-          >
-            {filtered.map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-auto">
+          {filtered.map((product, i) => (
+            <ProductCard key={product.id} product={product} index={i} />
+          ))}
+        </div>
 
       </div>
 
