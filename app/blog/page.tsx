@@ -5,7 +5,7 @@ import { getAllPosts, CATEGORY_LABELS, type Post } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/client";
 
 export const metadata: Metadata = {
-  title: "Blog & News — Biopapro",
+  title: "Blog & News",
   description: "Industry news, sustainability updates, and product announcements from Biopapro — India's leading birchwood cutlery manufacturer.",
 };
 

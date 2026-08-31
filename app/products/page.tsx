@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
 
 export const metadata: Metadata = {
-  title: "Wooden Cutlery Products — Forks, Spoons, Knives, Sporks | Biopapro India",
+  title: "Wooden Cutlery Products — Forks, Spoons, Knives, Sporks",
   description:
     "FSC-certified birchwood cutlery manufactured in Mumbai, India. Wooden forks, spoons, knives, sporks, coffee stirrers, skewers. Bulk supply for restaurants, hotels, caterers across India. Export to 18+ countries. 30+ SKUs, wholesale pricing.",
   keywords: [

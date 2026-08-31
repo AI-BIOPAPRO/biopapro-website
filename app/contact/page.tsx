@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ContactClient from "./ContactClient";
 
 export const metadata: Metadata = {
-  title: "Contact — Wooden Cutlery Supplier India | Domestic & Export Enquiry",
+  title: "Contact — Bulk & Export Wooden Cutlery Enquiry",
   description:
     "Contact Biopapro for wooden cutlery supply in India or export worldwide. Restaurants, hotels, caterers, food chains, distributors, importers — enquire for bulk pricing, MOQ, samples, and certifications. Mumbai manufacturer. Response within 24 hours.",
   keywords: [

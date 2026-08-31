@@ -31,8 +31,8 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: {
-    template: "%s | Biopapro — Wooden Cutlery Manufacturer India",
-    default: "Biopapro — Wooden Cutlery Manufacturer in India | Domestic & Export Supply",
+    template: "%s | Biopapro",
+    default: "Biopapro — Wooden Cutlery Manufacturer in India | Bulk & Export",
   },
   description:
     "Biopapro manufactures FSC-certified birchwood cutlery in Mumbai, India. 100M+ units/month. Supplying restaurants, hotels, caterers, and food chains across India — and exporting to 18+ countries worldwide. Wholesale and bulk supply available.",

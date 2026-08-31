@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SustainabilityClient from "./SustainabilityClient";
 
 export const metadata: Metadata = {
-  title: "Eco Friendly Wooden Cutlery India — Sustainable & Biodegradable | Biopapro",
+  title: "Biodegradable & Compostable Wooden Cutlery",
   description:
     "Biopapro's birchwood cutlery replaces 6,500kg of single-use plastic daily. FSC certified, BPI compostable, ISO 14001 certified. Eco-friendly wooden cutlery for Indian restaurants, hotels, and caterers — and sustainable export supply worldwide.",
   keywords: [

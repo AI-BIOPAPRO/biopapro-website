@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CertificationsClient from "./CertificationsClient";
 
 export const metadata: Metadata = {
-  title: "FSC ISO BRCGS Certified Wooden Cutlery Manufacturer India — Biopapro",
+  title: "Wooden Cutlery Certifications — FSC, ISO, FDA, BPI",
   description:
     "Biopapro holds 9 certifications: FSC® 100%, ISO 9001:2015, ISO 14001:2015, ISO 45001:2018, BRCGS Food Safety, BPI Compostable, BSCI, FDA CFR 21, EU 10/2011. Certified wooden cutlery manufacturer for domestic India supply and global export.",
   keywords: [

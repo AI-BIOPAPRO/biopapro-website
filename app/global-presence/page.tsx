@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import GlobalPresenceClient from "./GlobalPresenceClient";
 
 export const metadata: Metadata = {
-  title: "Wooden Cutlery Exporter India — 18+ Countries | Biopapro Mumbai",
+  title: "Wooden Cutlery Exporter — 18+ Countries Worldwide",
   description:
     "Biopapro exports FSC-certified birchwood tableware from Mumbai to 18+ countries across Europe, Americas, Middle East, and Asia-Pacific. Also supplying Indian domestic market. Airlines, hospitality, food service, distributors. Request export quotation.",
   keywords: [
