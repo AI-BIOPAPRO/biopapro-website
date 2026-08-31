@@ -28,7 +28,7 @@ export default function StructuredData() {
             "@type": "ContactPoint",
             telephone: "+91-70211-03763",
             contactType: "sales",
-            email: "yash@biopapro.com",
+            email: "export@biopapro.com",
             areaServed: ["IN", "WORLD"],
             availableLanguage: ["English", "Hindi"],
           },
@@ -42,7 +42,7 @@ export default function StructuredData() {
         image: "https://biopapro.com/logo.png",
         url: "https://biopapro.com",
         telephone: "+91-70211-03763",
-        email: "yash@biopapro.com",
+        email: "export@biopapro.com",
         priceRange: "$$",
         address: {
           "@type": "PostalAddress",

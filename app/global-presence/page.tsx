@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     description:
       "FSC-certified birchwood tableware exported from Mumbai to 18+ countries. Airlines, hospitality, food service. Request your export quotation.",
     type: "website",
-    url: "https://biopapro.com/global-presence",
+    url: "/global-presence",
   },
-  alternates: { canonical: "https://biopapro.com/global-presence" },
+  alternates: { canonical: "/global-presence" },
 };
 
 export default function GlobalPresencePage() {

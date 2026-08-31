@@ -153,7 +153,7 @@ export default function OpeningSection() {
               color: "rgba(160,210,140,0.52)",
             }}
           >
-            Global Manufacturer &nbsp;·&nbsp; Est. 2018
+            Global Manufacturer &nbsp;·&nbsp; Est. 2019
           </motion.p>
 
           {/* ── BIOPAPRO — refined brand anchor, not dominant ── */}

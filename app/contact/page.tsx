@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     description:
       "Enquire for domestic India supply or international export. Restaurants, hotels, caterers, importers, distributors. 24-hour response. Bulk pricing available.",
     type: "website",
-    url: "https://biopapro.com/contact",
+    url: "/contact",
   },
-  alternates: { canonical: "https://biopapro.com/contact" },
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

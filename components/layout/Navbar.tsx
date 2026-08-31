@@ -234,7 +234,7 @@ export default function Navbar() {
             {/* Footer strip */}
             <div className="px-8 py-5 bg-green-pale/40 border-t border-border flex-shrink-0">
               <p className="font-mono text-[9.5px] text-ink-muted tracking-[0.2em] uppercase">
-                FSC® Certified &nbsp;·&nbsp; ISO 9001:2015 &nbsp;·&nbsp; FDA CFR 21 &nbsp;·&nbsp; Est. 2018
+                FSC® Certified &nbsp;·&nbsp; ISO 9001:2015 &nbsp;·&nbsp; FDA CFR 21 &nbsp;·&nbsp; Est. 2019
               </p>
             </div>
           </motion.div>

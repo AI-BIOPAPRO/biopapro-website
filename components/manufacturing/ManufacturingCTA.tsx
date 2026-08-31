@@ -97,7 +97,7 @@ export default function ManufacturingCTA() {
               {
                 label: "India — Manufacturing & Export",
                 contact: "Yash Chandan / Nikunj Bhansali",
-                email: "yash@biopapro.com",
+                email: "export@biopapro.com",
                 phone: "+91 70211 03763",
                 note: "Mumbai HQ · Mon–Sat IST",
               },

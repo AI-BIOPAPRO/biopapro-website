@@ -39,7 +39,7 @@ const STATS = [
   { value: "80%+",  label: "Women Workforce"        },
   { value: "100M+", label: "Units Produced Annually" },
   { value: "18+",   label: "Export Markets"          },
-  { value: "2018",  label: "Established"             },
+  { value: "2019",  label: "Established"             },
 ] as const;
 
 export default function WomenWorkforce() {

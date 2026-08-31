@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     description:
       "6,500kg plastic displaced daily. FSC certified. BPI Compostable. ISO 14001. Biodegradable wooden cutlery for India and global markets.",
     type: "website",
-    url: "https://biopapro.com/sustainability",
+    url: "/sustainability",
   },
-  alternates: { canonical: "https://biopapro.com/sustainability" },
+  alternates: { canonical: "/sustainability" },
 };
 
 export default function SustainabilityPage() {

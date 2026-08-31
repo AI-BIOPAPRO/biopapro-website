@@ -26,10 +26,10 @@ const CERTS = [
     shortName: "FSC",
     fullName: "Forest Stewardship Council",
     code: "Chain of Custody Certified",
-    certNo: "FSC-C0XXXXX",
+    certNo: "Certificate available on request",
     scope: "100% of raw material — all product lines",
-    verifiedBy: "Rainforest Alliance / SCS Global",
-    since: "2018",
+    verifiedBy: "Accredited FSC certification body",
+    since: "2019",
     status: "ACTIVE",
     color: "#2D5228",
     bgLight: "#C8DFC0",
@@ -42,9 +42,9 @@ const CERTS = [
     shortName: "9001:2015",
     fullName: "Quality Management System",
     code: "ISO 9001:2015",
-    certNo: "Certificate No. XXXXX",
+    certNo: "Certificate available on request",
     scope: "Production, QC, Packaging, Export",
-    verifiedBy: "Bureau Veritas / SGS",
+    verifiedBy: "Accredited ISO certification body",
     since: "2019",
     status: "ACTIVE",
     color: "#4A7A3D",
@@ -304,7 +304,7 @@ export default function Certifications() {
                 {[
                   { value: "6",    label: "Active Certifications" },
                   { value: "100%", label: "Third-Party Verified"  },
-                  { value: "2018", label: "Certified Since"       },
+                  { value: "2019", label: "Certified Since"       },
                 ].map((s) => (
                   <div key={s.label}>
                     <p className="font-display font-light text-green-deep text-2xl leading-none">{s.value}</p>

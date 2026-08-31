@@ -93,7 +93,7 @@ export const OFFICES = [
   {
     region:  "India — Manufacturing HQ",
     address: "G1 Khetwadi, 12th Lane, Girgaon, Mumbai 400004, Maharashtra",
-    email:   "yash@biopapro.com",
+    email:   "export@biopapro.com",
     phone:   "+91 70211 03763",
     type:    "origin" as const,
   },

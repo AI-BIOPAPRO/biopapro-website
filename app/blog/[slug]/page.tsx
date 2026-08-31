@@ -24,8 +24,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-IN", {
+function formatDate(dateStr?: string) {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("en-IN", {
     day: "numeric", month: "long", year: "numeric",
   });
 }
@@ -133,7 +136,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16/9" }}>
             <Image
               src={urlFor(post.coverImage).width(1200).height(675).url()}
-              alt={post.title}
+              alt={post.coverImage.alt || post.title}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 800px"

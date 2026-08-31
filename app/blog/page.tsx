@@ -11,8 +11,11 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-IN", {
+function formatDate(dateStr?: string) {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("en-IN", {
     day: "numeric", month: "long", year: "numeric",
   });
 }
@@ -31,7 +34,7 @@ function PostCard({ post }: { post: Post }) {
         {post.coverImage ? (
           <Image
             src={urlFor(post.coverImage).width(800).height(450).url()}
-            alt={post.title}
+            alt={post.coverImage.alt || post.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

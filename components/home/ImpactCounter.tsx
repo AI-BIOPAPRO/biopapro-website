@@ -235,7 +235,7 @@ export default function ImpactCounter() {
             </div>
             <div className="w-px h-10 bg-border hidden md:block" />
             <div className="text-center hidden md:block">
-              <p className="font-display font-light text-ink text-xl">2018</p>
+              <p className="font-display font-light text-ink text-xl">2019</p>
               <p className="font-mono text-[8px] text-ink-muted uppercase tracking-[0.15em] mt-1">Year Founded</p>
             </div>
           </div>

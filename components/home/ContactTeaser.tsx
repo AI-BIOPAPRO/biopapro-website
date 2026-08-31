@@ -49,19 +49,53 @@ export default function ContactTeaser() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (sending) return;
     setSending(true);
-    /* ─────────────────────────────────────────────────────────────
-       WIRE UP: Replace with your preferred form handler.
-       Options:
-       A) Formspree: action="https://formspree.io/f/{id}" method="POST"
-       B) Next.js Server Action: import { sendEnquiry } from "@/app/actions"
-       C) Email API: Resend / Sendgrid via /api/contact route
 
-       For now: simulate a 1.2s send then mark submitted.
-    ────────────────────────────────────────────────────────────── */
-    await new Promise((r) => setTimeout(r, 1200));
-    setSending(false);
-    setSubmitted(true);
+    const fd = new FormData(e.currentTarget);
+    const company = String(fd.get("company") || "");
+    const country = String(fd.get("country") || "");
+    const email = String(fd.get("email") || "");
+    const product = String(fd.get("product") || "");
+    const volume = String(fd.get("volume") || "");
+    const message = String(fd.get("message") || "");
+    const website = String(fd.get("website") || ""); // honeypot
+
+    const mailto = () => {
+      const subject = encodeURIComponent(`Export Enquiry — ${company} (${country})`);
+      const body = encodeURIComponent(
+        `Company: ${company}\nCountry: ${country}\nEmail: ${email}\nProduct interest: ${product}\nAnnual volume: ${volume}\n\nMessage:\n${message}`,
+      );
+      window.location.href = `mailto:export@biopapro.com?subject=${subject}&body=${body}`;
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: company, // teaser form has no name field; company stands in
+          company,
+          country,
+          email,
+          products: product,
+          volume,
+          message,
+          website,
+          source: "homepage-teaser",
+        }),
+      });
+
+      if (!res.ok) {
+        const { error } = await res.json().catch(() => ({ error: "send_failed" }));
+        if (error === "email_not_configured" || error === "send_failed") mailto();
+      }
+    } catch {
+      mailto();
+    } finally {
+      setSending(false);
+      setSubmitted(true);
+    }
   }
 
   return (
@@ -148,13 +182,13 @@ export default function ContactTeaser() {
                 <div className="flex items-center gap-3">
                   <Phone size={12} className="text-wood flex-shrink-0" />
                   <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-light">
-                    Available via WhatsApp · WeChat
+                    +91 70211 03763 · Available via WhatsApp
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin size={12} className="text-wood flex-shrink-0" />
                   <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-light">
-                    Headquarters — China · Export globally
+                    Headquarters — Mumbai, India · Export globally
                   </span>
                 </div>
               </div>
@@ -192,6 +226,15 @@ export default function ContactTeaser() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Honeypot — hidden from users, bots fill it */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                />
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-2 sm:col-span-1">
                     <label className="block font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
@@ -212,6 +255,18 @@ export default function ContactTeaser() {
                       name="country"
                       required
                       placeholder="Australia"
+                      className="w-full px-4 py-3 bg-card border border-border text-ink text-sm font-sans placeholder:text-ink-muted/50 focus:outline-none focus:border-wood transition-colors duration-200"
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <label className="block font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
+                      Work Email *
+                    </label>
+                    <input
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="you@company.com"
                       className="w-full px-4 py-3 bg-card border border-border text-ink text-sm font-sans placeholder:text-ink-muted/50 focus:outline-none focus:border-wood transition-colors duration-200"
                     />
                   </div>

@@ -73,7 +73,7 @@ export default function Footer() {
               style={{ color: "rgba(230,220,205,0.65)" }}
             >
               Global FSC-certified birchwood tableware manufacturer.
-              Exporting to 18+ countries since 2018.
+              Exporting to 18+ countries since 2019.
             </p>
 
             {/* Cert strip */}
@@ -177,21 +177,6 @@ export default function Footer() {
                 strokeWidth={2.5}
                 className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
               />
-            </Link>
-
-            {/* AI Advisor link */}
-            <Link
-              href="/ai-advisor"
-              className="font-mono text-[9px] uppercase tracking-[0.18em] transition-colors duration-200"
-              style={{ color: "rgba(160,215,135,0.55)" }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.color = "rgba(160,215,135,0.9)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.color = "rgba(160,215,135,0.55)";
-              }}
-            >
-              → Try AI Procurement Advisor
             </Link>
           </div>
 

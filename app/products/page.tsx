@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     description:
       "30+ SKUs. Birchwood forks, spoons, knives, sporks, stirrers, skewers. Domestic India supply + 18+ country export. FSC certified. Bulk & wholesale.",
     type: "website",
-    url: "https://biopapro.com/products",
+    url: "/products",
   },
-  alternates: { canonical: "https://biopapro.com/products" },
+  alternates: { canonical: "/products" },
 };
 
 export default function ProductsPage() {

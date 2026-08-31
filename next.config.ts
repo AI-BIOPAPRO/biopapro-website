@@ -5,8 +5,9 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "picsum.photos" },
-      { protocol: "https", hostname: "biopapro.com" },
+      // Product photography (Shopify CDN on the biopapro.com domain)
+      { protocol: "https", hostname: "biopapro.com", pathname: "/cdn/**" },
+      // Sanity image pipeline (blog)
       { protocol: "https", hostname: "cdn.sanity.io" },
     ],
     formats: ["image/avif", "image/webp"],

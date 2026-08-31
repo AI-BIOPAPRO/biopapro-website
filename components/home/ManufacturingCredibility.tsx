@@ -27,54 +27,58 @@ import SectionLabel from "@/components/shared/SectionLabel";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+// Accurate to Biopapro's actual operation: FSC-certified semi-finished birchwood
+// is sourced from approved suppliers; Biopapro performs incoming inspection →
+// finishing → QC → packaging → export. No forestry, no raw-log conversion.
+// Kept in step with lib/manufacturing-data.ts (PRODUCTION_STEPS).
 const STEPS = [
   {
     index: "01",
-    title: "Raw Material Sourcing",
-    subtitle: "FSC-Certified Birch Forests",
-    body: "Every gram of wood we use is traced to FSC-certified Siberian and Northern European birch forests. Our procurement team audits each supplier annually. Chain-of-custody documentation is available for every shipment — a requirement, not an option.",
-    stat: { value: "100%", label: "FSC Certified" },
-    tags: ["Birchwood", "Siberian Origin", "CoC Documentation"],
+    title: "Certified Birchwood Supply",
+    subtitle: "FSC Chain of Custody",
+    body: "FSC-certified semi-finished birchwood is sourced from approved suppliers in Russia and China. Every incoming batch arrives with full FSC chain-of-custody documentation, and supplier qualification is maintained under ISO 9001 procurement controls.",
+    stat: { value: "100%", label: "FSC Certified Supply" },
+    tags: ["FSC® CoC", "Approved Suppliers", "ISO 9001 Procurement"],
   },
   {
     index: "02",
-    title: "Log Conversion & Veneer Slicing",
-    subtitle: "Precision Material Preparation",
-    body: "Birch logs are debarked, conditioned to 8–12% moisture content, and rotary-peeled into veneers at 0.6–2.0mm tolerance. Sheet uniformity directly determines product strength and surface finish — a step most manufacturers outsource. We control it in-house.",
-    stat: { value: "±0.1mm", label: "Thickness Tolerance" },
-    tags: ["In-house Veneer", "Moisture Control", "Sheet Uniformity"],
+    title: "Incoming Material Inspection",
+    subtitle: "Quality Gate at Intake",
+    body: "Every batch is inspected on arrival at the Mumbai facility — dimensional specification, surface quality grading, and moisture content. Sub-specification material is rejected at intake, before it enters the production line.",
+    stat: { value: "100%", label: "Batches Inspected" },
+    tags: ["Dimensional Check", "Surface Grading", "Moisture Control"],
   },
   {
     index: "03",
-    title: "Blanking & Forming",
-    subtitle: "High-Speed Multi-Cavity Stamping",
-    body: "Veneer sheets feed into our multi-cavity die-cut presses running at 180–240 strokes per minute. Each press produces between 8–24 blanks per stroke depending on product size. Tool steel dies are machined to ±0.05mm and replaced on a 3M-stroke maintenance cycle.",
-    stat: { value: "240/min", label: "Press Speed" },
-    tags: ["Die-Cut Press", "Multi-Cavity", "High Volume"],
+    title: "Precision Finishing",
+    subtitle: "High-Speed Manufacturing Lines",
+    body: "Stamping and finishing lines process semi-finished birchwood into final product form, with dimensional tolerances held across production runs. Output: 100M+ units per month from a single facility in Mumbai.",
+    stat: { value: "100M+/mo", label: "Units Produced" },
+    tags: ["Stamping & Finishing", "Tolerance Control", "Single Facility"],
   },
   {
     index: "04",
-    title: "Polishing & Surface Finishing",
-    subtitle: "4-Stage Drum Polish System",
-    body: "Raw blanks enter a four-stage rotating drum system: coarse de-burring → medium surface abrasion → fine finishing → final micro-polish. The result is a splinter-free surface that passes EU food-contact standards without any chemical coating or wax treatment.",
-    stat: { value: "4-Stage", label: "Polish System" },
-    tags: ["Splinter-Free", "No Chemical Coating", "EU Food Contact"],
+    title: "Quality Control & Food Safety",
+    subtitle: "Optical Sort + AQL 2.5",
+    body: "Automated optical sorting rejects dimensional defects and surface flaws; trained QC operators then run manual AQL 2.5 inspection. All food-contact units pass through a UV sterilisation tunnel — aligned with FDA CFR 21 and EU 10/2011 requirements.",
+    stat: { value: "AQL 2.5", label: "Inspection Standard" },
+    tags: ["Optical Sorting", "UV Sterilisation", "Food-Contact Safe"],
   },
   {
     index: "05",
-    title: "Optical Quality Control",
-    subtitle: "100% Vision-System Inspection",
-    body: "Every unit passes through our inline optical inspection system — a camera array running at 60fps that detects cracks, chips, warp, discolouration, and dimensional deviation. Rejection rate is tracked per shift. Product that fails goes back to biomass energy, not the bin.",
-    stat: { value: "100%", label: "Unit Inspected" },
-    tags: ["Optical Sorting", "Zero Compromise", "Shift Tracking"],
+    title: "Packaging & Export Preparation",
+    subtitle: "Container-Optimised Cartons",
+    body: "Units are packed into OPP polybags (100 or 500 pcs) and standardised export cartons sized for container fill. Export documentation is prepared in parallel: FSC certificate, phytosanitary certificate, certificate of origin, commercial invoice, packing list.",
+    stat: { value: "15+", label: "Docs / Shipment" },
+    tags: ["OPP Bagging", "Export Cartons", "Full Documentation"],
   },
   {
     index: "06",
-    title: "Packaging & Export",
-    subtitle: "Sterilised, Sealed, Dispatched",
-    body: "Finished product is UV-sterilised, individually sleeved or bulk-packed in kraft cartons, then palletised to customer specification. Our logistics team manages FCL and LCL container loading for 18+ countries. Average lead time: 25–35 days from order confirmation.",
-    stat: { value: "25–35d", label: "Lead Time" },
-    tags: ["UV Sterilised", "FCL / LCL", "18+ Countries"],
+    title: "Global Distribution",
+    subtitle: "JNPT Mumbai · FCL & LCL",
+    body: "Palletised cartons are loaded into 20ft or 40ft FCL containers at JNPT — India's largest container port. LCL consolidation is available for smaller volumes. 18+ active export markets across 6 continents.",
+    stat: { value: "21–28d", label: "Ocean Transit" },
+    tags: ["JNPT Mumbai", "FCL / LCL", "18+ Markets"],
   },
 ] as const;
 

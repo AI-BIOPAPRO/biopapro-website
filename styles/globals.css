@@ -241,3 +241,25 @@
 .animate-pulse-warm {
   animation: pulse-warm 2.5s ease-in-out infinite;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   REDUCED MOTION
+   Honour the OS setting: stop continuous background textures, collapse
+   transitions, and let content render in its final state. Lenis smooth-scroll
+   is disabled separately in SmoothScrollProvider.
+   ───────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .paper::after,
+  .grain::after {
+    animation: none !important;
+  }
+}

@@ -25,7 +25,6 @@ export default function ProductsClient() {
   return (
     <main>
       {/* S1 — Hero: headline, stats, cert badges, category quick-jump */}
-      {/* SpoonPOC is now mounted inside ProductsHero's own stacking context */}
       <ProductsHero />
 
       {/* S2 — Product Families: 8 editorial category cards */}

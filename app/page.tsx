@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     title: "Biopapro — Wooden Cutlery Manufacturer India",
     description:
       "FSC-certified birchwood cutlery from Mumbai. Supplying Indian restaurants, hotels, caterers and exporting to 18+ countries. 100M+ units/month.",
-    url: "https://biopapro.com",
+    url: "/",
   },
-  alternates: { canonical: "https://biopapro.com" },
+  alternates: { canonical: "/" },
 };
 
 export default function HomePage() {

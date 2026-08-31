@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     description:
       "9 certifications: FSC · ISO 9001 · ISO 14001 · ISO 45001 · BRCGS · BPI · BSCI · FDA · EU. India's certified birchwood cutlery manufacturer.",
     type: "website",
-    url: "https://biopapro.com/certifications",
+    url: "/certifications",
   },
-  alternates: { canonical: "https://biopapro.com/certifications" },
+  alternates: { canonical: "/certifications" },
 };
 
 export default function CertificationsPage() {
