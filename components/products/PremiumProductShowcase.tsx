@@ -249,7 +249,7 @@ function ProductInfoPanel({ product }: { product: typeof PRODUCTS[number] }) {
         {product.specs.map((spec) => (
           <div key={spec.label} className="flex items-baseline gap-3">
             <span
-              className="font-mono text-[10px] uppercase tracking-[0.16em] w-20 flex-shrink-0"
+              className="font-mono text-[11px] uppercase tracking-[0.16em] w-20 flex-shrink-0"
               style={{ color: "rgba(200,154,91,0.5)" }}
             >
               {spec.label}
@@ -318,7 +318,7 @@ function ProgressIndicator({
           style={{ height: 24, background: "rgba(200,154,91,0.2)" }}
         />
         <p
-          className="font-mono text-[9px] uppercase tracking-[0.2em]"
+          className="font-mono text-[11px] uppercase tracking-[0.2em]"
           style={{ color: "rgba(200,154,91,0.3)", writingMode: "vertical-rl" }}
         >
           scroll
@@ -456,7 +456,7 @@ export default function PremiumProductShowcase() {
         {/* Section label — top left */}
         <div className="absolute top-24 left-6 md:left-12 lg:left-20 z-30">
           <p
-            className="font-mono text-[10px] uppercase tracking-[0.28em]"
+            className="font-mono text-[11px] uppercase tracking-[0.28em]"
             style={{ color: "rgba(200,154,91,0.35)" }}
           >
             Premium Collection

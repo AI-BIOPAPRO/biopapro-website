@@ -16,6 +16,7 @@ import { motion, useInView } from "motion/react";
 import { CheckCircle2, Download, ExternalLink, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import SectionLabel from "@/components/shared/SectionLabel";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -29,7 +30,7 @@ const CERTS = [
     certNo: "FSC-C0XXXXX",
     scope: "100% of raw material — all product lines",
     verifiedBy: "Rainforest Alliance / SCS Global",
-    since: "2018",
+    since: String(COMPANY_FACTS.founded),
     status: "ACTIVE",
     color: "#2D5228",
     bgLight: "#C8DFC0",
@@ -170,19 +171,19 @@ function CertCard({ cert, index }: { cert: (typeof CERTS)[number]; index: number
         <div className="flex flex-col gap-1.5 min-w-0 pt-1">
           <div className="flex items-center gap-2 flex-wrap">
             <span
-              className="font-mono text-[8px] font-bold uppercase tracking-[0.22em] px-2 py-0.5"
+              className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] px-2 py-0.5"
               style={{ background: cert.color, color: "#fff" }}
             >
               {cert.status}
             </span>
-            <span className="font-mono text-[7.5px] text-ink-muted uppercase tracking-[0.14em]">
+            <span className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.14em]">
               Since {cert.since}
             </span>
           </div>
           <p className="font-sans font-semibold text-ink text-[13px] leading-tight">
             {cert.fullName}
           </p>
-          <p className="font-mono text-[8px] tracking-[0.12em]" style={{ color: cert.color }}>
+          <p className="font-mono text-[11px] tracking-[0.12em]" style={{ color: cert.color }}>
             {cert.code}
           </p>
         </div>
@@ -204,10 +205,10 @@ function CertCard({ cert, index }: { cert: (typeof CERTS)[number]; index: number
           className="px-3 py-2 flex items-center gap-2"
           style={{ background: cert.bgLight + "40", border: `1px solid ${cert.color}25` }}
         >
-          <span className="font-mono text-[7px] uppercase tracking-[0.18em] text-ink-muted">
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted">
             Verified by
           </span>
-          <span className="font-mono text-[8px] font-bold tracking-[0.1em]" style={{ color: cert.color }}>
+          <span className="font-mono text-[11px] font-bold tracking-[0.1em]" style={{ color: cert.color }}>
             {cert.verifiedBy}
           </span>
         </div>
@@ -217,7 +218,7 @@ function CertCard({ cert, index }: { cert: (typeof CERTS)[number]; index: number
           {cert.key3.map((tag) => (
             <span
               key={tag}
-              className="font-mono text-[7.5px] uppercase tracking-[0.12em] px-2.5 py-1"
+              className="font-mono text-[11px] uppercase tracking-[0.12em] px-2.5 py-1"
               style={{ border: `1px solid ${cert.color}30`, color: cert.color, background: cert.bgLight + "20" }}
             >
               {tag}
@@ -228,13 +229,13 @@ function CertCard({ cert, index }: { cert: (typeof CERTS)[number]; index: number
 
       {/* Footer */}
       <div className="px-5 pb-4 pt-2 border-t border-border flex items-center justify-between">
-        <span className="font-mono text-[7.5px] text-ink-muted uppercase tracking-[0.14em]">
+        <span className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.14em]">
           {cert.certNo}
         </span>
         {cert.downloadable ? (
           <Link
             href="/certifications"
-            className="inline-flex items-center gap-1 font-mono text-[7.5px] uppercase tracking-[0.16em] transition-colors duration-200"
+            className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors duration-200"
             style={{ color: cert.color }}
           >
             <Download size={9} />
@@ -243,7 +244,7 @@ function CertCard({ cert, index }: { cert: (typeof CERTS)[number]; index: number
         ) : (
           <Link
             href="/certifications"
-            className="inline-flex items-center gap-1 font-mono text-[7.5px] uppercase tracking-[0.16em] transition-colors duration-200 text-ink-muted hover:text-ink"
+            className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors duration-200 text-ink-muted hover:text-ink"
           >
             <ExternalLink size={9} />
             Learn More
@@ -262,37 +263,30 @@ export default function Certifications() {
     <section className="bg-parchment paper" aria-labelledby="certs-heading">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-20 pt-20 pb-20">
 
-        {/* ── Header ── */}
-        <div ref={headerRef} className="mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, ease: EASE }}
-            className="mb-7"
-          >
-            <SectionLabel index="09" label="Certifications & Compliance" />
-          </motion.div>
+        {/* ── Header — a single quiet fade, not a staggered reveal ── */}
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 10 }}
+          animate={headerInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mb-14"
+        >
+          <div className="mb-7">
+            <SectionLabel index="06" label="Certifications & Compliance" />
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
-            <motion.h2
+            <h2
               id="certs-heading"
-              initial={{ opacity: 0, y: 18 }}
-              animate={headerInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
               className="font-display font-light text-ink leading-[0.95]"
               style={{ fontSize: "clamp(2.2rem, 4vw, 3.6rem)" }}
             >
               Six certifications.
               <br />
               <span className="text-green-deep">Every claim verified.</span>
-            </motion.h2>
+            </h2>
 
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={headerInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.68, ease: EASE, delay: 0.2 }}
-              className="flex flex-col justify-center gap-5"
-            >
+            <div className="flex flex-col justify-center gap-5">
               <p className="font-sans font-light text-ink-light text-base leading-relaxed">
                 Biopapro holds six active certifications covering forest sourcing,
                 manufacturing quality, food safety, compostability, and social
@@ -304,17 +298,17 @@ export default function Certifications() {
                 {[
                   { value: "6",    label: "Active Certifications" },
                   { value: "100%", label: "Third-Party Verified"  },
-                  { value: "2018", label: "Certified Since"       },
+                  { value: String(COMPANY_FACTS.founded), label: "Certified Since" },
                 ].map((s) => (
                   <div key={s.label}>
                     <p className="font-display font-light text-green-deep text-2xl leading-none">{s.value}</p>
-                    <p className="font-mono text-[8px] text-ink-muted uppercase tracking-[0.14em] mt-1">{s.label}</p>
+                    <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.14em] mt-1">{s.label}</p>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* ── Cert grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -330,12 +324,12 @@ export default function Certifications() {
           transition={{ duration: 0.6, ease: EASE, delay: 0.6 }}
           className="mt-10 pt-8 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
         >
-          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-muted">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted">
             Full compliance documentation · Certificate copies · NDA available on request
           </p>
           <Link
             href="/certifications"
-            className="group inline-flex items-center gap-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
+            className="group inline-flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
             style={{ border: "1px solid #4A7A3D", color: "#4A7A3D" }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLElement;

@@ -91,14 +91,14 @@ export default function BuyerTrust() {
                   <Check size={12} style={{ color: "#4A7A3D" }} strokeWidth={2.5} />
                 </div>
                 <span
-                  className="font-mono text-[7px] uppercase tracking-[0.16em] px-2 py-0.5"
+                  className="font-mono text-[11px] uppercase tracking-[0.16em] px-2 py-0.5"
                   style={{ background: "rgba(200,154,91,0.1)", border: "1px solid rgba(200,154,91,0.25)", color: "#8C6239" }}
                 >
                   {signal.tag}
                 </span>
               </div>
 
-              <h3 className="font-mono text-[10.5px] font-bold uppercase tracking-[0.1em] text-ink mb-2">
+              <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-ink mb-2">
                 {signal.label}
               </h3>
 
@@ -124,7 +124,7 @@ export default function BuyerTrust() {
             "One manufacturing standard. Six certifications. Eighteen markets.
             Every buyer gets the same product, the same documentation, the same quality."
           </p>
-          <p className="font-mono text-[7.5px] uppercase tracking-[0.2em] text-ink-muted flex-shrink-0">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted flex-shrink-0">
             Biopapro Export Team
           </p>
         </motion.div>

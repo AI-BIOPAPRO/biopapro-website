@@ -123,7 +123,7 @@ export default function ExportInfrastructure() {
                     <Icon size={15} style={{ color: "#C89A5B" }} />
                   </div>
                   <span
-                    className="font-mono text-[7px] uppercase tracking-[0.18em] px-2.5 py-1"
+                    className="font-mono text-[11px] uppercase tracking-[0.18em] px-2.5 py-1"
                     style={{ background: "rgba(200,154,91,0.08)", border: "1px solid rgba(200,154,91,0.2)", color: "#C89A5B" }}
                   >
                     {cap.stat}

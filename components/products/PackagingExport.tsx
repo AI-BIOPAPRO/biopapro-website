@@ -142,7 +142,7 @@ export default function PackagingExport() {
                     <Icon size={15} style={{ color: "#C89A5B" }} />
                   </div>
                   <span
-                    className="font-mono text-[7px] uppercase tracking-[0.2em] px-2.5 py-1"
+                    className="font-mono text-[11px] uppercase tracking-[0.2em] px-2.5 py-1"
                     style={{ background: "rgba(200,154,91,0.12)", border: "1px solid rgba(200,154,91,0.25)", color: "#C89A5B" }}
                   >
                     {tier.badge}
@@ -156,7 +156,7 @@ export default function PackagingExport() {
                   {tier.title}
                 </h3>
                 <p
-                  className="font-mono text-[8px] uppercase tracking-[0.2em] mb-4"
+                  className="font-mono text-[11px] uppercase tracking-[0.2em] mb-4"
                   style={{ color: "rgba(200,154,91,0.65)" }}
                 >
                   {tier.subtitle}
@@ -174,13 +174,13 @@ export default function PackagingExport() {
                   {tier.specs.map((spec) => (
                     <div key={spec.label} className="flex items-center justify-between">
                       <span
-                        className="font-mono text-[8px] uppercase tracking-[0.12em]"
+                        className="font-mono text-[11px] uppercase tracking-[0.12em]"
                         style={{ color: "rgba(230,210,185,0.45)" }}
                       >
                         {spec.label}
                       </span>
                       <span
-                        className="font-mono text-[9px] font-medium"
+                        className="font-mono text-[11px] font-medium"
                         style={{ color: "rgba(230,210,185,0.8)" }}
                       >
                         {spec.value}
@@ -202,7 +202,7 @@ export default function PackagingExport() {
           <div className="flex items-center gap-3 mb-5">
             <Container size={14} style={{ color: "#C89A5B" }} />
             <p
-              className="font-mono text-[9px] uppercase tracking-[0.28em]"
+              className="font-mono text-[11px] uppercase tracking-[0.28em]"
               style={{ color: "rgba(200,154,91,0.7)" }}
             >
               Container Loading Reference (Indicative)
@@ -217,7 +217,7 @@ export default function PackagingExport() {
                     (h) => (
                       <th
                         key={h}
-                        className="font-mono text-[8px] uppercase tracking-[0.2em] text-left py-3 px-4"
+                        className="font-mono text-[11px] uppercase tracking-[0.2em] text-left py-3 px-4"
                         style={{ color: "rgba(200,154,91,0.55)" }}
                       >
                         {h}
@@ -242,19 +242,19 @@ export default function PackagingExport() {
                       {row.product}
                     </td>
                     <td
-                      className="font-mono text-[10px] py-3.5 px-4"
+                      className="font-mono text-[11px] py-3.5 px-4"
                       style={{ color: "#C89A5B" }}
                     >
                       {row.cartonPcs}
                     </td>
                     <td
-                      className="font-mono text-[10px] py-3.5 px-4"
+                      className="font-mono text-[11px] py-3.5 px-4"
                       style={{ color: "rgba(246,241,232,0.65)" }}
                     >
                       {row.cartons20ft} cartons
                     </td>
                     <td
-                      className="font-mono text-[10px] py-3.5 px-4"
+                      className="font-mono text-[11px] py-3.5 px-4"
                       style={{ color: "rgba(246,241,232,0.65)" }}
                     >
                       {row.cartons40ft} cartons
@@ -266,7 +266,7 @@ export default function PackagingExport() {
           </div>
 
           <p
-            className="font-mono text-[7.5px] uppercase tracking-[0.16em] mt-4"
+            className="font-mono text-[11px] uppercase tracking-[0.16em] mt-4"
             style={{ color: "rgba(230,210,185,0.3)" }}
           >
             * Quantities are indicative. Exact loading depends on carton dimensions and stacking configuration. Contact for precise container quotations.
@@ -286,7 +286,7 @@ export default function PackagingExport() {
               Need a container-level quotation?
             </p>
             <p
-              className="font-mono text-[8px] uppercase tracking-[0.18em] mt-1"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] mt-1"
               style={{ color: "rgba(200,154,91,0.55)" }}
             >
               Lead time · Freight terms · Certificate documentation — all in one quote
@@ -294,7 +294,7 @@ export default function PackagingExport() {
           </div>
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-300 flex-shrink-0"
+            className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-300 flex-shrink-0"
             style={{ background: "#4A7A3D" }}
             onMouseEnter={(e) =>
               ((e.currentTarget as HTMLElement).style.background = "#2D5228")

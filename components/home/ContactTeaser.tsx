@@ -18,6 +18,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
 import { ArrowRight, MapPin, Mail, Phone } from "lucide-react";
 import Link from "next/link";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 import SectionLabel from "@/components/shared/SectionLabel";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -32,6 +33,7 @@ const PRODUCTS_LIST = [
   "Full Range",
 ];
 
+// facts-allow: customer-selectable order-volume ranges, not a Biopapro production claim
 const VOLUMES = [
   "Under 500K units/year",
   "500K – 2M units/year",
@@ -76,22 +78,18 @@ export default function ContactTeaser() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-20 pt-20 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
 
-          {/* ── Left: Partnership pitch ── */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, ease: EASE }}
-              className="mb-7"
-            >
-              <SectionLabel index="11" label="Export Partnership" />
-            </motion.div>
+          {/* ── Left: Partnership pitch — one quiet fade, not a staggered reveal ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE }}
+          >
+            <div className="mb-7">
+              <SectionLabel index="07" label="Export Partnership" />
+            </div>
 
-            <motion.h2
+            <h2
               id="contact-heading"
-              initial={{ opacity: 0, y: 18 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
               className="font-display font-light text-ink leading-[0.95] mb-8"
               style={{ fontSize: "clamp(2.2rem, 4vw, 3.6rem)" }}
             >
@@ -100,14 +98,9 @@ export default function ContactTeaser() {
               export
               <br />
               <span className="text-wood">partnership.</span>
-            </motion.h2>
+            </h2>
 
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.68, ease: EASE, delay: 0.2 }}
-              className="space-y-8"
-            >
+            <div className="space-y-8">
               <p className="font-sans font-light text-ink-light text-base leading-relaxed max-w-[420px]">
                 Whether you are a distributor, an airline catering group, a
                 large-scale food service operator, or a sustainability
@@ -123,7 +116,7 @@ export default function ContactTeaser() {
                   { step: "04", text: "Compliance documentation for your market" },
                 ].map((item) => (
                   <div key={item.step} className="flex items-center gap-4">
-                    <span className="font-mono text-[8px] text-wood/50 tracking-[0.3em] flex-shrink-0">
+                    <span className="font-mono text-[11px] text-wood/50 tracking-[0.3em] flex-shrink-0">
                       {item.step}
                     </span>
                     <div className="w-4 h-px bg-border flex-shrink-0" />
@@ -141,25 +134,25 @@ export default function ContactTeaser() {
               >
                 <div className="flex items-center gap-3">
                   <Mail size={12} className="text-wood flex-shrink-0" />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-light">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-light">
                     export@biopapro.com
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone size={12} className="text-wood flex-shrink-0" />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-light">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-light">
                     Available via WhatsApp · WeChat
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin size={12} className="text-wood flex-shrink-0" />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-light">
-                    Headquarters — China · Export globally
+                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-light">
+                    Headquarters — {COMPANY_FACTS.location} · Export globally
                   </span>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
 
           {/* ── Right: Form ── */}
           <motion.div
@@ -184,7 +177,7 @@ export default function ContactTeaser() {
                 </p>
                 <Link
                   href="/products"
-                  className="group inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-wood hover:text-wood-dark transition-colors duration-200 mt-2"
+                  className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-wood hover:text-wood-dark transition-colors duration-200 mt-2"
                 >
                   Browse the full catalog while you wait
                   <ArrowRight size={10} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-200" />
@@ -194,7 +187,7 @@ export default function ContactTeaser() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-2 sm:col-span-1">
-                    <label className="block font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
+                    <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
                       Company *
                     </label>
                     <input
@@ -205,7 +198,7 @@ export default function ContactTeaser() {
                     />
                   </div>
                   <div className="col-span-2 sm:col-span-1">
-                    <label className="block font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
+                    <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
                       Country *
                     </label>
                     <input
@@ -218,7 +211,7 @@ export default function ContactTeaser() {
                 </div>
 
                 <div>
-                  <label className="block font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
+                  <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
                     Product Interest *
                   </label>
                   <select
@@ -235,7 +228,7 @@ export default function ContactTeaser() {
                 </div>
 
                 <div>
-                  <label className="block font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
+                  <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
                     Annual Volume *
                   </label>
                   <select
@@ -252,7 +245,7 @@ export default function ContactTeaser() {
                 </div>
 
                 <div>
-                  <label className="block font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
+                  <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
                     Message
                   </label>
                   <textarea
@@ -278,7 +271,7 @@ export default function ContactTeaser() {
                   )}
                 </button>
 
-                <p className="font-mono text-[7.5px] text-ink-muted uppercase tracking-[0.14em] text-center">
+                <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.14em] text-center">
                   No spam · No automated sales sequences · Export team responds directly
                 </p>
               </form>

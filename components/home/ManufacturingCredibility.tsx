@@ -103,7 +103,7 @@ function StepRow({ step, index }: { step: (typeof STEPS)[number]; index: number 
           {/* Step number */}
           <div className="flex items-center gap-3 mb-6">
             <span
-              className="font-mono text-[10px] tracking-[0.3em] uppercase"
+              className="font-mono text-[11px] tracking-[0.3em] uppercase"
               style={{ color: "rgba(200,154,91,0.78)" }}
             >
               STEP {step.index}
@@ -122,7 +122,7 @@ function StepRow({ step, index }: { step: (typeof STEPS)[number]; index: number 
             {step.title}
           </h3>
           <p
-            className="font-mono text-[9.5px] tracking-[0.18em] uppercase"
+            className="font-mono text-[11px] tracking-[0.18em] uppercase"
             style={{ color: "rgba(200,154,91,0.65)" }}
           >
             {step.subtitle}
@@ -141,7 +141,7 @@ function StepRow({ step, index }: { step: (typeof STEPS)[number]; index: number 
             {step.stat.value}
           </span>
           <span
-            className="font-mono text-[8.5px] uppercase tracking-[0.2em]"
+            className="font-mono text-[11px] uppercase tracking-[0.2em]"
             style={{ color: "rgba(200,154,91,0.55)" }}
           >
             {step.stat.label}
@@ -180,7 +180,7 @@ function StepRow({ step, index }: { step: (typeof STEPS)[number]; index: number 
           {step.tags.map((tag) => (
             <span
               key={tag}
-              className="font-mono text-[8px] uppercase tracking-[0.18em] px-3 py-1.5"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] px-3 py-1.5"
               style={{
                 border: "1px solid rgba(200,154,91,0.18)",
                 color: "rgba(200,154,91,0.85)",
@@ -227,7 +227,7 @@ export default function ManufacturingCredibility() {
           className="mb-8"
         >
           <SectionLabel
-            index="06"
+            index="03"
             label="Manufacturing"
             inverted
           />
@@ -240,7 +240,7 @@ export default function ManufacturingCredibility() {
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75, ease: EASE, delay: 0.1 }}
             className="font-display font-light leading-[0.95]"
-            style={{ fontSize: "clamp(2.4rem, 4.5vw, 4rem)", color: "#F6F1E8" }}
+            style={{ fontSize: "clamp(2.3rem, 4vw, 3.6rem)", color: "#F6F1E8" }}
           >
             From raw log
             <br />
@@ -274,7 +274,7 @@ export default function ManufacturingCredibility() {
               {[
                 { value: "18",      label: "Production Lines" },
                 { value: "3",       label: "Manufacturing Halls" },
-                { value: "100M+",   label: "Units / Year" },
+                { value: "100M+",   label: "Units / Month" },
               ].map((s, i) => (
                 <div
                   key={s.label}
@@ -288,7 +288,7 @@ export default function ManufacturingCredibility() {
                     {s.value}
                   </p>
                   <p
-                    className="font-mono text-[8px] uppercase tracking-[0.16em] mt-1.5"
+                    className="font-mono text-[11px] uppercase tracking-[0.16em] mt-1.5"
                     style={{ color: "rgba(200,154,91,0.78)" }}
                   >
                     {s.label}
@@ -324,7 +324,7 @@ export default function ManufacturingCredibility() {
               Ready to see the full operation?
             </p>
             <p
-              className="font-mono text-[9px] uppercase tracking-[0.18em] mt-1"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] mt-1"
               style={{ color: "rgba(200,154,91,0.78)" }}
             >
               Factory audit available for qualified buyers

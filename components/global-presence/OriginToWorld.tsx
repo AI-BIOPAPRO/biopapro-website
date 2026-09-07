@@ -93,6 +93,8 @@ export default function OriginToWorld() {
       style={{ background: "#EFE6D7" }}
       aria-labelledby="origin-heading"
     >
+      {/* Scoped prefetch — this section is the consumer of the world topology on this page */}
+      <link rel="prefetch" href="/world-110m.json" as="fetch" crossOrigin="anonymous" />
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-20">
 
         {/* Section header */}
@@ -406,13 +408,13 @@ export default function OriginToWorld() {
               >
                 <div className="flex items-center gap-1.5">
                   <div className="w-3 h-3 rounded-full" style={{ background: "#C89A5B" }} />
-                  <span className="font-mono text-[8px] uppercase tracking-[0.12em]" style={{ color: "#6B5D50" }}>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]" style={{ color: "#6B5D50" }}>
                     Manufacturing Hub
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <div className="w-3 h-3 rounded-full border" style={{ background: "rgba(250,245,236,0.9)", borderColor: "#C89A5B" }} />
-                  <span className="font-mono text-[8px] uppercase tracking-[0.12em]" style={{ color: "#6B5D50" }}>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]" style={{ color: "#6B5D50" }}>
                     Export Market
                   </span>
                 </div>
@@ -420,13 +422,13 @@ export default function OriginToWorld() {
                   <svg width="20" height="6">
                     <line x1="0" y1="3" x2="20" y2="3" stroke="rgba(200,154,91,0.65)" strokeWidth="1.5" strokeDasharray="4 2" />
                   </svg>
-                  <span className="font-mono text-[8px] uppercase tracking-[0.12em]" style={{ color: "#6B5D50" }}>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]" style={{ color: "#6B5D50" }}>
                     Shipping Route
                   </span>
                 </div>
               </div>
 
-              <p className="absolute bottom-2 right-2 font-mono text-[7px] uppercase tracking-[0.14em]" style={{ color: "rgba(140,98,57,0.4)" }}>
+              <p className="absolute bottom-2 right-2 font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: "rgba(140,98,57,0.4)" }}>
                 Hover markets for details
               </p>
             </div>

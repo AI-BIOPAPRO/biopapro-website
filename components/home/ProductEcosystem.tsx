@@ -40,6 +40,7 @@ interface Product {
   certifications: string[];
   cdnImage: string | null;   // null = use warm gradient placeholder
   highlight?: boolean;       // span 2 columns on desktop
+  shot: "context" | "spec";  // context = in-use lifestyle photography, spec = isolated product shot
 }
 
 const PRODUCTS: Product[] = [
@@ -52,7 +53,7 @@ const PRODUCTS: Product[] = [
     material: "FSC Birchwood",
     certifications: ["FSC®", "FDA", "EU"],
     cdnImage: "https://biopapro.com/cdn/shop/collections/C2_2.png?v=1663670170&width=800",
-    highlight: true,
+    shot: "spec",
   },
   {
     id: "fork",
@@ -63,6 +64,8 @@ const PRODUCTS: Product[] = [
     material: "FSC Birchwood",
     certifications: ["FSC®", "FDA", "EU"],
     cdnImage: "https://biopapro.com/cdn/shop/collections/C4_4.png?v=1662374267&width=800",
+    highlight: true,
+    shot: "context",
   },
   {
     id: "spoon",
@@ -73,6 +76,7 @@ const PRODUCTS: Product[] = [
     material: "FSC Birchwood",
     certifications: ["FSC®", "FDA", "EU"],
     cdnImage: "https://biopapro.com/cdn/shop/collections/C5.png?v=1662374075&width=800",
+    shot: "context",
   },
   {
     id: "knife",
@@ -83,37 +87,7 @@ const PRODUCTS: Product[] = [
     material: "FSC Birchwood",
     certifications: ["FSC®", "FDA", "EU"],
     cdnImage: "https://biopapro.com/cdn/shop/collections/C3_3.png?v=1662374387&width=800",
-  },
-  {
-    id: "stirrer",
-    name: "Coffee Stirrer",
-    category: "Café",
-    sizes: "110mm · 140mm · 160mm · 190mm",
-    moq: "500,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "FDA"],
-    cdnImage: "https://biopapro.com/cdn/shop/collections/Untitled_design_61.png?v=1662375316&width=800",
-    highlight: true,
-  },
-  {
-    id: "skewer",
-    name: "Gun Skewer",
-    category: "Grill",
-    sizes: "150mm · 200mm · 250mm · 300mm",
-    moq: "250,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "FDA", "EU"],
-    cdnImage: "https://biopapro.com/cdn/shop/collections/Untitled_design_58.png?v=1663670146&width=800",
-  },
-  {
-    id: "icecream",
-    name: "Ice Cream Stick",
-    category: "Dairy",
-    sizes: "75mm · 93mm · 114mm",
-    moq: "1,000,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "FDA", "EU"],
-    cdnImage: "https://biopapro.com/cdn/shop/products/W43.png?v=1662714289&width=800",
+    shot: "context",
   },
   {
     id: "packaged",
@@ -124,6 +98,41 @@ const PRODUCTS: Product[] = [
     material: "FSC Birchwood + Kraft Paper",
     certifications: ["FSC®", "BPI", "BSCI"],
     cdnImage: "https://biopapro.com/cdn/shop/collections/C6_4.png?v=1662375675&width=800",
+    highlight: true,
+    shot: "context",
+  },
+  {
+    id: "stirrer",
+    name: "Coffee Stirrer",
+    category: "Café",
+    sizes: "110mm · 140mm · 160mm · 190mm",
+    moq: "500,000 units",
+    material: "FSC Birchwood",
+    certifications: ["FSC®", "FDA"],
+    cdnImage: "https://biopapro.com/cdn/shop/collections/Untitled_design_61.png?v=1662375316&width=800",
+    shot: "spec",
+  },
+  {
+    id: "skewer",
+    name: "Gun Skewer",
+    category: "Grill",
+    sizes: "150mm · 200mm · 250mm · 300mm",
+    moq: "250,000 units",
+    material: "FSC Birchwood",
+    certifications: ["FSC®", "FDA", "EU"],
+    cdnImage: "https://biopapro.com/cdn/shop/collections/Untitled_design_58.png?v=1663670146&width=800",
+    shot: "spec",
+  },
+  {
+    id: "icecream",
+    name: "Ice Cream Stick",
+    category: "Dairy",
+    sizes: "75mm · 93mm · 114mm",
+    moq: "1,000,000 units",
+    material: "FSC Birchwood",
+    certifications: ["FSC®", "FDA", "EU"],
+    cdnImage: null,
+    shot: "spec",
   },
 ];
 
@@ -145,12 +154,17 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       {/* Wood top-bar reveal */}
       <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-wood origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 z-10" />
 
-      {/* Category + MOQ header */}
+      {/* Category + zone + MOQ header */}
       <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-border">
-        <span className="font-mono text-[7.5px] text-wood tracking-[0.28em] uppercase">
-          {product.category}
+        <span className="flex items-center gap-2">
+          <span className="font-mono text-[11px] text-wood tracking-[0.22em] uppercase">
+            {product.category}
+          </span>
+          <span className="font-mono text-[11px] text-ink-muted/80 tracking-[0.15em] uppercase">
+            · {product.shot === "context" ? "In the Kitchen" : "The Range"}
+          </span>
         </span>
-        <span className="font-mono text-[7px] text-ink-muted tracking-wider uppercase">
+        <span className="font-mono text-[11px] text-ink-muted tracking-wider uppercase flex-shrink-0">
           MOQ {product.moq.split(" ")[0]}
         </span>
       </div>
@@ -165,7 +179,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             src={product.cdnImage}
             alt={product.name}
             fill
+            priority={product.highlight}
             className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-700"
+            style={{ filter: "saturate(0.94) contrast(1.02) sepia(0.03)" }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
@@ -176,7 +192,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               background: "linear-gradient(155deg, #F0E4CE 0%, #E5D9C5 50%, #DDD0B8 100%)",
             }}
           >
-            <span className="font-mono text-[7px] text-wood/40 tracking-[0.22em] uppercase text-center leading-loose">
+            <span className="font-mono text-[11px] text-wood/60 tracking-[0.2em] uppercase text-center leading-loose">
               Product Photo
               <br />Coming Soon
             </span>
@@ -192,7 +208,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             {product.certifications.map((cert) => (
               <span
                 key={cert}
-                className="font-mono text-[7px] tracking-[0.16em] uppercase px-2 py-1"
+                className="font-mono text-[11px] tracking-[0.16em] uppercase px-2 py-1"
                 style={{
                   background: "rgba(200,154,91,0.2)",
                   border: "1px solid rgba(200,154,91,0.4)",
@@ -208,13 +224,13 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
       {/* Product info footer */}
       <div className="px-4 py-4">
-        <p className="font-sans text-[12px] font-semibold text-ink mb-1 group-hover:text-wood-dark transition-colors duration-300 leading-snug">
+        <p className="font-sans text-[13px] font-semibold text-ink mb-1.5 group-hover:text-wood-dark transition-colors duration-300 leading-snug">
           {product.name}
         </p>
-        <p className="font-mono text-[7.5px] text-ink-muted tracking-[0.1em] uppercase">
+        <p className="font-mono text-[11px] text-ink-muted tracking-[0.08em] uppercase">
           {product.sizes}
         </p>
-        <p className="font-mono text-[7px] text-ink-muted/60 tracking-[0.08em] mt-0.5">
+        <p className="font-mono text-[11px] text-ink-muted/85 tracking-[0.05em] mt-1">
           {product.material} · Min {product.moq}
         </p>
       </div>
@@ -244,7 +260,7 @@ export default function ProductEcosystem() {
             transition={{ duration: 0.55, ease: EASE }}
             className="mb-7"
           >
-            <SectionLabel index="07" label="Product Range" />
+            <SectionLabel index="04" label="Product Range" />
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
@@ -275,7 +291,7 @@ export default function ProductEcosystem() {
               </p>
               <Link
                 href="/products"
-                className="group inline-flex items-center gap-2.5 self-start font-mono text-[10px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
+                className="group inline-flex items-center gap-2.5 self-start font-mono text-[11px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
                 style={{ border: "1px solid #C89A5B", color: "#C89A5B" }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement;
@@ -306,7 +322,7 @@ export default function ProductEcosystem() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className="font-mono text-[9px] uppercase tracking-[0.18em] px-4 py-2 transition-all duration-200"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] px-4 py-2 min-h-[44px] inline-flex items-center justify-center transition-all duration-200"
               style={{
                 background: activeCategory === cat ? "#C89A5B" : "transparent",
                 color: activeCategory === cat ? "#1D1610" : "#9E9083",
@@ -316,7 +332,7 @@ export default function ProductEcosystem() {
               {cat}
             </button>
           ))}
-          <span className="ml-auto font-mono text-[8px] text-ink-muted uppercase tracking-[0.15em]">
+          <span className="ml-auto font-mono text-[11px] text-ink-muted uppercase tracking-[0.15em]">
             {filtered.length} product{filtered.length !== 1 ? "s" : ""}
           </span>
         </motion.div>
@@ -337,13 +353,13 @@ export default function ProductEcosystem() {
             <p className="font-sans font-medium text-ink text-sm">
               Need custom sizing, branding, or packaging?
             </p>
-            <p className="font-mono text-[8.5px] text-ink-muted uppercase tracking-[0.14em] mt-0.5">
+            <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.14em] mt-0.5">
               Laser engraving · Custom dimensions · Private label · OEM welcome
             </p>
           </div>
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2.5 px-6 py-3 bg-ink text-birch text-[10px] font-bold uppercase tracking-[0.14em] hover:bg-wood-dark transition-colors duration-300 flex-shrink-0"
+            className="group inline-flex items-center gap-2.5 px-6 py-3 bg-ink text-birch text-[11px] font-bold uppercase tracking-[0.14em] hover:bg-wood-dark transition-colors duration-300 flex-shrink-0"
           >
             Request Custom Quote
             <ArrowRight size={11} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-300" />

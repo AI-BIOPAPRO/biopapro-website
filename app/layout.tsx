@@ -111,7 +111,8 @@ export default function RootLayout({
         {/* Preconnect to CDN so image requests don't wait on DNS + TLS */}
         <link rel="preconnect" href="https://biopapro.com" />
         <link rel="dns-prefetch" href="https://biopapro.com" />
-        <link rel="prefetch" href="/world-110m.json" as="fetch" crossOrigin="anonymous" />
+        {/* world-110m.json is prefetched per-component (GlobalPresence, OriginToWorld)
+            instead of globally here — most routes never render a world map. */}
       </head>
       <body>
         <StructuredData />

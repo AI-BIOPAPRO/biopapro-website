@@ -37,7 +37,7 @@ export default function ExportQuoteCTA() {
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, ease: EASE }}
-            className="font-mono text-[8px] uppercase tracking-[0.36em] mb-8"
+            className="font-mono text-[11px] uppercase tracking-[0.36em] mb-8"
             style={{ color: "rgba(200,230,185,0.65)" }}
           >
             Ready to source?
@@ -97,7 +97,7 @@ export default function ExportQuoteCTA() {
 
             <a
               href="mailto:export@biopapro.com"
-              className="group inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.2em] transition-colors duration-200"
+              className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200"
               style={{ color: "rgba(168,198,134,0.75)" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(168,198,134,1)")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(168,198,134,0.75)")}
@@ -125,7 +125,7 @@ export default function ExportQuoteCTA() {
                     <Icon size={11} style={{ color: "#A8C686" }} />
                   </div>
                   <span
-                    className="font-mono text-[8px] uppercase tracking-[0.18em]"
+                    className="font-mono text-[11px] uppercase tracking-[0.18em]"
                     style={{ color: "rgba(200,230,185,0.55)" }}
                   >
                     {item.text}

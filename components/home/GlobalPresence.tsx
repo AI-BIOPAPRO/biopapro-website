@@ -7,6 +7,7 @@ import Link from "next/link";
 import { geoEquirectangular } from "d3-geo";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import SectionLabel from "@/components/shared/SectionLabel";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const GEO_URL = "/world-110m.json";
@@ -21,36 +22,39 @@ const proj = geoEquirectangular()
 const MUMBAI: [number, number] = [72.8, 19.1];
 const [MX, MY] = proj(MUMBAI) as [number, number];
 
+// Verified against lib/global-presence-data.ts (matches the live biopapro.com
+// site's own "Our Presence" list). India is Biopapro's manufacturing origin —
+// it already has its own dedicated marker below — so it isn't listed again
+// here as a destination market.
 const MARKETS: { name: string; region: string; lonlat: [number, number] }[] = [
   { name: "United States",  region: "Americas",    lonlat: [-77.0,  38.9] },
   { name: "Canada",         region: "Americas",    lonlat: [-75.7,  45.4] },
-  { name: "Brazil",         region: "Americas",    lonlat: [-47.9, -15.8] },
   { name: "Mexico",         region: "Americas",    lonlat: [-99.1,  19.4] },
   { name: "United Kingdom", region: "Europe",      lonlat: [ -0.1,  51.5] },
+  { name: "Ireland",        region: "Europe",      lonlat: [ -6.3,  53.3] },
   { name: "Germany",        region: "Europe",      lonlat: [ 13.4,  52.5] },
-  { name: "France",         region: "Europe",      lonlat: [  2.3,  48.9] },
   { name: "Netherlands",    region: "Europe",      lonlat: [  4.9,  52.4] },
+  { name: "Spain",          region: "Europe",      lonlat: [ -3.7,  40.4] },
   { name: "Poland",         region: "Europe",      lonlat: [ 21.0,  52.2] },
-  { name: "South Africa",   region: "Africa",      lonlat: [ 28.0, -26.0] },
+  { name: "Greece",         region: "Europe",      lonlat: [ 23.7,  37.9] },
+  { name: "Romania",        region: "Europe",      lonlat: [ 26.1,  44.4] },
   { name: "UAE",            region: "Middle East", lonlat: [ 55.3,  25.2] },
-  { name: "Saudi Arabia",   region: "Middle East", lonlat: [ 46.7,  24.7] },
-  { name: "India",          region: "Asia",        lonlat: [ 77.2,  28.6] },
-  { name: "Singapore",      region: "Asia",        lonlat: [103.8,   1.4] },
-  { name: "Japan",          region: "Asia",        lonlat: [139.7,  35.7] },
-  { name: "South Korea",    region: "Asia",        lonlat: [126.9,  37.6] },
+  { name: "Qatar",          region: "Middle East", lonlat: [ 51.5,  25.3] },
+  { name: "Bahrain",        region: "Middle East", lonlat: [ 50.6,  26.1] },
+  { name: "Mauritius",      region: "Africa",      lonlat: [ 57.6, -20.2] },
+  { name: "Maldives",       region: "Asia",        lonlat: [ 73.5,   4.2] },
   { name: "Australia",      region: "Pacific",     lonlat: [151.2, -33.9] },
-  { name: "New Zealand",    region: "Pacific",     lonlat: [174.8, -36.9] },
 ];
 
 const REGIONS = ["Americas", "Europe", "Middle East", "Africa", "Asia", "Pacific"] as const;
 
 const REGION_STATS: Record<string, { markets: number; growth: string }> = {
-  Americas:      { markets: 4, growth: "+12% YoY" },
-  Europe:        { markets: 5, growth: "+18% YoY" },
-  "Middle East": { markets: 2, growth: "+31% YoY" },
+  Americas:      { markets: 3, growth: "+12% YoY" },
+  Europe:        { markets: 8, growth: "+18% YoY" },
+  "Middle East": { markets: 3, growth: "+31% YoY" },
   Africa:        { markets: 1, growth: "New 2024"  },
-  Asia:          { markets: 4, growth: "+22% YoY"  },
-  Pacific:       { markets: 2, growth: "+9% YoY"   },
+  Asia:          { markets: 1, growth: "+22% YoY"  },
+  Pacific:       { markets: 1, growth: "+9% YoY"   },
 };
 
 // Quadratic bezier arc from Mumbai to destination
@@ -83,6 +87,8 @@ export default function GlobalPresence() {
       style={{ background: "#1D1610" }}
       aria-labelledby="global-heading"
     >
+      {/* Scoped prefetch — this section is the only homepage consumer of the world topology */}
+      <link rel="prefetch" href="/world-110m.json" as="fetch" crossOrigin="anonymous" />
       <div
         className="h-[3px] w-full"
         style={{ background: "linear-gradient(90deg, transparent 0%, #4A7A3D 40%, #2D5228 70%, transparent 100%)" }}
@@ -99,7 +105,7 @@ export default function GlobalPresence() {
               transition={{ duration: 0.55, ease: EASE }}
               className="mb-7"
             >
-              <SectionLabel index="08" label="Global Presence" inverted />
+              <SectionLabel index="05" label="Global Presence" inverted />
             </motion.div>
 
             <motion.h2
@@ -110,7 +116,7 @@ export default function GlobalPresence() {
               className="font-display font-light leading-[0.95]"
               style={{ fontSize: "clamp(2.2rem, 4vw, 3.6rem)", color: "#F6F1E8" }}
             >
-              18+ active markets
+              {COMPANY_FACTS.exportMarkets}+ active markets
               <br />
               <span style={{ color: "#7AAE6B" }}>across 6 continents.</span>
             </motion.h2>
@@ -133,7 +139,7 @@ export default function GlobalPresence() {
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setActiveRegion(null)}
-                className="font-mono text-[8px] uppercase tracking-[0.16em] px-3 py-1.5 transition-all duration-200"
+                className="font-mono text-[11px] uppercase tracking-[0.16em] px-3 py-1.5 min-h-[44px] inline-flex items-center justify-center transition-all duration-200"
                 style={{
                   background: !activeRegion ? "#4A7A3D" : "transparent",
                   color: !activeRegion ? "#F6F1E8" : "rgba(122,174,107,0.85)",
@@ -146,7 +152,7 @@ export default function GlobalPresence() {
                 <button
                   key={region}
                   onClick={() => setActiveRegion(region === activeRegion ? null : region)}
-                  className="font-mono text-[8px] uppercase tracking-[0.16em] px-3 py-1.5 transition-all duration-200"
+                  className="font-mono text-[11px] uppercase tracking-[0.16em] px-3 py-1.5 min-h-[44px] inline-flex items-center justify-center transition-all duration-200"
                   style={{
                     background: activeRegion === region ? "#4A7A3D" : "transparent",
                     color: activeRegion === region ? "#F6F1E8" : "rgba(122,174,107,0.85)",
@@ -226,10 +232,11 @@ export default function GlobalPresence() {
                   style={{ transformOrigin: `${m.dx}px ${m.dy}px` }}
                 >
                   <motion.circle
-                    cx={m.dx} cy={m.dy} r={4}
+                    cx={m.dx} cy={m.dy}
                     fill="none"
                     stroke={isActive ? "rgba(74,122,61,0.5)" : "rgba(74,122,61,0.15)"}
                     strokeWidth={0.4}
+                    initial={{ r: 4, opacity: 0.6 }}
                     animate={inView ? { r: [4, 8], opacity: [0.6, 0] } : {}}
                     transition={{ delay: 0.8 + i * 0.06, duration: 2, repeat: Infinity, repeatDelay: 3 }}
                   />
@@ -247,10 +254,11 @@ export default function GlobalPresence() {
                 {[8, 13, 18].map((r, i) => (
                   <motion.circle
                     key={r}
-                    cx={MX} cy={MY} r={r}
+                    cx={MX} cy={MY}
                     fill="none"
                     stroke="rgba(74,122,61,0.35)"
                     strokeWidth={0.4}
+                    initial={{ r, opacity: 0.5 }}
                     animate={{ r: [r, r + 7], opacity: [0.5, 0] }}
                     transition={{ delay: 0.3 + i * 0.4, duration: 2.5, repeat: Infinity, repeatDelay: 1.5 }}
                   />
@@ -282,7 +290,7 @@ export default function GlobalPresence() {
               <p className="font-display font-light text-xl" style={{ color: "#7AAE6B" }}>
                 {activeRegion}
               </p>
-              <p className="font-mono text-[8px] uppercase tracking-[0.16em] mt-1" style={{ color: "rgba(246,241,232,0.55)" }}>
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] mt-1" style={{ color: "rgba(246,241,232,0.55)" }}>
                 {REGION_STATS[activeRegion].markets} markets · {REGION_STATS[activeRegion].growth}
               </p>
             </motion.div>
@@ -304,7 +312,7 @@ export default function GlobalPresence() {
                 initial={{ opacity: 0 }}
                 animate={inView ? { opacity: 1 } : {}}
                 transition={{ delay: 0.6 + i * 0.04, duration: 0.4 }}
-                className="font-mono text-[8px] uppercase tracking-[0.14em] px-3 py-1.5"
+                className="font-mono text-[11px] uppercase tracking-[0.14em] px-3 py-1.5"
                 style={{
                   border: "1px solid rgba(200,154,91,0.18)",
                   color: "rgba(200,154,91,0.6)",
@@ -317,12 +325,12 @@ export default function GlobalPresence() {
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="font-mono text-[8.5px] uppercase tracking-[0.18em]" style={{ color: "rgba(200,154,91,0.72)" }}>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: "rgba(200,154,91,0.72)" }}>
               Actively expanding · New markets added quarterly
             </p>
             <Link
               href="/global-presence"
-              className="group inline-flex items-center gap-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
+              className="group inline-flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
               style={{ border: "1px solid rgba(122,174,107,0.55)", color: "#7AAE6B" }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;

@@ -192,7 +192,7 @@ export default function ProcurementTable() {
                       </span>
                       {row.isIndividuallyPacked && (
                         <span
-                          className="font-mono text-[6px] uppercase tracking-[0.12em] px-1.5 py-0.5"
+                          className="font-mono text-[11px] uppercase tracking-[0.12em] px-1.5 py-0.5"
                           style={{ background: "rgba(200,154,91,0.12)", border: "1px solid rgba(200,154,91,0.3)", color: "#8C6239" }}
                         >
                           Sleeved
@@ -203,29 +203,29 @@ export default function ProcurementTable() {
                   {/* Category */}
                   <td className="py-3.5 px-4">
                     <span
-                      className="font-mono text-[7.5px] uppercase tracking-[0.16em] px-2.5 py-1"
+                      className="font-mono text-[11px] uppercase tracking-[0.16em] px-2.5 py-1"
                       style={{ background: "rgba(74,122,61,0.08)", border: "1px solid rgba(74,122,61,0.18)", color: "#4A7A3D" }}
                     >
                       {row.category}
                     </span>
                   </td>
                   {/* Length */}
-                  <td className="py-3.5 px-4 font-mono text-[10px] text-ink">{row.length}</td>
+                  <td className="py-3.5 px-4 font-mono text-[11px] text-ink">{row.length}</td>
                   {/* Material */}
                   <td className="py-3.5 px-4 font-sans text-[11px] text-ink-light">{row.material}</td>
                   {/* Pcs/carton */}
-                  <td className="py-3.5 px-4 font-mono text-[10px] font-bold" style={{ color: "#C89A5B" }}>
+                  <td className="py-3.5 px-4 font-mono text-[11px] font-bold" style={{ color: "#C89A5B" }}>
                     {row.pcsPerCarton.toLocaleString()}
                   </td>
                   {/* MOQ */}
-                  <td className="py-3.5 px-4 font-mono text-[10px] text-ink">{row.moq}</td>
+                  <td className="py-3.5 px-4 font-mono text-[11px] text-ink">{row.moq}</td>
                   {/* Certifications */}
                   <td className="py-3.5 px-4">
                     <div className="flex flex-wrap gap-1">
                       {row.certifications.slice(0, 3).map((cert) => (
                         <span
                           key={cert}
-                          className="font-mono text-[6.5px] uppercase tracking-[0.1em] px-1.5 py-0.5"
+                          className="font-mono text-[11px] uppercase tracking-[0.1em] px-1.5 py-0.5"
                           style={{ background: "#F6F1E8", border: "1px solid #DDD3C5", color: "#6B5D50" }}
                         >
                           {cert}
@@ -246,12 +246,12 @@ export default function ProcurementTable() {
           transition={{ duration: 0.55, ease: EASE, delay: 0.36 }}
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6"
         >
-          <p className="font-mono text-[7.5px] uppercase tracking-[0.16em] text-ink-muted">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-muted">
             Showing {sorted.length} of {TABLE_ROWS.length} SKUs · Click column headers to sort
           </p>
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2 font-mono text-[8.5px] uppercase tracking-[0.18em] transition-colors duration-200"
+            className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200"
             style={{ color: "#4A7A3D" }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#2D5228")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#4A7A3D")}

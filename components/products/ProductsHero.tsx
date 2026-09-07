@@ -113,7 +113,7 @@ export default function ProductsHero() {
               {["FSC® 100%", "ISO 9001:2015", "FDA CFR 21", "BPI Compostable", "BSCI Audited"].map((cert) => (
                 <span
                   key={cert}
-                  className="font-mono text-[8px] uppercase tracking-[0.2em] px-3 py-1.5"
+                  className="font-mono text-[11px] uppercase tracking-[0.2em] px-3 py-1.5"
                   style={{ border: "1px solid #DDD3C5", color: "#6B5D50", background: "rgba(255,255,255,0.55)" }}
                 >
                   {cert}
@@ -140,7 +140,7 @@ export default function ProductsHero() {
               </Link>
               <a
                 href="#catalog"
-                className="group inline-flex items-center gap-2 font-mono text-[9px] text-ink-muted uppercase tracking-[0.2em] hover:text-ink transition-colors duration-200"
+                className="group inline-flex items-center gap-2 font-mono text-[11px] text-ink-muted uppercase tracking-[0.2em] hover:text-ink transition-colors duration-200"
               >
                 Browse catalog
                 <ChevronDown size={11} className="group-hover:translate-y-0.5 transition-transform duration-200" />
@@ -195,10 +195,10 @@ export default function ProductsHero() {
               className="absolute -bottom-3 left-0 px-4 py-3 hidden lg:block"
               style={{ background: "#1D1610", border: "1px solid #3D2E22" }}
             >
-              <p className="font-mono text-[7px] uppercase tracking-[0.25em]" style={{ color: "rgba(200,154,91,0.75)" }}>
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em]" style={{ color: "rgba(200,154,91,0.75)" }}>
                 FSC® Chain of Custody
               </p>
-              <p className="font-mono text-[8px] uppercase tracking-[0.15em] mt-0.5" style={{ color: "#F6F1E8" }}>
+              <p className="font-mono text-[11px] uppercase tracking-[0.15em] mt-0.5" style={{ color: "#F6F1E8" }}>
                 All birchwood certified
               </p>
             </motion.div>
@@ -217,11 +217,11 @@ export default function ProductsHero() {
             {STATS.map((stat, i) => (
               <div
                 key={stat.label}
-                className="flex flex-col items-center text-center px-4 py-3"
-                style={{
-                  borderRight: i % 2 === 0 || i === 1 ? "1px solid #DDD3C5" : "none",
-                  borderBottom: i < 2 ? "1px solid #DDD3C5" : "none",
-                }}
+                className={`flex flex-col items-center text-center px-4 py-3 border-[#DDD3C5] md:border-b-0 ${
+                  i % 2 === 0 ? "border-r" : "border-r-0"
+                } ${i < 2 ? "border-b" : "border-b-0"} ${
+                  i < 3 ? "md:border-r" : "md:border-r-0"
+                }`}
               >
                 <span
                   className="font-mono font-bold mb-1.5"
@@ -229,10 +229,10 @@ export default function ProductsHero() {
                 >
                   {stat.value}
                 </span>
-                <span className="font-sans text-[10px] font-semibold text-ink uppercase tracking-[0.1em] mb-0.5">
+                <span className="font-sans text-[11px] font-semibold text-ink uppercase tracking-[0.1em] mb-0.5">
                   {stat.label}
                 </span>
-                <span className="font-mono text-[7.5px] text-ink-muted uppercase tracking-[0.14em]">
+                <span className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.14em]">
                   {stat.sub}
                 </span>
               </div>
@@ -247,7 +247,7 @@ export default function ProductsHero() {
           transition={{ duration: 0.6, ease: EASE, delay: 0.44 }}
           className="pb-12"
         >
-          <p className="font-mono text-[7.5px] text-ink-muted uppercase tracking-[0.3em] mb-4">
+          <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.3em] mb-4">
             Jump to category
           </p>
           <div className="flex flex-wrap gap-2">
@@ -255,7 +255,7 @@ export default function ProductsHero() {
               <a
                 key={cat}
                 href={getCategoryAnchor(cat)}
-                className="font-mono text-[8.5px] uppercase tracking-[0.16em] px-4 py-2 transition-all duration-200"
+                className="font-mono text-[11px] uppercase tracking-[0.16em] px-4 py-2 transition-all duration-200"
                 style={{ border: "1px solid #DDD3C5", color: "#6B5D50", background: "transparent" }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement;

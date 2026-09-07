@@ -86,7 +86,7 @@ export default function ContainerJourney() {
                       }}
                     >
                       <span
-                        className="font-mono text-[9px] font-bold"
+                        className="font-mono text-[11px] font-bold"
                         style={{ color: i === 0 || i === JOURNEY_STEPS.length - 1 ? "#1D1610" : "#6B5D50" }}
                       >
                         {step.step}
@@ -97,7 +97,7 @@ export default function ContainerJourney() {
                   {/* Tag */}
                   <div className="md:col-span-2 flex md:flex-col items-start md:items-start md:justify-center gap-2">
                     <span
-                      className="font-mono text-[7.5px] uppercase tracking-[0.18em] px-2.5 py-1 whitespace-nowrap"
+                      className="font-mono text-[11px] uppercase tracking-[0.18em] px-2.5 py-1 whitespace-nowrap"
                       style={{
                         background: "rgba(200,154,91,0.1)",
                         border: "1px solid rgba(200,154,91,0.25)",

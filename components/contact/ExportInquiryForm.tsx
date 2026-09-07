@@ -118,11 +118,15 @@ function Checkbox({ id, label, checked, onChange }: {
   );
 }
 
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+
 export default function ExportInquiryForm() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
   const [form, setForm] = useState<FormState>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const set = (field: keyof FormState) => (value: string) =>
     setForm((f) => ({ ...f, [field]: value }));
@@ -135,16 +139,55 @@ export default function ExportInquiryForm() {
         : [...f[field], value],
     }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: connect to form backend (Formspree / custom API / Netlify Forms)
-    // For now: build mailto fallback
-    const subject = encodeURIComponent(`Export Inquiry — ${form.company} (${form.country})`);
-    const body = encodeURIComponent(
-      `Name: ${form.fullName}\nCompany: ${form.company}\nCountry: ${form.country}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nProducts: ${form.products.join(", ")}\nAnnual Volume: ${form.volume}\nDelivery Region: ${form.region}\nTimeline: ${form.timeline}\n\nProcurement Options: ${form.procurement.join(", ")}\n\nMessage:\n${form.message}`
-    );
-    window.location.href = `mailto:yash@biopapro.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    setError(null);
+
+    if (FORMSPREE_ID) {
+      setSubmitting(true);
+      try {
+        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            name: form.fullName,
+            company: form.company,
+            country: form.country,
+            email: form.email,
+            phone: form.phone,
+            products: form.products.join(", "),
+            volume: form.volume,
+            region: form.region,
+            timeline: form.timeline,
+            procurement: form.procurement.join(", "),
+            message: form.message,
+          }),
+        });
+        if (res.ok) {
+          setSubmitted(true);
+        } else {
+          throw new Error("Formspree error");
+        }
+      } catch {
+        // Formspree failed — fall back to mailto
+        const subject = encodeURIComponent(`Export Inquiry — ${form.company} (${form.country})`);
+        const body = encodeURIComponent(
+          `Name: ${form.fullName}\nCompany: ${form.company}\nCountry: ${form.country}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nProducts: ${form.products.join(", ")}\nVolume: ${form.volume}\nRegion: ${form.region}\nTimeline: ${form.timeline}\n\nProcurement: ${form.procurement.join(", ")}\n\nMessage:\n${form.message}`
+        );
+        window.location.href = `mailto:yash@biopapro.com?subject=${subject}&body=${body}`;
+        setSubmitted(true);
+      } finally {
+        setSubmitting(false);
+      }
+    } else {
+      // No Formspree ID configured — use mailto directly
+      const subject = encodeURIComponent(`Export Inquiry — ${form.company} (${form.country})`);
+      const body = encodeURIComponent(
+        `Name: ${form.fullName}\nCompany: ${form.company}\nCountry: ${form.country}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nProducts: ${form.products.join(", ")}\nVolume: ${form.volume}\nRegion: ${form.region}\nTimeline: ${form.timeline}\n\nProcurement: ${form.procurement.join(", ")}\n\nMessage:\n${form.message}`
+      );
+      window.location.href = `mailto:yash@biopapro.com?subject=${subject}&body=${body}`;
+      setSubmitted(true);
+    }
   };
 
   return (

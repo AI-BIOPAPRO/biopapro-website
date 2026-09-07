@@ -19,15 +19,16 @@ import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 
 const E = [0.16, 1, 0.3, 1] as const;
 
 const STATS = [
-  { value: "100M+",   label: "Units Produced",    sub: "Annually"              },
-  { value: "18+",     label: "Export Countries",  sub: "Active markets"        },
-  { value: "6,500kg", label: "Plastic Replaced",  sub: "Every single day"      },
+  { value: "100M+",   label: "Units Produced",    sub: "Every month"           },
+  { value: `${COMPANY_FACTS.exportMarkets}+`,     label: "Export Countries",  sub: "Active markets" },
+  { value: `${COMPANY_FACTS.plasticSavedPerDay.toLocaleString()}kg`, label: "Plastic Replaced",  sub: "Every single day" },
   { value: "FSC®",    label: "100% Certified",    sub: "Chain of custody"      },
-] as const;
+];
 
 const TRUST_MARKS = ["FSC® 100%", "ISO 9001:2015", "FDA CFR 21", "BPI Compostable", "BSCI Audited"] as const;
 
@@ -91,6 +92,17 @@ export default function OpeningSection() {
         aria-hidden="true"
       />
 
+      {/* Below-1400px scrim — the content column runs full-width until the layout has
+          real room to breathe, so the angled gradient above doesn't reliably clear the
+          carved wordmark art behind the CTA/stat row from mobile through small laptop
+          widths (verified failing at 1280). Flat coverage only where needed; 1440+
+          already reads clean with just the gradient above. */}
+      <div
+        className="absolute inset-0 z-10 pointer-events-none hidden max-[1399px]:block"
+        style={{ background: "rgba(10,18,9,0.72)" }}
+        aria-hidden="true"
+      />
+
       {/* ══════════════════════════════════
           LAYER 2 — All content
           ══════════════════════════════ */}
@@ -115,7 +127,7 @@ export default function OpeningSection() {
             }}
           >
             <CheckCircle2 size={10} color="rgba(160,220,140,0.9)" />
-            <span className="font-mono text-[9px] tracking-[0.25em] uppercase font-semibold"
+            <span className="font-mono text-[11px] tracking-[0.25em] uppercase font-semibold"
               style={{ color: "rgba(180,230,160,0.95)" }}>
               Global FSC-Certified Manufacturer
             </span>
@@ -125,12 +137,12 @@ export default function OpeningSection() {
           <div className="hidden md:flex items-center gap-1">
             {TRUST_MARKS.map((cert, i) => (
               <span key={cert}>
-                <span className="font-mono text-[8.5px] tracking-[0.16em] uppercase"
+                <span className="font-mono text-[11px] tracking-[0.16em] uppercase"
                   style={{ color: "rgba(200,230,185,0.65)" }}>
                   {cert}
                 </span>
                 {i < TRUST_MARKS.length - 1 && (
-                  <span className="mx-2 font-mono text-[8px]"
+                  <span className="mx-2 font-mono text-[11px]"
                     style={{ color: "rgba(180,210,160,0.3)" }}>·</span>
                 )}
               </span>
@@ -153,7 +165,7 @@ export default function OpeningSection() {
               color: "rgba(160,210,140,0.52)",
             }}
           >
-            Global Manufacturer &nbsp;·&nbsp; Est. 2018
+            Global Manufacturer &nbsp;·&nbsp; Est. {COMPANY_FACTS.founded}
           </motion.p>
 
           {/* ── BIOPAPRO — refined brand anchor, not dominant ── */}
@@ -304,13 +316,13 @@ export default function OpeningSection() {
                   {stat.value}
                 </div>
                 <div
-                  className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] mb-0.5"
+                  className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] mb-0.5"
                   style={{ color: "rgba(180,230,160,0.9)" }}
                 >
                   {stat.label}
                 </div>
                 <div
-                  className="font-mono text-[9px] uppercase tracking-[0.12em]"
+                  className="font-mono text-[11px] uppercase tracking-[0.12em]"
                   style={{ color: "rgba(200,220,185,0.55)" }}
                 >
                   {stat.sub}
@@ -333,7 +345,7 @@ export default function OpeningSection() {
           style={{ background: "rgba(255,255,255,0.15)" }}>
           <div className="w-full h-1/2 bg-green-light animate-scroll-line" />
         </div>
-        <span className="font-mono text-[8px] tracking-[0.3em] uppercase"
+        <span className="font-mono text-[11px] tracking-[0.3em] uppercase"
           style={{ color: "rgba(180,220,160,0.5)", writingMode: "vertical-rl" }}>
           Scroll
         </span>

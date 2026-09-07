@@ -127,6 +127,11 @@
     color: #1B3317;
   }
 
+  :focus-visible {
+    outline: 2px solid #4A7A3D;
+    outline-offset: 2px;
+  }
+
   /* Scrollbar — brand green */
   ::-webkit-scrollbar       { width: 4px; }
   ::-webkit-scrollbar-track { background: #F6F1E8; }
@@ -145,6 +150,7 @@
 
 .paper {
   position: relative;
+  overflow: hidden;
 }
 
 .paper::after {
@@ -169,6 +175,7 @@
 
 .grain {
   position: relative;
+  overflow: hidden;
 }
 
 .grain::after {

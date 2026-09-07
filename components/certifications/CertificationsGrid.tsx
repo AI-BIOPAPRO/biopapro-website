@@ -55,7 +55,7 @@ function CertCard({ cert, index, inView }: {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-1.5">
             <span
-              className="font-sans text-[10px] font-bold uppercase tracking-[0.12em] px-2 py-0.5"
+              className="font-sans text-[11px] font-bold uppercase tracking-[0.12em] px-2 py-0.5"
               style={{ background: status.bg, border: `1px solid ${status.border}`, color: status.color }}
             >
               {cert.status}
@@ -109,7 +109,7 @@ function CertCard({ cert, index, inView }: {
         className="mt-auto flex items-center justify-between px-5 py-3 border-t"
         style={{ borderColor: "#EDE5D8" }}
       >
-        <span className="font-mono text-[10px] text-ink-muted truncate max-w-[55%]">
+        <span className="font-mono text-[11px] text-ink-muted truncate max-w-[55%]">
           {cert.certRef}
         </span>
         <a

@@ -81,14 +81,14 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
         >
           <div className="flex items-center gap-2.5">
             <span
-              className="font-mono text-[7.5px] uppercase tracking-[0.22em] px-2.5 py-1"
+              className="font-mono text-[11px] uppercase tracking-[0.22em] px-2.5 py-1"
               style={{ background: "rgba(74,122,61,0.1)", border: "1px solid rgba(74,122,61,0.25)", color: "#4A7A3D" }}
             >
               {product.category}
             </span>
             {product.isIndividuallyPacked && (
               <span
-                className="font-mono text-[7px] uppercase tracking-[0.18em] px-2 py-1"
+                className="font-mono text-[11px] uppercase tracking-[0.18em] px-2 py-1"
                 style={{ background: "rgba(200,154,91,0.12)", border: "1px solid rgba(200,154,91,0.35)", color: "#8C6239" }}
               >
                 Individually Packed
@@ -166,14 +166,14 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
 
           {/* Applications */}
           <div className="mb-6">
-            <p className="font-mono text-[7.5px] uppercase tracking-[0.26em] text-ink-muted mb-2.5">
+            <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-ink-muted mb-2.5">
               Applications
             </p>
             <div className="flex flex-wrap gap-1.5">
               {product.applications.map((app) => (
                 <span
                   key={app}
-                  className="font-mono text-[7.5px] uppercase tracking-[0.12em] px-3 py-1.5"
+                  className="font-mono text-[11px] uppercase tracking-[0.12em] px-3 py-1.5"
                   style={{ background: "rgba(74,122,61,0.07)", border: "1px solid rgba(74,122,61,0.2)", color: "#4A7A3D" }}
                 >
                   {app}
@@ -186,7 +186,7 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-3">
               <Package size={11} className="text-ink-muted" />
-              <p className="font-mono text-[7.5px] uppercase tracking-[0.26em] text-ink-muted">
+              <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-ink-muted">
                 Technical Specifications
               </p>
             </div>
@@ -198,12 +198,12 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
                     style={{ background: i % 2 === 0 ? "rgba(246,241,232,0.55)" : "#FBF8F2", borderBottom: "1px solid #EDE5D8" }}
                   >
                     <td
-                      className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-ink-muted py-2.5 px-3"
+                      className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-muted py-2.5 px-3"
                       style={{ width: "42%", borderRight: "1px solid #EDE5D8" }}
                     >
                       {spec.label}
                     </td>
-                    <td className="font-mono text-[9px] text-ink py-2.5 px-3 font-medium">
+                    <td className="font-mono text-[11px] text-ink py-2.5 px-3 font-medium">
                       {spec.value}
                     </td>
                   </tr>
@@ -216,7 +216,7 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-3">
               <Award size={11} className="text-ink-muted" />
-              <p className="font-mono text-[7.5px] uppercase tracking-[0.26em] text-ink-muted">
+              <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-ink-muted">
                 Certifications
               </p>
             </div>
@@ -224,7 +224,7 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
               {product.certifications.map((cert) => (
                 <span
                   key={cert}
-                  className="font-mono text-[8px] uppercase tracking-[0.14em] px-3 py-1.5"
+                  className="font-mono text-[11px] uppercase tracking-[0.14em] px-3 py-1.5"
                   style={{ background: "#F6F1E8", border: "1px solid #DDD3C5", color: "#6B5D50" }}
                 >
                   {cert}
@@ -245,14 +245,14 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
               Ready to source {product.name}?
             </p>
             <p
-              className="font-mono text-[7.5px] uppercase tracking-[0.18em] mb-4"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] mb-4"
               style={{ color: "rgba(200,154,91,0.65)" }}
             >
               MOQ {product.moq} · {product.pcsPerCarton.toLocaleString()} pcs per export carton
             </p>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200"
+              className="group inline-flex items-center gap-2 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200"
               style={{ background: "#4A7A3D" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
@@ -318,7 +318,7 @@ function ProductCard({
         {/* Category badge */}
         <div className="absolute top-0 left-0 z-10">
           <span
-            className="font-mono text-[7px] uppercase tracking-[0.2em] px-2.5 py-1.5 block"
+            className="font-mono text-[11px] uppercase tracking-[0.16em] px-2.5 py-1.5 block"
             style={{ background: "rgba(29,22,16,0.7)", color: "#C89A5B", backdropFilter: "blur(4px)" }}
           >
             {product.category}
@@ -329,7 +329,7 @@ function ProductCard({
         {product.isIndividuallyPacked && (
           <div className="absolute top-0 right-0 z-10">
             <span
-              className="font-mono text-[6.5px] uppercase tracking-[0.16em] px-2.5 py-1.5 block"
+              className="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1.5 block"
               style={{ background: "rgba(200,154,91,0.88)", color: "#1D1610" }}
             >
               Sleeved
@@ -346,7 +346,7 @@ function ProductCard({
             {product.certifications.slice(0, 3).map((cert) => (
               <span
                 key={cert}
-                className="font-mono text-[6.5px] uppercase tracking-[0.12em] px-2 py-1"
+                className="font-mono text-[11px] uppercase tracking-[0.1em] px-2 py-1"
                 style={{ background: "rgba(200,154,91,0.18)", border: "1px solid rgba(200,154,91,0.45)", color: "#E5C99A" }}
               >
                 {cert}
@@ -361,7 +361,7 @@ function ProductCard({
         <h3 className="font-sans text-[13px] font-semibold text-ink mb-1 leading-snug">
           {product.name}
         </h3>
-        <p className="font-mono text-[7.5px] text-ink-muted uppercase tracking-[0.12em] mb-4">
+        <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.1em] mb-4">
           {product.length} · {product.material}
         </p>
 
@@ -371,14 +371,14 @@ function ProductCard({
           style={{ borderColor: "#EDE5D8" }}
         >
           <div>
-            <span className="font-mono text-[7px] text-ink-muted uppercase tracking-[0.14em]">
+            <span className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.12em]">
               Min. Order
             </span>
-            <p className="font-mono text-[9px] font-bold text-ink mt-0.5">{product.moq}</p>
+            <p className="font-mono text-[11px] font-bold text-ink mt-0.5">{product.moq}</p>
           </div>
           <button
             onClick={() => onOpen(product)}
-            className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.14em] px-3 py-2 transition-all duration-200"
+            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] px-3 py-2 transition-all duration-200"
             style={{ border: "1px solid #DDD3C5", color: "#6B5D50" }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLElement;
@@ -455,7 +455,7 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
                 initial={{ opacity: 0 }}
                 animate={headerInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.55, ease: EASE, delay: 0.18 }}
-                className="font-mono text-[7.5px] uppercase tracking-[0.22em] text-ink-muted"
+                className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-muted"
               >
                 {filtered.length} SKU{filtered.length !== 1 ? "s" : ""} · FSC® certified birchwood
               </motion.p>
@@ -477,7 +477,7 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
                 <button
                   key={cat}
                   onClick={() => onCategoryChange(cat)}
-                  className="font-mono text-[8px] uppercase tracking-[0.16em] px-3.5 py-2 transition-all duration-200"
+                  className="font-mono text-[11px] uppercase tracking-[0.16em] px-3.5 py-2 transition-all duration-200"
                   style={{
                     background: isActive ? "#4A7A3D" : "transparent",
                     color: isActive ? "#ffffff" : "#6B5D50",
@@ -486,7 +486,7 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
                 >
                   {cat}
                   <span
-                    className="ml-1.5 font-mono text-[7px]"
+                    className="ml-1.5 font-mono text-[11px]"
                     style={{ opacity: isActive ? 0.7 : 0.5 }}
                   >
                     {count}
@@ -529,13 +529,13 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
               <p className="font-sans font-semibold text-ink text-sm mb-1">
                 Need custom sizing, laser engraving, or private label packaging?
               </p>
-              <p className="font-mono text-[7.5px] text-ink-muted uppercase tracking-[0.16em]">
+              <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.16em]">
                 OEM · Custom dimensions · Kraft paper sleeve · Logo printing · All available
               </p>
             </div>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-6 py-3.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200 flex-shrink-0"
+              className="group inline-flex items-center gap-2.5 px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200 flex-shrink-0"
               style={{ background: "#1D1610" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#1D1610")}

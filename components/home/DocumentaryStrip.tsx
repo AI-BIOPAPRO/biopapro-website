@@ -316,7 +316,7 @@ export default function DocumentaryStrip() {
                       style={{ backgroundColor: i <= activeAct ? "#5B8C51" : "rgba(91,140,81,0.25)" }}
                     />
                     <span
-                      className="font-mono text-[8px] tracking-[0.2em] uppercase transition-colors duration-400"
+                      className="font-mono text-[11px] tracking-[0.2em] uppercase transition-colors duration-400"
                       style={{ color: i === activeAct ? "rgba(168,198,134,0.9)" : "rgba(168,198,134,0.3)" }}
                     >
                       {act.n} {act.title}
@@ -327,7 +327,7 @@ export default function DocumentaryStrip() {
                 <div className="flex-1" />
 
                 {/* Numeric progress */}
-                <span className="font-mono text-[9px] text-green-light/40 tracking-widest">
+                <span className="font-mono text-[11px] text-green-light/40 tracking-widest">
                   {String(activeAct + 1).padStart(2, "0")} / {String(ACTS.length).padStart(2, "0")}
                 </span>
               </div>
@@ -427,7 +427,7 @@ const ActPanel = React.forwardRef<HTMLDivElement, ActPanelProps>(
           <div className="act-content" style={{ opacity: 0 }}>
             <div className="flex items-center gap-3 mb-6">
               <span
-                className="font-mono text-[9px] tracking-[0.3em] uppercase px-3 py-1.5"
+                className="font-mono text-[11px] tracking-[0.3em] uppercase px-3 py-1.5"
                 style={{
                   background: isLight ? "rgba(91,140,81,0.12)" : "rgba(91,140,81,0.18)",
                   color: isLight ? "#3F6B42" : "rgba(168,198,134,0.85)",
@@ -437,7 +437,7 @@ const ActPanel = React.forwardRef<HTMLDivElement, ActPanelProps>(
                 {act.n} / 05
               </span>
               <span
-                className="font-mono text-[8.5px] tracking-[0.2em] uppercase"
+                className="font-mono text-[11px] tracking-[0.2em] uppercase"
                 style={{ color: act.palette.muted }}
               >
                 {act.title}
@@ -483,7 +483,7 @@ const ActPanel = React.forwardRef<HTMLDivElement, ActPanelProps>(
                 {act.stat.value}
               </span>
               <span
-                className="font-mono text-[8px] tracking-[0.12em] uppercase leading-relaxed mt-1.5 max-w-[200px]"
+                className="font-mono text-[11px] tracking-[0.12em] uppercase leading-relaxed mt-1.5 max-w-[200px]"
                 style={{ color: act.palette.muted }}
               >
                 {act.stat.unit}
@@ -497,7 +497,7 @@ const ActPanel = React.forwardRef<HTMLDivElement, ActPanelProps>(
               {act.certifications.map((cert) => (
                 <span
                   key={cert}
-                  className="font-mono text-[8px] tracking-[0.18em] uppercase px-2.5 py-1"
+                  className="font-mono text-[11px] tracking-[0.18em] uppercase px-2.5 py-1"
                   style={{
                     background: "rgba(91,140,81,0.10)",
                     color: "#3F6B42",
@@ -514,7 +514,7 @@ const ActPanel = React.forwardRef<HTMLDivElement, ActPanelProps>(
           {"countries" in act && act.countries && (
             <div className="act-content mb-7 max-w-[400px]" style={{ opacity: 0 }}>
               <p
-                className="font-mono text-[8px] tracking-[0.12em] uppercase leading-[2.2]"
+                className="font-mono text-[11px] tracking-[0.12em] uppercase leading-[2.2]"
                 style={{ color: "rgba(168,198,134,0.55)" }}
               >
                 {act.countries.slice(0, 12).join("  ·  ")} · +{act.countries.length - 12} more
@@ -587,7 +587,7 @@ function PlaceholderBackground({ act }: { act: typeof ACTS[number] }) {
           style={{ border: "1px dashed rgba(91,140,81,0.12)", padding: "2rem" }}
         >
           <p
-            className="font-mono text-[8px] tracking-[0.28em] uppercase leading-relaxed whitespace-pre-line"
+            className="font-mono text-[11px] tracking-[0.28em] uppercase leading-relaxed whitespace-pre-line"
             style={{ color: "rgba(91,140,81,0.25)" }}
           >
             {"imagePlaceholder" in act && act.imagePlaceholder
@@ -595,7 +595,7 @@ function PlaceholderBackground({ act }: { act: typeof ACTS[number] }) {
               : `Act ${act.n} Photography`}
           </p>
           <p
-            className="font-mono text-[7px] tracking-[0.2em] uppercase mt-3"
+            className="font-mono text-[11px] tracking-[0.2em] uppercase mt-3"
             style={{ color: "rgba(91,140,81,0.15)" }}
           >
             See MEDIA_NEEDED comment in code

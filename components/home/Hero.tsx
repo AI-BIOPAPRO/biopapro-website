@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, Leaf } from "lucide-react";
 import SectionLabel from "@/components/shared/SectionLabel";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CONSTANTS
@@ -56,10 +57,10 @@ const PRODUCTS = [
 ] as const;
 
 const STATS = [
-  { value: "100M+",   label: "Units Produced",   sub: "Annually"       },
-  { value: "18+",     label: "Countries Served",  sub: "Active markets" },
+  { value: "100M+",   label: "Units Produced",   sub: "Every month"    },
+  { value: `${COMPANY_FACTS.exportMarkets}+`, label: "Countries Served",  sub: "Active markets" },
   { value: "6,500kg", label: "Plastic Replaced",  sub: "Every day"      },
-  { value: "FSC®",    label: "100% Certified",    sub: "Since 2018"     },
+  { value: "FSC®",    label: "100% Certified",    sub: `Since ${COMPANY_FACTS.founded}` },
 ] as const;
 
 function wordStart(li: number) {
@@ -89,7 +90,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.55, ease: EASE }}
             >
-              <SectionLabel index="EST. 2018" label="BIRCHWOOD MANUFACTURER" />
+              <SectionLabel index={`EST. ${COMPANY_FACTS.founded}`} label="BIRCHWOOD MANUFACTURER" />
             </motion.div>
 
             {/* Certification marks — desktop only */}
@@ -100,7 +101,7 @@ export default function Hero() {
               className="hidden md:flex items-center gap-5"
             >
               {["FSC®", "ISO 9001", "FDA CFR 21", "BPI"].map((cert) => (
-                <span key={cert} className="font-mono text-[9px] text-ink-muted tracking-[0.2em] uppercase">
+                <span key={cert} className="font-mono text-[11px] text-ink-muted tracking-[0.2em] uppercase">
                   {cert}
                 </span>
               ))}
@@ -120,14 +121,14 @@ export default function Hero() {
                   >
                     <div className="flex items-center gap-2 h-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-green flex-shrink-0" />
-                      <span className="font-mono text-[7.5px] text-green/60 tracking-[0.3em] uppercase">
+                      <span className="font-mono text-[11px] text-green/60 tracking-[0.3em] uppercase">
                         {step.index}
                       </span>
                     </div>
-                    <span className="font-mono text-[9.5px] text-ink-light uppercase tracking-[0.12em] leading-snug whitespace-nowrap">
+                    <span className="font-mono text-[11px] text-ink-light uppercase tracking-[0.12em] leading-snug whitespace-nowrap">
                       {step.label}
                     </span>
-                    <span className="font-mono text-[8.5px] text-ink-muted uppercase tracking-[0.1em] whitespace-nowrap">
+                    <span className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.1em] whitespace-nowrap">
                       {step.sub}
                     </span>
                   </motion.div>
@@ -256,10 +257,10 @@ export default function Hero() {
                 >
                   {stat.value}
                 </div>
-                <div className="font-mono text-[8.5px] text-ink-light uppercase tracking-[0.15em] mt-1.5">
+                <div className="font-mono text-[11px] text-ink-light uppercase tracking-[0.15em] mt-1.5">
                   {stat.label}
                 </div>
-                <div className="font-mono text-[8px] text-ink-muted uppercase tracking-[0.1em]">
+                <div className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.1em]">
                   {stat.sub}
                 </div>
               </motion.div>
@@ -352,7 +353,7 @@ export default function Hero() {
                 <br />Collection
               </span>
               <span
-                className="font-mono text-[7px] tracking-[0.22em] uppercase leading-relaxed"
+                className="font-mono text-[11px] tracking-[0.22em] uppercase leading-relaxed"
                 style={{ color: "rgba(255,255,255,0.38)" }}
               >
                 Fork · Spoon · Knife · Stirrer
@@ -381,7 +382,7 @@ export default function Hero() {
             {["FSC® 100%", "ISO 9001", "FDA CFR 21"].map((cert) => (
               <span
                 key={cert}
-                className="font-mono text-[8px] tracking-[0.18em] uppercase px-3 py-1.5"
+                className="font-mono text-[11px] tracking-[0.18em] uppercase px-3 py-1.5"
                 style={{
                   background: "rgba(255,255,255,0.18)",
                   color: "rgba(255,255,255,0.80)",
@@ -411,10 +412,10 @@ export default function Hero() {
             >
               <div className="w-1.5 h-1.5 rounded-full bg-white/80 animate-pulse" />
               <span
-                className="font-mono text-[8.5px] tracking-[0.2em] uppercase"
+                className="font-mono text-[11px] tracking-[0.2em] uppercase"
                 style={{ color: "rgba(255,255,255,0.75)" }}
               >
-                Exporting to 18+ countries · 100M+ units annually
+                Exporting to {COMPANY_FACTS.exportMarkets}+ countries · 100M+ units every month
               </span>
             </div>
           </motion.div>
@@ -436,12 +437,12 @@ export default function Hero() {
       >
         {/* Strip header */}
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-5 pb-4 flex items-center justify-between">
-          <span className="font-mono text-[8.5px] text-ink-muted tracking-[0.28em] uppercase">
+          <span className="font-mono text-[11px] text-ink-muted tracking-[0.28em] uppercase">
             Product Range — 6 Categories
           </span>
           <Link
             href="/products"
-            className="font-mono text-[8.5px] text-green tracking-[0.18em] uppercase hover:text-green-deep transition-colors duration-200"
+            className="font-mono text-[11px] text-green tracking-[0.18em] uppercase hover:text-green-deep transition-colors duration-200"
           >
             Full Catalog →
           </Link>
@@ -470,10 +471,10 @@ export default function Hero() {
 
                   {/* Category + B2B */}
                   <div className="px-3.5 pt-3.5 pb-2 flex items-center justify-between">
-                    <span className="font-mono text-[7.5px] text-green tracking-[0.28em] uppercase">
+                    <span className="font-mono text-[11px] text-green tracking-[0.28em] uppercase">
                       {product.category}
                     </span>
-                    <span className="font-mono text-[7px] text-ink-muted tracking-wider uppercase">
+                    <span className="font-mono text-[11px] text-ink-muted tracking-wider uppercase">
                       B2B
                     </span>
                   </div>
@@ -491,7 +492,7 @@ export default function Hero() {
                       minHeight: "105px",
                     }}
                   >
-                    <span className="font-mono text-[7px] text-green/35 tracking-[0.22em] uppercase text-center leading-loose">
+                    <span className="font-mono text-[11px] text-green/35 tracking-[0.22em] uppercase text-center leading-loose">
                       Photo
                       <br />Placeholder
                     </span>
@@ -502,10 +503,10 @@ export default function Hero() {
                     <p className="font-sans text-[11.5px] font-semibold text-ink mb-0.5 group-hover:text-green-deep transition-colors duration-300 leading-snug">
                       {product.name}
                     </p>
-                    <p className="font-mono text-[7.5px] text-ink-muted tracking-[0.1em] uppercase">
+                    <p className="font-mono text-[11px] text-ink-muted tracking-[0.1em] uppercase">
                       {product.moq}
                     </p>
-                    <p className="font-mono text-[7px] text-ink-muted/70 tracking-[0.08em] mt-0.5">
+                    <p className="font-mono text-[11px] text-ink-muted/70 tracking-[0.08em] mt-0.5">
                       {product.spec}
                     </p>
                   </div>
@@ -536,10 +537,10 @@ export default function Hero() {
               >
                 {stat.value}
               </div>
-              <div className="font-mono text-[9px] text-ink-light uppercase tracking-[0.15em] mt-1.5">
+              <div className="font-mono text-[11px] text-ink-light uppercase tracking-[0.15em] mt-1.5">
                 {stat.label}
               </div>
-              <div className="font-mono text-[8.5px] text-ink-muted uppercase tracking-[0.1em]">
+              <div className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.1em]">
                 {stat.sub}
               </div>
             </div>
