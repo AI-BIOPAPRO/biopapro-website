@@ -30,6 +30,7 @@ export const metadata: Metadata = {
       "6,500kg plastic displaced daily. FSC certified. BPI Compostable. ISO 14001. Biodegradable wooden cutlery for India and global markets.",
     type: "website",
     url: "/sustainability",
+    images: ["/opengraph-image"],
   },
   alternates: { canonical: "/sustainability" },
 };

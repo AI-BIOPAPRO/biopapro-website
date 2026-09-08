@@ -25,6 +25,7 @@ export const metadata: Metadata = {
       "9 certifications: FSC · ISO 9001 · ISO 14001 · ISO 45001 · BRCGS · BPI · BSCI · FDA · EU. India's certified birchwood cutlery manufacturer.",
     type: "website",
     url: "/certifications",
+    images: ["/opengraph-image"],
   },
   alternates: { canonical: "/certifications" },
 };

@@ -28,6 +28,7 @@ export const metadata: Metadata = {
       "FSC-certified birchwood tableware exported from Mumbai to 18+ countries. Airlines, hospitality, food service. Request your export quotation.",
     type: "website",
     url: "/global-presence",
+    images: ["/opengraph-image"],
   },
   alternates: { canonical: "/global-presence" },
 };

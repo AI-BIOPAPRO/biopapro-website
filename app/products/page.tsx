@@ -34,6 +34,7 @@ export const metadata: Metadata = {
       "30+ SKUs. Birchwood forks, spoons, knives, sporks, stirrers, skewers. Domestic India supply + 18+ country export. FSC certified. Bulk & wholesale.",
     type: "website",
     url: "/products",
+    images: ["/opengraph-image"],
   },
   alternates: { canonical: "/products" },
 };

@@ -26,6 +26,7 @@ export const metadata: Metadata = {
       "ISO 9001 & BRCGS certified. FSC-sourced birchwood. 380+ employees. Mumbai manufacturer supplying Indian market and exporting to 18+ countries.",
     type: "website",
     url: "/manufacturing",
+    images: ["/opengraph-image"],
   },
   alternates: { canonical: "/manufacturing" },
 };

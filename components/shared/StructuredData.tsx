@@ -10,7 +10,7 @@ export default function StructuredData() {
         "@id": "https://biopapro.com/#organization",
         name: "Biopapro",
         url: "https://biopapro.com",
-        logo: "https://biopapro.com/logo.png",
+        logo: "https://biopapro.com/cdn/shop/files/BioPapro_logo-8.png?v=1663665457",
         description:
           "Biopapro is a large-scale FSC-certified birchwood cutlery manufacturer based in Mumbai, India. Supplying restaurants, hotels, caterers, and food chains across India, and exporting to 18+ countries worldwide.",
         foundingDate: "2019",
@@ -39,7 +39,7 @@ export default function StructuredData() {
         "@type": "LocalBusiness",
         "@id": "https://biopapro.com/#localbusiness",
         name: "Biopapro — Wooden Cutlery Manufacturer",
-        image: "https://biopapro.com/logo.png",
+        image: "https://biopapro.com/cdn/shop/files/BioPapro_logo-8.png?v=1663665457",
         url: "https://biopapro.com",
         telephone: "+91-70211-03763",
         email: "export@biopapro.com",

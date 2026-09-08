@@ -13,8 +13,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = getPostBySlug(slug);
   if (!post) return {};
   return {
-    title: `${post.title} — Biopapro Blog`,
+    title: post.title,
     description: post.excerpt,
+    openGraph: {
+      title: `${post.title} — Biopapro Blog`,
+      description: post.excerpt,
+      type: "article",
+      url: `/blog/${post.slug}`,
+    },
+    alternates: { canonical: `/blog/${post.slug}` },
   };
 }
 

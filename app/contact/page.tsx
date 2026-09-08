@@ -29,6 +29,7 @@ export const metadata: Metadata = {
       "Enquire for domestic India supply or international export. Restaurants, hotels, caterers, importers, distributors. 24-hour response. Bulk pricing available.",
     type: "website",
     url: "/contact",
+    images: ["/opengraph-image"],
   },
   alternates: { canonical: "/contact" },
 };
