@@ -32,6 +32,14 @@ export default function SustainabilityHero() {
           className="absolute inset-0"
           style={{ background: "linear-gradient(to bottom, rgba(29,22,16,0.4) 0%, rgba(29,22,16,0.78) 100%)" }}
         />
+        {/* Bottom-right vignette — this source footage has an AI-tool watermark
+            (wordmark, not just a small icon) spanning roughly the last quarter
+            of the frame width along the bottom edge. Wide/short ellipse to
+            match that footprint rather than a small corner circle. */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 42% 26% at 100% 100%, rgba(29,22,16,1) 0%, rgba(29,22,16,0.85) 45%, transparent 100%)" }}
+        />
       </div>
 
       <div
