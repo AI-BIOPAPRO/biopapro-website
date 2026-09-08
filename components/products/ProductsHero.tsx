@@ -99,8 +99,9 @@ export default function ProductsHero() {
               style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)" }}
             >
               FSC-certified birchwood tableware manufactured at 100M+ units
-              per month. Nine product categories, 30+ SKUs — all export-ready,
-              procurement-certified, manufactured in-house.
+              per month. Nine product categories, 30+ SKUs — ready for bulk
+              supply to Indian restaurants, hotels, and distributors, and for
+              export to international buyers. Procurement-certified, manufactured in-house.
             </motion.p>
 
             {/* Cert badges */}
@@ -135,7 +136,7 @@ export default function ProductsHero() {
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
               >
-                Request Export Quote
+                Request Quote
                 <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
               </Link>
               <a

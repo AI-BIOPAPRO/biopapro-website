@@ -119,7 +119,7 @@ export default function ContactTeaser() {
             transition={{ duration: 0.6, ease: EASE }}
           >
             <div className="mb-7">
-              <SectionLabel index="07" label="Export Partnership" />
+              <SectionLabel index="08" label="Get in Touch" />
             </div>
 
             <h2
@@ -129,16 +129,16 @@ export default function ContactTeaser() {
             >
               Start your
               <br />
-              export
+              supply
               <br />
               <span className="text-wood">partnership.</span>
             </h2>
 
             <div className="space-y-8">
               <p className="font-sans font-light text-ink-light text-base leading-relaxed max-w-[420px]">
-                Whether you are a distributor, an airline catering group, a
-                large-scale food service operator, or a sustainability
-                procurement team — we work with buyers at every scale.
+                Whether you&rsquo;re a restaurant group or distributor sourcing
+                in India, or an airline catering group, food-service operator,
+                or procurement team overseas — we work with buyers at every scale.
               </p>
 
               {/* What you get */}
@@ -181,7 +181,7 @@ export default function ContactTeaser() {
                 <div className="flex items-center gap-3">
                   <MapPin size={12} className="text-wood flex-shrink-0" />
                   <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-light">
-                    Headquarters — {COMPANY_FACTS.location} · Export globally
+                    Headquarters — {COMPANY_FACTS.location} · Domestic &amp; export supply
                   </span>
                 </div>
               </div>
@@ -206,7 +206,7 @@ export default function ContactTeaser() {
                   Enquiry received.
                 </h3>
                 <p className="font-sans text-ink-light text-sm leading-relaxed max-w-sm">
-                  Our export team will review your enquiry and respond within
+                  Our team will review your enquiry and respond within
                   24 hours. Check your inbox — and your spam folder, just in case.
                 </p>
                 <Link

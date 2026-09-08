@@ -257,7 +257,7 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
             >
-              Request Export Quote
+              Request Quote
               <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
             </Link>
           </div>

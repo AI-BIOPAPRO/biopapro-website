@@ -13,6 +13,112 @@
 
 ---
 
+## Domestic + Global Positioning (V1 pass — 2026-09-08)
+
+**Why:** The site read as export-only across nearly every shared surface (Navbar
+CTA, Footer tagline, homepage hero, Manufacturing hero, Contact flow). An external
+review correctly flagged that Biopapro's domestic Indian B2B business — the other
+half of the actual company — was invisible. The fix below is copy/IA only; **no
+redesign, no new visual system, no new pages.**
+
+**Positioning now communicated:** "Biopapro is an Indian manufacturer of
+FSC-certified birchwood tableware, supplying India's food-service industry at
+scale and serving global markets through established export capabilities."
+
+### What changed
+
+- **New homepage section** — `components/home/DomesticSupply.tsx`, inserted between
+  `WomenWorkforce` and `ProductEcosystem` (index "04" — every section after it was
+  renumbered +1, i.e. ProductEcosystem 04→05, GlobalPresence 05→06,
+  Certifications 06→07, ContactTeaser 07→08). Reuses the exact card pattern from
+  `components/global-presence/IndustriesServed.tsx` — same visual language, no new
+  design system. 6 segment cards (Restaurants & Cafés, QSRs & Cloud Kitchens,
+  Hotels & Hospitality, Caterers & Events, Corporate Cafeterias, Distributors &
+  Wholesalers) with deliberately generic descriptions — no invented per-segment
+  MOQs, client counts, or volume figures.
+- **Homepage hero** (`OpeningSection.tsx`) — headline kept exactly ("The Global
+  Standard for Birchwood Tableware."). Eyebrow label "Global Manufacturer" →
+  "Indian Manufacturer". Subtitle now leads with India before export. One hero
+  stat relabeled "Export Countries" → "Countries Served" (same number).
+- **Manufacturing accuracy fix** — `ManufacturingCredibility.tsx` (homepage) and
+  `ManufacturingHero.tsx` (`/manufacturing`) both said "raw log"/"global supply"
+  in headlines, contradicting the already-correct STEPS data and the existing
+  accuracy note in `lib/manufacturing-data.ts` (Biopapro imports FSC-certified
+  *semi-finished* birchwood, doesn't harvest forests). Headlines corrected to
+  "From certified birchwood to finished shipment." and "Built for supply at
+  scale." Step 06 ("Global Distribution") reworded to cover domestic dispatch
+  + export FCL/LCL, not export-only.
+- **Sitewide "export team" → neutral "team"/"procurement team"** — this phrase
+  appeared in ~9 places (Navbar-adjacent CTAs, `ContactHero`, `ExportInquiryForm`
+  confirmation copy, `ContactFinalCTA`, `GlobalContactNetwork`, `ContactTeaser`,
+  `ExportQuoteCTA`, `BuyerTrust`, `ExportPartnershipCTA`) implying a dedicated
+  export-only team. **No separate domestic/export team is confirmed anywhere in
+  this project's documentation** — there is one contact point
+  (export@biopapro.com, +91 70211 03763, Mumbai). Left the Global Presence page's
+  export-specific framing otherwise intact (that page's whole purpose is exports).
+- **"Request Export Quote" → "Request Quote"** on all universal/shared CTAs
+  (Navbar — appears on every page, Footer, homepage hero, Manufacturing,
+  Products). Left as "Request Export Quote" only on `/global-presence`'s own
+  hero, where it's contextually correct.
+- **Dual CTA, no invented teams** — per instruction, since separate domestic/
+  export teams aren't confirmed, used the literal fallback wording: "Source for
+  India" / "Source for Your Market", both routing to the existing contact form
+  (`#inquiry-form` anchor on `/contact`, or the homepage `ContactTeaser` form —
+  no new routes).
+- **Contact form gap fixed** — `REGION_OPTIONS` (`lib/contact-data.ts`) was
+  100% export regions (Europe/US/Middle East/APAC/Africa) with **no domestic
+  option at all**, on a *required* field. An Indian buyer had nothing correct to
+  select. Added "India — Domestic" as the first option. Also added
+  "Restaurant / QSR Supply" and "Caterer / Event Supply" to
+  `PROCUREMENT_OPTIONS` in `ExportInquiryForm.tsx`.
+- **Products page** (`ProductsHero.tsx`) — one line added clarifying bulk supply
+  to Indian restaurants/hotels/distributors alongside export, no redesign, no
+  fake prices/MOQs/stock added.
+- **Global Presence page** (`GlobalHero.tsx`) — headline "Manufactured in India.
+  Delivered worldwide." was already exactly right, kept unchanged. Subtitle
+  extended to mention India's food-service industry before the export-market
+  count, without diluting the page's export focus.
+- **SEO** — added a handful of domestic-intent keywords to `/products` metadata
+  (`wooden cutlery manufacturer India`, `wooden cutlery for QSRs`, `bulk wooden
+  cutlery supplier`, etc.). Homepage keywords were already reasonably balanced,
+  left as-is (no stuffing).
+
+### Claims softened (task: remove unsupported quantitative claims)
+
+`components/home/WhyWoodWon.tsx` had two claims not supported by the site's own
+BPI/certification documentation:
+- "90-day compost... in home **or** industrial composting" — the site's own
+  sustainability page correctly discloses BPI/ASTM D6400 covers *industrial*
+  composting only, not home. Softened to "Compostable in weeks" / "Biodegrades
+  in industrial composting within weeks — BPI certified to ASTM D6400" —
+  matching the verified language already used on `/sustainability`.
+- "Stable to 100°C+" (a specific, uncited number) → "Holds up to heat" /
+  "Withstands hot food and beverages without warping or softening" (qualitative,
+  defensible — wood objectively doesn't melt/warp like thin plastic at hot-food
+  temps; the exact number wasn't backed by any lab documentation in this repo).
+- (Fixed earlier in this project's history, noted for continuity) The "78% of
+  consumers... (Euromonitor 2024)" citation was already removed in a prior pass —
+  it attributed a specific stat to a real, named research firm with no
+  verification it was real.
+
+**Left unchanged, general material science (not Biopapro-specific claims):**
+"500+ year plastic persistence", "microplastics detected in human blood" — both
+well-documented general facts, not claims requiring Biopapro's own lab data.
+
+### Remaining items requiring business confirmation (not fixed — flagged only)
+
+- Whether "Restaurant / QSR Supply" and "Caterer / Event Supply" MOQs differ from
+  the existing bulk MOQ figures shown elsewhere (100,000+ units) — not stated,
+  not invented.
+- The certifications 6-vs-9 count discrepancy (pre-existing, see `docs/TASKS.md`)
+  — untouched by this pass.
+- Whether Biopapro wants an actual India-specific procurement page/section beyond
+  the homepage `DomesticSupply` block (e.g. a dedicated `/domestic` or
+  `/india` route) — explicitly out of scope per instruction ("do not add
+  excessive sections").
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -25,7 +131,7 @@
 | Advanced Animation | GSAP v3 + ScrollTrigger |
 | Icons | lucide-react |
 | Fonts | Cormorant Garamond, Inter, JetBrains Mono (via next/font/google) |
-| AI | @google/genai (Gemini — not yet connected, credentials unavailable) |
+| Contact form backend | `app/api/contact` — Resend REST API, honeypot spam protection, mailto fallback |
 
 **Import alias:** `@/` maps to project root
 
@@ -119,7 +225,7 @@ Apple-level polish × Patagonia sustainability × Muji simplicity
 
 | Section | Component | Background | Key Content |
 |---|---|---|---|
-| Hero | `ManufacturingHero` | `#1D1610` dark + video | "Built for global supply." + 4 stats + CTAs |
+| Hero | `ManufacturingHero` | `#1D1610` dark + video | "Built for supply at scale." + 4 stats + CTAs |
 | Capability Overview | `CapabilityOverview` | `#F6F1E8` light | 10-metric investor snapshot table |
 | Production Journey | `ProductionJourney` | `#EFE6D7` parchment | 6-step: certified supply → inspection → finishing → QC → packaging → distribution |
 | Quality Assurance | `QualityAssurance` | `#1D1610` dark | 6 operational capabilities + 12 QA checkpoints by stage |
@@ -200,6 +306,11 @@ onMouseLeave={(e) => {
 
 ## Route Structure
 
+> **Corrected 2026-09-08** — `/ai-advisor` and its Gemini backend never shipped and
+> have been fully removed (see "Removed / Dead Code" below). Do not re-add references
+> to it. Blog now runs on `lib/blog-data.ts` (static array), not Sanity — Sanity was
+> fully removed from the project (see Key Decisions).
+
 | Route | Status | File |
 |---|---|---|
 | `/` | ✅ Complete | `app/page.tsx` |
@@ -209,32 +320,34 @@ onMouseLeave={(e) => {
 | `/manufacturing` | ✅ Complete | `app/manufacturing/page.tsx` |
 | `/sustainability` | ✅ Complete | `app/sustainability/page.tsx` |
 | `/contact` | ✅ Complete | `app/contact/page.tsx` |
-| `/ai-advisor` | ✅ Built (Gemini not connected) | `app/ai-advisor/` |
+| `/blog` + `/blog/[slug]` | ✅ Complete | `app/blog/` — static posts in `lib/blog-data.ts` |
+| `/api/contact` | ✅ Complete | Resend-based form backend, honeypot spam protection |
 
 ---
 
 ## Completed Pages
 
 ### Homepage (`/`)
-**Sections (in order):**
-1. `OpeningSection` — hero with video, product photography, value proposition
-2. `StripEntry` — narrative threshold light→dark transition
-3. `DocumentaryStrip` — Forest→Material→Manufacturing→Product→Global journey
-4. `WhyWoodWon` — plastic vs birchwood comparison
-5. `ImpactCounter` — animated sustainability metrics (300T/mo, 100M units/mo, 6500kg plastic saved/day, 18 countries)
-6. `ManufacturingCredibility` — 6-step production journey (dark section)
-7. `WomenWorkforce` — 80% women workforce story
-8. `ProductEcosystem` — product range preview with category filters
-9. `GlobalPresence` — world map, 18+ markets
-10. `Certifications` — FSC, ISO, FDA, BPI, BSCI, EU (dark section)
-11. `AIAdvisorTeaser` — Gemini-powered procurement tool CTA
-12. `ContactTeaser` — export partnership form
+**Sections (in order, verified against `app/page.tsx` 2026-09-08):**
+1. `OpeningSection` — hero with video, product photography, value proposition (S1)
+2. `WhyWoodWon` — plastic vs birchwood comparison (S4, index "01")
+3. `ImpactCounter` — animated sustainability metrics; counting starts on mount
+   (not scroll-gated — see "Sustainability Counters" fix below) (S5, index "02")
+4. `ManufacturingCredibility` — 6-step production journey, dark section (S6, index "03")
+5. `WomenWorkforce` — 70%+ women workforce story, full-bleed photo, unnumbered (S6b)
+6. `DomesticSupply` — **new 2026-09-08**, India food-service industry segments (index "04")
+7. `ProductEcosystem` — product range preview with category filters (S7, index "05")
+8. `GlobalPresence` — world map, 18+ markets (S8, index "06")
+9. `Certifications` — FSC, ISO, FDA, BPI, BSCI, EU, dark section (S9, index "07")
+10. `ContactTeaser` — dual domestic + export enquiry form (S10, index "08")
 
-### AI Advisor (`/ai-advisor`)
-- UI complete, Gemini integration stub only (no live API key)
+**Not in the live flow** (dead code, not imported by `app/page.tsx` — do not assume
+they render): `StripEntry`, `DocumentaryStrip`. `/ai-advisor` and its Gemini backend
+were removed entirely (never had working credentials; dead weight).
 
 ### Footer
-- `components/layout/Footer.tsx` — dark section, links to all pages
+- `components/layout/Footer.tsx` — dark section, links to all pages, "Home" now an
+  explicit nav item (not just the logo)
 
 ---
 
@@ -289,18 +402,20 @@ All at `https://biopapro.com/cdn/shop/...`
 
 ## Current Project Status
 
-- **Homepage:** Complete ✅
-- **Products Page:** Complete ✅ — fully polished to homepage quality
+- **Homepage:** Complete ✅ — includes Domestic B2B Supply section (added 2026-09-08)
+- **Products Page:** Complete ✅
 - **Global Presence Page:** V1 Complete ✅ (visualization frozen — see Future Enhancement Backlog)
 - **Certifications Page:** Complete ✅
-- **Manufacturing Page:** Complete ✅
+- **Manufacturing Page:** Complete ✅ — accuracy-corrected (no "raw log" claims)
 - **Sustainability Page:** Complete ✅
-- **Contact Page:** Complete ✅
+- **Contact Page:** Complete ✅ — domestic + export dual pathway
+- **Blog:** Complete ✅ — static data, no CMS
 - **Footer:** Complete ✅
-- **Other pages:** Not started 🔜
-- **SEO/Sitemap/Robots:** Pending
-- **Mobile QA:** Pending
-- **Vercel Deployment:** Pending
+- **SEO/Sitemap/Robots:** Complete ✅
+- **Mobile QA:** Complete ✅
+- **Vercel Deployment:** **Live** ✅ — `biopapro-website.vercel.app` (production, tracks `master`).
+  A separate Shopify store still runs the real `biopapro.com` domain; this Next.js
+  site is the planned replacement pending domain cutover (see "Deployment" below).
 
 ---
 

@@ -44,7 +44,7 @@ const COMPARISONS: {
   {
     category: "End of Life",
     plastic:   { headline: "500+ year persistence",  detail: "Does not biodegrade — fragments into microplastics that persist in soil and ocean indefinitely." },
-    birchwood: { headline: "90-day compost",          detail: "Fully soil-assimilated within 90 days in home or industrial composting. Zero heavy-metal residue." },
+    birchwood: { headline: "Compostable in weeks",     detail: "Biodegrades in industrial composting within weeks — BPI certified to ASTM D6400. Zero heavy-metal residue." },
   },
   {
     category: "Food Safety",
@@ -54,7 +54,7 @@ const COMPARISONS: {
   {
     category: "Heat Performance",
     plastic:   { headline: "Warps above 70°C",        detail: "Structural failure and chemical release at temperatures common in cooked food and hot beverages." },
-    birchwood: { headline: "Stable to 100°C+",         detail: "Hydraulic hot-forming and high-temp baking create structural integrity far beyond plastic." },
+    birchwood: { headline: "Holds up to heat",         detail: "Withstands hot food and beverages without warping or softening — structural integrity far beyond plastic." },
   },
   {
     category: "Ocean Impact",

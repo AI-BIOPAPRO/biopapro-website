@@ -3,20 +3,21 @@
 /**
  * S6 — Manufacturing Credibility
  *
- * Six-step production journey from raw birch logs to export container.
+ * Six-step production journey from certified birchwood to finished,
+ * shipped product — domestic and export alike.
  * Each step is a full-width staggered row: index + title left, detail right.
  * On scroll the row reveals — title slides in from left, detail from right.
  *
  * Dark section (#1D1610) — one of the 30% dark moments on the page.
  * Communicates: "This is serious manufacturing. Not a craft workshop."
  *
- * Steps:
- *   01 — Raw Material Sourcing   (FSC forest, birch logs)
- *   02 — Log Conversion          (veneer slicing, moisture control)
- *   03 — Blanking & Forming      (die-cut stamping, multi-cavity)
- *   04 — Polishing & Finishing   (rotating drum, 4-stage grit)
- *   05 — Quality Control         (optical sorting, weight check)
- *   06 — Packaging & Export      (sterilisation, 18+ country dispatch)
+ * Steps (see STEPS below for the accurate, current copy):
+ *   01 — Certified Birchwood Supply     (FSC semi-finished material, imported)
+ *   02 — Incoming Material Inspection   (dimensional, surface, moisture)
+ *   03 — Precision Finishing            (stamping lines, 100M+ units/mo)
+ *   04 — Quality Control & Food Safety  (optical sort, AQL 2.5, UV sterilised)
+ *   05 — Packaging & Export Preparation (cartons, documentation)
+ *   06 — Distribution                   (domestic dispatch + FCL/LCL export)
  */
 
 import { useRef } from "react";
@@ -74,11 +75,11 @@ const STEPS = [
   },
   {
     index: "06",
-    title: "Global Distribution",
-    subtitle: "JNPT Mumbai · FCL & LCL",
-    body: "Palletised cartons are loaded into 20ft or 40ft FCL containers at JNPT — India's largest container port. LCL consolidation is available for smaller volumes. 18+ active export markets across 6 continents.",
-    stat: { value: "21–28d", label: "Ocean Transit" },
-    tags: ["JNPT Mumbai", "FCL / LCL", "18+ Markets"],
+    title: "Distribution — Domestic & Export",
+    subtitle: "Nationwide Dispatch · JNPT Mumbai FCL & LCL",
+    body: "Domestic orders are dispatched directly to restaurants, hotels, caterers, and distributors across India. Export cartons are palletised and loaded into 20ft or 40ft FCL containers at JNPT — India's largest container port — with LCL consolidation available for smaller volumes, reaching 18+ active export markets across 6 continents.",
+    stat: { value: "21–28d", label: "Export Ocean Transit" },
+    tags: ["Domestic Dispatch", "JNPT Mumbai FCL / LCL", "18+ Export Markets"],
   },
 ] as const;
 
@@ -246,9 +247,9 @@ export default function ManufacturingCredibility() {
             className="font-display font-light leading-[0.95]"
             style={{ fontSize: "clamp(2.3rem, 4vw, 3.6rem)", color: "#F6F1E8" }}
           >
-            From raw log
+            From certified birchwood
             <br />
-            to export container.
+            to finished shipment.
             <br />
             <span style={{ color: "#C89A5B" }}>Six steps. Zero shortcuts.</span>
           </motion.h2>

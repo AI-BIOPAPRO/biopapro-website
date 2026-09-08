@@ -260,7 +260,7 @@ export default function ProductEcosystem() {
             transition={{ duration: 0.55, ease: EASE }}
             className="mb-7"
           >
-            <SectionLabel index="04" label="Product Range" />
+            <SectionLabel index="05" label="Product Range" />
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">

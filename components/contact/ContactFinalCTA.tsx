@@ -32,7 +32,7 @@ export default function ContactFinalCTA() {
             className="font-display font-light leading-[0.92] mb-6"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.6rem)", color: "#F6F1E8" }}
           >
-            Your next shipment
+            Your next order
             <br />
             starts with a conversation.
           </motion.h2>
@@ -44,9 +44,10 @@ export default function ContactFinalCTA() {
             className="font-sans font-light leading-relaxed max-w-[560px] mb-12"
             style={{ fontSize: "clamp(1rem, 1.3vw, 1.1rem)", color: "rgba(200,230,190,0.75)" }}
           >
-            Speak directly with Biopapro's export team and receive
+            Speak directly with our procurement team and receive
             procurement-ready information — catalogue, specifications,
-            certifications, and pricing — within 24–48 hours.
+            certifications, and pricing — within 24–48 hours, whether
+            you're sourcing within India or importing internationally.
           </motion.p>
 
           <motion.div
@@ -70,12 +71,12 @@ export default function ContactFinalCTA() {
                 el.style.boxShadow = "none";
               }}
             >
-              Request Export Quote
+              Source for India
               <ArrowUpRight size={14} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
             </a>
             <a
-              href="mailto:export@biopapro.com"
-              className="inline-flex items-center gap-2.5 px-6 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] transition-all duration-300"
+              href="#inquiry-form"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 text-[12px] font-bold uppercase tracking-[0.14em] transition-all duration-300"
               style={{ border: "1px solid rgba(200,230,190,0.3)", color: "rgba(200,230,190,0.85)" }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
@@ -88,8 +89,18 @@ export default function ContactFinalCTA() {
                 el.style.color = "rgba(200,230,190,0.85)";
               }}
             >
+              Source for Your Market
+              <ArrowUpRight size={14} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+            </a>
+            <a
+              href="mailto:export@biopapro.com"
+              className="inline-flex items-center gap-2.5 px-4 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] transition-all duration-300"
+              style={{ color: "rgba(200,230,190,0.65)" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,1)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,0.65)"; }}
+            >
               <Mail size={14} strokeWidth={2} />
-              Email Export Team
+              Email Us
             </a>
           </motion.div>
 
@@ -102,7 +113,7 @@ export default function ContactFinalCTA() {
             style={{ borderColor: "rgba(200,230,190,0.15)" }}
           >
             {[
-              { region: "India — Export Team", email: "export@biopapro.com", phone: "+91 70211 03763", note: "Mon–Sat · IST" },
+              { region: "India — Sourcing Enquiries", email: "export@biopapro.com", phone: "+91 70211 03763", note: "Mon–Sat · IST" },
             ].map((o) => (
               <div key={o.region}>
                 <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.1em] mb-2" style={{ color: "rgba(200,230,190,0.45)" }}>

@@ -125,7 +125,7 @@ export default function BuyerTrust() {
             Every buyer gets the same product, the same documentation, the same quality."
           </p>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted flex-shrink-0">
-            Biopapro Export Team
+            Biopapro Team
           </p>
         </motion.div>
       </div>

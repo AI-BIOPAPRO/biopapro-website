@@ -67,8 +67,9 @@ export default function GlobalHero() {
               style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)" }}
             >
               From a single manufacturing ecosystem in Mumbai, Biopapro supplies
-              {" "}{COMPANY_FACTS.exportMarkets}+ international markets with FSC-certified birchwood
-              tableware — on time, at scale, with complete export documentation.
+              India&rsquo;s food-service industry and {COMPANY_FACTS.exportMarkets}+ international
+              markets with FSC-certified birchwood tableware — on time, at scale,
+              with complete documentation for every shipment.
             </motion.p>
 
             {/* Stats strip */}

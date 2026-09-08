@@ -105,7 +105,7 @@ export default function GlobalPresence() {
               transition={{ duration: 0.55, ease: EASE }}
               className="mb-7"
             >
-              <SectionLabel index="05" label="Global Presence" inverted />
+              <SectionLabel index="06" label="Global Presence" inverted />
             </motion.div>
 
             <motion.h2
@@ -130,9 +130,9 @@ export default function GlobalPresence() {
           >
             <p className="font-sans font-light text-base leading-relaxed mb-6" style={{ color: "rgba(246,241,232,0.88)" }}>
               From European airlines to Pacific food distributors, Biopapro
-              ships FCL and LCL containers on a rolling basis. Our export
-              logistics team manages customs documentation, phytosanitary
-              certificates, and compliance for every destination market.
+              ships FCL and LCL containers on a rolling basis. Our logistics
+              team manages customs documentation, phytosanitary certificates,
+              and compliance for every destination market.
             </p>
 
             {/* Region filter */}

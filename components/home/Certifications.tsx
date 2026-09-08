@@ -272,7 +272,7 @@ export default function Certifications() {
           className="mb-14"
         >
           <div className="mb-7">
-            <SectionLabel index="06" label="Certifications & Compliance" />
+            <SectionLabel index="07" label="Certifications & Compliance" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">

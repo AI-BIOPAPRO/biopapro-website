@@ -70,7 +70,7 @@ export default function ManufacturingHero() {
             Built for
             <br />
             <em className="not-italic" style={{ color: "#C89A5B", fontStyle: "italic", fontFamily: "inherit" }}>
-              global supply.
+              supply at scale.
             </em>
           </motion.h1>
 
@@ -82,8 +82,9 @@ export default function ManufacturingHero() {
             style={{ fontSize: "clamp(1rem, 1.3vw, 1.15rem)", color: "rgba(230,210,185,0.72)" }}
           >
             From a single manufacturing facility in Mumbai, Biopapro delivers
-            consistent, certified birchwood tableware to 18+ markets worldwide.
-            100M+ units per month. Every batch documented. Every shipment on schedule.
+            consistent, certified birchwood tableware across India and to
+            18+ markets worldwide. 100M+ units per month. Every batch documented.
+            Every shipment on schedule.
           </motion.p>
 
           {/* Stats strip */}
@@ -120,7 +121,7 @@ export default function ManufacturingHero() {
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
             >
-              Request Export Quote
+              Request Quote
               <ArrowUpRight size={13} strokeWidth={2.5} />
             </Link>
             <a
