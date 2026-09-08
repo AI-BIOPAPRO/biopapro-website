@@ -4,7 +4,7 @@ import GlobalPresenceClient from "./GlobalPresenceClient";
 export const metadata: Metadata = {
   title: "Wooden Cutlery Exporter — 18+ Countries Worldwide",
   description:
-    "Biopapro exports FSC-certified birchwood tableware from Mumbai to 18+ countries across Europe, Americas, Middle East, and Asia-Pacific. Also supplying Indian domestic market. Airlines, hospitality, food service, distributors. Request export quotation.",
+    "Biopapro exports FSC-certified birchwood tableware from Mumbai to 18+ countries across Europe, the Americas, Middle East, and Asia-Pacific. Also supplying the Indian domestic market. Airlines, hospitality, food service, distributors — request a quotation.",
   keywords: [
     // Export
     "wooden cutlery exporter India",
@@ -28,6 +28,7 @@ export const metadata: Metadata = {
       "FSC-certified birchwood tableware exported from Mumbai to 18+ countries. Airlines, hospitality, food service. Request your export quotation.",
     type: "website",
     url: "/global-presence",
+    images: ["/opengraph-image"],
   },
   alternates: { canonical: "/global-presence" },
 };

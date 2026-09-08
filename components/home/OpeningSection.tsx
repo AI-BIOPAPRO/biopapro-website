@@ -85,6 +85,17 @@ export default function OpeningSection() {
         aria-hidden="true"
       />
 
+      {/* Bottom-right corner vignette — the source footage has a faint AI-tool
+          watermark in this corner; the primary overlay intentionally keeps
+          the right side lighter ("video breathes"), so this small, tightly
+          radiused extra darkening sits only over that corner without
+          affecting the rest of the right-side treatment. */}
+      <div
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{ background: "radial-gradient(circle at 100% 100%, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 12%, transparent 26%)" }}
+        aria-hidden="true"
+      />
+
       {/* Top scrim — label area */}
       <div
         className="absolute top-0 left-0 right-0 z-10 pointer-events-none"

@@ -33,6 +33,13 @@ export default function ManufacturingHero() {
           className="absolute inset-0"
           style={{ background: "linear-gradient(to bottom, rgba(29,22,16,0.5) 0%, rgba(29,22,16,0.85) 100%)" }}
         />
+        {/* Corner vignette — this source footage has a faint AI-tool watermark
+            in the bottom-right corner; low base opacity already mostly hides
+            it, this adds a safety margin. */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(circle at 100% 100%, rgba(29,22,16,0.95) 0%, rgba(29,22,16,0.5) 12%, transparent 26%)" }}
+        />
       </div>
 
       {/* Amber top accent */}

@@ -4,7 +4,7 @@ import ProductsClient from "./ProductsClient";
 export const metadata: Metadata = {
   title: "Wooden Cutlery Products — Forks, Spoons, Knives, Sporks",
   description:
-    "FSC-certified birchwood cutlery manufactured in Mumbai, India. Wooden forks, spoons, knives, sporks, coffee stirrers, skewers. Bulk supply for restaurants, hotels, caterers across India. Export to 18+ countries. 30+ SKUs, wholesale pricing.",
+    "FSC-certified birchwood cutlery manufactured in Mumbai, India — 30+ SKUs, exported to 18+ countries and supplied in bulk across India. Forks, spoons, knives, sporks, stirrers, skewers. Wholesale pricing for restaurants, hotels, and caterers.",
   keywords: [
     // Domestic India
     "wooden cutlery wholesale India",
@@ -34,6 +34,7 @@ export const metadata: Metadata = {
       "30+ SKUs. Birchwood forks, spoons, knives, sporks, stirrers, skewers. Domestic India supply + 18+ country export. FSC certified. Bulk & wholesale.",
     type: "website",
     url: "/products",
+    images: ["/opengraph-image"],
   },
   alternates: { canonical: "/products" },
 };

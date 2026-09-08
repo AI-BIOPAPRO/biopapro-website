@@ -3,8 +3,15 @@ import Link from "next/link";
 import { POSTS, CATEGORY_LABELS } from "@/lib/blog-data";
 
 export const metadata: Metadata = {
-  title: "Blog & News — Biopapro",
+  title: "Blog & News",
   description: "Industry news, sustainability updates, and product announcements from Biopapro — India's leading birchwood cutlery manufacturer.",
+  openGraph: {
+    title: "Blog & News — Biopapro",
+    description: "Industry news, sustainability updates, and product announcements from India's leading birchwood cutlery manufacturer.",
+    type: "website",
+    url: "/blog",
+  },
+  alternates: { canonical: "/blog" },
 };
 
 function formatDate(dateStr: string) {
