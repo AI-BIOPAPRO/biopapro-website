@@ -4,7 +4,7 @@ import ContactClient from "./ContactClient";
 export const metadata: Metadata = {
   title: "Contact — Bulk & Export Wooden Cutlery Enquiry",
   description:
-    "Contact Biopapro for wooden cutlery supply in India or export worldwide. Restaurants, hotels, caterers, food chains, distributors, importers — enquire for bulk pricing, MOQ, samples, and certifications. Mumbai manufacturer. Response within 24 hours.",
+    "Contact Biopapro for wooden cutlery supply in India or export worldwide — restaurants, hotels, caterers, distributors, and importers welcome. Enquire for bulk pricing, MOQ, samples, and certifications. Mumbai manufacturer, 24-hour response.",
   keywords: [
     // Domestic inquiry
     "wooden cutlery supplier contact India",

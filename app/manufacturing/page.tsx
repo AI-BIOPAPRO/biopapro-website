@@ -4,7 +4,7 @@ import ManufacturingClient from "./ManufacturingClient";
 export const metadata: Metadata = {
   title: "Wooden Cutlery Manufacturing in Mumbai, India",
   description:
-    "Biopapro is a large-scale wooden cutlery manufacturer based in Mumbai, India. 100M+ units/month. ISO 9001, BRCGS, FSC certified. Supplying Indian restaurants, hotels, caterers, and food chains — and exporting to 18+ countries worldwide.",
+    "Biopapro is a large-scale, ISO 9001, BRCGS, and FSC certified wooden cutlery manufacturer in Mumbai, India, producing 100M+ units/month. Supplying Indian restaurants, hotels, caterers, and food chains — and exporting to 18+ countries worldwide.",
   keywords: [
     // Manufacturing — domestic + export
     "wooden cutlery manufacturer India",

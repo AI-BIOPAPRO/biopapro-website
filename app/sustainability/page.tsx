@@ -4,7 +4,7 @@ import SustainabilityClient from "./SustainabilityClient";
 export const metadata: Metadata = {
   title: "Biodegradable & Compostable Wooden Cutlery",
   description:
-    "Biopapro's birchwood cutlery replaces 6,500kg of single-use plastic daily. FSC certified, BPI compostable, ISO 14001 certified. Eco-friendly wooden cutlery for Indian restaurants, hotels, and caterers — and sustainable export supply worldwide.",
+    "Biopapro's FSC-certified, BPI compostable birchwood cutlery replaces 6,500kg of single-use plastic daily. Eco-friendly wooden cutlery for Indian restaurants, hotels, and caterers — and sustainable export supply worldwide. ISO 14001 certified.",
   keywords: [
     // Domestic eco keywords
     "eco friendly cutlery India",
