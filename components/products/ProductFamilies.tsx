@@ -74,7 +74,7 @@ function FamilyCard({
             {family.headline}
           </span>
           <span
-            className="font-mono text-[7px] uppercase tracking-[0.2em] px-2 py-1 flex-shrink-0 ml-2"
+            className="font-mono text-[11px] uppercase tracking-[0.2em] px-2 py-1 flex-shrink-0 ml-2"
             style={{ background: "rgba(200,154,91,0.18)", border: "1px solid rgba(200,154,91,0.4)", color: "#E5C99A" }}
           >
             {family.skuCount} SKU{family.skuCount > 1 ? "s" : ""}
@@ -93,7 +93,7 @@ function FamilyCard({
           {family.applications.slice(0, 3).map((app) => (
             <span
               key={app}
-              className="font-mono text-[6.5px] uppercase tracking-[0.14em] px-2 py-1"
+              className="font-mono text-[11px] uppercase tracking-[0.14em] px-2 py-1"
               style={{ background: "rgba(74,122,61,0.07)", border: "1px solid rgba(74,122,61,0.18)", color: "#4A7A3D" }}
             >
               {app}
@@ -107,11 +107,11 @@ function FamilyCard({
           style={{ borderColor: "#EDE5D8" }}
         >
           <div>
-            <span className="font-mono text-[7px] text-ink-muted uppercase tracking-[0.18em]">Min. Order</span>
-            <p className="font-mono text-[9px] font-bold text-ink mt-0.5">{family.moqRange}</p>
+            <span className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.18em]">Min. Order</span>
+            <p className="font-mono text-[11px] font-bold text-ink mt-0.5">{family.moqRange}</p>
           </div>
           <div
-            className="flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.16em] transition-colors duration-200 group-hover:text-wood"
+            className="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors duration-200 group-hover:text-wood"
             style={{ color: "#6B5D50" }}
           >
             Browse

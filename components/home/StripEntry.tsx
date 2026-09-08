@@ -77,14 +77,14 @@ export default function StripEntry() {
               <div className="flex flex-col gap-1.5 flex-shrink-0">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-green-light flex-shrink-0" />
-                  <span className="font-mono text-[7px] text-green-light/55 tracking-[0.28em] uppercase">
+                  <span className="font-mono text-[11px] text-green-light/55 tracking-[0.28em] uppercase">
                     {act.n}
                   </span>
                 </div>
-                <span className="font-mono text-[9px] text-dark-text/60 uppercase tracking-[0.12em] leading-snug hidden sm:block whitespace-nowrap">
+                <span className="font-mono text-[11px] text-dark-text/60 uppercase tracking-[0.12em] leading-snug hidden sm:block whitespace-nowrap">
                   {act.label}
                 </span>
-                <span className="font-mono text-[7.5px] text-dark-muted uppercase tracking-[0.1em] hidden md:block whitespace-nowrap">
+                <span className="font-mono text-[11px] text-dark-muted uppercase tracking-[0.1em] hidden md:block whitespace-nowrap">
                   {act.sub}
                 </span>
               </div>
@@ -105,43 +105,13 @@ export default function StripEntry() {
           ))}
         </motion.div>
 
-        {/* Central statement */}
-        <motion.div style={{ opacity: textOpacity, y: textY }}>
-          <p className="font-mono text-[9px] text-green-light/50 tracking-[0.28em] uppercase mb-5">
-            The manufacturing story
-          </p>
-          <h2
-            className="font-display font-light text-dark-text leading-[0.92] tracking-[-0.02em] max-w-[700px]"
-            style={{ fontSize: "clamp(2.4rem, 4.5vw, 4.2rem)" }}
-          >
-            From a Siberian forest
-            <br />
-            to tables in 18 countries.
-            <br />
-            <span className="text-green-light">The complete story.</span>
-          </h2>
-        </motion.div>
-
-        {/* Scroll instruction */}
-        <motion.div
-          style={{ opacity: textOpacity }}
-          className="mt-12 md:mt-16 flex items-center gap-4"
-        >
-          <div className="w-px h-10 overflow-hidden flex-shrink-0">
-            <div className="w-full h-full bg-gradient-to-b from-transparent via-green-light/40 to-transparent animate-scroll-line" />
-          </div>
-          <span className="font-mono text-[8.5px] text-dark-muted tracking-[0.22em] uppercase">
-            Scroll to begin the journey
-          </span>
-        </motion.div>
-
         {/* Preview of first act */}
         <motion.div
           style={{ opacity: textOpacity }}
           className="mt-10 flex items-center gap-3"
         >
           <span
-            className="font-mono text-[8px] tracking-[0.28em] uppercase px-3 py-1.5"
+            className="font-mono text-[11px] tracking-[0.28em] uppercase px-3 py-1.5"
             style={{
               background: "rgba(91,140,81,0.15)",
               color: "rgba(168,198,134,0.8)",
@@ -150,7 +120,7 @@ export default function StripEntry() {
           >
             01 / 05
           </span>
-          <span className="font-mono text-[8.5px] text-dark-muted tracking-[0.2em] uppercase">
+          <span className="font-mono text-[11px] text-dark-muted tracking-[0.2em] uppercase">
             Forest — where it begins
           </span>
         </motion.div>

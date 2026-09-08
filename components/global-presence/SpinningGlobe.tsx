@@ -245,11 +245,11 @@ export default function SpinningGlobe({ triggered }: { triggered: boolean }) {
         className="absolute bottom-3 left-3 px-3 py-2.5"
         style={{ background: "#1D1610", border: "1px solid #3D2E22" }}
       >
-        <p className="font-mono text-[7px] uppercase tracking-[0.22em]"
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em]"
           style={{ color: "rgba(200,154,91,0.7)" }}>
           Manufacturing Origin
         </p>
-        <p className="font-mono text-[9px] uppercase tracking-[0.14em] mt-0.5"
+        <p className="font-mono text-[11px] uppercase tracking-[0.14em] mt-0.5"
           style={{ color: "#F6F1E8" }}>
           Mumbai, India
         </p>

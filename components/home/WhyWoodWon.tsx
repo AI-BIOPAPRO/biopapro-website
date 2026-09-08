@@ -3,37 +3,34 @@
 /**
  * S4 — Why Wood Won
  *
- * A decisive, visual science-vs-emotion case for birchwood over plastic.
- * Structure: two-column comparison — each row reveals from both sides
- * on scroll. Plastic (left, terracotta) vs Birchwood (right, forest green).
+ * A material specification, not a marketing comparison table.
+ * Structure: editorial thesis line, then a technical spec-sheet body
+ * (hairlines, mono data, no colored icon badges), closing on a quiet
+ * material/temperature cue rather than a second visual bit.
  *
  * Design philosophy:
- *   - Not a table — a verdict.
- *   - Each row delivers a "punch, punch" reveal: ✗ plastic, ✓ birchwood.
- *   - By the end the visitor feels: "The argument is over."
+ *   - Reads like a datasheet a procurement engineer would actually receive.
+ *   - Color carries the verdict (terracotta vs. forest green text), not icons.
+ *   - The table doesn't perform an entrance — it's just there, precise and still.
  */
 
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "motion/react";
-import { X, Check, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import SectionLabel from "@/components/shared/SectionLabel";
 
 /* ── Palette ── */
 const PLASTIC = {
-  bg:     "#FEF6F3",
   accent: "#B5432A",
-  border: "#F5D5CC",
   muted:  "#9A6050",
 };
 const WOOD = {
-  bg:     "#F2F7EE",
   accent: "#3F6B42",
-  border: "#C8DFC0",
   muted:  "#5A7A5A",
 };
 
-/* ── Comparison data ── */
+/* ── Comparison data — unchanged from source ── */
 const COMPARISONS: {
   category:  string;
   plastic:   { headline: string; detail: string };
@@ -73,82 +70,51 @@ const COMPARISONS: {
 
 const E = [0.16, 1, 0.3, 1] as const;
 
-/* ── Single comparison row ── */
-function ComparisonRow({
-  row,
-  index,
-}: {
-  row: typeof COMPARISONS[number];
-  index: number;
-}) {
-  const ref     = useRef<HTMLDivElement>(null);
-  const inView  = useInView(ref, { once: true, margin: "-80px 0px" });
-
+/* ── Single spec row — static, no per-row entrance motion ── */
+function SpecRow({ row, index }: { row: typeof COMPARISONS[number]; index: number }) {
   return (
-    <div ref={ref} className="grid grid-cols-[1fr_auto_1fr] border-b last:border-b-0"
-      style={{ borderColor: "#EDE8E2" }}>
-
-      {/* ── Plastic side ── */}
-      <motion.div
-        initial={{ opacity: 0, x: -32 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ delay: index * 0.04, duration: 0.65, ease: E }}
-        className="flex items-start gap-3 p-5 md:p-7"
-        style={{ backgroundColor: PLASTIC.bg }}
-      >
-        <div
-          className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-          style={{ backgroundColor: `${PLASTIC.accent}18` }}
-        >
-          <X size={13} strokeWidth={2.5} style={{ color: PLASTIC.accent }} />
-        </div>
-        <div>
-          <p className="font-sans font-semibold text-sm mb-1" style={{ color: PLASTIC.accent }}>
-            {row.plastic.headline}
-          </p>
-          <p className="font-sans text-[12px] leading-relaxed" style={{ color: PLASTIC.muted }}>
-            {row.plastic.detail}
-          </p>
-        </div>
-      </motion.div>
-
-      {/* ── Category divider ── */}
-      <motion.div
-        initial={{ opacity: 0, scaleY: 0 }}
-        animate={inView ? { opacity: 1, scaleY: 1 } : {}}
-        transition={{ delay: index * 0.04 + 0.12, duration: 0.5, ease: E }}
-        className="flex flex-col items-center justify-center px-3 md:px-5 py-5"
-        style={{ borderLeft: `1px solid #EDE8E2`, borderRight: `1px solid #EDE8E2`, minWidth: "90px" }}
-      >
-        <span className="font-mono text-[7.5px] tracking-[0.25em] text-ink-muted uppercase text-center leading-relaxed">
-          {row.category}
+    <div
+      className="grid grid-cols-1 md:grid-cols-[160px_1fr_1fr] border-t"
+      style={{ borderColor: "#E3DDD3" }}
+    >
+      {/* Category label */}
+      <div className="flex items-center px-6 md:px-0 md:pl-0 pt-5 md:pt-6 pb-1 md:pb-6">
+        <span className="font-mono text-[11px] tracking-[0.22em] text-ink-muted uppercase">
+          {String(index + 1).padStart(2, "0")} — {row.category}
         </span>
-      </motion.div>
+      </div>
 
-      {/* ── Birchwood side ── */}
-      <motion.div
-        initial={{ opacity: 0, x: 32 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ delay: index * 0.04, duration: 0.65, ease: E }}
-        className="flex items-start gap-3 p-5 md:p-7"
-        style={{ backgroundColor: WOOD.bg }}
+      {/* Plastic spec */}
+      <div
+        className="px-6 md:px-7 py-3 md:py-6 md:border-l"
+        style={{ borderColor: "#E3DDD3" }}
       >
-        <div
-          className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-          style={{ backgroundColor: `${WOOD.accent}18` }}
-        >
-          <Check size={13} strokeWidth={2.5} style={{ color: WOOD.accent }} />
-        </div>
-        <div>
-          <p className="font-sans font-semibold text-sm mb-1" style={{ color: WOOD.accent }}>
-            {row.birchwood.headline}
-          </p>
-          <p className="font-sans text-[12px] leading-relaxed" style={{ color: WOOD.muted }}>
-            {row.birchwood.detail}
-          </p>
-        </div>
-      </motion.div>
+        <p className="md:hidden font-mono text-[11px] tracking-[0.18em] uppercase mb-1.5" style={{ color: PLASTIC.accent }}>
+          Plastic
+        </p>
+        <p className="font-sans font-semibold text-sm mb-1" style={{ color: PLASTIC.accent }}>
+          {row.plastic.headline}
+        </p>
+        <p className="font-sans text-[12px] leading-relaxed" style={{ color: PLASTIC.muted }}>
+          {row.plastic.detail}
+        </p>
+      </div>
 
+      {/* Birchwood spec */}
+      <div
+        className="px-6 md:px-7 py-3 md:py-6 pb-6 md:pb-6 md:border-l"
+        style={{ borderColor: "#E3DDD3" }}
+      >
+        <p className="md:hidden font-mono text-[11px] tracking-[0.18em] uppercase mb-1.5" style={{ color: WOOD.accent }}>
+          Birchwood
+        </p>
+        <p className="font-sans font-semibold text-sm mb-1" style={{ color: WOOD.accent }}>
+          {row.birchwood.headline}
+        </p>
+        <p className="font-sans text-[12px] leading-relaxed" style={{ color: WOOD.muted }}>
+          {row.birchwood.detail}
+        </p>
+      </div>
     </div>
   );
 }
@@ -157,13 +123,11 @@ function ComparisonRow({
 export default function WhyWoodWon() {
   const headerRef  = useRef<HTMLDivElement>(null);
   const headerView = useInView(headerRef, { once: true, margin: "-60px" });
-  const footerRef  = useRef<HTMLDivElement>(null);
-  const footerView = useInView(footerRef, { once: true, margin: "-60px" });
 
   return (
     <section className="bg-surface">
 
-      {/* ── Header ── */}
+      {/* ── Editorial thesis ── */}
       <div
         ref={headerRef}
         className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-28 pb-12 md:pb-16"
@@ -174,95 +138,62 @@ export default function WhyWoodWon() {
           transition={{ duration: 0.55, ease: E }}
           className="mb-6"
         >
-          <SectionLabel index="04" label="Material Comparison" />
+          <SectionLabel index="01" label="Material Comparison" />
         </motion.div>
 
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 18 }}
-              animate={headerView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.08, duration: 0.7, ease: E }}
-              className="font-display font-light text-ink leading-[0.9] tracking-[-0.02em]"
-              style={{ fontSize: "clamp(2.6rem, 5vw, 4.4rem)" }}
-            >
-              Why Wood Won.
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={headerView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.16, duration: 0.65, ease: E }}
-              className="font-sans font-light text-ink-light text-base md:text-lg mt-3 max-w-[460px]"
-            >
-              The science is clear. The choice is inevitable.
-            </motion.p>
-          </div>
-
-          {/* Column labels */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={headerView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.28, duration: 0.6 }}
-            className="hidden md:grid grid-cols-[1fr_auto_1fr] w-full max-w-[640px]"
-          >
-            <div className="text-center pb-2">
-              <span className="font-mono text-[8.5px] tracking-[0.28em] uppercase"
-                style={{ color: PLASTIC.accent }}>
-                Plastic
-              </span>
-            </div>
-            <div className="w-[94px]" />
-            <div className="text-center pb-2">
-              <span className="font-mono text-[8.5px] tracking-[0.28em] uppercase"
-                style={{ color: WOOD.accent }}>
-                Birchwood
-              </span>
-            </div>
-          </motion.div>
-        </div>
+        <motion.h2
+          initial={{ opacity: 0, y: 18 }}
+          animate={headerView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.08, duration: 0.7, ease: E }}
+          className="font-display font-light text-ink leading-[0.9] tracking-[-0.02em] max-w-[720px]"
+          style={{ fontSize: "clamp(2.6rem, 5vw, 4.4rem)" }}
+        >
+          Why Wood Won.
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={headerView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.16, duration: 0.65, ease: E }}
+          className="font-sans font-light text-ink-light text-base md:text-lg mt-4 max-w-[460px]"
+        >
+          The science is clear. The choice is inevitable.
+        </motion.p>
       </div>
 
-      {/* ── Comparison table ── */}
-      <div
-        className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-20"
-      >
-        <div className="border border-border overflow-hidden">
-          {/* Mobile column headers */}
-          <div
-            className="md:hidden grid grid-cols-2 border-b"
-            style={{ borderColor: "#EDE8E2" }}
-          >
-            <div className="py-3 px-5 text-center" style={{ backgroundColor: PLASTIC.bg }}>
-              <span className="font-mono text-[8px] tracking-[0.28em] uppercase" style={{ color: PLASTIC.accent }}>
+      {/* ── Spec sheet — static, no entrance choreography ── */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-20">
+        <div className="border" style={{ borderColor: "#E3DDD3" }}>
+          {/* Header row — desktop only, mobile repeats labels per row */}
+          <div className="hidden md:grid grid-cols-[160px_1fr_1fr] pb-3 pt-1">
+            <div />
+            <div className="px-7 border-l" style={{ borderColor: "#E3DDD3" }}>
+              <span className="font-mono text-[11px] tracking-[0.28em] uppercase" style={{ color: PLASTIC.accent }}>
                 Plastic
               </span>
             </div>
-            <div className="py-3 px-5 text-center" style={{ backgroundColor: WOOD.bg }}>
-              <span className="font-mono text-[8px] tracking-[0.28em] uppercase" style={{ color: WOOD.accent }}>
+            <div className="px-7 border-l" style={{ borderColor: "#E3DDD3" }}>
+              <span className="font-mono text-[11px] tracking-[0.28em] uppercase" style={{ color: WOOD.accent }}>
                 Birchwood
               </span>
             </div>
           </div>
 
           {COMPARISONS.map((row, i) => (
-            <ComparisonRow key={row.category} row={row} index={i} />
+            <SpecRow key={row.category} row={row} index={i} />
           ))}
         </div>
       </div>
 
-      {/* ── Verdict ── */}
+      {/* ── Material conclusion — quiet warmth cue, no split-screen ── */}
       <div
-        ref={footerRef}
         className="border-t border-border"
-        style={{ backgroundColor: WOOD.bg }}
+        style={{
+          background: "linear-gradient(135deg, #F2F7EE 0%, #F2F7EE 55%, #F5EEDD 100%)",
+        }}
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-10 md:py-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={footerView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: E }}
-          >
+          <div>
             <p
               className="font-display font-light leading-[1.1] tracking-tight"
               style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", color: WOOD.accent }}
@@ -271,21 +202,16 @@ export default function WhyWoodWon() {
               <br />
               <span className="text-ink font-light">Every category. Every time.</span>
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={footerView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.12, duration: 0.6, ease: E }}
-            className="flex flex-col gap-4"
-          >
-            <p className="font-mono text-[9px] text-ink-muted uppercase tracking-[0.2em] max-w-[300px] leading-relaxed">
+          <div className="flex flex-col gap-4">
+            <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.2em] max-w-[300px] leading-relaxed">
               6,500 kg of plastic not produced
               <br />today. Because of Biopapro.
             </p>
             <Link
               href="/certifications"
-              className="group inline-flex items-center gap-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
+              className="group inline-flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
               style={{ border: "1px solid #4A7A3D", color: "#4A7A3D" }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
@@ -301,7 +227,7 @@ export default function WhyWoodWon() {
               View All Certifications
               <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
             </Link>
-          </motion.div>
+          </div>
 
         </div>
       </div>

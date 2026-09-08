@@ -91,7 +91,7 @@ export default function GlobalHero() {
                   <span className="font-mono font-bold text-[1.4rem] leading-none" style={{ color: "#C89A5B" }}>
                     {s.value}
                   </span>
-                  <span className="font-mono text-[7.5px] uppercase tracking-[0.18em] text-ink-muted mt-1 text-center">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted mt-1 text-center">
                     {s.label}
                   </span>
                 </div>
@@ -114,7 +114,7 @@ export default function GlobalHero() {
                   style={{ border: "1px solid #DDD3C5", background: "rgba(255,255,255,0.5)" }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#C89A5B" }} />
-                  <span className="font-mono text-[7.5px] uppercase tracking-[0.16em] text-ink-muted">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-muted">
                     {o.location}
                   </span>
                 </div>
@@ -140,7 +140,7 @@ export default function GlobalHero() {
               </Link>
               <a
                 href="#origin"
-                className="font-mono text-[9px] uppercase tracking-[0.2em] transition-colors duration-200 text-ink-muted hover:text-ink"
+                className="font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200 text-ink-muted hover:text-ink"
               >
                 Explore supply network →
               </a>
@@ -166,13 +166,13 @@ export default function GlobalHero() {
           className="border-t pb-10 pt-6 flex flex-wrap items-center gap-x-6 gap-y-2"
           style={{ borderColor: "#DDD3C5" }}
         >
-          <span className="font-mono text-[7.5px] uppercase tracking-[0.28em] text-ink-muted">
+          <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-ink-muted">
             Active markets
           </span>
           {MARKETS.map((m) => (
             <span
               key={m.name}
-              className="font-mono text-[7.5px] uppercase tracking-[0.1em] text-ink-muted opacity-60"
+              className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink-muted opacity-60"
             >
               {m.name}
             </span>

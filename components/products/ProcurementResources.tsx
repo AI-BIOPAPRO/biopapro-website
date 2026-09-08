@@ -103,7 +103,7 @@ export default function ProcurementResources() {
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#4A7A3D" }} />
-                <span className="font-mono text-[8.5px] uppercase tracking-[0.22em]" style={{ color: "#4A7A3D" }}>
+                <span className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#4A7A3D" }}>
                   Documents issued within 24 hours
                 </span>
               </div>
@@ -141,7 +141,7 @@ export default function ProcurementResources() {
                   {resource.title}
                 </h3>
                 <span
-                  className="font-mono text-[7.5px] uppercase tracking-[0.2em]"
+                  className="font-mono text-[11px] uppercase tracking-[0.2em]"
                   style={{ color: "#6B5D50" }}
                 >
                   {resource.subtitle}
@@ -159,7 +159,7 @@ export default function ProcurementResources() {
               <div className="md:col-span-2 flex items-center justify-start md:justify-end">
                 <Link
                   href="/contact"
-                  className="group/cta inline-flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.18em] transition-all duration-200 whitespace-nowrap"
+                  className="group/cta inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-all duration-200 whitespace-nowrap"
                   style={{ color: "#4A7A3D" }}
                   onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#2D5228")}
                   onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#4A7A3D")}
@@ -184,13 +184,13 @@ export default function ProcurementResources() {
             <p className="font-sans font-semibold text-ink text-sm mb-1">
               Prefer a complete documentation bundle?
             </p>
-            <p className="font-mono text-[7.5px] text-ink-muted uppercase tracking-[0.16em]">
+            <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.16em]">
               Catalog · Certificates · Spec sheets · Compliance docs — delivered in a single email
             </p>
           </div>
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200 flex-shrink-0"
+            className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200 flex-shrink-0"
             style={{ background: "#4A7A3D" }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}

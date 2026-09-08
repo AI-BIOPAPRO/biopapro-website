@@ -36,6 +36,31 @@
 
 ---
 
+## ⚠️ Content Accuracy — Verified Against Real biopapro.com (fix before launch)
+
+Fact-checked every hardcoded claim against the live biopapro.com site (homepage + `/pages/about-us`) on 2026-08-26. Several components hardcode facts independently instead of reading the existing `COMPANY_FACTS` object in `lib/global-presence-data.ts` — that's the root cause of most of these. No code changed yet; this is the punch list.
+
+### Confirmed wrong (real site disagrees)
+- [ ] **Headquarters says "China"** — `components/home/ContactTeaser.tsx:157` reads "Headquarters — China". Real HQ is **Mumbai, India** (confirmed on real site + in ~18 other places in this codebase, e.g. `StructuredData.tsx`, `GlobalHero.tsx`, `OriginToWorld.tsx`).
+- [ ] **Founded year says "2018"** — `Navbar.tsx`, `Footer.tsx`, `WomenWorkforce.tsx` all say "Est. 2018". Real founding year is **2019** — "Yash Chandan established BIOPAPRO Private Limited... in 2019" (About Us page). Matches `COMPANY_FACTS.founded: 2019`, which these components don't import.
+- [ ] **Production volume says "100M+ Units / Year" / "Produced Annually"** — `ManufacturingCredibility.tsx`, `WomenWorkforce.tsx`. Real figure is **100 million pieces PER MONTH** ("We produce around 100 million pieces of wooden cutlery each month" — About Us page). A 12x understatement vs. actual scale. Note: `ProductsHero.tsx`, `ContactHero.tsx`, `GlobalHero.tsx`, `ExportInfrastructure.tsx`, `SustainabilityHero.tsx` already have this correct as "100M / month" — only the homepage components have the wrong version.
+- [ ] **Export country list is fabricated** — `ContactTeaser.tsx` dropdown, `GlobalPresence.tsx` map/region data, `OriginToWorld.tsx`. Current list: US, UK, Germany, France, Netherlands, UAE, Saudi Arabia, Japan, South Korea, Italy, Singapore, Brazil, South Africa, New Zealand, Canada, Spain, India. Real "Our Presence" list (About Us page): Canada, USA, Mexico, Ireland, UK, Spain, Poland, Greece, Romania, Qatar, Dubai/UAE, Bahrain, India, Australia, Netherlands, Germany, Mauritius, Maldives. Only 8 of 18 actually match — 9 invented (Saudi Arabia, Japan, South Korea, Italy, Singapore, Brazil, South Africa, New Zealand, France), 9 real ones omitted (Mexico, Ireland, Poland, Greece, Romania, Qatar, Bahrain, Mauritius, Maldives). **Needs your sign-off before fixing** — confirm the 18 countries are still current before replacing the list.
+
+### Internal contradiction — needs a decision
+- [ ] **Women workforce: 80% vs 70%** — `WomenWorkforce.tsx` (homepage) says "80%+"; `WorkforceSection.tsx` (manufacturing page) and `COMPANY_FACTS.womenPercent` say 70%. Real About Us page: "380+ employees with more than **70%** of them being women" — matches `COMPANY_FACTS` exactly, including the 380 headcount. Leaning 70% is correct and homepage is the outlier, but the real company's own homepage marketing copy also loosely says "80%" somewhere, so this may be an inherited ambiguity rather than a pure invention. Confirm before changing.
+
+### Placeholder content shipped as real
+- [ ] **Fake certificate numbers live in Certifications section** — literal placeholder text `FSC-C0XXXXX` and `Certificate No. XXXXX` (with actual X's) currently displayed as if real. Needs either the genuine certificate numbers or should not render a fake-looking number at all. High risk if a buyer's compliance team actually checks this.
+
+### Unverifiable (not proven wrong, just not confirmable)
+- [ ] Specific certification details (ISO 9001:2015, FDA CFR 21, BPI, BSCI, EU EC 10/2011 — verifier names, "since" years) — real site shows 6 cert logos with no extractable text to check against.
+- [ ] "18 production lines / 3 manufacturing halls" — not mentioned anywhere on the real site.
+
+### Opportunity (not a bug, missing real content)
+- [ ] Real company has registered EU entities — **Biopapro Europe UG**, offices in **Berlin and Neunkirchen, Germany** — not mentioned anywhere on this site. Given the site already leans on EU certification (EC 10/2011) for credibility, a real EU office address would be a stronger, verifiable trust signal on the Global Presence page than what's there now.
+
+---
+
 ## Upcoming Roadmap
 
 ### Pages (in build order)

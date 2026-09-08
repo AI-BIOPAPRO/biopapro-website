@@ -77,27 +77,9 @@ export const SHIPPING_ROUTES = [
 ];
 
 // ── Company Facts ─────────────────────────────────────────────────────────────
-export const COMPANY_FACTS = {
-  founded:            2019,
-  location:           "Mumbai, Maharashtra, India",
-  employees:          380,
-  womenPercent:       70,
-  unitsPerMonth:      100_000_000,
-  tonsPerMonth:       300,
-  plasticSavedPerDay: 6500,
-  exportMarkets:      18,
-  certifications:     6,
-};
-
-export const OFFICES = [
-  {
-    region:  "India — Manufacturing HQ",
-    address: "G1 Khetwadi, 12th Lane, Girgaon, Mumbai 400004, Maharashtra",
-    email:   "yash@biopapro.com",
-    phone:   "+91 70211 03763",
-    type:    "origin" as const,
-  },
-];
+// Canonical source moved to lib/company-facts.ts — re-exported here so
+// existing imports from this file keep working.
+export { COMPANY_FACTS, OFFICES } from "./company-facts";
 
 // ── Industries ────────────────────────────────────────────────────────────────
 export const INDUSTRIES = [

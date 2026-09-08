@@ -77,7 +77,7 @@ export default function ExportOperations() {
                     className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
                     style={{ background: "#FBF8F2", border: "2px solid #C89A5B" }}
                   >
-                    <span className="font-mono font-bold text-[10px]" style={{ color: "#C89A5B" }}>
+                    <span className="font-mono font-bold text-[11px]" style={{ color: "#C89A5B" }}>
                       {step.step}
                     </span>
                   </div>

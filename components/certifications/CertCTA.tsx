@@ -22,7 +22,7 @@ export default function CertCTA() {
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, ease: EASE }}
-              className="font-mono text-[8px] uppercase tracking-[0.28em] mb-5"
+              className="font-mono text-[11px] uppercase tracking-[0.28em] mb-5"
               style={{ color: "rgba(200,230,190,0.55)" }}
             >
               05 · Request Documentation
@@ -81,7 +81,7 @@ export default function CertCTA() {
               </Link>
               <Link
                 href="/products"
-                className="font-mono text-[9px] uppercase tracking-[0.2em] transition-colors duration-200"
+                className="font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200"
                 style={{ color: "rgba(200,230,190,0.65)" }}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,1)")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,0.65)")}
@@ -102,7 +102,7 @@ export default function CertCTA() {
               {
                 label: "India — Compliance & Export",
                 contact: "Yash Chandan / Nikunj Bhansali",
-                email: "yash@biopapro.com",
+                email: "export@biopapro.com",
                 phone: "+91 70211 03763",
                 note: "Mumbai HQ · Available Mon–Sat IST",
               },
@@ -115,7 +115,7 @@ export default function CertCTA() {
                 className="p-5"
                 style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(200,230,190,0.15)" }}
               >
-                <p className="font-mono text-[7px] uppercase tracking-[0.22em] mb-1" style={{ color: "rgba(200,230,190,0.45)" }}>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] mb-1" style={{ color: "rgba(200,230,190,0.45)" }}>
                   {office.label}
                 </p>
                 <p className="font-sans font-semibold text-[12px] mb-3" style={{ color: "#F6F1E8" }}>
@@ -127,7 +127,7 @@ export default function CertCTA() {
                     className="flex items-center gap-2 group transition-opacity duration-200 hover:opacity-80"
                   >
                     <Mail size={11} style={{ color: "rgba(200,230,190,0.5)" }} />
-                    <span className="font-mono text-[8.5px]" style={{ color: "rgba(200,230,190,0.65)" }}>
+                    <span className="font-mono text-[11px]" style={{ color: "rgba(200,230,190,0.65)" }}>
                       {office.email}
                     </span>
                   </a>
@@ -136,12 +136,12 @@ export default function CertCTA() {
                     className="flex items-center gap-2 group transition-opacity duration-200 hover:opacity-80"
                   >
                     <Phone size={11} style={{ color: "rgba(200,230,190,0.5)" }} />
-                    <span className="font-mono text-[8.5px]" style={{ color: "rgba(200,230,190,0.65)" }}>
+                    <span className="font-mono text-[11px]" style={{ color: "rgba(200,230,190,0.65)" }}>
                       {office.phone}
                     </span>
                   </a>
                 </div>
-                <p className="font-mono text-[7px] uppercase tracking-[0.1em] mt-3" style={{ color: "rgba(200,230,190,0.3)" }}>
+                <p className="font-mono text-[11px] uppercase tracking-[0.1em] mt-3" style={{ color: "rgba(200,230,190,0.3)" }}>
                   {office.note}
                 </p>
               </motion.div>

@@ -30,13 +30,23 @@ const COUNTRIES = [
 type FormState = {
   fullName: string; company: string; country: string; email: string;
   phone: string; products: string[]; volume: string; region: string;
-  timeline: string; message: string; procurement: string[];
+  timeline: string; message: string; procurement: string[]; website: string;
 };
 
 const EMPTY: FormState = {
   fullName: "", company: "", country: "", email: "", phone: "",
-  products: [], volume: "", region: "", timeline: "", message: "", procurement: [],
+  products: [], volume: "", region: "", timeline: "", message: "", procurement: [], website: "",
 };
+
+const CONTACT_EMAIL = "export@biopapro.com";
+
+function buildMailto(form: FormState) {
+  const subject = encodeURIComponent(`Export Inquiry — ${form.company} (${form.country})`);
+  const body = encodeURIComponent(
+    `Name: ${form.fullName}\nCompany: ${form.company}\nCountry: ${form.country}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nProducts: ${form.products.join(", ")}\nAnnual Volume: ${form.volume}\nDelivery Region: ${form.region}\nTimeline: ${form.timeline}\n\nProcurement Options: ${form.procurement.join(", ")}\n\nMessage:\n${form.message}`
+  );
+  return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+}
 
 function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
   return (
@@ -123,6 +133,9 @@ export default function ExportInquiryForm() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
   const [form, setForm] = useState<FormState>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [deliveredByEmailClient, setDeliveredByEmailClient] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const set = (field: keyof FormState) => (value: string) =>
     setForm((f) => ({ ...f, [field]: value }));
@@ -135,16 +148,57 @@ export default function ExportInquiryForm() {
         : [...f[field], value],
     }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: connect to form backend (Formspree / custom API / Netlify Forms)
-    // For now: build mailto fallback
-    const subject = encodeURIComponent(`Export Inquiry — ${form.company} (${form.country})`);
-    const body = encodeURIComponent(
-      `Name: ${form.fullName}\nCompany: ${form.company}\nCountry: ${form.country}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nProducts: ${form.products.join(", ")}\nAnnual Volume: ${form.volume}\nDelivery Region: ${form.region}\nTimeline: ${form.timeline}\n\nProcurement Options: ${form.procurement.join(", ")}\n\nMessage:\n${form.message}`
-    );
-    window.location.href = `mailto:yash@biopapro.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    if (sending) return;
+    setSending(true);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: form.fullName,
+          company: form.company,
+          country: form.country,
+          email: form.email,
+          phone: form.phone,
+          products: form.products.join(", "),
+          volume: form.volume,
+          region: form.region,
+          timeline: form.timeline,
+          procurement: form.procurement.join(", "),
+          message: form.message,
+          website: form.website, // honeypot
+          source: "contact-page",
+        }),
+      });
+
+      if (res.ok) {
+        setDeliveredByEmailClient(false);
+        setSubmitted(true);
+        return;
+      }
+
+      const { error: code } = await res.json().catch(() => ({ error: "send_failed" }));
+
+      if (code === "email_not_configured" || code === "send_failed") {
+        // Backend not ready or provider down — fall back to the visitor's email client
+        window.location.href = buildMailto(form);
+        setDeliveredByEmailClient(true);
+        setSubmitted(true);
+        return;
+      }
+
+      setError("Please check the required fields and try again.");
+    } catch {
+      window.location.href = buildMailto(form);
+      setDeliveredByEmailClient(true);
+      setSubmitted(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -205,11 +259,12 @@ export default function ExportInquiryForm() {
               Inquiry submitted.
             </h3>
             <p className="font-sans text-[15px] text-ink-light leading-relaxed max-w-lg mb-6">
-              Your email client has opened with a pre-filled message to Biopapro's
-              export team. You will receive a full procurement response within 24–48 hours.
+              {deliveredByEmailClient
+                ? "Your email client has opened with a pre-filled message to Biopapro's export team. Send it and you'll receive a full procurement response within 24–48 hours."
+                : "Your inquiry has reached Biopapro's export team. You'll receive a full procurement response within 24–48 hours."}
             </p>
             <p className="font-mono text-[12px] text-ink-muted">
-              Direct email: yash@biopapro.com · +91 70211 03763
+              Direct email: {CONTACT_EMAIL} · +91 70211 03763
             </p>
           </motion.div>
         ) : (
@@ -331,20 +386,36 @@ export default function ExportInquiryForm() {
                   Your inquiry will be sent directly to Biopapro's export team.
                   Response guaranteed within <strong className="text-ink font-semibold">24–48 business hours.</strong>
                 </p>
+                {/* Honeypot — visually hidden, off-screen; bots fill it, humans don't */}
+                <input
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  value={form.website}
+                  onChange={(e) => setForm((f) => ({ ...f, website: e.target.value }))}
+                  style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                />
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2.5 px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-300"
+                  disabled={sending}
+                  className="w-full inline-flex items-center justify-center gap-2.5 px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{ background: "#4A7A3D" }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
+                  onMouseEnter={(e) => !sending && ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
                   onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
                 >
-                  Submit Export Inquiry
-                  <ArrowUpRight size={14} strokeWidth={2.5} />
+                  {sending ? "Submitting…" : "Submit Export Inquiry"}
+                  {!sending && <ArrowUpRight size={14} strokeWidth={2.5} />}
                 </button>
+                {error && (
+                  <p className="font-sans text-[12px] text-center" style={{ color: "#B4442E" }} role="alert">
+                    {error}
+                  </p>
+                )}
                 <p className="font-sans text-[12px] text-ink-muted text-center">
                   Or email directly:{" "}
-                  <a href="mailto:yash@biopapro.com" className="font-semibold text-ink hover:underline">
-                    yash@biopapro.com
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="font-semibold text-ink hover:underline">
+                    {CONTACT_EMAIL}
                   </a>
                 </p>
               </div>

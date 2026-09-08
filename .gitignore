@@ -7,3 +7,12 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Local tooling / editor artifacts — not project source
+.claude/
+.mcp.json
+.playwright-mcp/
+.asset-backups/
+
+# build info
+tsconfig.tsbuildinfo

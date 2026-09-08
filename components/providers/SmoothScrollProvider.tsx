@@ -1,7 +1,8 @@
 "use client";
 
 /**
- * SmoothScrollProvider — wraps the entire app with Lenis smooth scroll.
+ * SmoothScrollProvider — wraps the entire app with Lenis smooth scroll
+ * and Motion's reduced-motion handling.
  *
  * Integration notes:
  * - Uses GSAP ticker to drive Lenis (replaces raw requestAnimationFrame).
@@ -9,10 +10,16 @@
  *   with Lenis's virtual scroll position.
  * - gsap.ticker.lagSmoothing(0) prevents GSAP from throttling during
  *   background tabs, which would desync the scroll.
+ * - prefers-reduced-motion: Lenis's eased wheel smoothing is skipped (falls
+ *   back to native scroll), and MotionConfig's reducedMotion="user" makes
+ *   every motion.* component resolve straight to its end state instead of
+ *   animating — not a blanket CSS transition-duration kill, which would
+ *   destroy state-change feedback rather than just skip the motion.
  */
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { MotionConfig } from "motion/react";
 import { gsap } from "@/lib/gsap-config";
 import { ScrollTrigger } from "@/lib/gsap-config";
 
@@ -22,10 +29,20 @@ export default function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   useEffect(() => {
+    // Respect the OS "reduce motion" setting — skip smooth scroll and let the
+    // browser scroll natively. ScrollTrigger still works against native scroll.
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (prefersReducedMotion) {
+      ScrollTrigger.refresh();
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
+      smoothWheel: !prefersReducedMotion,
       touchMultiplier: 2,
     });
 
@@ -43,5 +60,9 @@ export default function SmoothScrollProvider({
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <MotionConfig reducedMotion="user">
+      {children}
+    </MotionConfig>
+  );
 }

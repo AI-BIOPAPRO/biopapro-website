@@ -24,13 +24,13 @@ export default function SustainabilityHero() {
         <video
           autoPlay muted loop playsInline
           className="w-full h-full object-cover"
-          style={{ opacity: 0.22 }}
+          style={{ opacity: 0.4 }}
         >
           <source src="/videos/Sustainibilty 1-2.mp4" type="video/mp4" />
         </video>
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, rgba(29,22,16,0.55) 0%, rgba(29,22,16,0.88) 100%)" }}
+          style={{ background: "linear-gradient(to bottom, rgba(29,22,16,0.4) 0%, rgba(29,22,16,0.78) 100%)" }}
         />
       </div>
 

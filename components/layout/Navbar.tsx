@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll } from "motion/react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 
 const NAV_LINKS = [
   { label: "Products",        href: "/products"        },
@@ -54,7 +55,7 @@ export default function Navbar() {
             : "bg-transparent"
         )}
       >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-5 xl:px-20">
           <div className="flex items-center justify-between h-[72px]">
 
             {/* ── Logo — actual Biopapro brand mark ── */}
@@ -76,17 +77,20 @@ export default function Navbar() {
             </Link>
 
             {/* ── Desktop navigation ── */}
-            <nav className="hidden lg:flex items-center gap-7 xl:gap-9" aria-label="Main navigation">
+            <nav className="hidden lg:flex items-center gap-3 xl:gap-8" aria-label="Main navigation">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "relative text-[11px] font-medium tracking-[0.1em] uppercase transition-colors duration-200 py-1 group",
+                    "relative whitespace-nowrap text-[11px] font-medium tracking-[0.1em] uppercase transition-colors duration-200 py-1 group",
                     pathname === link.href
                       ? "text-green-deep"
-                      : "text-ink-light hover:text-ink"
+                      : scrolled
+                        ? "text-ink-light hover:text-ink"
+                        : "text-white hover:text-green-light"
                   )}
+                  style={!scrolled && pathname !== link.href ? { textShadow: "0 1px 6px rgba(0,0,0,0.55)" } : undefined}
                 >
                   {link.label}
                   <span
@@ -111,7 +115,11 @@ export default function Navbar() {
 
               <button
                 onClick={() => setMenuOpen((v) => !v)}
-                className="lg:hidden w-10 h-10 flex items-center justify-center text-ink hover:text-green-deep transition-colors duration-200"
+                className={cn(
+                  "lg:hidden w-11 h-11 flex items-center justify-center transition-colors duration-200",
+                  scrolled || menuOpen ? "text-ink hover:text-green-deep" : "text-white hover:text-green-light"
+                )}
+                style={!scrolled && !menuOpen ? { filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.55))" } : undefined}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
               >
@@ -175,7 +183,7 @@ export default function Navbar() {
               </Link>
               <button
                 onClick={() => setMenuOpen(false)}
-                className="w-10 h-10 flex items-center justify-center text-ink-light hover:text-ink"
+                className="w-11 h-11 flex items-center justify-center text-ink-light hover:text-ink"
                 aria-label="Close menu"
               >
                 <X size={20} />
@@ -233,8 +241,8 @@ export default function Navbar() {
 
             {/* Footer strip */}
             <div className="px-8 py-5 bg-green-pale/40 border-t border-border flex-shrink-0">
-              <p className="font-mono text-[9.5px] text-ink-muted tracking-[0.2em] uppercase">
-                FSC® Certified &nbsp;·&nbsp; ISO 9001:2015 &nbsp;·&nbsp; FDA CFR 21 &nbsp;·&nbsp; Est. 2018
+              <p className="font-mono text-[11px] text-ink-muted tracking-[0.2em] uppercase">
+                FSC® Certified &nbsp;·&nbsp; ISO 9001:2015 &nbsp;·&nbsp; FDA CFR 21 &nbsp;·&nbsp; Est. {COMPANY_FACTS.founded}
               </p>
             </div>
           </motion.div>

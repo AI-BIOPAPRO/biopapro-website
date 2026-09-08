@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
+import { siteUrl, absoluteUrl } from "@/lib/site";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -28,9 +29,10 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: {
-    template: "%s | Biopapro — Wooden Cutlery Manufacturer India",
-    default: "Biopapro — Wooden Cutlery Manufacturer in India | Domestic & Export Supply",
+    template: "%s | Biopapro",
+    default: "Biopapro — Wooden Cutlery Manufacturer in India | Bulk & Export",
   },
   description:
     "Biopapro manufactures FSC-certified birchwood cutlery in Mumbai, India. 100M+ units/month. Supplying restaurants, hotels, caterers, and food chains across India — and exporting to 18+ countries worldwide. Wholesale and bulk supply available.",
@@ -67,7 +69,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     alternateLocale: ["en_US", "en_GB"],
-    url: "https://biopapro.com",
+    url: absoluteUrl("/"),
     siteName: "Biopapro",
     title: "Biopapro — Wooden Cutlery Manufacturer India | Domestic & Export",
     description:
@@ -89,11 +91,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "", // Add Google Search Console verification token here
-  },
+  // Add `verification: { google: "<token>" }` once a Search Console token is issued.
   alternates: {
-    canonical: "https://biopapro.com",
+    canonical: "/",
   },
 };
 
@@ -111,7 +111,8 @@ export default function RootLayout({
         {/* Preconnect to CDN so image requests don't wait on DNS + TLS */}
         <link rel="preconnect" href="https://biopapro.com" />
         <link rel="dns-prefetch" href="https://biopapro.com" />
-        <link rel="prefetch" href="/world-110m.json" as="fetch" crossOrigin="anonymous" />
+        {/* world-110m.json is prefetched per-component (GlobalPresence, OriginToWorld)
+            instead of globally here — most routes never render a world map. */}
       </head>
       <body>
         <StructuredData />

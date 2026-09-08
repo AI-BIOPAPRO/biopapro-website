@@ -88,7 +88,7 @@ export default function IndustriesServed() {
                   <h3 className="font-sans font-semibold text-ink text-[13px] leading-tight">
                     {industry.name}
                   </h3>
-                  <p className="font-mono text-[7px] uppercase tracking-[0.16em]" style={{ color: "#C89A5B" }}>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: "#C89A5B" }}>
                     MOQ {industry.moq}
                   </p>
                 </div>
@@ -100,14 +100,14 @@ export default function IndustriesServed() {
 
               {/* Products */}
               <div className="mb-3">
-                <p className="font-mono text-[7px] uppercase tracking-[0.2em] text-ink-muted mb-2">
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-2">
                   Products
                 </p>
                 <div className="flex flex-wrap gap-1">
                   {industry.products.slice(0, 3).map((p) => (
                     <span
                       key={p}
-                      className="font-mono text-[7px] uppercase tracking-[0.1em] px-2 py-1"
+                      className="font-mono text-[11px] uppercase tracking-[0.1em] px-2 py-1"
                       style={{ background: "rgba(74,122,61,0.07)", border: "1px solid rgba(74,122,61,0.18)", color: "#4A7A3D" }}
                     >
                       {p}
@@ -118,7 +118,7 @@ export default function IndustriesServed() {
 
               {/* Clients note */}
               <div className="pt-3 border-t" style={{ borderColor: "#EDE5D8" }}>
-                <p className="font-mono text-[7.5px] text-ink-muted uppercase tracking-[0.1em] leading-relaxed">
+                <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.1em] leading-relaxed">
                   {industry.clients}
                 </p>
               </div>

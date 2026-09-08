@@ -17,6 +17,7 @@ import { motion, useInView } from "motion/react";
 import Link from "next/link";
 import SectionLabel from "@/components/shared/SectionLabel";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 
 const E = [0.16, 1, 0.3, 1] as const;
 
@@ -31,15 +32,15 @@ const STORY_BLOCKS = [
   },
   {
     keyword: "Impact",
-    body: "100M+ units produced annually with sustainability at the core.",
+    body: "100M+ units produced every month with sustainability at the core.",
   },
 ] as const;
 
 const STATS = [
-  { value: "80%+",  label: "Women Workforce"        },
-  { value: "100M+", label: "Units Produced Annually" },
-  { value: "18+",   label: "Export Markets"          },
-  { value: "2018",  label: "Established"             },
+  { value: `${COMPANY_FACTS.womenPercent}%+`,  label: "Women Workforce"    },
+  { value: "100M+", label: "Units Produced Monthly" },
+  { value: `${COMPANY_FACTS.exportMarkets}+`,   label: "Export Markets"    },
+  { value: `${COMPANY_FACTS.founded}`,  label: "Established"              },
 ] as const;
 
 export default function WomenWorkforce() {
@@ -107,7 +108,7 @@ export default function WomenWorkforce() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1, duration: 0.85, ease: E }}
             className="font-display font-light leading-[0.9] mb-8"
-            style={{ fontSize: "clamp(2.6rem, 5vw, 5.4rem)", color: "#F4F8F0" }}
+            style={{ fontSize: "clamp(2.4rem, 4.3vw, 4.4rem)", color: "#F4F8F0" }}
           >
             The Hands
             <br />Behind Every
@@ -129,10 +130,10 @@ export default function WomenWorkforce() {
             shipped across 18+ countries is a workforce built on precision,
             consistency, and craftsmanship.
             <br /><br />
-            More than 80% of Biopapro&apos;s production team is made up of
+            More than {COMPANY_FACTS.womenPercent}% of Biopapro&apos;s production team is made up of
             skilled women who manufacture, inspect, and prepare export-grade
             birchwood tableware every day. Their work powers over
-            100&thinsp;million units annually while helping global
+            100&thinsp;million units every month while helping global
             food-service operators reduce dependence on single-use plastic.
           </motion.p>
 
@@ -148,7 +149,7 @@ export default function WomenWorkforce() {
                 style={{ borderColor: "rgba(74,122,61,0.4)" }}
               >
                 <p
-                  className="font-mono text-[10px] uppercase tracking-[0.26em] font-bold mb-2"
+                  className="font-mono text-[11px] uppercase tracking-[0.26em] font-bold mb-2"
                   style={{ color: "#7AAE6B" }}
                 >
                   {block.keyword}
@@ -171,7 +172,7 @@ export default function WomenWorkforce() {
           >
             <Link
               href="/manufacturing"
-              className="group inline-flex items-center gap-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
+              className="group inline-flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
               style={{ border: "1px solid rgba(150,210,125,0.45)", color: "rgba(150,210,125,0.9)" }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
@@ -217,7 +218,7 @@ export default function WomenWorkforce() {
                 {s.value}
               </p>
               <p
-                className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em]"
+                className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em]"
                 style={{ color: "rgba(160,215,135,0.82)" }}
               >
                 {s.label}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 
 const NAV = {
   Products: [
@@ -73,7 +74,7 @@ export default function Footer() {
               style={{ color: "rgba(230,220,205,0.65)" }}
             >
               Global FSC-certified birchwood tableware manufacturer.
-              Exporting to 18+ countries since 2018.
+              Exporting to {COMPANY_FACTS.exportMarkets}+ countries since {COMPANY_FACTS.founded}.
             </p>
 
             {/* Cert strip */}
@@ -81,7 +82,7 @@ export default function Footer() {
               {CERTS.map((c) => (
                 <span
                   key={c}
-                  className="font-mono text-[8px] uppercase tracking-[0.18em]"
+                  className="font-mono text-[11px] uppercase tracking-[0.18em]"
                   style={{ color: "rgba(160,215,135,0.55)" }}
                 >
                   {c}
@@ -97,7 +98,7 @@ export default function Footer() {
               >
                 <Mail size={12} style={{ color: "rgba(160,215,135,0.5)", flexShrink: 0 }} />
                 <span
-                  className="font-mono text-[9px] uppercase tracking-[0.16em] group-hover:underline"
+                  className="font-mono text-[11px] uppercase tracking-[0.16em] group-hover:underline"
                   style={{ color: "rgba(220,215,205,0.7)" }}
                 >
                   export@biopapro.com
@@ -106,7 +107,7 @@ export default function Footer() {
               <div className="inline-flex items-center gap-2.5">
                 <MapPin size={12} style={{ color: "rgba(160,215,135,0.5)", flexShrink: 0 }} />
                 <span
-                  className="font-mono text-[9px] uppercase tracking-[0.16em]"
+                  className="font-mono text-[11px] uppercase tracking-[0.16em]"
                   style={{ color: "rgba(220,215,205,0.6)" }}
                 >
                   India · Exporting globally
@@ -119,7 +120,7 @@ export default function Footer() {
           {(Object.entries(NAV) as [string, readonly { label: string; href: string }[]][]).map(([group, links]) => (
             <div key={group} className="lg:col-span-2 flex flex-col gap-4">
               <span
-                className="font-mono text-[9px] uppercase tracking-[0.28em] font-bold"
+                className="font-mono text-[11px] uppercase tracking-[0.28em] font-bold"
                 style={{ color: "rgba(160,215,135,0.6)" }}
               >
                 {group}
@@ -149,7 +150,7 @@ export default function Footer() {
           {/* CTA column */}
           <div className="lg:col-span-2 flex flex-col gap-5">
             <span
-              className="font-mono text-[9px] uppercase tracking-[0.28em] font-bold"
+              className="font-mono text-[11px] uppercase tracking-[0.28em] font-bold"
               style={{ color: "rgba(160,215,135,0.6)" }}
             >
               Export Partnership
@@ -162,7 +163,7 @@ export default function Footer() {
             </p>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.16em] transition-colors duration-300 self-start"
+              className="group inline-flex items-center gap-2 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.16em] transition-colors duration-300 self-start"
               style={{ background: "#4A7A3D", color: "#FFFFFF" }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background = "#2D5228";
@@ -178,21 +179,6 @@ export default function Footer() {
                 className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
               />
             </Link>
-
-            {/* AI Advisor link */}
-            <Link
-              href="/ai-advisor"
-              className="font-mono text-[9px] uppercase tracking-[0.18em] transition-colors duration-200"
-              style={{ color: "rgba(160,215,135,0.55)" }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.color = "rgba(160,215,135,0.9)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.color = "rgba(160,215,135,0.55)";
-              }}
-            >
-              → Try AI Procurement Advisor
-            </Link>
           </div>
 
         </div>
@@ -203,7 +189,7 @@ export default function Footer() {
           style={{ borderColor: "rgba(255,255,255,0.08)" }}
         >
           <p
-            className="font-mono text-[8.5px] uppercase tracking-[0.16em]"
+            className="font-mono text-[11px] uppercase tracking-[0.16em]"
             style={{ color: "rgba(180,170,155,0.4)" }}
           >
             © {year} Biopapro Pvt. Ltd. · All rights reserved
@@ -213,7 +199,7 @@ export default function Footer() {
               <Link
                 key={label}
                 href="/contact"
-                className="font-mono text-[8.5px] uppercase tracking-[0.14em] transition-colors duration-200"
+                className="font-mono text-[11px] uppercase tracking-[0.14em] transition-colors duration-200"
                 style={{ color: "rgba(180,170,155,0.4)" }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.color = "rgba(180,170,155,0.75)";

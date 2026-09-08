@@ -310,7 +310,7 @@ export function LogoFDA({ size = 64 }: LogoProps) {
       <path d={shield} stroke={navy} strokeWidth={w*0.045} fill="none" />
       {/* Inner shield */}
       <path
-        d={`M ${w*0.5},${h*0.87} C ${w*0.5},${h*0.87} ${w*0.16},${h*0.66} ${w*0.16},${h*0.36} L ${w*0.16},${h*0.16} L ${w*0.84},${h*0.16} L ${w*0.84},${h*0.36} C ${w*0.84},${h*0.66} ${w*0.5},${h*0.87} Z`}
+        d={`M ${w*0.5},${h*0.87} C ${w*0.5},${h*0.87} ${w*0.16},${h*0.66} ${w*0.16},${h*0.36} L ${w*0.16},${h*0.16} L ${w*0.84},${h*0.16} L ${w*0.84},${h*0.36} C ${w*0.84},${h*0.66} ${w*0.5},${h*0.87} ${w*0.5},${h*0.87} Z`}
         stroke={navy} strokeWidth={w*0.012} fill="none" opacity="0.35"
       />
       {/* "FDA" */}
@@ -367,12 +367,15 @@ export function LogoEU({ size = 64 }: LogoProps) {
   const starOrbitR = w * 0.32;
 
   // 12 stars: draw 5-point star at each position
+  // Coordinates are rounded — Math.cos/Math.sin aren't guaranteed bit-identical
+  // between server (Node) and client (browser) engines, and an unrounded value
+  // here causes a React hydration mismatch on this SVG.
   function starPoints(ox: number, oy: number, outerR: number, innerR: number): string {
     const pts: string[] = [];
     for (let i = 0; i < 10; i++) {
       const angle = (i * 36 - 90) * (Math.PI / 180);
       const r = i % 2 === 0 ? outerR : innerR;
-      pts.push(`${ox + r * Math.cos(angle)},${oy + r * Math.sin(angle)}`);
+      pts.push(`${(ox + r * Math.cos(angle)).toFixed(2)},${(oy + r * Math.sin(angle)).toFixed(2)}`);
     }
     return pts.join(" ");
   }
@@ -380,8 +383,8 @@ export function LogoEU({ size = 64 }: LogoProps) {
   const stars = Array.from({ length: 12 }, (_, i) => {
     const angle = (i * 30 - 90) * (Math.PI / 180);
     return {
-      x: cx + starOrbitR * Math.cos(angle),
-      y: cy + starOrbitR * Math.sin(angle),
+      x: Number((cx + starOrbitR * Math.cos(angle)).toFixed(2)),
+      y: Number((cy + starOrbitR * Math.sin(angle)).toFixed(2)),
     };
   });
 

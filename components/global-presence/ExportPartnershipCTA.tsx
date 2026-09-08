@@ -32,7 +32,7 @@ export default function ExportPartnershipCTA() {
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, ease: EASE }}
-              className="font-mono text-[8px] uppercase tracking-[0.36em] mb-8"
+              className="font-mono text-[11px] uppercase tracking-[0.36em] mb-8"
               style={{ color: "rgba(168,198,134,0.65)" }}
             >
               Ready to source?
@@ -83,7 +83,7 @@ export default function ExportPartnershipCTA() {
               </Link>
               <Link
                 href="/products"
-                className="group inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.2em] transition-colors duration-200"
+                className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200"
                 style={{ color: "rgba(168,198,134,0.75)" }}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(168,198,134,1)")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(168,198,134,0.75)")}
@@ -119,7 +119,7 @@ export default function ExportPartnershipCTA() {
                     className="w-2 h-2 rounded-full flex-shrink-0"
                     style={{ background: office.type === "origin" ? "#7AAE6B" : "#A8C686" }}
                   />
-                  <p className="font-mono text-[8px] uppercase tracking-[0.22em]" style={{ color: "rgba(168,198,134,0.8)" }}>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "rgba(168,198,134,0.8)" }}>
                     {office.region}
                   </p>
                 </div>
@@ -131,7 +131,7 @@ export default function ExportPartnershipCTA() {
                 <div className="flex flex-wrap gap-x-5 gap-y-2">
                   <a
                     href={`mailto:${office.email}`}
-                    className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.16em] transition-colors duration-200"
+                    className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors duration-200"
                     style={{ color: "rgba(168,198,134,0.8)" }}
                     onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(168,198,134,1)")}
                     onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(168,198,134,0.8)")}
@@ -141,7 +141,7 @@ export default function ExportPartnershipCTA() {
                   </a>
                   <a
                     href={`tel:${office.phone.replace(/\s/g, "")}`}
-                    className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.16em] transition-colors duration-200"
+                    className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors duration-200"
                     style={{ color: "rgba(246,241,232,0.45)" }}
                     onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(246,241,232,0.75)")}
                     onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(246,241,232,0.45)")}
@@ -151,7 +151,7 @@ export default function ExportPartnershipCTA() {
                   </a>
                 </div>
                 {"contact" in office && (
-                  <p className="font-mono text-[7px] uppercase tracking-[0.14em] mt-2" style={{ color: "rgba(168,198,134,0.45)" }}>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.14em] mt-2" style={{ color: "rgba(168,198,134,0.45)" }}>
                     Contact: {(office as { contact: string }).contact}
                   </p>
                 )}

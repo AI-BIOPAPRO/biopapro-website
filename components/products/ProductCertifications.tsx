@@ -92,7 +92,7 @@ export default function ProductCertifications() {
                     {cert.name}
                   </p>
                   <p
-                    className="font-mono text-[7.5px] uppercase tracking-[0.16em]"
+                    className="font-mono text-[11px] uppercase tracking-[0.16em]"
                     style={{ color: "rgba(230,210,185,0.4)" }}
                   >
                     {cert.fullName}
@@ -113,13 +113,13 @@ export default function ProductCertifications() {
                 style={{ borderColor: "#3D2E22" }}
               >
                 <p
-                  className="font-mono text-[7px] uppercase tracking-[0.18em]"
+                  className="font-mono text-[11px] uppercase tracking-[0.18em]"
                   style={{ color: "rgba(200,154,91,0.45)" }}
                 >
                   Scope
                 </p>
                 <p
-                  className="font-mono text-[8.5px] uppercase tracking-[0.12em] mt-1"
+                  className="font-mono text-[11px] uppercase tracking-[0.12em] mt-1"
                   style={{ color: "rgba(246,241,232,0.65)" }}
                 >
                   {cert.scope}
@@ -141,7 +141,7 @@ export default function ProductCertifications() {
             {CERTIFICATIONS_LIST.map((cert) => (
               <span
                 key={cert.id}
-                className="font-mono text-[8.5px] uppercase tracking-[0.2em]"
+                className="font-mono text-[11px] uppercase tracking-[0.2em]"
                 style={{ color: "rgba(200,154,91,0.5)" }}
               >
                 {cert.name}
@@ -149,7 +149,7 @@ export default function ProductCertifications() {
             ))}
           </div>
           <p
-            className="font-mono text-[7.5px] uppercase tracking-[0.16em]"
+            className="font-mono text-[11px] uppercase tracking-[0.16em]"
             style={{ color: "rgba(230,210,185,0.3)" }}
           >
             All certificates available on request
