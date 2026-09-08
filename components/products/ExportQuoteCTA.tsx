@@ -70,7 +70,7 @@ export default function ExportQuoteCTA() {
             style={{ color: "rgba(200,230,185,0.65)", maxWidth: "520px" }}
           >
             Tell us what you need — product, quantity, packaging, and destination.
-            Our export team responds with a tailored quotation within 24 hours.
+            Our team responds with a tailored quotation within 24 hours.
           </motion.p>
 
           {/* CTAs */}

@@ -71,7 +71,7 @@ export default function ManufacturingCTA() {
                   el.style.boxShadow = "none";
                 }}
               >
-                Request Export Quote
+                Request Quote
                 <ArrowUpRight size={13} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
               </Link>
               <Link

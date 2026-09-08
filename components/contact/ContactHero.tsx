@@ -67,7 +67,7 @@ export default function ContactHero() {
               style={{ fontSize: "clamp(1rem, 1.2vw, 1.1rem)" }}
             >
               Share your product requirements, volume, and delivery region.
-              Biopapro's export team will respond with a full procurement package
+              Biopapro's team will respond with a full procurement package
               — catalogue, specifications, certifications, and pricing — within
               24–48 hours.
             </motion.p>

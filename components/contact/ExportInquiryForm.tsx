@@ -15,6 +15,8 @@ const PROCUREMENT_OPTIONS = [
   { id: "oem",         label: "OEM / Private Label"         },
   { id: "airline",     label: "Airline Supply"              },
   { id: "hospitality", label: "Hospitality Supply"          },
+  { id: "restaurant",  label: "Restaurant / QSR Supply"     },
+  { id: "caterer",     label: "Caterer / Event Supply"      },
   { id: "distributor", label: "Distributor Partnership"     },
   { id: "sample",      label: "Sample Request"              },
 ] as const;
@@ -260,8 +262,8 @@ export default function ExportInquiryForm() {
             </h3>
             <p className="font-sans text-[15px] text-ink-light leading-relaxed max-w-lg mb-6">
               {deliveredByEmailClient
-                ? "Your email client has opened with a pre-filled message to Biopapro's export team. Send it and you'll receive a full procurement response within 24–48 hours."
-                : "Your inquiry has reached Biopapro's export team. You'll receive a full procurement response within 24–48 hours."}
+                ? "Your email client has opened with a pre-filled message to Biopapro's team. Send it and you'll receive a full procurement response within 24–48 hours."
+                : "Your inquiry has reached Biopapro's team. You'll receive a full procurement response within 24–48 hours."}
             </p>
             <p className="font-mono text-[12px] text-ink-muted">
               Direct email: {CONTACT_EMAIL} · +91 70211 03763
@@ -383,7 +385,7 @@ export default function ExportInquiryForm() {
               {/* Submit */}
               <div className="p-6 flex flex-col gap-4" style={{ border: "1px solid #DDD3C5", background: "#F6F1E8" }}>
                 <p className="font-sans text-[13px] text-ink-muted leading-relaxed">
-                  Your inquiry will be sent directly to Biopapro's export team.
+                  Your inquiry will be sent directly to Biopapro's team.
                   Response guaranteed within <strong className="text-ink font-semibold">24–48 business hours.</strong>
                 </p>
                 {/* Honeypot — visually hidden, off-screen; bots fill it, humans don't */}

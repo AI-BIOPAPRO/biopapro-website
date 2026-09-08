@@ -234,7 +234,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="inline-flex items-center gap-2 px-7 py-4 bg-green text-white text-sm font-bold uppercase tracking-[0.14em] hover:bg-green-deep transition-colors duration-200"
                 >
-                  Request Export Quote
+                  Request Quote
                   <ArrowUpRight size={14} strokeWidth={2.5} />
                 </Link>
               </motion.div>

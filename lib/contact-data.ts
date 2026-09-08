@@ -189,6 +189,7 @@ export const VOLUME_OPTIONS = [
 ] as const;
 
 export const REGION_OPTIONS = [
+  "India — Domestic",
   "Europe — EU",
   "Europe — UK",
   "North America — USA",

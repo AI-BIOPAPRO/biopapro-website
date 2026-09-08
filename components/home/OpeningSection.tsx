@@ -25,7 +25,7 @@ const E = [0.16, 1, 0.3, 1] as const;
 
 const STATS = [
   { value: "100M+",   label: "Units Produced",    sub: "Every month"           },
-  { value: `${COMPANY_FACTS.exportMarkets}+`,     label: "Export Countries",  sub: "Active markets" },
+  { value: `${COMPANY_FACTS.exportMarkets}+`,     label: "Countries Served",  sub: "Active markets" },
   { value: `${COMPANY_FACTS.plasticSavedPerDay.toLocaleString()}kg`, label: "Plastic Replaced",  sub: "Every single day" },
   { value: "FSC®",    label: "100% Certified",    sub: "Chain of custody"      },
 ];
@@ -176,7 +176,7 @@ export default function OpeningSection() {
               color: "rgba(160,210,140,0.52)",
             }}
           >
-            Global Manufacturer &nbsp;·&nbsp; Est. {COMPANY_FACTS.founded}
+            Indian Manufacturer &nbsp;·&nbsp; Est. {COMPANY_FACTS.founded}
           </motion.p>
 
           {/* ── BIOPAPRO — refined brand anchor, not dominant ── */}
@@ -249,9 +249,9 @@ export default function OpeningSection() {
             }}
           >
             Precision-manufactured FSC-certified birchwood cutlery
-            for airlines, food service, and global distributors.
-            Replacing 6,500&thinsp;kg of plastic every day — across
-            18+ countries.
+            for restaurants, hotels, and caterers across India — and
+            airlines, food service, and distributors worldwide.
+            Replacing 6,500&thinsp;kg of plastic every day.
           </motion.p>
 
           {/* ── CTAs ── */}
@@ -292,7 +292,7 @@ export default function OpeningSection() {
                 el.style.borderColor = "rgba(255,255,255,0.22)";
               }}
             >
-              Request Export Quote
+              Request Quote
               <ArrowUpRight size={13} strokeWidth={2}
                 className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
             </Link>

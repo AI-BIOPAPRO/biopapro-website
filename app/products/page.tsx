@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     "FSC-certified birchwood cutlery manufactured in Mumbai, India — 30+ SKUs, exported to 18+ countries and supplied in bulk across India. Forks, spoons, knives, sporks, stirrers, skewers. Wholesale pricing for restaurants, hotels, and caterers.",
   keywords: [
     // Domestic India
+    "wooden cutlery manufacturer India",
     "wooden cutlery wholesale India",
     "wooden spoons supplier India",
     "wooden forks bulk India",
@@ -17,8 +18,10 @@ export const metadata: Metadata = {
     "eco friendly cutlery India",
     "wooden coffee stirrers India",
     "bamboo skewers bulk India",
-    "wooden cutlery restaurants India",
+    "wooden cutlery for restaurants",
+    "wooden cutlery for QSRs",
     "wooden tableware hotels India",
+    "bulk wooden cutlery supplier",
     // Export / International
     "birchwood fork bulk export",
     "wooden spoon manufacturer export",

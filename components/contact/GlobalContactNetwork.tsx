@@ -35,7 +35,7 @@ export default function GlobalContactNetwork() {
           >
             Speak directly
             <br />
-            <span style={{ color: "#C89A5B" }}>with the export team.</span>
+            <span style={{ color: "#C89A5B" }}>with our team.</span>
           </motion.h2>
         </div>
 

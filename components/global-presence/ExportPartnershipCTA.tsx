@@ -61,7 +61,7 @@ export default function ExportPartnershipCTA() {
               style={{ color: "rgba(200,230,185,0.65)", maxWidth: 460 }}
             >
               Tell us your market, required volume, and product categories.
-              Our export team — based in Mumbai — responds within
+              Our team — based in Mumbai — responds within
               24 hours with a tailored supply proposal.
             </motion.p>
 

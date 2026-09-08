@@ -23,7 +23,7 @@ const NAV = {
   ],
   Resources: [
     { label: "Blog & News",            href: "/blog"             },
-    { label: "Export Partnership",     href: "/contact"          },
+    { label: "Partner With Us",        href: "/contact"          },
     { label: "Request Samples",        href: "/contact#samples"  },
     { label: "Certificate Downloads",  href: "/certifications"   },
   ],
@@ -73,8 +73,8 @@ export default function Footer() {
               className="font-sans font-light text-sm leading-relaxed max-w-[280px]"
               style={{ color: "rgba(230,220,205,0.65)" }}
             >
-              Global FSC-certified birchwood tableware manufacturer.
-              Exporting to {COMPANY_FACTS.exportMarkets}+ countries since {COMPANY_FACTS.founded}.
+              Indian FSC-certified birchwood tableware manufacturer.
+              Supplying India and exporting to {COMPANY_FACTS.exportMarkets}+ countries since {COMPANY_FACTS.founded}.
             </p>
 
             {/* Cert strip */}
@@ -153,7 +153,7 @@ export default function Footer() {
               className="font-mono text-[11px] uppercase tracking-[0.28em] font-bold"
               style={{ color: "rgba(160,215,135,0.6)" }}
             >
-              Export Partnership
+              Partner With Us
             </span>
             <p
               className="font-sans text-[13px] font-light leading-relaxed"
@@ -172,7 +172,7 @@ export default function Footer() {
                 (e.currentTarget as HTMLElement).style.background = "#4A7A3D";
               }}
             >
-              Request Export Quote
+              Request Quote
               <ArrowUpRight
                 size={11}
                 strokeWidth={2.5}
