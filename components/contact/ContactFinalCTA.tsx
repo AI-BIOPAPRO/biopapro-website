@@ -74,7 +74,7 @@ export default function ContactFinalCTA() {
               <ArrowUpRight size={14} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
             </a>
             <a
-              href="mailto:yash@biopapro.com"
+              href="mailto:export@biopapro.com"
               className="inline-flex items-center gap-2.5 px-6 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] transition-all duration-300"
               style={{ border: "1px solid rgba(200,230,190,0.3)", color: "rgba(200,230,190,0.85)" }}
               onMouseEnter={(e) => {
@@ -102,7 +102,7 @@ export default function ContactFinalCTA() {
             style={{ borderColor: "rgba(200,230,190,0.15)" }}
           >
             {[
-              { region: "India — Export Team", email: "yash@biopapro.com", phone: "+91 70211 03763", note: "Mon–Sat · IST" },
+              { region: "India — Export Team", email: "export@biopapro.com", phone: "+91 70211 03763", note: "Mon–Sat · IST" },
             ].map((o) => (
               <div key={o.region}>
                 <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.1em] mb-2" style={{ color: "rgba(200,230,190,0.45)" }}>

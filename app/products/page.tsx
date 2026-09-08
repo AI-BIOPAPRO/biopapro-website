@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
 
 export const metadata: Metadata = {
-  title: "Wooden Cutlery Products — Forks, Spoons, Knives, Sporks | Biopapro India",
+  title: "Wooden Cutlery Products — Forks, Spoons, Knives, Sporks",
   description:
     "FSC-certified birchwood cutlery manufactured in Mumbai, India. Wooden forks, spoons, knives, sporks, coffee stirrers, skewers. Bulk supply for restaurants, hotels, caterers across India. Export to 18+ countries. 30+ SKUs, wholesale pricing.",
   keywords: [
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     description:
       "30+ SKUs. Birchwood forks, spoons, knives, sporks, stirrers, skewers. Domestic India supply + 18+ country export. FSC certified. Bulk & wholesale.",
     type: "website",
-    url: "https://biopapro.com/products",
+    url: "/products",
   },
-  alternates: { canonical: "https://biopapro.com/products" },
+  alternates: { canonical: "/products" },
 };
 
 export default function ProductsPage() {

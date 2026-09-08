@@ -41,7 +41,7 @@ const STATS = [
   { value: "100M+", label: "Units Produced Monthly" },
   { value: `${COMPANY_FACTS.exportMarkets}+`,   label: "Export Markets"    },
   { value: `${COMPANY_FACTS.founded}`,  label: "Established"              },
-];
+] as const;
 
 export default function WomenWorkforce() {
   const ref = useRef<HTMLDivElement>(null);

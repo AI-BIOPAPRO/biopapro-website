@@ -10,7 +10,7 @@ export const OFFICES = [
       { name: "Yash Chandan",     role: "Export Operations" },
       { name: "Nikunj Bhansali",  role: "Export Operations" },
     ],
-    email: "yash@biopapro.com",
+    email: "export@biopapro.com",
     phone: "+91 70211 03763",
     hours: "Mon – Sat, 09:00 – 18:00 IST",
     timezone: "UTC +5:30",

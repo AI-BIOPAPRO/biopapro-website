@@ -13,3 +13,6 @@ coverage/
 .mcp.json
 .playwright-mcp/
 .asset-backups/
+
+# build info
+tsconfig.tsbuildinfo

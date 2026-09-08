@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ContactClient from "./ContactClient";
 
 export const metadata: Metadata = {
-  title: "Contact — Wooden Cutlery Supplier India | Domestic & Export Enquiry",
+  title: "Contact — Bulk & Export Wooden Cutlery Enquiry",
   description:
     "Contact Biopapro for wooden cutlery supply in India or export worldwide. Restaurants, hotels, caterers, food chains, distributors, importers — enquire for bulk pricing, MOQ, samples, and certifications. Mumbai manufacturer. Response within 24 hours.",
   keywords: [
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     description:
       "Enquire for domestic India supply or international export. Restaurants, hotels, caterers, importers, distributors. 24-hour response. Bulk pricing available.",
     type: "website",
-    url: "https://biopapro.com/contact",
+    url: "/contact",
   },
-  alternates: { canonical: "https://biopapro.com/contact" },
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

@@ -29,7 +29,15 @@ export default function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Respect the OS "reduce motion" setting — skip smooth scroll and let the
+    // browser scroll natively. ScrollTrigger still works against native scroll.
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (prefersReducedMotion) {
+      ScrollTrigger.refresh();
+      return;
+    }
 
     const lenis = new Lenis({
       duration: 1.1,

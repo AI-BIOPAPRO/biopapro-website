@@ -1,6 +1,0 @@
-{
-  "name": "Biopapro Premium Digital Platform",
-  "description": "High-fidelity digital experience and B2B strategic platform for Biopapro, the global leader in sustainable biodegradable manufacturing.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
