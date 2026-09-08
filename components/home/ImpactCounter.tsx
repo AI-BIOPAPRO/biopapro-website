@@ -4,7 +4,11 @@
  * S5 — Impact Counter
  *
  * Live sustainability metrics — calculated from real Biopapro production data.
- * Numbers count up from 0 when the section enters the viewport.
+ * Numbers count up from 0 as soon as the page mounts (not gated on scroll
+ * visibility) so they're never caught sitting at 0 by a screenshot tool,
+ * link-preview bot, or a fast scroll — they finish within ~1.2s of load.
+ * The card's own fade/slide entrance still waits for scroll, so the
+ * reveal-on-scroll feel is unchanged for a normal visitor.
  *
  * Calculation method:
  *   - Plastic replaced (kg): COMPANY_FACTS.plasticSavedPerDay × days elapsed this year
@@ -71,6 +75,7 @@ function CounterCard({
   sublabel,
   format = "full",
   active,
+  countActive,
   delay,
   isLive = false,
 }: {
@@ -80,10 +85,16 @@ function CounterCard({
   sublabel: string;
   format?:  "full" | "compact";
   active:   boolean;
+  countActive: boolean;
   delay:    number;
   isLive?:  boolean;
 }) {
-  const count    = useCountUp(value, 2200, active);
+  // Counting is gated on mount (countActive), not on scroll visibility
+  // (active) — a screenshot tool, link-preview bot, or a fast scroll should
+  // never be able to see these sitting at 0. The card's own fade/slide
+  // entrance still waits for scroll, so the reveal-on-scroll feel is kept;
+  // by the time it fades in, the number underneath is already correct.
+  const count    = useCountUp(value, 1200, countActive);
   const display  = format === "compact" ? fmtCompact(count) : fmtNumber(count);
   const E = [0.16, 1, 0.3, 1] as const;
 
@@ -131,6 +142,11 @@ function CounterCard({
 export default function ImpactCounter() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView     = useInView(sectionRef, { once: true, margin: "-120px 0px" });
+
+  // Counting starts on mount, independent of scroll position — see the note
+  // on CounterCard. This finishes well before most users ever scroll here.
+  const [countActive, setCountActive] = useState(false);
+  useEffect(() => { setCountActive(true); }, []);
 
   const days = daysElapsedThisYear();
 
@@ -208,7 +224,7 @@ export default function ImpactCounter() {
         {/* Counter grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 border-t border-border pt-12">
           {counters.map((c) => (
-            <CounterCard key={c.label} {...c} active={inView} />
+            <CounterCard key={c.label} {...c} active={inView} countActive={countActive} />
           ))}
         </div>
 

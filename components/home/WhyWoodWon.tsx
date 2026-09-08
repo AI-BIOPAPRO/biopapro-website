@@ -63,7 +63,7 @@ const COMPARISONS: {
   },
   {
     category: "Brand Signal",
-    plastic:   { headline: "Consumer rejection",      detail: "78% of global consumers actively prefer brands that eliminate single-use plastic (Euromonitor 2024)." },
+    plastic:   { headline: "Consumer rejection",      detail: "Growing regulatory bans and consumer preference are pushing food-service brands away from single-use plastic worldwide." },
     birchwood: { headline: "Premium perception",      detail: "Wooden cutlery is chosen by premium airlines, Michelin-starred catering, and sustainable food brands globally." },
   },
 ];
