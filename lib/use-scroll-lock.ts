@@ -40,7 +40,16 @@ export function useScrollLock(locked: boolean, allowedRef?: RefObject<HTMLElemen
 
     const blockIfOutside = (e: Event) => {
       const target = e.target as Node | null;
-      if (allowedRef?.current && target && allowedRef.current.contains(target)) return;
+      if (allowedRef?.current && target && allowedRef.current.contains(target)) {
+        // Let the browser natively scroll the modal's own content — but stop
+        // the event from reaching Lenis's listener (attached to `window`,
+        // bubble phase, later in this same dispatch). Lenis has no concept
+        // of "except this element": while stopped it calls preventDefault()
+        // on every wheel event unconditionally, which froze the modal's own
+        // scrolling too, not just the background it was meant to block.
+        e.stopPropagation();
+        return;
+      }
       e.preventDefault();
       e.stopImmediatePropagation();
     };
