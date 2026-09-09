@@ -78,8 +78,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Compact 140mm birchwood fork for airline meals, fast-casual dining, and travel catering. Heat-resistant and food-safe.",
-    applications: ["Airlines", "Fast casual", "Travel catering", "Cafeterias"],
+      "Compact 140mm birchwood fork sized for airline meal trays, food delivery boxes, and grab-and-go meal kits. Heat-resistant and food-safe, it holds its shape in hot curries, biryani, and oily foods without softening or splintering.",
+    applications: ["Airlines", "Fast casual", "Travel catering", "Cafeterias", "Cloud kitchens", "Food delivery", "Meal kit services", "Corporate cafeterias"],
     primaryImage: `${CDN}/products/W7_1_30fe1a1f-efc4-40cf-898a-7ae32de521a6.jpg?v=1665051997`,
     galleryImages: [
       `${CDN}/products/W7_1_30fe1a1f-efc4-40cf-898a-7ae32de521a6.jpg?v=1665051997`,
@@ -101,8 +101,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Standard 160mm birchwood fork for restaurants, hospitality, and food service. The most popular fork size for dine-in and takeaway.",
-    applications: ["Restaurants", "Hotels", "Food service", "Catering"],
+      "Standard 160mm birchwood fork built for everyday dine-in and takeaway volume. The size restaurants, cloud kitchens, and institutional canteens default to when they need one fork that works across the entire menu — starters, mains, and rice dishes alike.",
+    applications: ["Restaurants", "Hotels", "Food service", "Catering", "Cloud kitchens", "Food courts", "Canteens", "Institutional dining"],
     primaryImage: `${CDN}/products/W7_1_713c7c76-f698-4bb9-9de4-1d75c61e9853.jpg`,
     galleryImages: [
       `${CDN}/products/W7_1_713c7c76-f698-4bb9-9de4-1d75c61e9853.jpg`,
@@ -125,8 +125,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Individually OPP-sleeved 160mm birchwood fork. Hygienic single-unit packaging for premium food service, airline trays, and hotel amenities.",
-    applications: ["Airlines", "Hotels", "Premium catering", "Healthcare"],
+      "Individually OPP-sleeved 160mm birchwood fork. The single-unit seal matters wherever cutlery has to survive handling before it reaches the guest — airline trolleys, hotel room-service trays, hospital meal carts, and long-haul delivery bags — without anyone questioning if it's been touched.",
+    applications: ["Airlines", "Hotels", "Premium catering", "Healthcare", "Hospitals", "Room service", "Corporate gifting", "Food delivery"],
     isIndividuallyPacked: true,
     primaryImage: `${CDN}/products/W7_1.jpg?v=1665051920`,
     galleryImages: [
@@ -151,8 +151,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Compact 110mm spoon ideal for desserts, ice cream, yogurt, and sampling. Popular with dairy brands and premium dessert concepts.",
-    applications: ["Dairy", "Ice cream", "Desserts", "Sampling"],
+      "Compact 110mm spoon sized for single servings — ice cream tubs, yogurt cups, mini desserts, and tasting samples. The size dairy brands, gelaterias, and dessert parlors reach for when the spoon needs to disappear into the experience, not compete with it.",
+    applications: ["Dairy", "Ice cream", "Desserts", "Sampling", "Ice cream parlors", "Bakeries & confectioneries", "Frozen yogurt shops", "Gelaterias"],
     primaryImage: `${CDN}/products/W3_1_7b597730-c22b-4b48-aec6-867408a3080d.jpg`,
     galleryImages: [
       `${CDN}/products/W3_1_7b597730-c22b-4b48-aec6-867408a3080d.jpg`,
@@ -172,8 +172,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Medium 140mm birchwood spoon for soups, breakfast service, and café use. Balanced proportions for optimal user experience.",
-    applications: ["Cafés", "Breakfast", "Soups", "Airlines"],
+      "Medium 140mm birchwood spoon balanced for everyday use — cereal, curd rice, salads, soups, and breakfast trays. The all-rounder size cloud kitchens and café chains standardize on so they don't have to stock a different spoon for every menu category.",
+    applications: ["Cafés", "Breakfast", "Soups", "Airlines", "Cloud kitchens", "Salad bars", "Food trucks", "Corporate cafeterias"],
     primaryImage: `${CDN}/products/W3_1_3390b722-b808-4bc3-9398-e09eb12185a8.jpg`,
     galleryImages: [
       `${CDN}/products/W3_1_3390b722-b808-4bc3-9398-e09eb12185a8.jpg`,
@@ -193,8 +193,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Full-size 160mm birchwood spoon for restaurants, hospitality, and institutional catering. Heat-resistant for hot food and soup service.",
-    applications: ["Restaurants", "Hotels", "Catering", "Institutions"],
+      "Full-size 160mm birchwood spoon built for hot food — dal, sambar, gravies, and soups — without going soft or bending under weight. The size hospitals, canteens, and banquet caterers rely on for high-volume plated service where the spoon has to hold up meal after meal.",
+    applications: ["Restaurants", "Hotels", "Catering", "Institutions", "Canteens", "Hospitals", "Banquet halls", "Wedding catering"],
     primaryImage: `${CDN}/products/W3_1_ac837677-7a66-4363-bb00-675eb726043d.jpg`,
     galleryImages: [
       `${CDN}/products/W3_1_ac837677-7a66-4363-bb00-675eb726043d.jpg`,
@@ -217,8 +217,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Individually OPP-sleeved 110mm birchwood spoon. Hygienically sealed for premium food service, airline meal trays, and hotel room service.",
-    applications: ["Airlines", "Hotels", "Healthcare", "Premium catering"],
+      "Individually OPP-sleeved 110mm birchwood spoon, sealed for the same reason a sealed water bottle reassures a guest — because it's changed hands before it reaches them. Standard on airline dessert trays, hospital meal carts, and hotel amenity kits.",
+    applications: ["Airlines", "Hotels", "Healthcare", "Premium catering", "Hospitals", "Room service", "Corporate gifting"],
     isIndividuallyPacked: true,
     primaryImage: `${CDN}/products/W3_1.jpg?v=1665051817`,
     galleryImages: [
@@ -243,8 +243,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Compact 140mm birchwood knife for airline meals, takeaway boxes, and travel catering where a smaller profile is preferred.",
-    applications: ["Airlines", "Takeaway", "Travel catering", "Cafeterias"],
+      "Compact 140mm birchwood knife sized to fit inside sealed meal boxes and airline trays without adding bulk. The size delivery-first kitchens and travel caterers choose when the whole cutlery set has to fit a fixed-size compartment.",
+    applications: ["Airlines", "Takeaway", "Travel catering", "Cafeterias", "Food delivery", "Meal kit services"],
     primaryImage: `${CDN}/products/W1_1.jpg?v=1665052308`,
     galleryImages: [
       `${CDN}/products/W1_1.jpg?v=1665052308`,
@@ -266,8 +266,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Full-size 165mm birchwood knife for restaurants, hospitality, and catering. Rigid enough for firm foods while remaining 100% biodegradable.",
-    applications: ["Restaurants", "Hotels", "Food service", "Catering"],
+      "Full-size 165mm birchwood knife with enough rigidity to cut through paneer, parathas, and firm proteins without flexing — a common failure point for thinner cutlery. The default choice for sit-down restaurants and banquet caterers plating full meals.",
+    applications: ["Restaurants", "Hotels", "Food service", "Catering", "Cloud kitchens", "Banquet halls", "Institutional dining"],
     primaryImage: `${CDN}/products/W1_1_beb99461-f1f0-41b4-bf81-20b902898748.jpg`,
     galleryImages: [
       `${CDN}/products/W1_1_beb99461-f1f0-41b4-bf81-20b902898748.jpg`,
@@ -292,8 +292,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Compact 140mm spork — spoon and fork combined — for airline meal trays and single-item packaging. Reduces SKUs for operators.",
-    applications: ["Airlines", "Travel catering", "Fast casual", "Takeaway"],
+      "Compact 140mm spork — one utensil doing a spoon's and fork's job — built for meal formats with only room for one implement per pack: airline trays, single-serve meal kits, and outdoor events where fewer pieces means less to carry and less to throw away.",
+    applications: ["Airlines", "Travel catering", "Fast casual", "Takeaway", "Meal kit services", "Picnics & outdoor events", "Food delivery"],
     primaryImage: `${CDN}/products/W9_1.png?v=1662714451`,
     galleryImages: [`${CDN}/products/W9_1.png?v=1662714451`],
     highlight: true,
@@ -312,8 +312,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Full-size 160mm spork for restaurants and food delivery concepts looking to reduce their cutlery SKU footprint without compromising usability.",
-    applications: ["Restaurants", "Food delivery", "Catering", "Institutions"],
+      "Full-size 160mm spork for kitchens that would rather stock one utensil than two. Popular with cloud kitchens and food-delivery brands packing rice bowls and one-dish meals, where a single spork replaces a separate spoon and fork without shortchanging the customer.",
+    applications: ["Restaurants", "Food delivery", "Catering", "Institutions", "Cloud kitchens", "Food trucks"],
     primaryImage: `${CDN}/products/W9_1_2b4bd9de-74ff-476c-986f-c81e43cb8ec8.png`,
     galleryImages: [
       `${CDN}/products/W9_1_2b4bd9de-74ff-476c-986f-c81e43cb8ec8.png`,
@@ -335,8 +335,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 50000,
     moq: "50,000 pcs",
     shortDescription:
-      "Compact 110mm coffee stirrer for espresso bars, office coffee stations, and compact beverage service. High-volume carton of 50,000 units.",
-    applications: ["Espresso bars", "Offices", "Compact cafés", "Events"],
+      "Compact 110mm coffee stirrer sized for espresso cups and small beverage formats. High-volume carton of 50,000 units, built for office pantries, co-working spaces, and compact café counters that go through stirrers by the thousand every week.",
+    applications: ["Espresso bars", "Offices", "Compact cafés", "Events", "Co-working spaces", "Hotel lobby cafés"],
     primaryImage: `${CDN}/products/W20.png?v=1662714572`,
     galleryImages: [`${CDN}/products/W20.png?v=1662714572`],
   },
@@ -354,8 +354,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 50000,
     moq: "50,000 pcs",
     shortDescription:
-      "Standard 140mm coffee stirrer — the most widely used size for specialty coffee, café chains, and quick-service restaurants globally.",
-    applications: ["Coffee chains", "QSR", "Hotels", "Catering"],
+      "Standard 140mm coffee stirrer — the size café chains and QSR counters default to because it fits every standard cup without needing a second size on hand. The single highest-volume SKU in the range for a reason.",
+    applications: ["Coffee chains", "QSR", "Hotels", "Catering", "Cloud kitchens", "Bakeries", "Corporate pantries"],
     primaryImage: `${CDN}/products/W20_f40b8f4a-3ebe-4145-b013-43d53ebb9a1b.png`,
     galleryImages: [
       `${CDN}/products/W20_f40b8f4a-3ebe-4145-b013-43d53ebb9a1b.png`,
@@ -376,8 +376,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 50000,
     moq: "50,000 pcs",
     shortDescription:
-      "Long 160mm stirrer for tall cups, cold brew, and specialty beverages. Perfect for hospitality groups and premium coffee service.",
-    applications: ["Specialty coffee", "Cold brew", "Hotels", "Premium cafés"],
+      "Long 160mm stirrer built to reach the bottom of tall glasses — cold brew, iced lattes, and layered beverages where a shorter stirrer just doesn't get there. Standard stock for premium cafés, hotel lounges, and bars serving tall-format drinks.",
+    applications: ["Specialty coffee", "Cold brew", "Hotels", "Premium cafés", "Bars", "Lounges"],
     primaryImage: `${CDN}/products/W20_1e981daa-2dc8-4741-947b-bfe64cddb1ce.png`,
     galleryImages: [
       `${CDN}/products/W20_1e981daa-2dc8-4741-947b-bfe64cddb1ce.png`,
@@ -399,8 +399,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "10,000 pcs",
     shortDescription:
-      "Compact 95mm birchwood scoop for ice cream, gelato, and dry goods sampling. Robust bowl-shaped design for portion control.",
-    applications: ["Ice cream", "Gelato", "Sampling", "Dry goods"],
+      "Compact 95mm birchwood scoop with a bowl-shaped head built for portion control — ice cream, gelato, loose spices, grains, and dry goods sampling. Sturdy enough to hold shape when scooping firmer, frozen product, unlike flat spoons pressed into scoop duty.",
+    applications: ["Ice cream", "Gelato", "Sampling", "Dry goods", "Ice cream parlors", "Frozen dessert shops", "Bulk distributors & wholesalers"],
     primaryImage: `${CDN}/products/W43.png?v=1662714289`,
     galleryImages: [`${CDN}/products/W43.png?v=1662714289`],
   },
@@ -420,8 +420,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 20000,
     moq: "20,000 pcs",
     shortDescription:
-      "Compact 7cm gun skewer for canapés, appetizers, and mini-bite presentation. Signature gun-tip shape for professional food styling.",
-    applications: ["Canapés", "Appetizers", "Events", "Banqueting"],
+      "Compact 7cm gun skewer built for mini-bite presentation — canapés, cocktail appetizers, and plated starters where the skewer is as much a styling tool as a utensil. The signature gun-tip shape holds food securely without piercing all the way through delicate bites.",
+    applications: ["Canapés", "Appetizers", "Events", "Banqueting", "Cocktail parties", "Wedding catering", "Hotel bars"],
     primaryImage: `${CDN}/products/W26_1_105630ca-3689-4bea-8946-706190417455.jpg?v=1664946421`,
     galleryImages: [
       `${CDN}/products/W26_1_105630ca-3689-4bea-8946-706190417455.jpg?v=1664946421`,
@@ -441,8 +441,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 20000,
     moq: "20,000 pcs",
     shortDescription:
-      "Standard 10cm gun skewer for kebabs, brochettes, and grilled street food. Ideal for food courts, events, and QSR grill stations.",
-    applications: ["Kebabs", "Street food", "Food courts", "Events"],
+      "Standard 10cm gun skewer sized for kebabs, brochettes, and grilled street food — long enough to hold multiple pieces, short enough to grill evenly without charring the handle. A staple at food courts, night markets, and QSR grill counters.",
+    applications: ["Kebabs", "Street food", "Food courts", "Events", "Food trucks", "Night markets"],
     primaryImage: `${CDN}/products/W26_1_ab0c6646-1d0d-4a90-8f4f-ca4e6d0d1639.jpg?v=1664946360`,
     galleryImages: [
       `${CDN}/products/W26_1_ab0c6646-1d0d-4a90-8f4f-ca4e6d0d1639.jpg?v=1664946360`,
@@ -464,8 +464,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 20000,
     moq: "20,000 pcs",
     shortDescription:
-      "Mid-size 15cm gun skewer for satay, yakitori, and grill platters. The most popular skewer size for hospitality and banqueting worldwide.",
-    applications: ["Satay", "Yakitori", "Grill", "Hospitality"],
+      "Mid-size 15cm gun skewer for satay, yakitori, and grill platters — long enough to plate as a centerpiece, sturdy enough to survive an open flame. The most popular skewer size across hospitality and banqueting worldwide, and the one Asian-cuisine restaurants keep in steady rotation.",
+    applications: ["Satay", "Yakitori", "Grill", "Hospitality", "Restaurants", "BBQ joints"],
     primaryImage: `${CDN}/products/W26_1_b883d15b-dfbf-46ca-b101-9a413464dfd3.jpg`,
     galleryImages: [
       `${CDN}/products/W26_1_b883d15b-dfbf-46ca-b101-9a413464dfd3.jpg`,
@@ -485,8 +485,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 20000,
     moq: "20,000 pcs",
     shortDescription:
-      "Long 21cm gun skewer for grilled meats, BBQ, and churrasco-style service. Robust enough for heavy proteins on professional grills.",
-    applications: ["BBQ", "Churrasco", "Grill meats", "Street BBQ"],
+      "Long 21cm gun skewer built for heavy proteins on professional grills — full cuts of meat, churrasco-style service, and BBQ platters where a shorter skewer would burn through before the food is done. The choice for steakhouses and outdoor grill events.",
+    applications: ["BBQ", "Churrasco", "Grill meats", "Street BBQ", "Steakhouses", "Outdoor catering"],
     primaryImage: `${CDN}/products/W26_1.jpg?v=1664945885`,
     galleryImages: [`${CDN}/products/W26_1.jpg?v=1664945885`],
   },
@@ -506,8 +506,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 500,
     moq: "500 sets",
     shortDescription:
-      "Complete 3-piece cutlery set — birchwood fork, knife, and tissue — in a single OPP sleeve. Ready for airline trays, food delivery bags, and hospitality amenity packs.",
-    applications: ["Airlines", "Food delivery", "Hotels", "Premium takeaway"],
+      "Complete 3-piece cutlery set — birchwood fork, knife, and tissue — pre-packed in a single OPP sleeve so nothing has to be assembled or picked separately at packing time. Drop one sleeve into a delivery bag, airline tray, or amenity kit and the cutlery is done.",
+    applications: ["Airlines", "Food delivery", "Hotels", "Premium takeaway", "Cloud kitchens", "Corporate meal programs", "Meal kit services"],
     primaryImage: `${CDN}/products/G52_1.jpg?v=1664961427`,
     galleryImages: [`${CDN}/products/G52_1.jpg?v=1664961427`],
     highlight: true,
@@ -528,8 +528,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 50000,
     moq: "50,000 pcs",
     shortDescription:
-      "Standard 6mm diameter paper straw for cold beverages, juices, and smoothies. Holds integrity for up to 3 hours in liquid — suitable for hospitality.",
-    applications: ["Juice bars", "Cafés", "Hotels", "Restaurants"],
+      "Standard 6mm paper straw for water, juices, and everyday cold beverages. Holds its structure for up to 3 hours submerged in liquid — the threshold that matters for table service, where a straw sitting through a long meal can't go soft halfway through.",
+    applications: ["Juice bars", "Cafés", "Hotels", "Restaurants", "Cloud kitchens", "Food delivery", "Corporate cafeterias"],
     primaryImage: `${CDN}/products/W40_1.jpg?v=1665051402`,
     galleryImages: [`${CDN}/products/W40_1.jpg?v=1665051402`],
   },
@@ -547,8 +547,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 50000,
     moq: "50,000 pcs",
     shortDescription:
-      "Wide 8mm paper straw for thick smoothies, milkshakes, and bubble tea. Reinforced multi-layer construction for high-viscosity beverages.",
-    applications: ["Bubble tea", "Milkshakes", "Smoothies", "QSR"],
+      "Wide 8mm paper straw with reinforced multi-layer construction built for beverages a standard straw can't handle — thick milkshakes, smoothies, and bubble tea where tapioca pearls need to pass through without clogging or crushing the straw.",
+    applications: ["Bubble tea", "Milkshakes", "Smoothies", "QSR", "Dessert parlors", "Food trucks"],
     primaryImage: `${CDN}/products/W38_1.jpg?v=1665051710`,
     galleryImages: [`${CDN}/products/W38_1.jpg?v=1665051710`],
     highlight: true,
@@ -567,8 +567,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 50000,
     moq: "50,000 pcs",
     shortDescription:
-      "Extra-wide 10mm paper straw for large-format cold beverages, slushies, and fruit chunks. Preferred by premium beverage concepts.",
-    applications: ["Slushies", "Premium beverages", "Fruit drinks", "Bars"],
+      "Extra-wide 10mm paper straw built for beverages with something to pull through, not just liquid — slushies, fruit chunks, and layered cocktails. The size premium bars and resort beverage programs stock when a standard straw would bottleneck the drink.",
+    applications: ["Slushies", "Premium beverages", "Fruit drinks", "Bars", "Juice bars", "Resorts"],
     primaryImage: `${CDN}/products/W40_1.jpg?v=1665051402`,
     galleryImages: [`${CDN}/products/W40_1.jpg?v=1665051402`],
   },
