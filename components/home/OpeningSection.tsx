@@ -249,9 +249,9 @@ export default function OpeningSection() {
             }}
           >
             Precision-manufactured FSC-certified birchwood cutlery
-            for restaurants, hotels, and caterers across India — and
-            airlines, food service, and distributors worldwide.
-            Replacing 6,500&thinsp;kg of plastic every day.
+            for restaurants, hotels, cloud kitchens, and caterers
+            across India — and airlines, QSRs, and distributors
+            worldwide. Replacing 6,500&thinsp;kg of plastic every day.
           </motion.p>
 
           {/* ── CTAs ── */}

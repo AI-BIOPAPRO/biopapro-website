@@ -90,7 +90,7 @@ function FamilyCard({
 
         {/* Applications */}
         <div className="flex flex-wrap gap-1 mb-4">
-          {family.applications.slice(0, 3).map((app) => (
+          {family.applications.slice(0, 5).map((app) => (
             <span
               key={app}
               className="font-mono text-[11px] uppercase tracking-[0.14em] px-2 py-1"
