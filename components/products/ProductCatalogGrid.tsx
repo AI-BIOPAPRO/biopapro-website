@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { X, ArrowUpRight, ChevronRight, Package, Award } from "lucide-react";
 import SectionLabel from "@/components/shared/SectionLabel";
+import { useScrollLock } from "@/lib/use-scroll-lock";
 import {
   PRODUCTS,
   ALL_CATEGORIES,
@@ -26,16 +27,18 @@ ALL_CATEGORIES.forEach((cat) => {
 
 function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () => void }) {
   const [activeImage, setActiveImage] = useState(0);
+  const scrollableRef = useRef<HTMLElement>(null);
+
+  // Background stays locked; the drawer's own content (scrollableRef) keeps
+  // scrolling normally — see lib/use-scroll-lock.ts for why the simpler
+  // overflow-only approach isn't reliable here.
+  useScrollLock(true, scrollableRef);
 
   useEffect(() => {
     setActiveImage(0);
     const handler = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", handler);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handler);
-      document.body.style.overflow = "";
-    };
+    return () => document.removeEventListener("keydown", handler);
   }, [product, onClose]);
 
   const specs = [
@@ -64,6 +67,7 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
 
       {/* Drawer */}
       <motion.aside
+        ref={scrollableRef}
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
         exit={{ x: "100%" }}

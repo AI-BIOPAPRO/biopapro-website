@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,6 +8,7 @@ import { motion, AnimatePresence, useScroll } from "motion/react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COMPANY_FACTS } from "@/lib/company-facts";
+import { useScrollLock } from "@/lib/use-scroll-lock";
 
 const NAV_LINKS = [
   { label: "Home",             href: "/"                },
@@ -25,17 +26,17 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const { scrollYProgress } = useScroll();
+  const mobileNavRef = useRef<HTMLElement>(null);
+
+  // Background stays locked; the menu's own nav list (mobileNavRef) keeps
+  // scrolling normally — see lib/use-scroll-lock.ts.
+  useScrollLock(menuOpen, mobileNavRef);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 72);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [menuOpen]);
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
@@ -192,7 +193,7 @@ export default function Navbar() {
             </div>
 
             {/* Links */}
-            <nav className="flex-1 flex flex-col justify-center px-8 py-10 overflow-y-auto" aria-label="Mobile navigation">
+            <nav ref={mobileNavRef} className="flex-1 flex flex-col justify-center px-8 py-10 overflow-y-auto" aria-label="Mobile navigation">
               <div className="space-y-0.5">
                 {NAV_LINKS.map((link, i) => (
                   <motion.div

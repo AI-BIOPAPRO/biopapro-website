@@ -46,6 +46,14 @@ export default function SmoothScrollProvider({
       touchMultiplier: 2,
     });
 
+    // Exposed so modals/drawers/mobile menus can pause Lenis while open.
+    // `document.body.style.overflow = "hidden"` alone does NOT stop
+    // background scroll here — Lenis intercepts wheel/touch events directly
+    // and drives its own virtual scroll position, bypassing native overflow
+    // entirely. Call window.__lenis?.stop() / .start() alongside any
+    // overflow toggle (see Navbar.tsx, ProductCatalogGrid.tsx).
+    window.__lenis = lenis;
+
     // Sync Lenis with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -57,6 +65,7 @@ export default function SmoothScrollProvider({
     return () => {
       gsap.ticker.remove(tickerFn);
       lenis.destroy();
+      if (window.__lenis === lenis) window.__lenis = undefined;
     };
   }, []);
 
