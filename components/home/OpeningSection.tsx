@@ -15,20 +15,19 @@
  *   5s  — Cert badges confirm trust
  */
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { COMPANY_FACTS } from "@/lib/company-facts";
 import { getProductById } from "@/lib/products-data";
 
 // Real products, not abstract branding — the actual visual gap flagged by
 // the boss review: first screen showed certs + an artistic logo video, no
-// product in sight. These are genuine catalog SKUs, same CDN images used
-// on /products, not stock or AI-generated imagery.
-const SHOWCASE_IDS = ["fork-160", "spoon-160", "skewer-10cm"] as const;
-const SHOWCASE_LABELS = ["Fork", "Spoon", "Skewer"] as const;
+// product in sight. These are genuine catalog SKUs, same CDN images and
+// real specs used on /products, not stock or AI-generated imagery.
+const SHOWCASE_IDS = ["fork-160", "spoon-160", "skewer-10cm", "knife-165"] as const;
 
 const E = [0.16, 1, 0.3, 1] as const;
 
@@ -58,6 +57,113 @@ function HeroVideo() {
       className="absolute inset-0 w-full h-full object-cover"
       aria-hidden="true"
     />
+  );
+}
+
+function ProductSpecShowcase() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((a) => (a + 1) % SHOWCASE_IDS.length);
+    }, 3600);
+    return () => clearInterval(timer);
+  }, []);
+
+  const product = getProductById(SHOWCASE_IDS[active]);
+  if (!product) return null;
+
+  const CORNER = "rgba(160,220,140,0.6)";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 24 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 1.3, duration: 0.8, ease: E }}
+      className="absolute z-20 hidden xl:block"
+      style={{ right: "4rem", top: "22%", width: 240 }}
+    >
+      {/* Framed image with precision corner brackets */}
+      <div className="relative" style={{ width: 240, height: 240 }}>
+        <span className="absolute -top-2.5 -left-2.5 w-6 h-6 border-t-2 border-l-2 pointer-events-none" style={{ borderColor: CORNER }} />
+        <span className="absolute -top-2.5 -right-2.5 w-6 h-6 border-t-2 border-r-2 pointer-events-none" style={{ borderColor: CORNER }} />
+        <span className="absolute -bottom-2.5 -left-2.5 w-6 h-6 border-b-2 border-l-2 pointer-events-none" style={{ borderColor: CORNER }} />
+        <span className="absolute -bottom-2.5 -right-2.5 w-6 h-6 border-b-2 border-r-2 pointer-events-none" style={{ borderColor: CORNER }} />
+
+        <Link href="/products" aria-label={`View ${product.name}`} className="group block w-full h-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.55, ease: E }}
+              className="relative w-full h-full overflow-hidden"
+              style={{ background: "#EDE6D8", boxShadow: "0 24px 60px rgba(0,0,0,0.45)" }}
+            >
+              <Image
+                src={product.primaryImage}
+                alt={product.name}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="240px"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </Link>
+      </div>
+
+      {/* Product identity — display serif name + real spec line, not a caption */}
+      <div className="mt-5 text-right">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={product.id}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.4, ease: E }}
+          >
+            <p className="font-display font-light leading-tight" style={{ fontSize: "1.2rem", color: "rgba(242,248,236,0.96)" }}>
+              {product.name}
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] mt-1.5" style={{ color: "rgba(180,230,160,0.7)" }}>
+              {product.length} &middot; {product.material}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Progress dots */}
+      <div className="flex items-center justify-end gap-2 mt-4">
+        <span className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(200,220,185,0.5)" }}>
+          30+ SKUs
+        </span>
+        <span className="w-px h-2.5" style={{ background: "rgba(255,255,255,0.2)" }} />
+        {SHOWCASE_IDS.map((id, i) => (
+          <span
+            key={id}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === active ? 16 : 5,
+              height: 5,
+              background: i === active ? "rgba(160,220,140,0.9)" : "rgba(255,255,255,0.25)",
+            }}
+          />
+        ))}
+      </div>
+
+      <Link
+        href="/products"
+        className="group mt-4 flex items-center justify-end gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] whitespace-nowrap transition-colors duration-200"
+        style={{ color: "rgba(230,240,220,0.75)" }}
+        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
+        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(230,240,220,0.75)"; }}
+      >
+        View Full Range
+        <ArrowUpRight size={11} strokeWidth={2.5}
+          className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+      </Link>
+    </motion.div>
   );
 }
 
@@ -354,89 +460,15 @@ export default function OpeningSection() {
 
       </div>{/* /Content */}
 
-      {/* ── Real product showcase — a glass card over the right side of the
-          video, where the overlay is intentionally lighter. Same treatment
-          language as the manufacturer badge (blur + translucent green +
-          hairline border) so it reads as a designed part of the hero, not
-          a bolted-on element. Answers "where are our products" directly:
-          three actual SKUs. Desktop-only (xl+) — the content column runs
-          full-width below that, so there's no clear space for it. */}
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.3, duration: 0.75, ease: E }}
-        className="absolute z-20 hidden xl:flex flex-col items-center gap-4 px-7 py-6"
-        style={{
-          right: "3.5rem",
-          top: "26%",
-          background: "rgba(18,26,15,0.42)",
-          backdropFilter: "blur(14px)",
-          border: "1px solid rgba(160,220,140,0.22)",
-          boxShadow: "0 20px 50px rgba(0,0,0,0.35)",
-        }}
-      >
-        <span
-          className="font-mono text-[10px] font-semibold uppercase tracking-[0.32em]"
-          style={{ color: "rgba(180,230,160,0.75)" }}
-        >
-          The Range
-        </span>
-
-        <div className="flex items-end gap-5">
-          {SHOWCASE_IDS.map((id, i) => {
-            const product = getProductById(id);
-            if (!product) return null;
-            const size = i === 1 ? 92 : 72;
-            return (
-              <div key={id} className="flex flex-col items-center gap-2.5">
-                <Link
-                  href="/products"
-                  aria-label={`View ${product.name}`}
-                  className="group block flex-shrink-0"
-                  style={{ width: size, height: size }}
-                >
-                  <div
-                    className="relative w-full h-full overflow-hidden rounded-full transition-transform duration-300 group-hover:-translate-y-1"
-                    style={{
-                      border: "1.5px solid rgba(160,220,140,0.4)",
-                      background: "#EDE6D8",
-                      boxShadow: "0 8px 22px rgba(0,0,0,0.4), 0 0 0 5px rgba(122,174,107,0.1)",
-                    }}
-                  >
-                    <Image
-                      src={product.primaryImage}
-                      alt={product.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="96px"
-                    />
-                  </div>
-                </Link>
-                <span
-                  className="font-mono text-[10px] uppercase tracking-[0.14em]"
-                  style={{ color: "rgba(210,230,195,0.6)" }}
-                >
-                  {SHOWCASE_LABELS[i]}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-
-        <span className="w-full h-px" style={{ background: "rgba(255,255,255,0.14)" }} />
-
-        <Link
-          href="/products"
-          className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200"
-          style={{ color: "rgba(230,240,220,0.8)" }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(230,240,220,0.8)"; }}
-        >
-          30+ SKUs · View Range
-          <ArrowUpRight size={11} strokeWidth={2.5}
-            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-        </Link>
-      </motion.div>
+      {/* ── Real product showcase — a rotating "spec card", not a badge.
+          Corner brackets frame it like a precision measurement, echoing
+          the manufacturing-precision brand pillar rather than borrowing
+          the manufacturer badge's glass treatment. Cycles through real
+          SKUs with their actual length/material — answers "where are our
+          products" with something that feels engineered, not decorative.
+          Desktop-only (xl+) — the content column runs full-width below
+          that breakpoint, so there's no clear space for it. */}
+      <ProductSpecShowcase />
 
       {/* ── Scroll indicator ── */}
       <motion.div
