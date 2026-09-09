@@ -73,8 +73,6 @@ function ProductSpecShowcase() {
   const product = getProductById(SHOWCASE_IDS[active]);
   if (!product) return null;
 
-  const CORNER = "rgba(160,220,140,0.6)";
-
   return (
     <motion.div
       initial={{ opacity: 0, x: 24 }}
@@ -83,23 +81,35 @@ function ProductSpecShowcase() {
       className="absolute z-20 hidden xl:block"
       style={{ right: "4rem", top: "22%", width: 240 }}
     >
-      {/* Framed image with precision corner brackets */}
-      <div className="relative" style={{ width: 240, height: 240 }}>
-        <span className="absolute -top-2.5 -left-2.5 w-6 h-6 border-t-2 border-l-2 pointer-events-none" style={{ borderColor: CORNER }} />
-        <span className="absolute -top-2.5 -right-2.5 w-6 h-6 border-t-2 border-r-2 pointer-events-none" style={{ borderColor: CORNER }} />
-        <span className="absolute -bottom-2.5 -left-2.5 w-6 h-6 border-b-2 border-l-2 pointer-events-none" style={{ borderColor: CORNER }} />
-        <span className="absolute -bottom-2.5 -right-2.5 w-6 h-6 border-b-2 border-r-2 pointer-events-none" style={{ borderColor: CORNER }} />
+      {/* Soft warm glow behind the frame — reads as a naturally lit patch of
+          the same scene (the video already has real sunlight falling on
+          wood like this) rather than a UI panel floating on top of it. */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          inset: "-30px",
+          background: "radial-gradient(circle, rgba(200,154,91,0.22) 0%, transparent 68%)",
+          filter: "blur(6px)",
+        }}
+      />
 
+      {/* Framed image — soft rounded corners + inner vignette so it reads
+          as a lit object sitting in the scene, not a flat sticker. */}
+      <div className="relative" style={{ width: 240, height: 240 }}>
         <Link href="/products" aria-label={`View ${product.name}`} className="group block w-full h-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, scale: 0.94 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.55, ease: E }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.6, ease: E }}
               className="relative w-full h-full overflow-hidden"
-              style={{ background: "#EDE6D8", boxShadow: "0 24px 60px rgba(0,0,0,0.45)" }}
+              style={{
+                borderRadius: "18px",
+                background: "#EDE6D8",
+                boxShadow: "0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)",
+              }}
             >
               <Image
                 src={product.primaryImage}
@@ -108,61 +118,79 @@ function ProductSpecShowcase() {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="240px"
               />
+              {/* Inner vignette — softens the hard photo edge into the frame */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ boxShadow: "inset 0 0 34px rgba(29,22,16,0.28)" }}
+              />
             </motion.div>
           </AnimatePresence>
         </Link>
       </div>
 
-      {/* Product identity — display serif name + real spec line, not a caption */}
-      <div className="mt-5 text-right">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={product.id}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.4, ease: E }}
-          >
-            <p className="font-display font-light leading-tight" style={{ fontSize: "1.2rem", color: "rgba(242,248,236,0.96)" }}>
-              {product.name}
-            </p>
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] mt-1.5" style={{ color: "rgba(180,230,160,0.7)" }}>
-              {product.length} &middot; {product.material}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+      {/* Text sits on a soft dark pool beneath the frame — not a hard box,
+          just enough falloff that it stays legible over the lighter grain
+          patches in the video, the same way text sits over the video
+          everywhere else in this hero (see the atmospheric overlays at
+          the top of this file). */}
+      <div className="relative mt-3 pt-6 pb-1 px-3 -mx-3">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at 50% 30%, rgba(8,12,6,0.55) 0%, rgba(8,12,6,0.28) 55%, transparent 80%)",
+          }}
+        />
 
-      {/* Progress dots */}
-      <div className="flex items-center justify-end gap-2 mt-4">
-        <span className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(200,220,185,0.5)" }}>
-          30+ SKUs
-        </span>
-        <span className="w-px h-2.5" style={{ background: "rgba(255,255,255,0.2)" }} />
-        {SHOWCASE_IDS.map((id, i) => (
-          <span
-            key={id}
-            className="rounded-full transition-all duration-300"
-            style={{
-              width: i === active ? 16 : 5,
-              height: 5,
-              background: i === active ? "rgba(160,220,140,0.9)" : "rgba(255,255,255,0.25)",
-            }}
-          />
-        ))}
-      </div>
+        <div className="relative text-right">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.4, ease: E }}
+            >
+              <p className="font-display font-light leading-tight" style={{ fontSize: "1.2rem", color: "rgba(248,252,244,0.98)" }}>
+                {product.name}
+              </p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] mt-1.5" style={{ color: "rgba(190,235,170,0.85)" }}>
+                {product.length} &middot; {product.material}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-      <Link
-        href="/products"
-        className="group mt-4 flex items-center justify-end gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] whitespace-nowrap transition-colors duration-200"
-        style={{ color: "rgba(230,240,220,0.75)" }}
-        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
-        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(230,240,220,0.75)"; }}
-      >
-        View Full Range
+        {/* Progress dots */}
+        <div className="relative flex items-center justify-end gap-2 mt-4">
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(210,230,195,0.65)" }}>
+            30+ SKUs
+          </span>
+          <span className="w-px h-2.5" style={{ background: "rgba(255,255,255,0.25)" }} />
+          {SHOWCASE_IDS.map((id, i) => (
+            <span
+              key={id}
+              className="rounded-full transition-all duration-300"
+              style={{
+                width: i === active ? 16 : 5,
+                height: 5,
+                background: i === active ? "rgba(160,220,140,0.95)" : "rgba(255,255,255,0.35)",
+              }}
+            />
+          ))}
+        </div>
+
+        <Link
+          href="/products"
+          className="group relative mt-4 flex items-center justify-end gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] whitespace-nowrap transition-colors duration-200"
+          style={{ color: "rgba(235,244,228,0.9)" }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(235,244,228,0.9)"; }}
+        >
+          View Full Range
         <ArrowUpRight size={11} strokeWidth={2.5}
-          className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-      </Link>
+            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+        </Link>
+      </div>
     </motion.div>
   );
 }
