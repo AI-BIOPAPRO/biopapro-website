@@ -17,9 +17,17 @@
 
 import { useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { COMPANY_FACTS } from "@/lib/company-facts";
+import { getProductById } from "@/lib/products-data";
+
+// Real products, not abstract branding — the actual visual gap flagged by
+// the boss review: first screen showed certs + an artistic logo video, no
+// product in sight. These are genuine catalog SKUs, same CDN images used
+// on /products, not stock or AI-generated imagery.
+const SHOWCASE_IDS = ["fork-160", "spoon-160", "skewer-10cm"] as const;
 
 const E = [0.16, 1, 0.3, 1] as const;
 
@@ -344,6 +352,64 @@ export default function OpeningSection() {
         </motion.div>
 
       </div>{/* /Content */}
+
+      {/* ── Real product showcase — floating over the right side of the
+          video, where the overlay is intentionally lighter. Answers the
+          "where are our products" review directly: three actual SKUs,
+          not an abstraction. Desktop-only (xl+) — the content column
+          runs full-width below that, so there's no clear space for it. */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.3, duration: 0.75, ease: E }}
+        className="absolute z-20 hidden xl:flex flex-col items-end gap-3"
+        style={{ right: "4rem", top: "30%" }}
+      >
+        <div className="flex items-end gap-3">
+          {SHOWCASE_IDS.map((id, i) => {
+            const product = getProductById(id);
+            if (!product) return null;
+            const size = i === 1 ? 96 : 76;
+            return (
+              <Link
+                key={id}
+                href="/products"
+                aria-label={`View ${product.name}`}
+                className="group block flex-shrink-0"
+                style={{ width: size, height: size }}
+              >
+                <div
+                  className="relative w-full h-full overflow-hidden rounded-full transition-transform duration-300 group-hover:-translate-y-1"
+                  style={{
+                    border: "2px solid rgba(255,255,255,0.35)",
+                    background: "#EDE6D8",
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
+                  }}
+                >
+                  <Image
+                    src={product.primaryImage}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="96px"
+                  />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+        <Link
+          href="/products"
+          className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200"
+          style={{ color: "rgba(230,240,220,0.75)" }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(230,240,220,0.75)"; }}
+        >
+          30+ SKUs · View Range
+          <ArrowUpRight size={11} strokeWidth={2.5}
+            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+        </Link>
+      </motion.div>
 
       {/* ── Scroll indicator ── */}
       <motion.div
