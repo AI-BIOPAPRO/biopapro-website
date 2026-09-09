@@ -28,6 +28,7 @@ import { getProductById } from "@/lib/products-data";
 // product in sight. These are genuine catalog SKUs, same CDN images used
 // on /products, not stock or AI-generated imagery.
 const SHOWCASE_IDS = ["fork-160", "spoon-160", "skewer-10cm"] as const;
+const SHOWCASE_LABELS = ["Fork", "Spoon", "Skewer"] as const;
 
 const E = [0.16, 1, 0.3, 1] as const;
 
@@ -353,57 +354,83 @@ export default function OpeningSection() {
 
       </div>{/* /Content */}
 
-      {/* ── Real product showcase — floating over the right side of the
-          video, where the overlay is intentionally lighter. Answers the
-          "where are our products" review directly: three actual SKUs,
-          not an abstraction. Desktop-only (xl+) — the content column
-          runs full-width below that, so there's no clear space for it. */}
+      {/* ── Real product showcase — a glass card over the right side of the
+          video, where the overlay is intentionally lighter. Same treatment
+          language as the manufacturer badge (blur + translucent green +
+          hairline border) so it reads as a designed part of the hero, not
+          a bolted-on element. Answers "where are our products" directly:
+          three actual SKUs. Desktop-only (xl+) — the content column runs
+          full-width below that, so there's no clear space for it. */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1.3, duration: 0.75, ease: E }}
-        className="absolute z-20 hidden xl:flex flex-col items-end gap-3"
-        style={{ right: "4rem", top: "30%" }}
+        className="absolute z-20 hidden xl:flex flex-col items-center gap-4 px-7 py-6"
+        style={{
+          right: "3.5rem",
+          top: "26%",
+          background: "rgba(18,26,15,0.42)",
+          backdropFilter: "blur(14px)",
+          border: "1px solid rgba(160,220,140,0.22)",
+          boxShadow: "0 20px 50px rgba(0,0,0,0.35)",
+        }}
       >
-        <div className="flex items-end gap-3">
+        <span
+          className="font-mono text-[10px] font-semibold uppercase tracking-[0.32em]"
+          style={{ color: "rgba(180,230,160,0.75)" }}
+        >
+          The Range
+        </span>
+
+        <div className="flex items-end gap-5">
           {SHOWCASE_IDS.map((id, i) => {
             const product = getProductById(id);
             if (!product) return null;
-            const size = i === 1 ? 96 : 76;
+            const size = i === 1 ? 92 : 72;
             return (
-              <Link
-                key={id}
-                href="/products"
-                aria-label={`View ${product.name}`}
-                className="group block flex-shrink-0"
-                style={{ width: size, height: size }}
-              >
-                <div
-                  className="relative w-full h-full overflow-hidden rounded-full transition-transform duration-300 group-hover:-translate-y-1"
-                  style={{
-                    border: "2px solid rgba(255,255,255,0.35)",
-                    background: "#EDE6D8",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
-                  }}
+              <div key={id} className="flex flex-col items-center gap-2.5">
+                <Link
+                  href="/products"
+                  aria-label={`View ${product.name}`}
+                  className="group block flex-shrink-0"
+                  style={{ width: size, height: size }}
                 >
-                  <Image
-                    src={product.primaryImage}
-                    alt={product.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="96px"
-                  />
-                </div>
-              </Link>
+                  <div
+                    className="relative w-full h-full overflow-hidden rounded-full transition-transform duration-300 group-hover:-translate-y-1"
+                    style={{
+                      border: "1.5px solid rgba(160,220,140,0.4)",
+                      background: "#EDE6D8",
+                      boxShadow: "0 8px 22px rgba(0,0,0,0.4), 0 0 0 5px rgba(122,174,107,0.1)",
+                    }}
+                  >
+                    <Image
+                      src={product.primaryImage}
+                      alt={product.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="96px"
+                    />
+                  </div>
+                </Link>
+                <span
+                  className="font-mono text-[10px] uppercase tracking-[0.14em]"
+                  style={{ color: "rgba(210,230,195,0.6)" }}
+                >
+                  {SHOWCASE_LABELS[i]}
+                </span>
+              </div>
             );
           })}
         </div>
+
+        <span className="w-full h-px" style={{ background: "rgba(255,255,255,0.14)" }} />
+
         <Link
           href="/products"
           className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200"
-          style={{ color: "rgba(230,240,220,0.75)" }}
+          style={{ color: "rgba(230,240,220,0.8)" }}
           onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(230,240,220,0.75)"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(230,240,220,0.8)"; }}
         >
           30+ SKUs · View Range
           <ArrowUpRight size={11} strokeWidth={2.5}
