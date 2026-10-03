@@ -20,7 +20,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
-import { COMPANY_FACTS } from "@/lib/company-facts";
+import { COMPANY_FACTS, getCumulativeUnitsProduced, formatUnitsShort } from "@/lib/company-facts";
 import { getProductById } from "@/lib/products-data";
 
 // Real products, not abstract branding — the actual visual gap flagged by
@@ -30,13 +30,6 @@ import { getProductById } from "@/lib/products-data";
 const SHOWCASE_IDS = ["fork-160", "spoon-160", "skewer-10cm", "knife-165"] as const;
 
 const E = [0.16, 1, 0.3, 1] as const;
-
-const STATS = [
-  { value: "100M+",   label: "Units Produced",    sub: "Every month"           },
-  { value: `${COMPANY_FACTS.exportMarkets}+`,     label: "Countries Served",  sub: "Active markets" },
-  { value: `${COMPANY_FACTS.plasticSavedPerDay.toLocaleString()}kg`, label: "Plastic Replaced",  sub: "Every single day" },
-  { value: "FSC®",    label: "100% Certified",    sub: "Chain of custody"      },
-];
 
 const TRUST_MARKS = ["FSC® 100%", "ISO 9001:2015", "FDA CFR 21", "BPI Compostable", "BSCI Audited"] as const;
 
@@ -196,6 +189,20 @@ function ProductSpecShowcase() {
 }
 
 export default function OpeningSection() {
+  // Computed fresh on every render (client component — the whole module
+  // re-executes on each real page load) so this climbs by 100M every month
+  // automatically, no manual update or redeploy needed. Explicitly a rough
+  // always-100M/month estimate, not an audited historical total — see the
+  // comment on getCumulativeUnitsProduced() in lib/company-facts.ts.
+  const cumulativeUnits = getCumulativeUnitsProduced();
+
+  const STATS = [
+    { value: formatUnitsShort(cumulativeUnits), label: "Units Produced", sub: `Since ${COMPANY_FACTS.founded}` },
+    { value: `${COMPANY_FACTS.exportMarkets}+`,     label: "Countries Served",  sub: "Active markets" },
+    { value: `${COMPANY_FACTS.plasticSavedPerDay.toLocaleString()}kg`, label: "Plastic Replaced",  sub: "Every single day" },
+    { value: "FSC®",    label: "100% Certified",    sub: "Chain of custody"      },
+  ];
+
   return (
     <section className="relative w-full overflow-hidden" style={{ minHeight: "100svh" }}>
 
@@ -461,6 +468,7 @@ export default function OpeningSection() {
                 style={{ borderColor: "rgba(255,255,255,0.1)" }}
               >
                 <div
+                  suppressHydrationWarning={i === 0}
                   className="font-display font-light leading-none mb-2"
                   style={{
                     fontSize: "clamp(1.8rem, 3.2vw, 2.6rem)",
