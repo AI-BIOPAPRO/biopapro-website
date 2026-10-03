@@ -1,12 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, useInView } from "motion/react";
 import { ArrowUpRight, CheckCircle } from "lucide-react";
 import SectionLabel from "@/components/shared/SectionLabel";
 import {
   PRODUCT_OPTIONS, VOLUME_OPTIONS, REGION_OPTIONS, TIMELINE_OPTIONS,
+  PRODUCT_CATEGORY_LABELS,
 } from "@/lib/contact-data";
+import type { ProductCategory } from "@/lib/products-data";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -28,6 +31,20 @@ const COUNTRIES = [
   "Canada", "Mexico", "Brazil", "South Africa", "Mauritius", "India", "Singapore",
   "Japan", "South Korea", "China", "Malaysia", "Thailand", "Indonesia", "Other",
 ];
+
+// Dial codes for auto-filling the phone field when a country is selected.
+const COUNTRY_DIAL_CODES: Record<string, string> = {
+  "United States": "+1", "United Kingdom": "+44", "Germany": "+49",
+  "Netherlands": "+31", "France": "+33", "Spain": "+34", "Italy": "+39",
+  "Poland": "+48", "Greece": "+30", "Romania": "+40", "Ireland": "+353",
+  "Sweden": "+46", "Norway": "+47", "Denmark": "+45", "UAE": "+971",
+  "Qatar": "+974", "Bahrain": "+973", "Saudi Arabia": "+966", "Kuwait": "+965",
+  "Australia": "+61", "New Zealand": "+64", "Canada": "+1", "Mexico": "+52",
+  "Brazil": "+55", "South Africa": "+27", "Mauritius": "+230", "India": "+91",
+  "Singapore": "+65", "Japan": "+81", "South Korea": "+82", "China": "+86",
+  "Malaysia": "+60", "Thailand": "+66", "Indonesia": "+62",
+  // "Other" intentionally has no dial code — nothing to auto-fill.
+};
 
 type FormState = {
   fullName: string; company: string; country: string; email: string;
@@ -108,9 +125,22 @@ function Select({ value, onChange, options, placeholder, required }: {
 function Checkbox({ id, label, checked, onChange }: {
   id: string; label: string; checked: boolean; onChange: (v: boolean) => void;
 }) {
+  // Previously this rendered only a styled <div> + <span> inside a <label> with
+  // no real <input> and no click handler anywhere — clicking it did nothing.
+  // That's the "product selection not working" bug. A real checkbox input
+  // (visually hidden, sr-only) wired to the same label fixes both the click
+  // and keyboard/screen-reader behavior in one go.
   return (
-    <label className="flex items-center gap-3 cursor-pointer group">
+    <label htmlFor={id} className="flex items-center gap-3 cursor-pointer group">
+      <input
+        type="checkbox"
+        id={id}
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="sr-only"
+      />
       <div
+        aria-hidden="true"
         className="w-5 h-5 flex items-center justify-center flex-shrink-0 transition-all duration-200"
         style={{
           background: checked ? "#C89A5B" : "#FFFFFF",
@@ -138,9 +168,53 @@ export default function ExportInquiryForm() {
   const [sending, setSending] = useState(false);
   const [deliveredByEmailClient, setDeliveredByEmailClient] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+
+  // Picks up ?category=<ProductCategory>&sku=<product name> set by the
+  // "Request Quote" action on a product card/drawer (see ProductCatalogGrid),
+  // so choosing a specific product on /products carries through here instead
+  // of starting the inquiry from scratch — the Zomato/Amazon-style flow of
+  // picking an item, then it's already attached when you go to check out.
+  useEffect(() => {
+    const category = searchParams.get("category") as ProductCategory | null;
+    const sku = searchParams.get("sku");
+    if (!category && !sku) return;
+
+    setForm((f) => {
+      const label = category ? PRODUCT_CATEGORY_LABELS[category] : null;
+      const products = label && !f.products.includes(label)
+        ? [...f.products, label]
+        : f.products;
+      const skuNote = sku ? `Interested in: ${sku}\n\n` : "";
+      const message = f.message.startsWith(skuNote) || !sku ? f.message : `${skuNote}${f.message}`;
+      return { ...f, products, message };
+    });
+  }, [searchParams]);
 
   const set = (field: keyof FormState) => (value: string) =>
     setForm((f) => ({ ...f, [field]: value }));
+
+  const handleCountryChange = (country: string) => {
+    const dialCode = COUNTRY_DIAL_CODES[country];
+    // Pure on purpose — no refs or other side effects in here. setState
+    // updaters run twice in dev under React Strict Mode to catch exactly
+    // this kind of bug: an earlier version tracked "did we just auto-fill
+    // this" via a ref mutated inside the updater, which meant the second
+    // (purity-check) invocation saw a ref already changed by the first one
+    // and silently skipped the update — country changed, phone didn't.
+    // Checking against the known dial codes themselves needs no state at all.
+    setForm((f) => {
+      const trimmedPhone = f.phone.trim();
+      const phoneIsEmpty = trimmedPhone === "";
+      const phoneIsBareDialCode = Object.values(COUNTRY_DIAL_CODES).includes(trimmedPhone);
+
+      if (!dialCode || (!phoneIsEmpty && !phoneIsBareDialCode)) {
+        return { ...f, country };
+      }
+
+      return { ...f, country, phone: `${dialCode} ` };
+    });
+  };
 
   const toggleMulti = (field: "products" | "procurement", value: string) =>
     setForm((f) => ({
@@ -296,7 +370,7 @@ export default function ExportInquiryForm() {
                   </div>
                   <div>
                     <Label required>Country</Label>
-                    <Select value={form.country} onChange={set("country")} options={COUNTRIES} placeholder="Select country" required />
+                    <Select value={form.country} onChange={handleCountryChange} options={COUNTRIES} placeholder="Select country" required />
                   </div>
                   <div>
                     <Label required>Email Address</Label>

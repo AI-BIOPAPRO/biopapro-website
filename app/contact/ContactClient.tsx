@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import ContactHero          from "@/components/contact/ContactHero";
 import ExportInquiryForm    from "@/components/contact/ExportInquiryForm";
 import ProcurementJourney   from "@/components/contact/ProcurementJourney";
@@ -15,8 +16,15 @@ export default function ContactClient() {
       {/* S1 — Hero: "Let's discuss your next shipment." + 4 stats */}
       <ContactHero />
 
-      {/* S2 — Export Inquiry Form: full procurement intake */}
-      <ExportInquiryForm />
+      {/* S2 — Export Inquiry Form: full procurement intake.
+          Suspense is required here because the form reads ?category=/?sku=
+          via useSearchParams() to pick up a product selected on /products.
+          The fallback is only ever visible for a single frame — searchParams
+          resolves practically instantly on the client — so it stays minimal
+          rather than duplicating the real form. */}
+      <Suspense fallback={<div style={{ minHeight: 480 }} />}>
+        <ExportInquiryForm />
+      </Suspense>
 
       {/* S3 — Procurement Journey: 6-step inquiry to delivery timeline */}
       <ProcurementJourney />

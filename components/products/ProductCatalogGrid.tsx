@@ -255,7 +255,7 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
               MOQ {product.moq} · {product.pcsPerCarton.toLocaleString()} pcs per export carton
             </p>
             <Link
-              href="/contact"
+              href={`/contact?category=${encodeURIComponent(product.category)}&sku=${encodeURIComponent(product.name)}#inquiry-form`}
               className="group inline-flex items-center gap-2 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200"
               style={{ background: "#4A7A3D" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
@@ -380,27 +380,53 @@ function ProductCard({
             </span>
             <p className="font-mono text-[11px] font-bold text-ink mt-0.5">{product.moq}</p>
           </div>
-          <button
-            onClick={() => onOpen(product)}
-            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] px-3 py-2 transition-all duration-200"
-            style={{ border: "1px solid #DDD3C5", color: "#6B5D50" }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.borderColor = "#C89A5B";
-              el.style.color = "#8C6239";
-              el.style.background = "rgba(200,154,91,0.07)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.borderColor = "#DDD3C5";
-              el.style.color = "#6B5D50";
-              el.style.background = "transparent";
-            }}
-            aria-label={`View details for ${product.name}`}
-          >
-            View Specs
-            <ChevronRight size={9} strokeWidth={2.5} />
-          </button>
+          <div className="flex items-center gap-1.5">
+            {/* Quick "request this" action — carries straight to the Contact
+                form with this exact product attached, Zomato/Amazon-style,
+                without needing to open the drawer first. */}
+            <Link
+              href={`/contact?category=${encodeURIComponent(product.category)}&sku=${encodeURIComponent(product.name)}#inquiry-form`}
+              className="inline-flex items-center justify-center w-[30px] h-[30px] transition-all duration-200"
+              style={{ border: "1px solid #DDD3C5", color: "#6B5D50" }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = "#4A7A3D";
+                el.style.color = "#4A7A3D";
+                el.style.background = "rgba(74,122,61,0.07)";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = "#DDD3C5";
+                el.style.color = "#6B5D50";
+                el.style.background = "transparent";
+              }}
+              aria-label={`Request a quote for ${product.name}`}
+              title="Request a quote for this product"
+            >
+              <ArrowUpRight size={13} strokeWidth={2.5} />
+            </Link>
+            <button
+              onClick={() => onOpen(product)}
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] px-3 py-2 transition-all duration-200"
+              style={{ border: "1px solid #DDD3C5", color: "#6B5D50" }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = "#C89A5B";
+                el.style.color = "#8C6239";
+                el.style.background = "rgba(200,154,91,0.07)";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = "#DDD3C5";
+                el.style.color = "#6B5D50";
+                el.style.background = "transparent";
+              }}
+              aria-label={`View details for ${product.name}`}
+            >
+              View Specs
+              <ChevronRight size={9} strokeWidth={2.5} />
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>
