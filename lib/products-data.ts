@@ -363,11 +363,14 @@ export const PRODUCTS: BioProduct[] = [
     highlight: true,
   },
   {
-    id: "stirrer-160",
-    name: "Wooden Stirrer 160mm",
+    // NOTE: the slug below ("...-110mm") still doesn't match this product's
+    // length — a pre-existing mismatch across the stirrer entries flagged
+    // separately for the boss to confirm before touching slugs/URLs.
+    id: "stirrer-190",
+    name: "Wooden Stirrer 190mm",
     slug: "wooden-stirrer-110mm",
     category: "Stirrers",
-    length: "160mm",
+    length: "190mm",
     material: "FSC Birchwood",
     finish: "Natural smooth",
     certifications: ["FSC®", "FDA CFR 21"],
@@ -376,7 +379,7 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 50000,
     moq: "50,000 pcs",
     shortDescription:
-      "Long 160mm stirrer built to reach the bottom of tall glasses — cold brew, iced lattes, and layered beverages where a shorter stirrer just doesn't get there. Standard stock for premium cafés, hotel lounges, and bars serving tall-format drinks.",
+      "Long 190mm stirrer built to reach the bottom of tall glasses — cold brew, iced lattes, and layered beverages where a shorter stirrer just doesn't get there. Standard stock for premium cafés, hotel lounges, and bars serving tall-format drinks.",
     applications: ["Specialty coffee", "Cold brew", "Hotels", "Premium cafés", "Bars", "Lounges"],
     primaryImage: `${CDN}/products/W20_1e981daa-2dc8-4741-947b-bfe64cddb1ce.png`,
     galleryImages: [
@@ -630,7 +633,7 @@ export const PRODUCT_FAMILIES: ProductFamily[] = [
     category: "Stirrers",
     headline: "Coffee Stirrers",
     description:
-      "110mm, 140mm, and 160mm birchwood stirrers. 50,000 units per carton. The highest-volume SKU — ideal for coffee chains and large hospitality groups, right down to office pantries and specialty cafés.",
+      "110mm, 140mm, and 190mm birchwood stirrers. 50,000 units per carton. The highest-volume SKU — ideal for coffee chains and large hospitality groups, right down to office pantries and specialty cafés.",
     applications: ["Coffee Chains", "Hotels", "Offices", "Catering", "QSR", "Specialty Coffee", "Bars & Lounges", "Corporate Pantries"],
     moqRange: "50,000 pcs",
     skuCount: 3,
