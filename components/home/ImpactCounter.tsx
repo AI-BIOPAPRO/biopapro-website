@@ -108,8 +108,18 @@ function CounterCard({
       {/* Value */}
       <div className="flex items-end gap-2 mb-1">
         <span
-          className="font-display font-light text-green-deep tabular-nums"
-          style={{ fontSize: "clamp(2.8rem, 5vw, 4.9rem)", lineHeight: 1 }}
+          className="font-display font-light text-green-deep"
+          style={{
+            fontSize: "clamp(2.8rem, 5vw, 4.9rem)",
+            lineHeight: 1,
+            // Cormorant Garamond's default figures are old-style — digits sit
+            // at varying heights/baselines like lowercase letters (elegant in
+            // running prose, but exactly what made this row look "not in
+            // line" in a stat display). lining-nums forces uniform, same-
+            // baseline digits; tabular-nums keeps them fixed-width so the
+            // layout doesn't jiggle as the count-up animation changes digits.
+            fontVariantNumeric: "lining-nums tabular-nums",
+          }}
         >
           {display}
         </span>
@@ -243,17 +253,17 @@ export default function ImpactCounter() {
           </div>
           <div className="flex items-center gap-6">
             <div className="text-center">
-              <p className="font-display font-light text-ink text-xl">{COMPANY_FACTS.tonsPerMonth}+</p>
+              <p className="font-display font-light text-ink text-xl" style={{ fontVariantNumeric: "lining-nums tabular-nums" }}>{COMPANY_FACTS.tonsPerMonth}+</p>
               <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.15em] mt-1">Tons / Month</p>
             </div>
             <div className="w-px h-10 bg-border" />
             <div className="text-center">
-              <p className="font-display font-light text-ink text-xl">{COMPANY_FACTS.womenPercent}%</p>
+              <p className="font-display font-light text-ink text-xl" style={{ fontVariantNumeric: "lining-nums tabular-nums" }}>{COMPANY_FACTS.womenPercent}%</p>
               <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.15em] mt-1">Women Workforce</p>
             </div>
             <div className="w-px h-10 bg-border hidden md:block" />
             <div className="text-center hidden md:block">
-              <p className="font-display font-light text-ink text-xl">{COMPANY_FACTS.founded}</p>
+              <p className="font-display font-light text-ink text-xl" style={{ fontVariantNumeric: "lining-nums tabular-nums" }}>{COMPANY_FACTS.founded}</p>
               <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.15em] mt-1">Year Founded</p>
             </div>
           </div>

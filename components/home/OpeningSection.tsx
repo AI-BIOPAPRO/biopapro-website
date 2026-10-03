@@ -473,6 +473,11 @@ export default function OpeningSection() {
                   style={{
                     fontSize: "clamp(1.8rem, 3.2vw, 2.6rem)",
                     color: "#FFFFFF",
+                    // Cormorant Garamond's default figures are old-style —
+                    // digits sit at varying heights like lowercase letters,
+                    // which reads as misaligned in a stat row. Force uniform,
+                    // same-baseline lining figures instead.
+                    fontVariantNumeric: "lining-nums tabular-nums",
                   }}
                 >
                   {stat.value}
