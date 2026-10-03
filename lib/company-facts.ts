@@ -18,7 +18,7 @@ export const COMPANY_FACTS = {
   womenPercent:       70,
   unitsPerMonth:      100_000_000,
   tonsPerMonth:       300,
-  plasticSavedPerDay: 6500,
+  plasticSavedPerDay: 10000,
   exportMarkets:      18,
   certifications:     6, // unresolved 6-vs-9 discrepancy — see docs/TASKS.md, do not change without business confirmation
 } as const;

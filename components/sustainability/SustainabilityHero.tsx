@@ -5,8 +5,10 @@ import { motion, useInView } from "motion/react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import SectionLabel from "@/components/shared/SectionLabel";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const PLASTIC_KG = COMPANY_FACTS.plasticSavedPerDay.toLocaleString();
 
 export default function SustainabilityHero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -69,7 +71,7 @@ export default function SustainabilityHero() {
               className="font-display font-light leading-[0.92] mb-8"
               style={{ fontSize: "clamp(2.8rem, 5.5vw, 5rem)", color: "#F6F1E8" }}
             >
-              6,500kg of plastic.
+              {PLASTIC_KG}kg of plastic.
               <br />
               <em className="not-italic" style={{ color: "#7DB870", fontStyle: "italic", fontFamily: "inherit" }}>
                 Not today.
@@ -83,7 +85,7 @@ export default function SustainabilityHero() {
               className="font-sans font-light leading-relaxed max-w-[560px] mb-10"
               style={{ fontSize: "clamp(1rem, 1.3vw, 1.1rem)", color: "rgba(230,210,185,0.70)" }}
             >
-              Every day, Biopapro's birchwood tableware displaces 6,500kg of single-use
+              Every day, Biopapro's birchwood tableware displaces {PLASTIC_KG}kg of single-use
               plastic from the global supply chain. FSC-certified. BPI compostable.
               ISO 14001 environmental management. This is not a brand position — it is
               what the product does.
@@ -126,7 +128,7 @@ export default function SustainabilityHero() {
           >
             <div className="flex flex-col gap-3">
               {[
-                { value: "6,500kg",  label: "Plastic displaced every single day"         },
+                { value: `${PLASTIC_KG}kg`,  label: "Plastic displaced every single day"         },
                 { value: "100M+",    label: "Units shipped per month, replacing plastic"  },
                 { value: "FSC® 100%",label: "Certified sustainable sourcing"              },
                 { value: "BPI",      label: "Third-party verified compostability"         },

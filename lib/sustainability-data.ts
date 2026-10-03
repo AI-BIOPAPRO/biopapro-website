@@ -1,7 +1,9 @@
 // Biopapro Sustainability Data — all figures from live biopapro.com
 
+import { COMPANY_FACTS } from "@/lib/company-facts";
+
 export const IMPACT_METRICS = [
-  { value: 6500,   suffix: "kg",  label: "Plastic Saved Daily",    sub: "Compared to equivalent plastic cutlery"   },
+  { value: COMPANY_FACTS.plasticSavedPerDay, suffix: "kg",  label: "Plastic Saved Daily",    sub: "Compared to equivalent plastic cutlery"   },
   { value: 100,    suffix: "M+",  label: "Units per Month",         sub: "Replacing single-use plastic globally"    },
   { value: 300,    suffix: "T",   label: "Birchwood per Month",     sub: "100% FSC-certified, renewable material"   },
   { value: 70,     suffix: "%+",  label: "Women in Workforce",      sub: "Structural inclusion since founding"      },

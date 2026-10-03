@@ -10,7 +10,7 @@
  * Content hierarchy (5-second test):
  *   1s  — BIOPAPRO (dominant, impossible to miss)
  *   2s  — "The Global Standard for Birchwood Tableware."
- *   3s  — 100M+ / 18+ Countries / 6,500kg / FSC® (stats bar)
+ *   3s  — 100M+ / 18+ Countries / plastic replaced per day / FSC® (stats bar)
  *   4s  — CTA: View Products / Request Export Quote
  *   5s  — Cert badges confirm trust
  */
@@ -394,7 +394,7 @@ export default function OpeningSection() {
             Precision-manufactured FSC-certified birchwood cutlery
             for restaurants, hotels, cloud kitchens, and caterers
             across India — and airlines, QSRs, and distributors
-            worldwide. Replacing 6,500&thinsp;kg of plastic every day.
+            worldwide. Replacing {COMPANY_FACTS.plasticSavedPerDay.toLocaleString()}&thinsp;kg of plastic every day.
           </motion.p>
 
           {/* ── CTAs ── */}

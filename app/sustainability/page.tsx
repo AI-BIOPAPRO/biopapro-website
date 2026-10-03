@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import SustainabilityClient from "./SustainabilityClient";
+import { COMPANY_FACTS } from "@/lib/company-facts";
+
+const PLASTIC_KG = COMPANY_FACTS.plasticSavedPerDay.toLocaleString();
 
 export const metadata: Metadata = {
   title: "Biodegradable & Compostable Wooden Cutlery",
   description:
-    "Biopapro's FSC-certified, BPI compostable birchwood cutlery replaces 6,500kg of single-use plastic daily. Eco-friendly wooden cutlery for Indian restaurants, hotels, and caterers — and sustainable export supply worldwide. ISO 14001 certified.",
+    `Biopapro's FSC-certified, BPI compostable birchwood cutlery replaces ${PLASTIC_KG}kg of single-use plastic daily. Eco-friendly wooden cutlery for Indian restaurants, hotels, and caterers — and sustainable export supply worldwide. ISO 14001 certified.`,
   keywords: [
     // Domestic eco keywords
     "eco friendly cutlery India",
@@ -27,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Eco Friendly Wooden Cutlery India — Biopapro",
     description:
-      "6,500kg plastic displaced daily. FSC certified. BPI Compostable. ISO 14001. Biodegradable wooden cutlery for India and global markets.",
+      `${PLASTIC_KG}kg plastic displaced daily. FSC certified. BPI Compostable. ISO 14001. Biodegradable wooden cutlery for India and global markets.`,
     type: "website",
     url: "/sustainability",
     images: ["/opengraph-image"],
