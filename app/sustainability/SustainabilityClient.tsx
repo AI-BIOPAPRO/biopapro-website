@@ -11,10 +11,10 @@ import SustainabilityCTA   from "@/components/sustainability/SustainabilityCTA";
 export default function SustainabilityClient() {
   return (
     <main>
-      {/* S1 — Hero: "6,500kg of plastic. Not today." */}
+      {/* S1 — Hero: "<plastic/day>kg of plastic. Not today." */}
       <SustainabilityHero />
 
-      {/* S2 — Impact Metrics: animated counters — 6,500kg, 100M units, 300T, 70%+ women */}
+      {/* S2 — Impact Metrics: animated counters — plastic/day, 100M units, 300T, 70%+ women */}
       <ImpactMetrics />
 
       {/* S3 — Birchwood Story: plastic vs birchwood + 4 material properties */}

@@ -19,6 +19,7 @@ import Link from "next/link";
 import { motion, useInView } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import SectionLabel from "@/components/shared/SectionLabel";
+import { COMPANY_FACTS } from "@/lib/company-facts";
 
 /* ── Palette ── */
 const PLASTIC = {
@@ -206,7 +207,7 @@ export default function WhyWoodWon() {
 
           <div className="flex flex-col gap-4">
             <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.2em] max-w-[300px] leading-relaxed">
-              6,500 kg of plastic not produced
+              {COMPANY_FACTS.plasticSavedPerDay.toLocaleString()} kg of plastic not produced
               <br />today. Because of Biopapro.
             </p>
             <Link

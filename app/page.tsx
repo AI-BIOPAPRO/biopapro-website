@@ -27,6 +27,18 @@ export const metadata: Metadata = {
     "biodegradable cutlery supplier India",
     "wooden cutlery exporter India",
     "birchwood tableware wholesale",
+    // Hindi — both Devanagari and common Hinglish/transliterated search terms
+    "लकड़ी की कटलरी निर्माता",
+    "लकड़ी के चम्मच थोक विक्रेता",
+    "लकड़ी के कांटे सप्लायर इंडिया",
+    "इको फ्रेंडली कटलरी इंडिया",
+    "डिस्पोजेबल लकड़ी की कटलरी थोक",
+    "बायोडिग्रेडेबल कटलरी सप्लायर",
+    "lakdi ki cutlery manufacturer",
+    "lakdi ke chammach wholesale India",
+    "lakdi ke kaante supplier India",
+    "eco friendly cutlery India hindi",
+    "disposable lakdi cutlery bulk order",
   ],
   openGraph: {
     title: "Biopapro — Wooden Cutlery Manufacturer India",

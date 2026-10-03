@@ -1,5 +1,7 @@
 // Biopapro Contact Page Data — sourced from live biopapro.com
 
+import type { ProductCategory } from "@/lib/products-data";
+
 export const OFFICES = [
   {
     id: "india",
@@ -168,16 +170,25 @@ export const FAQS = [
   },
 ] as const;
 
-export const PRODUCT_OPTIONS = [
-  "Birchwood Forks",
-  "Birchwood Spoons",
-  "Birchwood Knives",
-  "Birchwood Sporks",
-  "Coffee Stirrers",
-  "Bamboo Skewers",
-  "Cutlery Sets",
-  "Custom / OEM",
-] as const;
+// Keyed off the real product catalog (lib/products-data.ts ProductCategory)
+// instead of a separately hand-maintained list — the old version had drifted
+// out of sync with the actual catalog ("Bamboo Skewers" when the real
+// product is birchwood, no Scoops or Paper Straws entries at all). "Custom /
+// OEM" isn't included here since it's already covered by PROCUREMENT_OPTIONS
+// in ExportInquiryForm.tsx ("OEM / Private Label").
+export const PRODUCT_CATEGORY_LABELS: Record<ProductCategory, string> = {
+  Forks: "Birchwood Forks",
+  Spoons: "Birchwood Spoons",
+  Knives: "Birchwood Knives",
+  Sporks: "Birchwood Sporks",
+  Stirrers: "Coffee Stirrers",
+  Scoops: "Ice Cream Scoops",
+  Skewers: "Birchwood Skewers",
+  Sets: "Cutlery Sets",
+  "Paper Straws": "Paper Straws",
+};
+
+export const PRODUCT_OPTIONS = Object.values(PRODUCT_CATEGORY_LABELS);
 
 export const VOLUME_OPTIONS = [
   "Under 500,000 units",

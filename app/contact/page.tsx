@@ -22,6 +22,11 @@ export const metadata: Metadata = {
     "wooden cutlery distributor enquiry",
     "birchwood tableware MOQ",
     "wooden cutlery OEM India",
+    // Hindi — both Devanagari and common Hinglish/transliterated search terms
+    "लकड़ी की कटलरी सप्लायर संपर्क",
+    "लकड़ी के बर्तन थोक ऑर्डर इंडिया",
+    "lakdi ki cutlery supplier contact",
+    "lakdi ke bartan bulk order India",
   ],
   openGraph: {
     title: "Contact Biopapro — Wooden Cutlery Supplier India & Export",

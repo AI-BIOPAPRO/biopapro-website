@@ -7,6 +7,8 @@
  *          y = (90 - lat) / 180 × 91
  */
 
+import { COMPANY_FACTS } from "@/lib/company-facts";
+
 export interface ExportMarket {
   name: string;
   region: Region;
@@ -168,7 +170,7 @@ export const PROCUREMENT_STATS = [
   { value: "100M",  suffix: "+",  label: "Units / Month",       sub: "Production capacity" },
   { value: "300",   suffix: "T",  label: "Tons / Month",        sub: "Birchwood processed" },
   { value: "18",    suffix: "+",  label: "Export Markets",      sub: "Active destinations" },
-  { value: "6,500", suffix: "kg", label: "Plastic Saved Daily", sub: "Environmental impact" },
+  { value: COMPANY_FACTS.plasticSavedPerDay.toLocaleString(), suffix: "kg", label: "Plastic Saved Daily", sub: "Environmental impact" },
   { value: "380",   suffix: "+",  label: "Employees",           sub: "70%+ women" },
   { value: "6",     suffix: "",   label: "Certifications",      sub: "FSC · ISO · FDA · BPI · BSCI · EU" },
 ] as const;
