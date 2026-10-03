@@ -383,23 +383,27 @@ export default function ExportInquiryForm() {
                 </div>
               </div>
 
-              {/* Procurement details */}
+              {/* Procurement details — intentionally not required. Forcing a
+                  buyer to commit to a volume/region/timeline before they can
+                  even send a question was unnecessary friction; all three
+                  already have a "not sure yet" option, so nothing is lost by
+                  letting the inquiry through without them. */}
               <div className="p-6 flex flex-col gap-5" style={{ border: "1px solid #DDD3C5" }}>
                 <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted pb-3 border-b" style={{ borderColor: "#EDE5D8" }}>
-                  Procurement Details
+                  Procurement Details <span className="normal-case font-normal" style={{ color: "#9A8A7A" }}>(optional)</span>
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <Label required>Annual Volume Estimate</Label>
-                    <Select value={form.volume} onChange={set("volume")} options={VOLUME_OPTIONS} placeholder="Select volume range" required />
+                    <Label>Annual Volume Estimate</Label>
+                    <Select value={form.volume} onChange={set("volume")} options={VOLUME_OPTIONS} placeholder="Select volume range" />
                   </div>
                   <div>
-                    <Label required>Delivery Region</Label>
-                    <Select value={form.region} onChange={set("region")} options={REGION_OPTIONS} placeholder="Select region" required />
+                    <Label>Delivery Region</Label>
+                    <Select value={form.region} onChange={set("region")} options={REGION_OPTIONS} placeholder="Select region" />
                   </div>
                   <div className="sm:col-span-2">
-                    <Label required>Required Timeline</Label>
-                    <Select value={form.timeline} onChange={set("timeline")} options={TIMELINE_OPTIONS} placeholder="Select timeline" required />
+                    <Label>Required Timeline</Label>
+                    <Select value={form.timeline} onChange={set("timeline")} options={TIMELINE_OPTIONS} placeholder="Select timeline" />
                   </div>
                 </div>
               </div>
