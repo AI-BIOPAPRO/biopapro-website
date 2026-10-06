@@ -688,6 +688,10 @@ export function getProductById(id: string): BioProduct | undefined {
   return PRODUCTS.find((p) => p.id === id);
 }
 
+export function getProductBySlug(slug: string): BioProduct | undefined {
+  return PRODUCTS.find((p) => p.slug === slug);
+}
+
 export function getFamilyByCategory(category: ProductCategory): ProductFamily | undefined {
   return PRODUCT_FAMILIES.find((f) => f.category === category);
 }

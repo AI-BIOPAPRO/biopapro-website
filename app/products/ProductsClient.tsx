@@ -1,6 +1,6 @@
 "use client";
 
-import { useState }           from "react";
+import { useState, Suspense }  from "react";
 import ProductsHero           from "@/components/products/ProductsHero";
 import ProductFamilies        from "@/components/products/ProductFamilies";
 import ProductCatalogGrid     from "@/components/products/ProductCatalogGrid";
@@ -30,11 +30,16 @@ export default function ProductsClient() {
       {/* S2 — Product Families: 8 editorial category cards */}
       <ProductFamilies onCategorySelect={handleCategorySelect} />
 
-      {/* S3 — Catalog Grid: filterable 4-col grid + product detail drawer */}
-      <ProductCatalogGrid
-        activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
-      />
+      {/* S3 — Catalog Grid: filterable 4-col grid + product detail drawer.
+          Suspense is required here because the grid reads ?product=<slug>
+          via useSearchParams() to deep-link straight to one product's
+          drawer (used by the homepage product strip). */}
+      <Suspense fallback={<div style={{ minHeight: 480 }} />}>
+        <ProductCatalogGrid
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+        />
+      </Suspense>
 
       {/* S4 — Packaging & Export: bulk/sleeved/OEM specs + container loading table (dark) */}
       <PackagingExport />

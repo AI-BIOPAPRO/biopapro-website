@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { X, ArrowUpRight, ChevronRight, Package, Award } from "lucide-react";
 import SectionLabel from "@/components/shared/SectionLabel";
@@ -10,6 +11,7 @@ import { useScrollLock } from "@/lib/use-scroll-lock";
 import {
   PRODUCTS,
   ALL_CATEGORIES,
+  getProductBySlug,
   type BioProduct,
   type ProductCategory,
 } from "@/lib/products-data";
@@ -444,6 +446,18 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
   const [selectedProduct, setSelectedProduct] = useState<BioProduct | null>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const headerInView = useInView(headerRef, { once: true, margin: "-10% 0px" });
+  const searchParams = useSearchParams();
+
+  // Deep-link support — clicking a product elsewhere on the site (the
+  // homepage product strip, say) can link straight to ?product=<slug>#catalog
+  // and this opens that exact product's spec drawer on load, instead of
+  // dropping the visitor on the catalog grid to go find it themselves.
+  useEffect(() => {
+    const slug = searchParams.get("product");
+    if (!slug) return;
+    const match = getProductBySlug(slug);
+    if (match) setSelectedProduct(match);
+  }, [searchParams]);
 
   const filtered = activeCategory === "All"
     ? PRODUCTS

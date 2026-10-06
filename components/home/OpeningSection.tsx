@@ -15,19 +15,11 @@
  *   5s  — Cert badges confirm trust
  */
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { COMPANY_FACTS, getCumulativeUnitsProduced, formatUnitsShort } from "@/lib/company-facts";
-import { getProductById } from "@/lib/products-data";
-
-// Real products, not abstract branding — the actual visual gap flagged by
-// the boss review: first screen showed certs + an artistic logo video, no
-// product in sight. These are genuine catalog SKUs, same CDN images and
-// real specs used on /products, not stock or AI-generated imagery.
-const SHOWCASE_IDS = ["fork-160", "spoon-160", "skewer-10cm", "knife-165"] as const;
 
 const E = [0.16, 1, 0.3, 1] as const;
 
@@ -53,140 +45,6 @@ function HeroVideo() {
   );
 }
 
-function ProductSpecShowcase() {
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActive((a) => (a + 1) % SHOWCASE_IDS.length);
-    }, 3600);
-    return () => clearInterval(timer);
-  }, []);
-
-  const product = getProductById(SHOWCASE_IDS[active]);
-  if (!product) return null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 24 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 1.3, duration: 0.8, ease: E }}
-      className="absolute z-20 hidden xl:block"
-      style={{ right: "4rem", top: "22%", width: 240 }}
-    >
-      {/* Soft warm glow behind the frame — reads as a naturally lit patch of
-          the same scene (the video already has real sunlight falling on
-          wood like this) rather than a UI panel floating on top of it. */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          inset: "-30px",
-          background: "radial-gradient(circle, rgba(200,154,91,0.22) 0%, transparent 68%)",
-          filter: "blur(6px)",
-        }}
-      />
-
-      {/* Framed image — soft rounded corners + inner vignette so it reads
-          as a lit object sitting in the scene, not a flat sticker. */}
-      <div className="relative" style={{ width: 240, height: 240 }}>
-        <Link href="/products" aria-label={`View ${product.name}`} className="group block w-full h-full">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.97 }}
-              transition={{ duration: 0.6, ease: E }}
-              className="relative w-full h-full overflow-hidden"
-              style={{
-                borderRadius: "18px",
-                background: "#EDE6D8",
-                boxShadow: "0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)",
-              }}
-            >
-              <Image
-                src={product.primaryImage}
-                alt={product.name}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="240px"
-              />
-              {/* Inner vignette — softens the hard photo edge into the frame */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ boxShadow: "inset 0 0 34px rgba(29,22,16,0.28)" }}
-              />
-            </motion.div>
-          </AnimatePresence>
-        </Link>
-      </div>
-
-      {/* Text sits on a soft dark pool beneath the frame — not a hard box,
-          just enough falloff that it stays legible over the lighter grain
-          patches in the video, the same way text sits over the video
-          everywhere else in this hero (see the atmospheric overlays at
-          the top of this file). */}
-      <div className="relative mt-3 pt-6 pb-1 px-3 -mx-3">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse at 50% 30%, rgba(8,12,6,0.55) 0%, rgba(8,12,6,0.28) 55%, transparent 80%)",
-          }}
-        />
-
-        <div className="relative text-right">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.4, ease: E }}
-            >
-              <p className="font-display font-light leading-tight" style={{ fontSize: "1.2rem", color: "rgba(248,252,244,0.98)" }}>
-                {product.name}
-              </p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] mt-1.5" style={{ color: "rgba(190,235,170,0.85)" }}>
-                {product.length} &middot; {product.material}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Progress dots */}
-        <div className="relative flex items-center justify-end gap-2 mt-4">
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(210,230,195,0.65)" }}>
-            30+ SKUs
-          </span>
-          <span className="w-px h-2.5" style={{ background: "rgba(255,255,255,0.25)" }} />
-          {SHOWCASE_IDS.map((id, i) => (
-            <span
-              key={id}
-              className="rounded-full transition-all duration-300"
-              style={{
-                width: i === active ? 16 : 5,
-                height: 5,
-                background: i === active ? "rgba(160,220,140,0.95)" : "rgba(255,255,255,0.35)",
-              }}
-            />
-          ))}
-        </div>
-
-        <Link
-          href="/products"
-          className="group relative mt-4 flex items-center justify-end gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] whitespace-nowrap transition-colors duration-200"
-          style={{ color: "rgba(235,244,228,0.9)" }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(235,244,228,0.9)"; }}
-        >
-          View Full Range
-        <ArrowUpRight size={11} strokeWidth={2.5}
-            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-        </Link>
-      </div>
-    </motion.div>
-  );
-}
 
 export default function OpeningSection() {
   // Computed fresh on every render (client component — the whole module
@@ -235,19 +93,32 @@ export default function OpeningSection() {
         aria-hidden="true"
       />
 
-      {/* Watermark vignette — hero-background-v2.mp4 (the Gemini-generated
+      {/* Watermark cover — hero-background-v2.mp4 (the Gemini-generated
           replacement) has a small sparkle watermark sitting at roughly
           93.5% width / 83% height on screen (measured directly against a
-          live rendered 1440x900 screenshot with the vignette disabled,
-          accounting for the video's own object-cover crop — not just
-          eyeballed off a raw extracted frame, which was off by enough to
-          leave a visible ghost outline on the first pass). Full opacity
-          starts further out and holds longer than a typical vignette so
-          no trace of the shape survives, verified against a zoomed-in
-          screenshot afterward. */}
+          live render with this element hidden, accounting for the video's
+          own object-cover crop). A flat dark overlay here looked right at
+          one moment in the loop but wrong at every other — that part of
+          the frame genuinely brightens and dims throughout the clip (drifting
+          light, dust), so no single static color/opacity could ever match
+          it. A small blurred patch instead: it smears the sparkle into
+          nothing while sampling the *actual* video pixels underneath live,
+          so it tracks the real brightness at every point in the loop
+          automatically. Soft-edged via a radial mask so the blur fades out
+          rather than ending in a hard circle. */}
       <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{ background: "radial-gradient(circle at 93.5% 83%, rgba(10,16,8,1) 0%, rgba(10,16,8,0.97) 8%, transparent 16%)" }}
+        className="absolute z-10 pointer-events-none"
+        style={{
+          left: "93.5%",
+          top: "83%",
+          width: 150,
+          height: 150,
+          transform: "translate(-50%, -50%)",
+          backdropFilter: "blur(60px)",
+          WebkitBackdropFilter: "blur(60px)",
+          maskImage: "radial-gradient(circle, black 55%, transparent 90%)",
+          WebkitMaskImage: "radial-gradient(circle, black 55%, transparent 90%)",
+        }}
         aria-hidden="true"
       />
 
@@ -505,16 +376,6 @@ export default function OpeningSection() {
         </motion.div>
 
       </div>{/* /Content */}
-
-      {/* ── Real product showcase — a rotating "spec card", not a badge.
-          Corner brackets frame it like a precision measurement, echoing
-          the manufacturing-precision brand pillar rather than borrowing
-          the manufacturer badge's glass treatment. Cycles through real
-          SKUs with their actual length/material — answers "where are our
-          products" with something that feels engineered, not decorative.
-          Desktop-only (xl+) — the content column runs full-width below
-          that breakpoint, so there's no clear space for it. */}
-      <ProductSpecShowcase />
 
       {/* ── Scroll indicator ── */}
       <motion.div
