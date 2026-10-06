@@ -75,12 +75,22 @@ const E = [0.16, 1, 0.3, 1] as const;
 function SpecRow({ row, index }: { row: typeof COMPARISONS[number]; index: number }) {
   return (
     <div
-      className="grid grid-cols-1 md:grid-cols-[160px_1fr_1fr] border-t"
+      className="grid grid-cols-1 md:grid-cols-[232px_1fr_1fr] border-t"
       style={{ borderColor: "#E3DDD3" }}
     >
-      {/* Category label */}
-      <div className="flex items-center px-6 md:px-0 md:pl-0 pt-5 md:pt-6 pb-1 md:pb-6">
-        <span className="font-mono text-[11px] tracking-[0.22em] text-ink-muted uppercase">
+      {/* Category label — font-sans to match the headline/detail columns
+          instead of font-mono, which read as a mismatched, unrelated
+          typeface sitting next to them. whitespace-nowrap so it can never
+          silently wrap to a second line again (the 160px column this
+          replaced was just barely too narrow for "04 — HEAT PERFORMANCE",
+          so only that one row wrapped while the other five sat on one line).
+          Left padding was 0 on desktop (md:px-0 md:pl-0), so the label sat
+          flush against the table's outer border with no breathing room
+          while the two content columns next to it have px-7 — matched to
+          pl-7 here so the whole row reads as one evenly-spaced table
+          instead of the label column looking visually cramped. */}
+      <div className="flex items-center px-6 md:pl-7 md:pr-0 pt-5 md:pt-6 pb-1 md:pb-6">
+        <span className="font-sans text-[12px] font-semibold tracking-[0.06em] text-ink-muted uppercase whitespace-nowrap">
           {String(index + 1).padStart(2, "0")} — {row.category}
         </span>
       </div>
@@ -90,7 +100,7 @@ function SpecRow({ row, index }: { row: typeof COMPARISONS[number]; index: numbe
         className="px-6 md:px-7 py-3 md:py-6 md:border-l"
         style={{ borderColor: "#E3DDD3" }}
       >
-        <p className="md:hidden font-mono text-[11px] tracking-[0.18em] uppercase mb-1.5" style={{ color: PLASTIC.accent }}>
+        <p className="md:hidden font-sans text-[12px] font-semibold tracking-[0.06em] uppercase mb-1.5" style={{ color: PLASTIC.accent }}>
           Plastic
         </p>
         <p className="font-sans font-semibold text-sm mb-1" style={{ color: PLASTIC.accent }}>
@@ -106,7 +116,7 @@ function SpecRow({ row, index }: { row: typeof COMPARISONS[number]; index: numbe
         className="px-6 md:px-7 py-3 md:py-6 pb-6 md:pb-6 md:border-l"
         style={{ borderColor: "#E3DDD3" }}
       >
-        <p className="md:hidden font-mono text-[11px] tracking-[0.18em] uppercase mb-1.5" style={{ color: WOOD.accent }}>
+        <p className="md:hidden font-sans text-[12px] font-semibold tracking-[0.06em] uppercase mb-1.5" style={{ color: WOOD.accent }}>
           Birchwood
         </p>
         <p className="font-sans font-semibold text-sm mb-1" style={{ color: WOOD.accent }}>
@@ -165,15 +175,15 @@ export default function WhyWoodWon() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-20">
         <div className="border" style={{ borderColor: "#E3DDD3" }}>
           {/* Header row — desktop only, mobile repeats labels per row */}
-          <div className="hidden md:grid grid-cols-[160px_1fr_1fr] pb-3 pt-1">
+          <div className="hidden md:grid grid-cols-[232px_1fr_1fr] pb-3 pt-1">
             <div />
             <div className="px-7 border-l" style={{ borderColor: "#E3DDD3" }}>
-              <span className="font-mono text-[11px] tracking-[0.28em] uppercase" style={{ color: PLASTIC.accent }}>
+              <span className="font-sans text-[12px] font-semibold tracking-[0.1em] uppercase" style={{ color: PLASTIC.accent }}>
                 Plastic
               </span>
             </div>
             <div className="px-7 border-l" style={{ borderColor: "#E3DDD3" }}>
-              <span className="font-mono text-[11px] tracking-[0.28em] uppercase" style={{ color: WOOD.accent }}>
+              <span className="font-sans text-[12px] font-semibold tracking-[0.1em] uppercase" style={{ color: WOOD.accent }}>
                 Birchwood
               </span>
             </div>
