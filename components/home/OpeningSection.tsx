@@ -45,6 +45,66 @@ function HeroVideo() {
   );
 }
 
+// Native position of the Gemini video's sparkle watermark within its own
+// 1280x720 source frame (not screen percentages — those only hold at one
+// specific aspect ratio). Reverse-derived from an on-screen measurement at
+// a known viewport size via the object-cover crop math below.
+const VIDEO_NATIVE_ASPECT = 1280 / 720;
+const WATERMARK_FX = 0.8915; // fraction across the native frame
+const WATERMARK_FY = 0.83; // fraction down the native frame
+
+/**
+ * Positions the watermark-cover patch using the video element's *actual*
+ * rendered box, not an assumed 100vh/100vw. The hero section is
+ * `min-height: 100svh` — its real height grows past one viewport when the
+ * text content needs more room than that (confirmed: ~1467px tall at a
+ * 1440x900 test, well over 900px), and that overflow is proportionally far
+ * larger at short/wide windows. A pure-CSS vh/vw version of this looked
+ * right at the one size it was tuned against and drifted off the real
+ * watermark everywhere else — this measures the real box on mount and on
+ * resize instead of assuming it.
+ */
+function useWatermarkCoverPosition(
+  sectionRef: React.RefObject<HTMLElement | null>,
+  coverRef: React.RefObject<HTMLDivElement | null>
+) {
+  useEffect(() => {
+    const section = sectionRef.current;
+    const cover = coverRef.current;
+    if (!section || !cover) return;
+
+    const reposition = () => {
+      const rect = section.getBoundingClientRect();
+      const containerAspect = rect.width / rect.height;
+
+      let scaledW: number, scaledH: number, cropX: number, cropY: number;
+      if (containerAspect < VIDEO_NATIVE_ASPECT) {
+        // object-cover fills by height, crops left/right
+        scaledH = rect.height;
+        scaledW = scaledH * VIDEO_NATIVE_ASPECT;
+        cropX = (scaledW - rect.width) / 2;
+        cropY = 0;
+      } else {
+        // object-cover fills by width, crops top/bottom
+        scaledW = rect.width;
+        scaledH = scaledW / VIDEO_NATIVE_ASPECT;
+        cropX = 0;
+        cropY = (scaledH - rect.height) / 2;
+      }
+
+      const x = WATERMARK_FX * scaledW - cropX;
+      const y = WATERMARK_FY * scaledH - cropY;
+
+      cover.style.left = `${x}px`;
+      cover.style.top = `${y}px`;
+    };
+
+    reposition();
+    window.addEventListener("resize", reposition);
+    return () => window.removeEventListener("resize", reposition);
+  }, [sectionRef, coverRef]);
+}
+
 
 export default function OpeningSection() {
   // Computed fresh on every render (client component — the whole module
@@ -61,8 +121,12 @@ export default function OpeningSection() {
     { value: "FSC®",    label: "100% Certified",    sub: "Chain of custody"      },
   ];
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const watermarkCoverRef = useRef<HTMLDivElement>(null);
+  useWatermarkCoverPosition(sectionRef, watermarkCoverRef);
+
   return (
-    <section className="relative w-full overflow-hidden" style={{ minHeight: "100svh" }}>
+    <section ref={sectionRef} className="relative w-full overflow-hidden" style={{ minHeight: "100svh" }}>
 
       {/* ══════════════════════════════════
           LAYER 0 — Video (full bleed)
@@ -94,25 +158,28 @@ export default function OpeningSection() {
       />
 
       {/* Watermark cover — hero-background-v2.mp4 (the Gemini-generated
-          replacement) has a small sparkle watermark sitting at roughly
-          93.5% width / 83% height on screen (measured directly against a
-          live render with this element hidden, accounting for the video's
-          own object-cover crop). A flat dark overlay here looked right at
-          one moment in the loop but wrong at every other — that part of
-          the frame genuinely brightens and dims throughout the clip (drifting
-          light, dust), so no single static color/opacity could ever match
-          it. A small blurred patch instead: it smears the sparkle into
-          nothing while sampling the *actual* video pixels underneath live,
-          so it tracks the real brightness at every point in the loop
-          automatically. Soft-edged via a radial mask so the blur fades out
-          rather than ending in a hard circle. */}
+          replacement) has a small sparkle watermark. A flat dark overlay
+          looked right at one moment in the loop but wrong at every other
+          (the frame genuinely brightens/dims throughout — drifting light,
+          dust), so a blurred patch is used instead: it smears the sparkle
+          into nothing while sampling the *actual* video pixels underneath
+          live, tracking real brightness automatically.
+
+          Position is set by useWatermarkCoverPosition() above, in pixels,
+          from the video element's own measured box — not a CSS percentage
+          or vh/vw assumption. Both of those drifted off the real watermark
+          at viewport sizes other than the one they were tuned against,
+          because the hero section's actual height isn't exactly 100vh —
+          it overflows past that when the text content needs more room,
+          and that overflow is proportionally much bigger at short/wide
+          windows. See useWatermarkCoverPosition's comment for the full
+          object-cover crop math this replaced. */}
       <div
+        ref={watermarkCoverRef}
         className="absolute z-10 pointer-events-none"
         style={{
-          left: "93.5%",
-          top: "83%",
-          width: 150,
-          height: 150,
+          width: 170,
+          height: 170,
           transform: "translate(-50%, -50%)",
           backdropFilter: "blur(60px)",
           WebkitBackdropFilter: "blur(60px)",
