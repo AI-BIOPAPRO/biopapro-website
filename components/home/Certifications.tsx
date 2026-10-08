@@ -4,7 +4,7 @@
  * S9 — Certifications
  *
  * Trust vault — official seal-style presentation.
- * Visitors must immediately recognise FSC, ISO, FDA, BPI, BSCI, EU.
+ * Visitors must immediately recognise FSC, ISO, BRCGS.
  *
  * Design: Each certification feels like an official document with
  * a circular seal, issuing body, certificate code, and scope.
@@ -27,95 +27,79 @@ const CERTS = [
     shortName: "FSC",
     fullName: "Forest Stewardship Council",
     code: "Chain of Custody Certified",
-    certNo: "Certificate available on request",
+    certNo: "SGSHK-COC-400230",
     scope: "100% of raw material — all product lines",
-    verifiedBy: "Accredited FSC certification body",
-    since: String(COMPANY_FACTS.founded),
+    verifiedBy: "SGS Hong Kong Limited",
+    since: "2022",
     status: "ACTIVE",
     color: "#2D5228",
     bgLight: "#C8DFC0",
-    key3: ["100% Certified Wood", "Annual Audit", "Chain of Custody"],
+    key3: ["FSC 100%", "Chain of Custody", "Annual Audit"],
     downloadable: true,
   },
   {
-    id: "iso",
+    id: "iso9001",
     badge: "ISO",
     shortName: "9001:2015",
     fullName: "Quality Management System",
     code: "ISO 9001:2015",
-    certNo: "Certificate available on request",
+    certNo: "IN/87521966/2521",
     scope: "Production, QC, Packaging, Export",
-    verifiedBy: "Accredited ISO certification body",
-    since: "2019",
+    verifiedBy: "ICV Assessments Pvt. Ltd.",
+    since: "2025",
     status: "ACTIVE",
     color: "#4A7A3D",
     bgLight: "#C8DFC0",
-    key3: ["Production QC", "Third-Party Audited", "Annual Renewal"],
+    key3: ["EGAC Accredited", "Third-Party Audited", "Valid to 2028"],
     downloadable: true,
   },
   {
-    id: "fda",
-    badge: "FDA",
-    shortName: "CFR 21",
-    fullName: "US Food & Drug Administration",
-    code: "21 CFR 176.170",
-    certNo: "Direct Food Contact Compliant",
-    scope: "All wooden tableware — US market",
-    verifiedBy: "US FDA",
-    since: "2020",
-    status: "COMPLIANT",
-    color: "#6B6257",
-    bgLight: "#EDE5D8",
-    key3: ["No Chemical Coatings", "Direct Food Contact", "US Market Ready"],
-    downloadable: false,
-  },
-  {
-    id: "bpi",
-    badge: "BPI",
-    shortName: "COMPOSTABLE",
-    fullName: "Biodegradable Products Institute",
-    code: "ASTM D6400 / D6868",
-    certNo: "BPI Certified Compostable",
-    scope: "Selected product lines",
-    verifiedBy: "BPI — USA",
-    since: "2021",
-    status: "CERTIFIED",
-    color: "#2D5228",
-    bgLight: "#C8DFC0",
-    key3: ["Industrial Compostable", "ASTM Compliant", "US & Canada"],
-    downloadable: true,
-  },
-  {
-    id: "bsci",
-    badge: "amfori",
-    shortName: "BSCI",
-    fullName: "Business Social Compliance Initiative",
-    code: "amfori BSCI Audit",
-    certNo: "Social Compliance Verified",
-    scope: "All facilities — annual audit",
-    verifiedBy: "amfori — Brussels",
-    since: "2021",
+    id: "iso14001",
+    badge: "ISO",
+    shortName: "14001:2015",
+    fullName: "Environmental Management System",
+    code: "ISO 14001:2015",
+    certNo: "IN/78621967/8965",
+    scope: "Energy, Waste, Material Consumption",
+    verifiedBy: "ICV Assessments Pvt. Ltd.",
+    since: "2025",
     status: "ACTIVE",
-    color: "#4A5C4A",
-    bgLight: "#D4DFD0",
-    key3: ["Labour Rights", "Health & Safety", "Annual Factory Audit"],
+    color: "#4A7A3D",
+    bgLight: "#C8DFC0",
+    key3: ["EGAC Accredited", "Third-Party Audited", "Valid to 2028"],
     downloadable: true,
   },
   {
-    id: "eu",
-    badge: "EU",
-    shortName: "EC 10/2011",
-    fullName: "EU Food Contact Regulation",
-    code: "Reg. EC 10/2011 · EN 1400",
-    certNo: "Migration Tested",
-    scope: "All products exported to EU",
-    verifiedBy: "Accredited EU Lab",
-    since: "2020",
-    status: "COMPLIANT",
-    color: "#2D4A8A",
+    id: "iso45001",
+    badge: "ISO",
+    shortName: "45001:2018",
+    fullName: "Occupational Health & Safety",
+    code: "ISO 45001:2018",
+    certNo: "IN/38421968/7610",
+    scope: "All facilities — workforce safety",
+    verifiedBy: "ICV Assessments Pvt. Ltd.",
+    since: "2025",
+    status: "ACTIVE",
+    color: "#4A7A3D",
+    bgLight: "#C8DFC0",
+    key3: ["EGAC Accredited", "Third-Party Audited", "Valid to 2028"],
+    downloadable: true,
+  },
+  {
+    id: "brcgs",
+    badge: "BRCGS",
+    shortName: "CONSUMER PRODUCTS",
+    fullName: "Global Standard for Consumer Products",
+    code: "BRCGS Issue 4 — Foundation Level",
+    certNo: "IN21/818844913",
+    scope: "Manufacture of wooden cutlery — full facility",
+    verifiedBy: "SGS United Kingdom Ltd.",
+    since: "2026",
+    status: "ACTIVE",
+    color: "#005C8B",
     bgLight: "#D0D8F0",
-    key3: ["Migration Tested", "EU Market Ready", "Annual Testing"],
-    downloadable: false,
+    key3: ["UKAS Accredited", "Grade: PASSED", "Valid to Aug 2027"],
+    downloadable: true,
   },
 ] as const;
 
@@ -281,22 +265,22 @@ export default function Certifications() {
               className="font-display font-light text-ink leading-[0.95]"
               style={{ fontSize: "clamp(2.2rem, 4vw, 3.6rem)" }}
             >
-              Six certifications.
+              Five certifications.
               <br />
               <span className="text-green-deep">Every claim verified.</span>
             </h2>
 
             <div className="flex flex-col justify-center gap-5">
               <p className="font-sans font-light text-ink-light text-base leading-relaxed">
-                Biopapro holds six active certifications covering forest sourcing,
-                manufacturing quality, food safety, compostability, and social
-                compliance. Every certificate is independently issued and
-                renewed annually.
+                Biopapro holds five active certifications covering forest sourcing,
+                manufacturing quality, environmental management, workplace safety,
+                and consumer product standards. Every certificate is independently
+                issued and audited.
               </p>
               {/* Trust stat row */}
               <div className="flex items-center gap-6 pt-2 border-t border-border">
                 {[
-                  { value: "6",    label: "Active Certifications" },
+                  { value: "5",    label: "Active Certifications" },
                   { value: "100%", label: "Third-Party Verified"  },
                   { value: String(COMPANY_FACTS.founded), label: "Certified Since" },
                 ].map((s) => (

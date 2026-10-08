@@ -86,8 +86,8 @@ export default function SustainabilityHero() {
               style={{ fontSize: "clamp(1rem, 1.3vw, 1.1rem)", color: "rgba(230,210,185,0.70)" }}
             >
               Every day, Biopapro's birchwood tableware displaces {PLASTIC_KG}kg of single-use
-              plastic from the global supply chain. FSC-certified. BPI compostable.
-              ISO 14001 environmental management. This is not a brand position — it is
+              plastic from the global supply chain. FSC-certified sourcing. ISO 14001
+              environmental management. This is not a brand position — it is
               what the product does.
             </motion.p>
 
@@ -131,7 +131,7 @@ export default function SustainabilityHero() {
                 { value: `${PLASTIC_KG}kg`,  label: "Plastic displaced every single day"         },
                 { value: "100M+",    label: "Units shipped per month, replacing plastic"  },
                 { value: "FSC® 100%",label: "Certified sustainable sourcing"              },
-                { value: "BPI",      label: "Third-party verified compostability"         },
+                { value: "BRCGS",    label: "Global consumer products standard"           },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}

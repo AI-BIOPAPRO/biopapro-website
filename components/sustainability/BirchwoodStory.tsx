@@ -99,9 +99,9 @@ export default function BirchwoodStory() {
               "Sourced from FSC®-certified renewable forests",
               "Biodegrades in industrial composting within weeks",
               "No microplastic residue — ever",
-              "BPI Compostable certified (ASTM D6400)",
               "FSC® Chain of Custody independently audited",
-              "Compliant with EU single-use plastics directive",
+              "ISO 9001, ISO 14001 & ISO 45001 certified manufacturing",
+              "BRCGS Global Standard for Consumer Products certified",
             ].map((point) => (
               <div key={point} className="flex items-start gap-3 mb-3">
                 <span className="flex-shrink-0 mt-1 text-[13px]" style={{ color: "#7DB870" }}>✓</span>

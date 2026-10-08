@@ -50,7 +50,7 @@ export default function ProductsClient() {
       {/* S6 — Procurement Resources: catalog PDF, datasheets, certs, compliance */}
       <ProcurementResources />
 
-      {/* S7 — Certifications: FSC, ISO, FDA, BPI, BSCI, EU (dark) */}
+      {/* S7 — Certifications: FSC, ISO 9001/14001/45001, BRCGS (dark) */}
       <ProductCertifications />
 
       {/* S8 — Export Quote CTA: final persistent dark CTA */}

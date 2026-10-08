@@ -111,7 +111,7 @@ export default function ProductsHero() {
               transition={{ duration: 0.6, ease: EASE, delay: 0.24 }}
               className="flex flex-wrap gap-2 mb-10"
             >
-              {["FSC® 100%", "ISO 9001:2015", "FDA CFR 21", "BPI Compostable", "BSCI Audited"].map((cert) => (
+              {["FSC® 100%", "ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "BRCGS Certified"].map((cert) => (
                 <span
                   key={cert}
                   className="font-mono text-[11px] uppercase tracking-[0.2em] px-3 py-1.5"

@@ -51,8 +51,8 @@ export default function CertCTA() {
               style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)", color: "rgba(200,230,190,0.75)" }}
             >
               Contact us with your destination market and required certifications.
-              We issue a full documentation package — FSC®, ISO 9001, FDA, EU 10/2011,
-              BPI, BSCI — within 2–3 business days.
+              We issue a full documentation package — FSC®, ISO 9001, ISO 14001,
+              ISO 45001, BRCGS — within 2–3 business days.
             </motion.p>
 
             <motion.div

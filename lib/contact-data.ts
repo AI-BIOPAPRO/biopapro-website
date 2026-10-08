@@ -70,7 +70,7 @@ export const AFTER_SUBMIT = [
   { item: "Technical Datasheets",           detail: "Dimensions, tolerances, material specification"         },
   { item: "Packaging Specifications",       detail: "OPP bag counts, carton sizes, container fill data"      },
   { item: "MOQ & Pricing Guidance",         detail: "Volume pricing tiers from 5,000 to 1M+ units"           },
-  { item: "Certification Package",          detail: "FSC, ISO 9001, BRCGS, FDA, EU, BPI, BSCI documents"    },
+  { item: "Certification Package",          detail: "FSC, ISO 9001, ISO 14001, ISO 45001, BRCGS documents"  },
   { item: "Sample Request Option",          detail: "Physical sample pack dispatched from Mumbai"            },
   { item: "Export Documentation Overview",  detail: "COO, phytosanitary, FSC cert — all included"           },
   { item: "Lead Time Schedule",             detail: "Current production availability and shipment dates"     },
@@ -150,7 +150,7 @@ export const FAQS = [
   },
   {
     q: "What certifications do you provide with each shipment?",
-    a: "FSC® Chain of Custody Certificate and ISO 9001:2015 are included with every shipment. FDA CFR 21, EU 10/2011, BPI Compostable, and BSCI audit reports are available on request. Full documentation is provided within 2–3 business days of order confirmation.",
+    a: "FSC® Chain of Custody Certificate and ISO 9001:2015 are included with every shipment. ISO 14001, ISO 45001, BRCGS, and independent lab test reports (SGS, Intertek) are available on request. Full documentation is provided within 2–3 business days of order confirmation.",
   },
   {
     q: "What are your typical lead times?",
@@ -166,7 +166,7 @@ export const FAQS = [
   },
   {
     q: "What export documents are provided with every shipment?",
-    a: "Every shipment includes: Phytosanitary Certificate, Certificate of Origin, FSC® Chain of Custody Certificate, Commercial Invoice, Packing List, and Bill of Lading. ISO, FDA, EU, and BPI certificates provided on request. Full package ready within 2–3 days of loading.",
+    a: "Every shipment includes: Certificate of Origin, FSC® Chain of Custody Certificate, Commercial Invoice, Packing List, and Bill of Lading. ISO 9001/14001/45001 and BRCGS certificates provided on request. Full package ready within 2–3 days of loading.",
   },
 ] as const;
 

@@ -41,15 +41,15 @@ const RESOURCES = [
     number: "05",
     title: "ISO & Quality Certificates",
     subtitle: "ISO 9001:2015",
-    description: "Quality management system certificate covering manufacturing, QC, and export operations. Includes BSCI social audit summary and workplace compliance report.",
+    description: "Quality, environmental, and occupational health & safety certificates (ISO 9001, ISO 14001, ISO 45001) covering manufacturing, QC, and export operations.",
     cta: "Request Certificate",
   },
   {
     number: "06",
-    title: "Compliance Documents",
-    subtitle: "FDA · EU · BPI",
-    description: "FDA CFR 21, EU 10/2011 food-contact compliance, BPI compostability test reports. Full bundle for North American and European import documentation.",
-    cta: "Request Documents",
+    title: "Independent Test Reports",
+    subtitle: "SGS · Intertek",
+    description: "Heavy metal & phthalate testing (SGS), microbiology and packaging material testing (Intertek). Full bundle for North American and European import documentation.",
+    cta: "Request Reports",
   },
 ];
 

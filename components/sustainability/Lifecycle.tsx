@@ -94,11 +94,10 @@ export default function Lifecycle() {
           <span className="text-xl flex-shrink-0">♻</span>
           <p className="font-sans text-[14px] leading-relaxed text-ink-light">
             <strong className="text-ink font-semibold">End-of-life note:</strong>{" "}
-            Birchwood cutlery should be directed to industrial composting facilities where certified
-            compostable products are accepted. BPI certification applies to industrial composting
-            conditions (ASTM D6400) — not home composting. Buyers sourcing for markets with industrial
-            composting infrastructure (Germany, Netherlands, Australia, US) can make verified
-            compostability claims to their customers.
+            Birchwood cutlery should be directed to industrial composting facilities where
+            wood-based products are accepted — not home composting. As a natural material
+            rather than a plastic with a coating, it breaks down without leaving
+            microplastic residue.
           </p>
         </motion.div>
       </div>

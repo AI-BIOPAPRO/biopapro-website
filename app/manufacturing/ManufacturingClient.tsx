@@ -24,7 +24,7 @@ export default function ManufacturingClient() {
       {/* S4 — Quality Assurance: ISO 9001, BRCGS, 12 checkpoints, optical sorting */}
       <QualityAssurance />
 
-      {/* S5 — Workforce: 380+ employees, 70%+ women, BSCI audited */}
+      {/* S5 — Workforce: 380+ employees, 70%+ women, ISO 45001 certified */}
       <WorkforceSection />
 
       {/* S6 — Export Operations: container types, JNPT, logistics flow, capability table */}

@@ -26,7 +26,7 @@ export default function SustainabilityClient() {
       {/* S5 — Social Impact: workforce story + Worker Image */}
       <SocialImpact />
 
-      {/* S6 — Certifications: FSC, ISO 14001, BPI, ISO 45001 — with link to full page */}
+      {/* S6 — Certifications: FSC, ISO 14001, BRCGS, ISO 45001 — with link to full page */}
       <SustainabilityCerts />
 
       {/* S7 — CTA: Replace plastic in your supply chain */}
