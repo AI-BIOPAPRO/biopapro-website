@@ -56,7 +56,7 @@ export default function BuyerTrust() {
             >
               Global buyers require more than a product — they require a supplier
               who delivers on time, with the documentation their compliance teams
-              need. Six certifications. Two offices. One manufacturing standard.
+              need. Five certifications. Two offices. One manufacturing standard.
             </motion.p>
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function BuyerTrust() {
             className="font-display font-light italic text-ink-light"
             style={{ fontSize: "clamp(1.05rem, 1.8vw, 1.4rem)", maxWidth: 580 }}
           >
-            "One manufacturing standard. Six certifications. Eighteen markets.
+            "One manufacturing standard. Five certifications. Eighteen markets.
             Every buyer gets the same product, the same documentation, the same quality."
           </p>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted flex-shrink-0">
