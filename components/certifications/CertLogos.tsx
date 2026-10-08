@@ -1,231 +1,52 @@
-import React from "react";
+import Image from "next/image";
 
 /**
- * Certification mark SVGs — faithful recreations for immediate recognition
- *
- * Design principle: use actual certification body colors and visual identity.
- * A procurement manager must recognize the mark before reading the label.
- *
- * Legal notes:
- * - ISO 9001/14001/45001: ISO prohibits certified orgs from using the ISO logo.
- *   Recreation uses the well-known globe-badge visual language as a reference mark,
- *   not a claim of ISO endorsement. Final site should use registrar-issued artwork.
- * - FSC®: Certificate holders are licensed to display. Faithful recreation used.
- * - BRCGS: Certificate holders display under BRCGS brand guidelines.
+ * Certification marks — extracted directly from Biopapro's actual issued
+ * certificates (not recreated), cropped to the logo mark and stored under
+ * /public/certifications/. ISO 9001/14001/45001 are all issued by the same
+ * registrar (ICV Assessments), so they share one logo image.
  */
 
 type LogoProps = { size?: number; variant?: "light" | "dark" };
 
-// ── ISO Globe Badge (shared for 9001, 14001, 45001) ───────────────────────────
-// Visual: classic ISO circular badge with globe grid, "ISO" centered, std number below
-// Color: ISO navy blue #004494
-function ISOBadge({ size, standard, number }: { size: number; standard: string; number: string }) {
-  const blue = "#004494";
-  const w = size;
-  // The badge has the globe circle taking up ~60% of height, number below
-  const cx = w / 2;
-  const cy = w * 0.44;
-  const outerR = w * 0.44;
-  const globeR  = w * 0.30;
+const LOGO_FILES: Record<string, { src: string; alt: string; aspect: number }> = {
+  fsc:      { src: "/certifications/fsc.png",   alt: "FSC® Chain of Custody Certified",        aspect: 347 / 330 },
+  iso9001:  { src: "/certifications/icv.png",   alt: "ISO 9001:2015 — ICV Assessments",         aspect: 1 },
+  iso14001: { src: "/certifications/icv.png",   alt: "ISO 14001:2015 — ICV Assessments",        aspect: 1 },
+  iso45001: { src: "/certifications/icv.png",   alt: "ISO 45001:2018 — ICV Assessments",        aspect: 1 },
+  brcgs:    { src: "/certifications/brcgs.png", alt: "BRCGS Consumer Products Certificated",    aspect: 398 / 295 },
+};
 
-  // Latitude ellipse vertical offsets from globe center
-  const latOffsets = [-globeR * 0.38, 0, globeR * 0.38];
-
+function CertLogoImage({ id, size = 64 }: { id: string; size?: number }) {
+  const logo = LOGO_FILES[id];
+  if (!logo) return null;
+  const height = Math.round(size / logo.aspect);
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${w} ${w}`} fill="none" aria-label={`${standard} Certified`}>
-      {/* Outer thick ring */}
-      <circle cx={cx} cy={cy} r={outerR} stroke={blue} strokeWidth={w * 0.055} fill="none" />
-      {/* Inner thin ring */}
-      <circle cx={cx} cy={cy} r={outerR - w * 0.07} stroke={blue} strokeWidth={w * 0.008} fill="none" opacity="0.5" />
-
-      {/* Globe circle */}
-      <circle cx={cx} cy={cy} r={globeR} stroke={blue} strokeWidth={w * 0.018} fill="none" />
-
-      {/* Latitude arcs — clipped to globe */}
-      <clipPath id={`globe-clip-${number}`}>
-        <circle cx={cx} cy={cy} r={globeR} />
-      </clipPath>
-      <g clipPath={`url(#globe-clip-${number})`}>
-        {latOffsets.map((dy, i) => (
-          <ellipse
-            key={i}
-            cx={cx}
-            cy={cy + dy}
-            rx={globeR}
-            ry={Math.abs(dy) * 0.32 + globeR * 0.13}
-            stroke={blue}
-            strokeWidth={w * 0.012}
-            fill="none"
-          />
-        ))}
-        {/* Central vertical longitude */}
-        <line
-          x1={cx} y1={cy - globeR}
-          x2={cx} y2={cy + globeR}
-          stroke={blue} strokeWidth={w * 0.012}
-        />
-      </g>
-
-      {/* "ISO" text centered on globe */}
-      <text
-        x={cx} y={cy + w * 0.07}
-        textAnchor="middle"
-        fontFamily="'Arial Black', Arial, sans-serif"
-        fontSize={w * 0.19}
-        fontWeight="900"
-        fill={blue}
-        letterSpacing={w * 0.005}
-      >
-        ISO
-      </text>
-
-      {/* Standard number below badge */}
-      <text
-        x={cx} y={w * 0.93}
-        textAnchor="middle"
-        fontFamily="Arial, sans-serif"
-        fontSize={w * 0.13}
-        fontWeight="700"
-        fill={blue}
-        letterSpacing={w * 0.004}
-      >
-        {number}
-      </text>
-    </svg>
+    <Image
+      src={logo.src}
+      alt={logo.alt}
+      width={size}
+      height={height}
+      style={{ width: size, height: "auto", maxHeight: size, objectFit: "contain" }}
+      unoptimized
+    />
   );
 }
 
-export function LogoISO9001({ size = 64 }: LogoProps) {
-  return <ISOBadge size={size} standard="ISO 9001:2015" number="9001" />;
-}
-
-export function LogoISO14001({ size = 64 }: LogoProps) {
-  return <ISOBadge size={size} standard="ISO 14001:2015" number="14001" />;
-}
-
-export function LogoISO45001({ size = 64 }: LogoProps) {
-  return <ISOBadge size={size} standard="ISO 45001:2018" number="45001" />;
-}
-
-// ── BRCGS Food Safety ─────────────────────────────────────────────────────────
-// Visual: "BRCGS" bold wordmark, "Food Safety" sub-line, green "CERTIFICATED" bar
-// Color: BRCGS navy #005C8B + green #00A651
-export function LogoBRCGS({ size = 64 }: LogoProps) {
-  const navy  = "#005C8B";
-  const green = "#00A651";
-  const w = size;
-  const h = size * 0.85; // slightly rectangular
-
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill="none" aria-label="BRCGS Food Safety Certificated">
-      {/* Outer border */}
-      <rect x={w*0.03} y={h*0.03} width={w*0.94} height={h*0.94} rx={w*0.06} stroke={navy} strokeWidth={w*0.04} fill="none" />
-
-      {/* "BRCGS" main wordmark */}
-      <text
-        x={w/2} y={h*0.40}
-        textAnchor="middle"
-        fontFamily="'Arial Black', Arial, sans-serif"
-        fontSize={w*0.22}
-        fontWeight="900"
-        fill={navy}
-        letterSpacing={-w*0.005}
-      >
-        BRCGS
-      </text>
-
-      {/* "Food Safety" line */}
-      <text
-        x={w/2} y={h*0.58}
-        textAnchor="middle"
-        fontFamily="Arial, sans-serif"
-        fontSize={w*0.10}
-        fontWeight="600"
-        fill={navy}
-        letterSpacing={w*0.006}
-      >
-        Food Safety
-      </text>
-
-      {/* Green CERTIFICATED bar */}
-      <rect x={w*0.03} y={h*0.67} width={w*0.94} height={h*0.26} rx={w*0.02} fill={green} />
-      <text
-        x={w/2} y={h*0.845}
-        textAnchor="middle"
-        fontFamily="Arial, sans-serif"
-        fontSize={w*0.095}
-        fontWeight="700"
-        fill="white"
-        letterSpacing={w*0.008}
-      >
-        CERTIFICATED
-      </text>
-    </svg>
-  );
-}
-
-// ── FSC® 100% ────────────────────────────────────────────────────────────────
-// Visual: checkmark-tree logo + "FSC" + "® 100%"
-// Color: FSC green #007A34
 export function LogoFSC({ size = 64 }: LogoProps) {
-  const g = "#007A34";
-  const w = size;
-  const h = size;
-  const cx = w / 2;
-
-  // Tree shape: trunk + 3 stacked triangles (pine silhouette)
-  const trunk = { x: cx - w*0.05, y: h*0.6, width: w*0.10, height: h*0.22 };
-  // Tiers from bottom to top: wide → narrow
-  const tiers = [
-    { baseY: h*0.60, points: [cx, h*0.35, cx - w*0.32, h*0.60, cx + w*0.32, h*0.60] },
-    { baseY: h*0.50, points: [cx, h*0.20, cx - w*0.26, h*0.50, cx + w*0.26, h*0.50] },
-    { baseY: h*0.42, points: [cx, h*0.08, cx - w*0.18, h*0.42, cx + w*0.18, h*0.42] },
-  ];
-
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill="none" aria-label="FSC® 100% Certified">
-      {/* Tree tiers */}
-      {tiers.map((t, i) => (
-        <polygon key={i} points={t.points.join(",")} fill={g} />
-      ))}
-      {/* Trunk */}
-      <rect x={trunk.x} y={trunk.y} width={trunk.width} height={trunk.height} fill={g} rx="1" />
-
-      {/* Checkmark overlaid on top tier — white */}
-      <polyline
-        points={`${cx - w*0.10},${h*0.21} ${cx - w*0.02},${h*0.30} ${cx + w*0.14},${h*0.12}`}
-        stroke="white"
-        strokeWidth={w*0.045}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-
-      {/* FSC text */}
-      <text
-        x={cx} y={h*0.91}
-        textAnchor="middle"
-        fontFamily="'Arial Black', Arial, sans-serif"
-        fontSize={w*0.17}
-        fontWeight="900"
-        fill={g}
-        letterSpacing={w*0.012}
-      >
-        FSC®
-      </text>
-      <text
-        x={cx} y={h*1.00}
-        textAnchor="middle"
-        fontFamily="Arial, sans-serif"
-        fontSize={w*0.085}
-        fill={g}
-        opacity="0.75"
-        letterSpacing={w*0.004}
-      >
-        100% Certified
-      </text>
-    </svg>
-  );
+  return <CertLogoImage id="fsc" size={size} />;
+}
+export function LogoISO9001({ size = 64 }: LogoProps) {
+  return <CertLogoImage id="iso9001" size={size} />;
+}
+export function LogoISO14001({ size = 64 }: LogoProps) {
+  return <CertLogoImage id="iso14001" size={size} />;
+}
+export function LogoISO45001({ size = 64 }: LogoProps) {
+  return <CertLogoImage id="iso45001" size={size} />;
+}
+export function LogoBRCGS({ size = 64 }: LogoProps) {
+  return <CertLogoImage id="brcgs" size={size} />;
 }
 
 // ── Unified lookup ────────────────────────────────────────────────────────────

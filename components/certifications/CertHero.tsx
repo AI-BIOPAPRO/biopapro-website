@@ -63,9 +63,9 @@ export default function CertHero() {
               className="font-sans font-light text-ink-light leading-relaxed max-w-[500px] mb-10"
               style={{ fontSize: "clamp(1rem, 1.2vw, 1.1rem)" }}
             >
-              Biopapro holds nine independently verified certifications covering sustainable
-              sourcing, quality management, food safety, environmental compliance,
-              compostability, and ethical production. Every shipment ships documented.
+              Biopapro holds five independently verified certifications covering sustainable
+              sourcing, quality management, environmental compliance, workplace safety,
+              and consumer product standards. Every shipment ships documented.
             </motion.p>
 
             {/* Stats */}

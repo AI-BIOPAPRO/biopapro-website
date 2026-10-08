@@ -160,7 +160,7 @@ export default function CertificationsGrid() {
               className="font-display font-light text-ink leading-[0.95]"
               style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
-              Nine certifications.
+              Five certifications.
               <br />
               <span style={{ color: "#C89A5B" }}>Every claim verified.</span>
             </motion.h2>
@@ -171,16 +171,16 @@ export default function CertificationsGrid() {
               className="flex flex-col justify-center gap-5"
             >
               <p className="font-sans font-light text-ink-light leading-relaxed" style={{ fontSize: "clamp(1rem, 1.1vw, 1.05rem)" }}>
-                Biopapro holds nine active certifications covering forest sourcing,
-                manufacturing quality, food safety, compostability, and social compliance.
-                Every certificate is independently issued and renewed annually.
+                Biopapro holds five active certifications covering forest sourcing,
+                manufacturing quality, environmental management, workplace safety, and
+                consumer product standards. Every certificate is independently issued and audited.
               </p>
               {/* Mini stats */}
               <div className="flex gap-8">
                 {[
-                  { v: "9",     l: "Active Certifications"   },
+                  { v: "5",     l: "Active Certifications"   },
                   { v: "100%",  l: "Third-Party Verified"    },
-                  { v: "2019",  l: "Certified Since"         },
+                  { v: "2022",  l: "Certified Since"         },
                 ].map((s) => (
                   <div key={s.l}>
                     <p className="font-mono font-bold text-[1.4rem] leading-none" style={{ color: "#C89A5B" }}>{s.v}</p>

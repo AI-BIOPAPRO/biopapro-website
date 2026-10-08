@@ -17,6 +17,7 @@ import { CheckCircle2, Download, ExternalLink, ArrowUpRight } from "lucide-react
 import Link from "next/link";
 import SectionLabel from "@/components/shared/SectionLabel";
 import { COMPANY_FACTS } from "@/lib/company-facts";
+import { CERT_LOGOS } from "@/components/certifications/CertLogos";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -103,8 +104,9 @@ const CERTS = [
   },
 ] as const;
 
-/* ── Seal circle SVG ── */
-function CertSeal({ badge, shortName, color }: { badge: string; shortName: string; color: string }) {
+/* ── Seal circle, logo pulled from the actual issued certificate ── */
+function CertSeal({ id, color }: { id: string; color: string }) {
+  const Logo = CERT_LOGOS[id];
   return (
     <div className="relative flex-shrink-0" style={{ width: 80, height: 80 }}>
       <svg viewBox="0 0 80 80" width={80} height={80}>
@@ -118,16 +120,9 @@ function CertSeal({ badge, shortName, color }: { badge: string; shortName: strin
         <circle cx="40" cy="40" r="37" fill="none" stroke={color} strokeWidth="0.5"
           strokeDasharray="2 3" opacity="0.5" />
       </svg>
-      {/* Badge text */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
-        <span className="font-mono font-bold leading-none text-center"
-          style={{ fontSize: badge.length > 4 ? "8px" : "13px", color, letterSpacing: "0.05em" }}>
-          {badge}
-        </span>
-        <span className="font-mono font-bold leading-none text-center"
-          style={{ fontSize: "7px", color, letterSpacing: "0.12em", opacity: 0.75 }}>
-          {shortName}
-        </span>
+      {/* Real logo, cropped from the issued certificate */}
+      <div className="absolute inset-0 flex items-center justify-center p-4">
+        {Logo && <Logo size={48} />}
       </div>
     </div>
   );
@@ -151,7 +146,7 @@ function CertCard({ cert, index }: { cert: (typeof CERTS)[number]; index: number
 
       {/* Card header: seal + name */}
       <div className="px-5 pt-5 pb-4 flex items-start gap-4 border-b border-border">
-        <CertSeal badge={cert.badge} shortName={cert.shortName} color={cert.color} />
+        <CertSeal id={cert.id} color={cert.color} />
         <div className="flex flex-col gap-1.5 min-w-0 pt-1">
           <div className="flex items-center gap-2 flex-wrap">
             <span
