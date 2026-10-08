@@ -61,7 +61,7 @@ const STEPS = [
     index: "04",
     title: "Quality Control & Food Safety",
     subtitle: "Optical Sort + AQL 2.5",
-    body: "Automated optical sorting rejects dimensional defects and surface flaws; trained QC operators then run manual AQL 2.5 inspection. All food-contact units pass through a UV sterilisation tunnel — aligned with FDA CFR 21 and EU 10/2011 requirements.",
+    body: "Automated optical sorting rejects dimensional defects and surface flaws; trained QC operators then run manual AQL 2.5 inspection. All food-contact units pass through a UV sterilisation tunnel — within an ISO 9001-certified quality management system.",
     stat: { value: "AQL 2.5", label: "Inspection Standard" },
     tags: ["Optical Sorting", "UV Sterilisation", "Food-Contact Safe"],
   },

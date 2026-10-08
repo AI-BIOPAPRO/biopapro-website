@@ -29,7 +29,7 @@ const NAV = {
   ],
 } as const;
 
-const CERTS = ["FSC® 100%", "ISO 9001:2015", "FDA CFR 21", "BPI Compostable", "BSCI Audited"] as const;
+const CERTS = ["FSC® 100%", "ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "BRCGS Certified"] as const;
 
 export default function Footer() {
   const year = new Date().getFullYear();

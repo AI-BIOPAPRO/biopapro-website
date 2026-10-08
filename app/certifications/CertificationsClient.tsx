@@ -12,7 +12,7 @@ export default function CertificationsClient() {
       {/* S1 — Hero: "Every certification is a promise kept." + 6 cert badges */}
       <CertHero />
 
-      {/* S2 — All Certifications: expandable cards, FSC · ISO · FDA · EU · BPI · BSCI */}
+      {/* S2 — All Certifications: expandable cards, FSC · ISO 9001/14001/45001 · BRCGS */}
       <CertificationsGrid />
 
       {/* S3 — Compliance by Market: EU / US / Middle East / Pacific requirements */}

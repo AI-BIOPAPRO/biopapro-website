@@ -64,7 +64,7 @@ export default function SustainabilityCerts() {
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#A8D8A0")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#7DB870")}
               >
-                View all 9 certifications
+                View all 5 certifications
                 <ArrowUpRight size={14} strokeWidth={2} />
               </Link>
             </motion.div>
@@ -85,7 +85,7 @@ export default function SustainabilityCerts() {
                   <div className="flex items-center gap-3 mb-3">
                     <span
                       className="font-mono font-bold text-[13px] px-2.5 py-1"
-                      style={{ background: `${cert.color}18`, border: `1px solid ${cert.color}40`, color: cert.color === "#004494" ? "#8AABCF" : cert.color === "#007A34" || cert.color === "#2E7D32" ? "#7DB870" : "#7DB870" }}
+                      style={{ background: `${cert.color}18`, border: `1px solid ${cert.color}40`, color: cert.color === "#004494" ? "#8AABCF" : "#7DB870" }}
                     >
                       {cert.code}
                     </span>

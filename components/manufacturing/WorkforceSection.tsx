@@ -20,8 +20,8 @@ const WORKFORCE_POINTS = [
     body: "Consistent workforce means consistent quality. Operators who have worked through hundreds of production runs carry the process knowledge that prevents variation at scale.",
   },
   {
-    title: "BSCI Audited",
-    body: "Independent amfori BSCI social compliance audit verified. Labour rights, fair wages, workplace safety, and working hours are audited — not self-reported.",
+    title: "ISO 45001 Certified",
+    body: "Occupational health and safety management independently audited and certified to ISO 45001:2018. Hazard identification, risk assessment, and worker safety — audited, not self-reported.",
   },
 ] as const;
 

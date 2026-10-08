@@ -19,8 +19,8 @@ export const BIRCHWOOD_FACTS = [
     body: "Birchwood cutlery decomposes in industrial composting environments within weeks. No microplastic residue. No persistent environmental contamination. The product disappears as nature intended.",
   },
   {
-    title: "BPI Compostable Certified",
-    body: "Biopapro's compostability claims are third-party verified by the Biodegradable Products Institute (BPI) to ASTM D6400 standard. Not self-declared — independently tested.",
+    title: "Naturally Compostable",
+    body: "Birchwood is a natural material, not a plastic with a coating — it breaks down in composting environments without leaving microplastic residue. No synthetic additives, no chemical treatment.",
   },
   {
     title: "FSC® Chain of Custody",
@@ -50,7 +50,7 @@ export const LIFECYCLE_STAGES = [
   {
     step: "04",
     title: "Single-Use — Then Compost",
-    body: "After use, birchwood cutlery goes to industrial composting. BPI-certified to ASTM D6400. The product becomes organic matter — not landfill, not ocean waste, not microplastics.",
+    body: "After use, birchwood cutlery goes to industrial composting. The product becomes organic matter — not landfill, not ocean waste, not microplastics.",
     tag: "End of Life",
   },
 ] as const;
@@ -67,9 +67,9 @@ export const SOCIAL_FACTS = [
     body: "A permanent, skilled workforce with deep process knowledge. Long-term employment provides income stability for families across Mumbai.",
   },
   {
-    stat: "BSCI",
-    label: "Social Compliance Audited",
-    body: "Independent amfori BSCI audit verified labour rights, fair wages, workplace safety, and working conditions. Audit report available to qualified buyers on request.",
+    stat: "ISO 45001",
+    label: "Workplace Safety Certified",
+    body: "Occupational health and safety management independently audited and certified to ISO 45001:2018 by ICV Assessments. Certificate available to qualified buyers on request.",
   },
   {
     stat: "2019",
@@ -81,6 +81,6 @@ export const SOCIAL_FACTS = [
 export const SUSTAINABILITY_CERTS = [
   { code: "FSC®",        name: "Forest Stewardship Council",  detail: "100% certified sourcing · Chain of custody verified",    color: "#007A34" },
   { code: "ISO 14001",   name: "Environmental Management",    detail: "ISO 14001:2015 · Annual surveillance audits",             color: "#004494" },
-  { code: "BPI",         name: "Compostable Certified",       detail: "ASTM D6400 · Third-party verified compostability",        color: "#2E7D32" },
+  { code: "BRCGS",       name: "Consumer Products Standard",  detail: "Foundation Level · Audited by SGS United Kingdom",        color: "#005C8B" },
   { code: "ISO 45001",   name: "Occupational Health & Safety",detail: "ISO 45001:2018 · Worker safety certified",                color: "#004494" },
 ] as const;

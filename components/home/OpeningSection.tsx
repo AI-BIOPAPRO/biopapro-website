@@ -23,7 +23,7 @@ import { COMPANY_FACTS, getCumulativeUnitsProduced, formatUnitsShort } from "@/l
 
 const E = [0.16, 1, 0.3, 1] as const;
 
-const TRUST_MARKS = ["FSC® 100%", "ISO 9001:2015", "FDA CFR 21", "BPI Compostable", "BSCI Audited"] as const;
+const TRUST_MARKS = ["FSC® 100%", "ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "BRCGS Certified"] as const;
 
 function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);

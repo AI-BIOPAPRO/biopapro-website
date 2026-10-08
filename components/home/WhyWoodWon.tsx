@@ -45,12 +45,12 @@ const COMPARISONS: {
   {
     category: "End of Life",
     plastic:   { headline: "500+ year persistence",  detail: "Does not biodegrade — fragments into microplastics that persist in soil and ocean indefinitely." },
-    birchwood: { headline: "Compostable in weeks",     detail: "Biodegrades in industrial composting within weeks — BPI certified to ASTM D6400. Zero heavy-metal residue." },
+    birchwood: { headline: "Compostable in weeks",     detail: "Biodegrades in industrial composting within weeks — a natural material, not a plastic with a coating. Lab-tested: zero detectable heavy metals." },
   },
   {
     category: "Food Safety",
     plastic:   { headline: "Chemical migration risk", detail: "Phthalates, BPA, styrene, and other plasticizers leach into food — especially at high temperatures." },
-    birchwood: { headline: "FDA CFR 21 Certified",    detail: "Zero chemical contact. No bleach, wax, or coatings. Tested under rigorous acetic acid extraction protocols." },
+    birchwood: { headline: "Lab-Tested Food Contact",  detail: "Zero chemical contact. No bleach, wax, or coatings. Independently tested for heavy metals and phthalates — results on request." },
   },
   {
     category: "Heat Performance",

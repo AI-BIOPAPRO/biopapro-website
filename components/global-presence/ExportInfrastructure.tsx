@@ -30,7 +30,7 @@ const CAPABILITIES = [
     icon: FileCheck,
     title: "Export Documentation",
     stat: "All markets covered",
-    body: "COO, phytosanitary certificates, FSC chain-of-custody documents, FDA compliance letters, EU food-contact declarations. Full pack issued per shipment.",
+    body: "COO, phytosanitary certificates, FSC chain-of-custody documents, ISO and BRCGS certificates, independent lab test reports. Full pack issued per shipment.",
   },
   {
     icon: Truck,

@@ -54,7 +54,7 @@ export const PRODUCTION_STEPS = [
   {
     step: "04",
     title: "Quality Control & Food Safety",
-    body: "Automated optical sorting identifies and rejects dimensional defects and surface flaws. Manual AQL 2.5 inspection follows, conducted by trained QC operators. All food-contact units pass through a UV sterilisation tunnel — compliant with FDA CFR 21 and EU 10/2011.",
+    body: "Automated optical sorting identifies and rejects dimensional defects and surface flaws. Manual AQL 2.5 inspection follows, conducted by trained QC operators. All food-contact units pass through a UV sterilisation tunnel, within an ISO 9001-certified quality system.",
     tag: "Quality Gate 2",
     accent: "#4A7A3D",
   },
@@ -90,8 +90,8 @@ export const FACTORY_CAPABILITIES = [
   {
     id: "uv",
     title: "UV Sterilisation",
-    body: "All food-contact units pass through a UV sterilisation tunnel before packaging. Food-safety compliance is maintained to FDA CFR Title 21 and EU Regulation 10/2011 standards.",
-    metric: "FDA + EU compliant",
+    body: "All food-contact units pass through a UV sterilisation tunnel before packaging. Food-safety compliance is maintained within the BRCGS-certified manufacturing process.",
+    metric: "BRCGS certified",
   },
   {
     id: "qc",
@@ -121,7 +121,7 @@ export const QA_CHECKPOINTS = [
   { stage: "Post-Production", check: "Automated optical sorting — 100% of units screened"                    },
   { stage: "Post-Production", check: "Manual AQL 2.5 sampling inspection by QC team"                        },
   { stage: "Food Safety",     check: "UV sterilisation tunnel — all food-contact units"                      },
-  { stage: "Food Safety",     check: "FDA CFR 21 and EU 10/2011 compliance verified per batch"               },
+  { stage: "Food Safety",     check: "BRCGS food-contact manufacturing standard verified per batch"          },
   { stage: "Packaging",       check: "Count verification — OPP bag and carton quantity audit"                },
   { stage: "Packaging",       check: "Carton labelling and export marking verified"                          },
   { stage: "Pre-Shipment",    check: "Documentation package review — FSC cert, phytosanitary, COO, invoices" },
@@ -144,7 +144,7 @@ export const MFG_METRICS = [
   { value: "300",    suffix: "T",  label: "Tons per Month",       sub: "Birchwood processed"                 },
   { value: "380",    suffix: "+",  label: "Employees",            sub: "70%+ women"                          },
   { value: "18",     suffix: "+",  label: "Export Markets",       sub: "6 continents"                        },
-  { value: "9",      suffix: "",   label: "Certifications",       sub: "ISO · FSC · BRCGS · BPI · BSCI"     },
+  { value: "5",      suffix: "",   label: "Certifications",       sub: "ISO · FSC · BRCGS"                   },
   { value: "12",     suffix: "+",  label: "QA Checkpoints",       sub: "Per production batch"                },
 ] as const;
 
@@ -167,7 +167,7 @@ export const BUYER_TRUST_POINTS = [
   },
   {
     title: "Regulatory Compliance",
-    body: "ISO 14001, ISO 45001, FDA CFR 21, EU 10/2011, BPI Compostable, BSCI — compliance maintained continuously, not just at audit time.",
+    body: "ISO 14001, ISO 45001, BRCGS — compliance maintained continuously, not just at audit time.",
   },
   {
     title: "Workforce Stability",

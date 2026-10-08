@@ -120,7 +120,7 @@ const ACTS = [
     imagePlaceholder: null,
     imageAlt: "FSC-certified birchwood wooden fork — Biopapro product engineering",
     cta: { label: "View Full Range", href: "/products" },
-    certifications: ["FSC®", "ISO 9001", "FDA CFR 21", "BPI"],
+    certifications: ["FSC®", "ISO 9001", "ISO 14001", "BRCGS"],
   },
   {
     n: "05",

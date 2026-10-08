@@ -45,7 +45,7 @@ export default function ProductCertifications() {
               className="font-display font-light leading-[0.93]"
               style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#F6F1E8" }}
             >
-              Six certifications.
+              Five certifications.
               <br />
               <span style={{ color: "#C89A5B" }}>Every market covered.</span>
             </motion.h2>
@@ -57,7 +57,7 @@ export default function ProductCertifications() {
               className="font-sans font-light text-base leading-relaxed flex items-center"
               style={{ color: "rgba(230,210,185,0.65)" }}
             >
-              From FSC chain-of-custody to FDA food contact compliance,
+              From FSC chain-of-custody to ISO-certified manufacturing,
               every Biopapro product ships with the documentation your
               import team needs to clear customs and satisfy regulatory
               requirements across North America, Europe, and Asia.

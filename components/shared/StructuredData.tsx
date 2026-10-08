@@ -90,8 +90,9 @@ export default function StructuredData() {
         hasCertification: [
           { "@type": "Certification", name: "FSC® 100% Chain of Custody" },
           { "@type": "Certification", name: "ISO 9001:2015" },
-          { "@type": "Certification", name: "BRCGS Food Safety" },
-          { "@type": "Certification", name: "BPI Compostable" },
+          { "@type": "Certification", name: "ISO 14001:2015" },
+          { "@type": "Certification", name: "ISO 45001:2018" },
+          { "@type": "Certification", name: "BRCGS Global Standard for Consumer Products" },
         ],
       },
     ],

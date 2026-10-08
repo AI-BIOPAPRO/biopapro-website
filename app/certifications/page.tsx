@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import CertificationsClient from "./CertificationsClient";
 
 export const metadata: Metadata = {
-  title: "Wooden Cutlery Certifications — FSC, ISO, FDA, BPI",
+  title: "Wooden Cutlery Certifications — FSC, ISO, BRCGS",
   description:
-    "Biopapro is a certified wooden cutlery manufacturer for domestic India supply and global export, backed by 9 independent certifications. FSC® 100%, ISO 9001:2015, ISO 14001:2015, ISO 45001:2018, BRCGS Food Safety, BPI Compostable, BSCI, FDA CFR 21, EU 10/2011.",
+    "Biopapro is a certified wooden cutlery manufacturer for domestic India supply and global export, backed by 5 independent certifications. FSC® 100%, ISO 9001:2015, ISO 14001:2015, ISO 45001:2018, BRCGS Global Standard for Consumer Products.",
   keywords: [
     "FSC certified wooden cutlery India",
     "ISO certified cutlery manufacturer India",
@@ -12,17 +12,15 @@ export const metadata: Metadata = {
     "certified wooden cutlery supplier",
     "FSC certified tableware India",
     "ISO 9001 cutlery manufacturer India",
-    "BPI compostable cutlery India",
-    "BSCI audited manufacturer India",
-    "FDA food contact wooden cutlery",
-    "EU 10/2011 birchwood tableware",
+    "ISO 14001 cutlery manufacturer India",
+    "ISO 45001 cutlery manufacturer India",
     "certified sustainable cutlery supplier",
     "certified wooden tableware India",
   ],
   openGraph: {
     title: "Certified Wooden Cutlery Manufacturer India — Biopapro",
     description:
-      "9 certifications: FSC · ISO 9001 · ISO 14001 · ISO 45001 · BRCGS · BPI · BSCI · FDA · EU. India's certified birchwood cutlery manufacturer.",
+      "5 certifications: FSC · ISO 9001 · ISO 14001 · ISO 45001 · BRCGS. India's certified birchwood cutlery manufacturer.",
     type: "website",
     url: "/certifications",
     images: ["/opengraph-image"],

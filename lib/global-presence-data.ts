@@ -147,21 +147,20 @@ export const JOURNEY_STEPS = [
   { step: "02", title: "Raw Material Intake",      body: "Birchwood billets inspected, graded, and moisture-tested on arrival at the Mumbai manufacturing facility.", tag: "Quality Gate 1" },
   { step: "03", title: "Precision Stamping",       body: "High-speed stamping lines cut each product to dimensional tolerance. 300+ tons of cutlery produced monthly.", tag: "Manufacturing" },
   { step: "04", title: "Optical Sorting & QC",    body: "Automated optical sorting removes sub-specification units. Manual QC inspection per ISO 9001:2015 procedures.", tag: "Quality Gate 2" },
-  { step: "05", title: "UV Sterilisation",         body: "Every unit passes through UV sterilisation tunnel before packing. Food-contact safe per FDA CFR 21 and EU 10/2011.", tag: "Food Safety" },
+  { step: "05", title: "UV Sterilisation",         body: "Every unit passes through UV sterilisation tunnel before packing, within a BRCGS-certified food-contact manufacturing process.", tag: "Food Safety" },
   { step: "06", title: "Export Packaging",         body: "Packed into OPP bags (100 or 500 units), then into standardised export cartons sized for container optimisation.", tag: "Packaging" },
   { step: "07", title: "Container Loading",        body: "20ft or 40ft FCL containers loaded at Mumbai port. LCL consolidation available for smaller order quantities.", tag: "Logistics" },
   { step: "08", title: "Ocean Freight",            body: "Container departs Mumbai port. Transit time 10–28 days depending on destination. Customs docs issued at loading.", tag: "Shipping" },
-  { step: "09", title: "Delivered to Buyer",       body: "Container arrives at destination port. Full documentation package: COO, phytosanitary cert, FSC cert, invoices.", tag: "Delivery" },
+  { step: "09", title: "Delivered to Buyer",       body: "Container arrives at destination port. Full documentation package: COO, FSC cert, ISO/BRCGS certs, invoices.", tag: "Delivery" },
 ] as const;
 
 // ── Trust Signals ─────────────────────────────────────────────────────────────
 export const TRUST_SIGNALS = [
   { label: "FSC® Certified",    detail: "Chain of Custody verified for every batch",      tag: "Forest Stewardship" },
   { label: "ISO 9001:2015",     detail: "Quality management across all production",        tag: "Quality System"     },
-  { label: "FDA CFR 21",        detail: "Food-contact safe for US market imports",         tag: "US Compliance"      },
-  { label: "EU 10/2011",        detail: "European food-contact materials regulation",      tag: "EU Compliance"      },
-  { label: "BPI Compostable",   detail: "Independently verified industrial compostability",tag: "Sustainability"      },
-  { label: "BSCI Audited",      detail: "Independent social compliance audit passed",      tag: "Ethics"             },
+  { label: "ISO 14001:2015",    detail: "Environmental management system certified",       tag: "Environmental"      },
+  { label: "ISO 45001:2018",    detail: "Occupational health & safety certified",          tag: "Workplace Safety"   },
+  { label: "BRCGS",             detail: "Global consumer products standard, Foundation Level", tag: "Product Standard" },
   { label: "380+ Workforce",    detail: "Scalable production capacity on demand",          tag: "Scale"              },
 ] as const;
 
@@ -172,5 +171,5 @@ export const PROCUREMENT_STATS = [
   { value: "18",    suffix: "+",  label: "Export Markets",      sub: "Active destinations" },
   { value: COMPANY_FACTS.plasticSavedPerDay.toLocaleString(), suffix: "kg", label: "Plastic Saved Daily", sub: "Environmental impact" },
   { value: "380",   suffix: "+",  label: "Employees",           sub: "70%+ women" },
-  { value: "6",     suffix: "",   label: "Certifications",      sub: "FSC · ISO · FDA · BPI · BSCI · EU" },
+  { value: "5",     suffix: "",   label: "Certifications",      sub: "FSC · ISO · BRCGS" },
 ] as const;

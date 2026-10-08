@@ -82,7 +82,7 @@ export default function HomePage() {
       {/* S8  — Global Presence: interactive world map, 18+ markets */}
       <GlobalPresence />
 
-      {/* S9  — Certifications: trust vault — FSC, ISO, FDA, BPI, BSCI, EU */}
+      {/* S9  — Certifications: trust vault — FSC, ISO 9001/14001/45001, BRCGS */}
       <Certifications />
 
       {/* S10 — Contact: export partnership enquiry form */}
