@@ -22,6 +22,33 @@ export function estimateReadingMinutes(post: Post): number {
   return Math.max(1, Math.ceil(words / 200));
 }
 
+/**
+ * Posts with a real cover photo in public/blog/covers/<slug>.jpg
+ * (free-license Pexels images, picked per post topic). A post not listed
+ * here falls back to the generated per-category BlogCover graphic instead
+ * of linking a file that doesn't exist.
+ */
+const COVER_IMAGE_SLUGS = new Set([
+  "india-single-use-plastic-ban-2025",
+  "birchwood-vs-bamboo-cutlery",
+  "what-does-fsc-certified-cutlery-mean",
+  "biopapro-100-million-units-milestone",
+  "eu-single-use-plastics-directive-export-guide",
+  "industrial-vs-home-compostable-explained",
+  "how-to-vet-wooden-cutlery-supplier",
+  "wooden-vs-cornstarch-pla-cutlery",
+  "plastic-foodware-regulation-trends",
+  "how-birchwood-becomes-a-fork",
+  "carbon-footprint-wooden-vs-plastic-cutlery",
+  "choosing-right-cutlery-length-for-your-menu",
+  "wooden-cutlery-airlines-hospitality",
+  "export-documentation-checklist-wooden-tableware",
+]);
+
+export function getCoverImageSrc(post: Post): string | null {
+  return COVER_IMAGE_SLUGS.has(post.slug) ? `/blog/covers/${post.slug}.jpg` : null;
+}
+
 export const POSTS: Post[] = [
   {
     slug: "india-single-use-plastic-ban-2025",
