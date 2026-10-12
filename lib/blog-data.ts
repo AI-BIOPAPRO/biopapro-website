@@ -16,6 +16,12 @@ export const CATEGORY_LABELS: Record<string, string> = {
   "regulations":      "Regulations",
 };
 
+/** ~200 words/minute, rounded up to a whole minute, minimum 1. */
+export function estimateReadingMinutes(post: Post): number {
+  const words = post.body.reduce((sum, block) => sum + block.text.trim().split(/\s+/).length, 0);
+  return Math.max(1, Math.ceil(words / 200));
+}
+
 export const POSTS: Post[] = [
   {
     slug: "india-single-use-plastic-ban-2025",

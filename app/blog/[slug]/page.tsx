@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { POSTS, CATEGORY_LABELS, getPostBySlug } from "@/lib/blog-data";
+import { POSTS, CATEGORY_LABELS, getPostBySlug, estimateReadingMinutes } from "@/lib/blog-data";
+import BlogCover from "@/components/blog/BlogCover";
 
 export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }));
@@ -36,6 +37,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const related = POSTS.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 3);
+
   return (
     <main style={{ background: "#F6F1E8", minHeight: "100vh" }}>
       {/* Back nav */}
@@ -50,9 +53,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </Link>
       </div>
 
+      {/* Hero cover */}
+      <div className="max-w-[800px] mx-auto px-6 md:px-12 pt-8">
+        <div className="w-full overflow-hidden" style={{ aspectRatio: "16 / 7", border: "1px solid #DDD3C5" }}>
+          <BlogCover category={post.category} />
+        </div>
+      </div>
+
       {/* Article header */}
       <header className="max-w-[800px] mx-auto px-6 md:px-12 pt-10 pb-8">
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-6 flex-wrap">
           <span
             className="font-mono text-[11px] uppercase tracking-[0.22em] px-2.5 py-1"
             style={{ background: "#EDE7DC", color: "#4A7A3D" }}
@@ -61,6 +71,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </span>
           <span className="font-mono text-[11px]" style={{ color: "#B8A898" }}>
             {formatDate(post.publishedAt)}
+          </span>
+          <span className="font-mono text-[11px]" style={{ color: "#B8A898" }}>
+            · {estimateReadingMinutes(post)} min read
           </span>
         </div>
 
@@ -106,6 +119,39 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         ))}
       </article>
+
+      {/* Related posts */}
+      {related.length > 0 && (
+        <section className="max-w-[800px] mx-auto px-6 md:px-12 pb-20">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] mb-5" style={{ color: "#B8A898" }}>
+            More in {CATEGORY_LABELS[post.category] ?? post.category}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {related.map((r) => (
+              <Link
+                key={r.slug}
+                href={`/blog/${r.slug}`}
+                className="group flex flex-col overflow-hidden"
+                style={{ border: "1px solid #DDD3C5", background: "#FDFAF5" }}
+              >
+                <div className="w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+                  <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.06]">
+                    <BlogCover category={r.category} />
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3
+                    className="font-display font-light leading-snug transition-colors duration-200 group-hover:text-[#4A7A3D]"
+                    style={{ fontSize: "0.95rem", color: "#2A2118" }}
+                  >
+                    {r.title}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Footer CTA */}
       <div style={{ background: "#2D5228" }}>
