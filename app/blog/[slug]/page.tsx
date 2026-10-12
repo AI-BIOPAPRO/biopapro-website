@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
-import { POSTS, CATEGORY_LABELS, getPostBySlug, estimateReadingMinutes } from "@/lib/blog-data";
+import { POSTS, CATEGORY_LABELS, getPostBySlug, estimateReadingMinutes, getCoverImageSrc, type Post } from "@/lib/blog-data";
 import BlogCover from "@/components/blog/BlogCover";
+
+function PostCover({ post }: { post: Post }) {
+  const src = getCoverImageSrc(post);
+  if (src) {
+    return <Image src={src} alt={post.title} fill sizes="(min-width: 768px) 800px, 100vw" className="object-cover" />;
+  }
+  return <BlogCover category={post.category} />;
+}
 
 export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }));
@@ -55,8 +64,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       {/* Hero cover */}
       <div className="max-w-[800px] mx-auto px-6 md:px-12 pt-8">
-        <div className="w-full overflow-hidden" style={{ aspectRatio: "16 / 7", border: "1px solid #DDD3C5" }}>
-          <BlogCover category={post.category} />
+        <div className="w-full overflow-hidden relative" style={{ aspectRatio: "16 / 7", border: "1px solid #DDD3C5" }}>
+          <PostCover post={post} />
         </div>
       </div>
 
@@ -134,9 +143,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 className="group flex flex-col overflow-hidden"
                 style={{ border: "1px solid #DDD3C5", background: "#FDFAF5" }}
               >
-                <div className="w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
-                  <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.06]">
-                    <BlogCover category={r.category} />
+                <div className="w-full overflow-hidden relative" style={{ aspectRatio: "4 / 3" }}>
+                  <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.06] relative">
+                    <PostCover post={r} />
                   </div>
                 </div>
                 <div className="p-4">

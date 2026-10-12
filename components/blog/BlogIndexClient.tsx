@@ -2,8 +2,25 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Post, CATEGORY_LABELS, estimateReadingMinutes } from "@/lib/blog-data";
+import Image from "next/image";
+import { Post, CATEGORY_LABELS, estimateReadingMinutes, getCoverImageSrc } from "@/lib/blog-data";
 import BlogCover from "@/components/blog/BlogCover";
+
+function PostCover({ post }: { post: Post }) {
+  const src = getCoverImageSrc(post);
+  if (src) {
+    return (
+      <Image
+        src={src}
+        alt={post.title}
+        fill
+        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+        className="object-cover"
+      />
+    );
+  }
+  return <BlogCover category={post.category} />;
+}
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-IN", {
@@ -62,9 +79,9 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
             className="group flex flex-col overflow-hidden"
             style={{ border: "1px solid #DDD3C5", background: "#FDFAF5" }}
           >
-            <div className="w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
-              <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.06]">
-                <BlogCover category={post.category} />
+            <div className="w-full overflow-hidden relative" style={{ aspectRatio: "4 / 3" }}>
+              <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.06] relative">
+                <PostCover post={post} />
               </div>
             </div>
 
