@@ -51,7 +51,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <main style={{ background: "#F6F1E8", minHeight: "100vh" }}>
       {/* Back nav */}
-      <div className="max-w-[800px] mx-auto px-6 md:px-12 pt-10">
+      <div className="max-w-[800px] mx-auto px-6 md:px-12 pt-28 md:pt-32">
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] transition-colors duration-200 hover:text-[#4A7A3D]"
