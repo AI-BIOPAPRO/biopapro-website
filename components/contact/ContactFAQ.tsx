@@ -24,7 +24,7 @@ export default function ContactFAQ() {
             transition={{ duration: 0.55, ease: EASE }}
             className="mb-7"
           >
-            <SectionLabel index="07" label="Procurement FAQ" />
+            <SectionLabel index="08" label="Procurement FAQ" />
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
             <motion.h2

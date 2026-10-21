@@ -22,7 +22,7 @@ export default function AfterSubmit() {
             transition={{ duration: 0.55, ease: EASE }}
             className="mb-7"
           >
-            <SectionLabel index="05" label="What You Receive" />
+            <SectionLabel index="06" label="What You Receive" />
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
             <motion.h2

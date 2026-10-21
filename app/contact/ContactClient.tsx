@@ -5,6 +5,7 @@ import ContactHero          from "@/components/contact/ContactHero";
 import ExportInquiryForm    from "@/components/contact/ExportInquiryForm";
 import ProcurementJourney   from "@/components/contact/ProcurementJourney";
 import GlobalContactNetwork from "@/components/contact/GlobalContactNetwork";
+import MeetTheTeam          from "@/components/contact/MeetTheTeam";
 import AfterSubmit          from "@/components/contact/AfterSubmit";
 import ContactIndustries    from "@/components/contact/ContactIndustries";
 import ContactFAQ           from "@/components/contact/ContactFAQ";
@@ -32,16 +33,20 @@ export default function ContactClient() {
       {/* S4 — Global Contact Network: India HQ */}
       <GlobalContactNetwork />
 
-      {/* S5 — What You Receive: 8-item procurement package */}
+      {/* S5 — Meet the Team: founder/co-founder/sales cards (placeholder
+          until real photos + names are provided) */}
+      <MeetTheTeam />
+
+      {/* S6 — What You Receive: 8-item procurement package */}
       <AfterSubmit />
 
-      {/* S6 — Industries We Supply: 8 segment cards */}
+      {/* S7 — Industries We Supply: 8 segment cards */}
       <ContactIndustries />
 
-      {/* S7 — Procurement FAQ: 8 buyer questions */}
+      {/* S8 — Procurement FAQ: 8 buyer questions */}
       <ContactFAQ />
 
-      {/* S8 — Final CTA: "Your next shipment starts with a conversation." */}
+      {/* S9 — Final CTA: "Your next shipment starts with a conversation." */}
       <ContactFinalCTA />
     </main>
   );

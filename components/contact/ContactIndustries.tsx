@@ -22,7 +22,7 @@ export default function ContactIndustries() {
             transition={{ duration: 0.55, ease: EASE }}
             className="mb-7"
           >
-            <SectionLabel index="06" label="Industries We Supply" />
+            <SectionLabel index="07" label="Industries We Supply" />
           </motion.div>
           <motion.h2
             id="industries-heading"
