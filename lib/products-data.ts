@@ -273,6 +273,7 @@ export const PRODUCTS: BioProduct[] = [
     primaryImage: `${CDN}/products/W3_1_a6553262-d845-4b67-858e-e826356b8630.jpg?v=1665051943`,
     galleryImages: [
       `${CDN}/products/W3_1_a6553262-d845-4b67-858e-e826356b8630.jpg?v=1665051943`,
+      "/products/real/spoon-160mm-wrapped.jpg",
       `${CDN}/products/NewProject_8_4f36430d-c81c-4878-93d6-cffde38fea48.png?v=1665051943`,
       `${CDN}/products/G46_1.jpg?v=1665051943`,
     ],
