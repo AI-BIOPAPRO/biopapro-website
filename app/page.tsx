@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import OpeningSection            from "@/components/home/OpeningSection";
+import TrustBadgeTicker          from "@/components/home/TrustBadgeTicker";
 import ProductStrip              from "@/components/home/ProductStrip";
 import WhyWoodWon               from "@/components/home/WhyWoodWon";
 import ImpactCounter            from "@/components/home/ImpactCounter";
@@ -55,6 +56,10 @@ export default function HomePage() {
     <main>
       {/* S1  — Opening: product photography, value proposition, immediate clarity */}
       <OpeningSection />
+
+      {/* Trust badge ticker — scrolling credibility strip, sits right below
+          the hero so it's visible on first scroll */}
+      <TrustBadgeTicker />
 
       {/* S1b — Product Strip: continuous self-sliding real-SKU preview,
           replaces the single rotating card that used to live inside the

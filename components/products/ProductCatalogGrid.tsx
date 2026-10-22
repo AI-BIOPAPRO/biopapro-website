@@ -11,6 +11,7 @@ import { useScrollLock } from "@/lib/use-scroll-lock";
 import {
   PRODUCTS,
   ALL_CATEGORIES,
+  CATEGORY_COLORS,
   getProductBySlug,
   type BioProduct,
   type ProductCategory,
@@ -88,7 +89,7 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
           <div className="flex items-center gap-2.5">
             <span
               className="font-mono text-[11px] uppercase tracking-[0.22em] px-2.5 py-1"
-              style={{ background: "rgba(74,122,61,0.1)", border: "1px solid rgba(74,122,61,0.25)", color: "#4A7A3D" }}
+              style={{ background: CATEGORY_COLORS[product.category], color: "#FFFFFF" }}
             >
               {product.category}
             </span>
@@ -286,6 +287,7 @@ function ProductCard({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
+  const accent = CATEGORY_COLORS[product.category];
 
   return (
     <motion.div
@@ -296,17 +298,19 @@ function ProductCard({
       className="group relative flex flex-col bg-surface overflow-hidden"
       style={{
         border: "1px solid #DDD3C5",
+        borderTop: `3px solid #DDD3C5`,
         transition: "border-color 0.28s, box-shadow 0.32s, transform 0.32s",
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLElement;
-        el.style.borderColor = "rgba(200,154,91,0.5)";
+        el.style.borderColor = accent;
         el.style.boxShadow = "0 10px 36px rgba(44,36,27,0.13), 0 2px 8px rgba(44,36,27,0.06)";
         el.style.transform = "translateY(-2px)";
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLElement;
         el.style.borderColor = "#DDD3C5";
+        el.style.borderTopColor = "#DDD3C5";
         el.style.boxShadow = "none";
         el.style.transform = "translateY(0)";
       }}
@@ -321,11 +325,12 @@ function ProductCard({
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
 
-        {/* Category badge */}
+        {/* Category badge — color-coded per category so the grid reads as
+            distinct ranges at a glance */}
         <div className="absolute top-0 left-0 z-10">
           <span
             className="font-mono text-[11px] uppercase tracking-[0.16em] px-2.5 py-1.5 block"
-            style={{ background: "rgba(29,22,16,0.7)", color: "#C89A5B", backdropFilter: "blur(4px)" }}
+            style={{ background: accent, color: "#FFFFFF" }}
           >
             {product.category}
           </span>
@@ -517,20 +522,27 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
             {(["All", ...ALL_CATEGORIES] as string[]).map((cat) => {
               const isActive = activeCategory === cat;
               const count = CATEGORY_COUNTS[cat] ?? 0;
+              const accent = cat === "All" ? "#4A7A3D" : CATEGORY_COLORS[cat as ProductCategory];
               return (
                 <button
                   key={cat}
                   onClick={() => onCategoryChange(cat)}
-                  className="font-mono text-[11px] uppercase tracking-[0.16em] px-3.5 py-2 transition-all duration-200"
+                  className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] px-3.5 py-2 transition-all duration-200"
                   style={{
-                    background: isActive ? "#4A7A3D" : "transparent",
+                    background: isActive ? accent : "transparent",
                     color: isActive ? "#ffffff" : "#6B5D50",
-                    border: `1px solid ${isActive ? "#4A7A3D" : "#DDD3C5"}`,
+                    border: `1px solid ${isActive ? accent : "#DDD3C5"}`,
                   }}
                 >
+                  {!isActive && (
+                    <span
+                      className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                      style={{ background: accent }}
+                    />
+                  )}
                   {cat}
                   <span
-                    className="ml-1.5 font-mono text-[11px]"
+                    className="font-mono text-[11px]"
                     style={{ opacity: isActive ? 0.7 : 0.5 }}
                   >
                     {count}
