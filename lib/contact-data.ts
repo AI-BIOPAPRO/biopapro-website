@@ -187,7 +187,7 @@ export const PRODUCT_CATEGORY_LABELS: Record<ProductCategory, string> = {
   Sets: "Cutlery Sets",
   "Paper Straws": "Paper Straws",
   "Ice Cream": "Ice Cream & Scoops",
-  "Bamboo Sticks": "Bamboo & Craft Sticks",
+  Sticks: "Wooden & Bamboo Sticks",
 };
 
 export const PRODUCT_OPTIONS = Object.values(PRODUCT_CATEGORY_LABELS);
