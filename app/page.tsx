@@ -6,6 +6,7 @@ import WhyWoodWon               from "@/components/home/WhyWoodWon";
 import ImpactCounter            from "@/components/home/ImpactCounter";
 import ManufacturingCredibility from "@/components/home/ManufacturingCredibility";
 import WomenWorkforce           from "@/components/home/WomenWorkforce";
+import InUse                    from "@/components/home/InUse";
 import DomesticSupply           from "@/components/home/DomesticSupply";
 import ProductEcosystem         from "@/components/home/ProductEcosystem";
 import GlobalPresence           from "@/components/home/GlobalPresence";
@@ -77,6 +78,11 @@ export default function HomePage() {
 
       {/* S6b — Women Workforce: the people behind the operation */}
       <WomenWorkforce />
+
+      {/* In Use — real photos of the product on a table, not floating on a
+          studio background; the one section on the page meant to feel
+          alive rather than catalogued */}
+      <InUse />
 
       {/* S4  — Domestic B2B Supply: India food-service industry segments */}
       <DomesticSupply />
