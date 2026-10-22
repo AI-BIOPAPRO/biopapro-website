@@ -37,6 +37,7 @@ const CATEGORY_LABELS: Record<ProductCategory, string> = {
   Forks: "Forks", Spoons: "Spoons", Knives: "Knives", Sporks: "Sporks",
   Stirrers: "Stirrers", Scoops: "Scoops", Skewers: "Skewers",
   Sets: "Sets", "Paper Straws": "Straws",
+  "Ice Cream": "Ice Cream", "Bamboo Sticks": "Bamboo Sticks",
 };
 
 // Warm image bg — shows behind transparent PNGs
