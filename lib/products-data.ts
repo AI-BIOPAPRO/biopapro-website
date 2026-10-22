@@ -595,8 +595,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Mid-small 9cm gun skewer for canapes and small-format grilled bites, between the 7cm and 10cm sizes in the range.",
     applications: ["Canapes", "Appetizers", "Events", "Cocktail parties"],
-    primaryImage: "/products/new/gun-skewers-9cm.jpg",
-    galleryImages: ["/products/new/gun-skewers-9cm.jpg"],
+    primaryImage: "/products/new/gun-skewer-9cm.jpg",
+    galleryImages: ["/products/new/gun-skewer-9cm.jpg"],
   },
   {
     id: "skewer-12cm",
@@ -614,8 +614,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "12cm gun skewer sized between the 10cm street-food standard and the 15cm grill size, for mid-size kebabs and starters.",
     applications: ["Kebabs", "Starters", "Food courts", "Events"],
-    primaryImage: "/products/new/gun-skewers-12cm.jpg",
-    galleryImages: ["/products/new/gun-skewers-12cm.jpg"],
+    primaryImage: "/products/new/gun-skewer-12cm.jpg",
+    galleryImages: ["/products/new/gun-skewer-12cm.jpg"],
   },
   {
     id: "skewer-18cm",
@@ -633,8 +633,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "18cm gun skewer for full-size satay and yakitori platters, between the 15cm and 21cm sizes.",
     applications: ["Satay", "Yakitori", "Grill", "Restaurants"],
-    primaryImage: "/products/new/gun-skewers-18cm.jpg",
-    galleryImages: ["/products/new/gun-skewers-18cm.jpg"],
+    primaryImage: "/products/new/gun-skewer-18cm.jpg",
+    galleryImages: ["/products/new/gun-skewer-18cm.jpg"],
   },
   {
     id: "skewer-20cm",
@@ -652,8 +652,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "20cm gun skewer for heavier grilled proteins and BBQ platters that need more length than the standard 15cm size.",
     applications: ["BBQ", "Grill meats", "Steakhouses", "Outdoor catering"],
-    primaryImage: "/products/new/gun-skewers-20cm.jpg",
-    galleryImages: ["/products/new/gun-skewers-20cm.jpg"],
+    primaryImage: "/products/new/gun-skewer-20cm.jpg",
+    galleryImages: ["/products/new/gun-skewer-20cm.jpg"],
   },
   {
     id: "fruit-fork-90",
@@ -690,8 +690,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Full-size 170mm birchwood fork, a step up from the standard 160mm for larger place settings and buffet service.",
     applications: ["Restaurants", "Buffets", "Hotels", "Catering"],
-    primaryImage: "/products/new/wooden-fork-170mm.jpg",
-    galleryImages: ["/products/new/wooden-fork-170mm.jpg"],
+    primaryImage: "/products/new/fork-170mm.jpg",
+    galleryImages: ["/products/new/fork-170mm.jpg"],
   },
   {
     id: "fork-165-premium",
@@ -710,8 +710,8 @@ export const PRODUCTS: BioProduct[] = [
       "165mm premium-finish fork with a refined profile for upscale dining and banquet settings.",
     applications: ["Fine dining", "Banquets", "Hotels", "Premium catering"],
     highlight: true,
-    primaryImage: "/products/new/wooden-fork-165mm-premium.jpg",
-    galleryImages: ["/products/new/wooden-fork-165mm-premium.jpg"],
+    primaryImage: "/products/new/fork-165mm-premium.jpg",
+    galleryImages: ["/products/new/fork-165mm-premium.jpg"],
   },
   {
     id: "fork-186",
@@ -729,8 +729,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Long 186mm fork for full table settings and multi-course service where a larger utensil is expected.",
     applications: ["Fine dining", "Banquets", "Hotels"],
-    primaryImage: "/products/new/wooden-fork-186mm.jpg",
-    galleryImages: ["/products/new/wooden-fork-186mm.jpg"],
+    primaryImage: "/products/new/fork-186mm.jpg",
+    galleryImages: ["/products/new/fork-186mm.jpg"],
   },
   {
     id: "fork-183",
@@ -748,8 +748,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "183mm fork sized close to standard flatware proportions, for full-service restaurant and hotel settings.",
     applications: ["Restaurants", "Hotels", "Catering"],
-    primaryImage: "/products/new/wooden-fork-183mm.jpg",
-    galleryImages: ["/products/new/wooden-fork-183mm.jpg"],
+    primaryImage: "/products/new/fork-183mm.jpg",
+    galleryImages: ["/products/new/fork-183mm.jpg"],
   },
   {
     id: "chips-fork-85",
@@ -805,8 +805,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "165mm knife in the rounded Roman profile, an alternative handle shape to the standard 165mm knife.",
     applications: ["Restaurants", "Hotels", "Catering"],
-    primaryImage: "/products/new/wooden-knife-165mm-roman.jpg",
-    galleryImages: ["/products/new/wooden-knife-165mm-roman.jpg"],
+    primaryImage: "/products/new/knife-165mm-roman.jpg",
+    galleryImages: ["/products/new/knife-165mm-roman.jpg"],
   },
   {
     id: "knife-170",
@@ -824,8 +824,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "170mm knife, longer than the standard 165mm, for full place settings and multi-course meals.",
     applications: ["Fine dining", "Banquets", "Hotels"],
-    primaryImage: "/products/new/wooden-knife-170mm.jpg",
-    galleryImages: ["/products/new/wooden-knife-170mm.jpg"],
+    primaryImage: "/products/new/knife-170mm.jpg",
+    galleryImages: ["/products/new/knife-170mm.jpg"],
   },
   {
     id: "knife-165-premium",
@@ -844,8 +844,8 @@ export const PRODUCTS: BioProduct[] = [
       "165mm premium-finish knife with a refined handle profile for upscale table settings.",
     applications: ["Fine dining", "Premium catering", "Hotels"],
     highlight: true,
-    primaryImage: "/products/new/wooden-knife-165mm-premium.jpg",
-    galleryImages: ["/products/new/wooden-knife-165mm-premium.jpg"],
+    primaryImage: "/products/new/knife-165mm-premium.jpg",
+    galleryImages: ["/products/new/knife-165mm-premium.jpg"],
   },
   {
     id: "bamboo-knife-170",
@@ -882,8 +882,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Compact 105mm spork for single-serve desserts, yogurt cups, and small meal formats.",
     applications: ["Desserts", "Single-serve meals", "Airlines", "Sampling"],
-    primaryImage: "/products/new/wooden-spork-105mm.jpg",
-    galleryImages: ["/products/new/wooden-spork-105mm.jpg"],
+    primaryImage: "/products/new/spork-105mm.jpg",
+    galleryImages: ["/products/new/spork-105mm.jpg"],
   },
   {
     id: "spork-160-premium",
@@ -902,8 +902,8 @@ export const PRODUCTS: BioProduct[] = [
       "160mm premium-finish spork, the same full size as the standard spork with a refined surface finish.",
     applications: ["Food delivery", "Catering", "Cloud kitchens"],
     highlight: true,
-    primaryImage: "/products/new/wooden-spork-160mm-premium.jpg",
-    galleryImages: ["/products/new/wooden-spork-160mm-premium.jpg"],
+    primaryImage: "/products/new/spork-160mm-premium.jpg",
+    galleryImages: ["/products/new/spork-160mm-premium.jpg"],
   },
   {
     id: "spoon-96",
@@ -921,8 +921,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Compact 96mm spoon close to the 110mm size, for single-serve desserts and tasting portions.",
     applications: ["Desserts", "Sampling", "Ice cream parlors"],
-    primaryImage: "/products/new/wooden-spoon-96mm.jpg",
-    galleryImages: ["/products/new/wooden-spoon-96mm.jpg"],
+    primaryImage: "/products/new/spoon-96mm.jpg",
+    galleryImages: ["/products/new/spoon-96mm.jpg"],
   },
   {
     id: "spoon-100",
@@ -940,8 +940,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "100mm spoon between the 96mm and 110mm sizes, for single servings and small dessert formats.",
     applications: ["Desserts", "Cafes", "Sampling"],
-    primaryImage: "/products/new/wooden-spoon-100mm.jpg",
-    galleryImages: ["/products/new/wooden-spoon-100mm.jpg"],
+    primaryImage: "/products/new/spoon-100mm.jpg",
+    galleryImages: ["/products/new/spoon-100mm.jpg"],
   },
   {
     id: "spoon-140-roman",
@@ -959,8 +959,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "140mm spoon in the rounded Roman profile, an alternative handle shape to the standard 140mm spoon.",
     applications: ["Cafes", "Breakfast", "Cloud kitchens"],
-    primaryImage: "/products/new/wooden-spoon-140mm-roman.jpg",
-    galleryImages: ["/products/new/wooden-spoon-140mm-roman.jpg"],
+    primaryImage: "/products/new/spoon-140mm-roman.jpg",
+    galleryImages: ["/products/new/spoon-140mm-roman.jpg"],
   },
   {
     id: "spoon-160-roman",
@@ -978,8 +978,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "160mm spoon in the rounded Roman profile, an alternative to the standard 160mm full-size spoon.",
     applications: ["Restaurants", "Hotels", "Institutions"],
-    primaryImage: "/products/new/wooden-spoon-160mm-roman.jpg",
-    galleryImages: ["/products/new/wooden-spoon-160mm-roman.jpg"],
+    primaryImage: "/products/new/spoon-160mm-roman.jpg",
+    galleryImages: ["/products/new/spoon-160mm-roman.jpg"],
   },
   {
     id: "spoon-165",
@@ -997,8 +997,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "165mm spoon, longer than the standard 160mm, for full table settings and multi-course meals.",
     applications: ["Fine dining", "Banquets", "Hotels"],
-    primaryImage: "/products/new/wooden-spoon-165mm.jpg",
-    galleryImages: ["/products/new/wooden-spoon-165mm.jpg"],
+    primaryImage: "/products/new/spoon-165mm.jpg",
+    galleryImages: ["/products/new/spoon-165mm.jpg"],
   },
   {
     id: "spoon-175",
@@ -1016,8 +1016,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "175mm spoon for full place settings where a longer handle is expected alongside matching forks and knives.",
     applications: ["Fine dining", "Hotels", "Banquets"],
-    primaryImage: "/products/new/wooden-spoon-175mm.jpg",
-    galleryImages: ["/products/new/wooden-spoon-175mm.jpg"],
+    primaryImage: "/products/new/spoon-175mm.jpg",
+    galleryImages: ["/products/new/spoon-175mm.jpg"],
   },
   {
     id: "spoon-186",
@@ -1035,8 +1035,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "186mm spoon, the longest in the range, matching the 186mm fork for complete long-format table settings.",
     applications: ["Fine dining", "Banquets", "Hotels"],
-    primaryImage: "/products/new/wooden-spoon-186mm.jpg",
-    galleryImages: ["/products/new/wooden-spoon-186mm.jpg"],
+    primaryImage: "/products/new/spoon-186mm.jpg",
+    galleryImages: ["/products/new/spoon-186mm.jpg"],
   },
   {
     id: "bamboo-spoon-170",
@@ -1474,8 +1474,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Compact 65mm flat wooden stick for mini confectionery and small craft applications.",
     applications: ["Confectionery", "Craft and DIY"],
-    primaryImage: "/products/new/wooden-stick-65mm.jpg",
-    galleryImages: ["/products/new/wooden-stick-65mm.jpg"],
+    primaryImage: "/products/new/stick-65mm.jpg",
+    galleryImages: ["/products/new/stick-65mm.jpg"],
   },
 ];
 
