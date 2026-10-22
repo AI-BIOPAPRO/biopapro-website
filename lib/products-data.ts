@@ -425,8 +425,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Compact 95mm birchwood scoop with a bowl-shaped head built for portion control — ice cream, gelato, loose spices, grains, and dry goods sampling. Sturdy enough to hold shape when scooping firmer, frozen product, unlike flat spoons pressed into scoop duty.",
     applications: ["Ice cream", "Gelato", "Sampling", "Dry goods", "Ice cream parlors", "Frozen dessert shops", "Bulk distributors & wholesalers"],
-    primaryImage: `${CDN}/products/W43.png?v=1662714289`,
-    galleryImages: [`${CDN}/products/W43.png?v=1662714289`],
+    primaryImage: "/products/new/scoop-95mm.jpg",
+    galleryImages: ["/products/new/scoop-95mm.jpg"],
   },
 
   // ── SKEWERS ────────────────────────────────────────────────────────────────
