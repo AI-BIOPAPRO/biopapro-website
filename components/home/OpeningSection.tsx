@@ -20,6 +20,8 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { COMPANY_FACTS, getCumulativeUnitsProduced, formatUnitsShort } from "@/lib/company-facts";
+import MagneticButton from "@/components/shared/MagneticButton";
+
 
 const E = [0.16, 1, 0.3, 1] as const;
 
@@ -307,7 +309,7 @@ export default function OpeningSection() {
           {/* ── Headline — primary focus ── */}
           <div className="mb-7 md:mb-9">
             <h1
-              className="font-display font-light leading-[0.93] tracking-[-0.015em]"
+              className="font-display font-normal leading-[0.93] tracking-[-0.02em]"
               style={{ fontSize: "clamp(2.8rem, 5.5vw, 5.8rem)" }}
             >
               {[
@@ -354,41 +356,45 @@ export default function OpeningSection() {
             transition={{ delay: 1.0, duration: 0.72, ease: E }}
             className="flex flex-col sm:flex-row items-start gap-3"
           >
-            <Link
-              href="/products"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300"
-              style={{ background: "#4A7A3D", color: "#FFFFFF" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#2D5228"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#4A7A3D"; }}
-            >
-              View Product Range
-              <ArrowRight size={13} strokeWidth={2.5}
-                className="group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 text-[11px] font-medium uppercase tracking-[0.18em] transition-all duration-300"
-              style={{
-                background: "rgba(255,255,255,0.08)",
-                color: "rgba(240,248,235,0.95)",
-                border: "1px solid rgba(255,255,255,0.22)",
-                backdropFilter: "blur(8px)",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "rgba(255,255,255,0.16)";
-                el.style.borderColor = "rgba(160,220,140,0.45)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "rgba(255,255,255,0.08)";
-                el.style.borderColor = "rgba(255,255,255,0.22)";
-              }}
-            >
-              Request Quote
-              <ArrowUpRight size={13} strokeWidth={2}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-            </Link>
+            <MagneticButton>
+              <Link
+                href="/products"
+                className="group inline-flex items-center gap-2.5 px-8 py-4 text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300"
+                style={{ background: "#4A7A3D", color: "#FFFFFF" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#2D5228"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#4A7A3D"; }}
+              >
+                View Product Range
+                <ArrowRight size={13} strokeWidth={2.5}
+                  className="group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </MagneticButton>
+            <MagneticButton>
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2.5 px-8 py-4 text-[11px] font-medium uppercase tracking-[0.18em] transition-all duration-300"
+                style={{
+                  background: "rgba(255,255,255,0.08)",
+                  color: "rgba(240,248,235,0.95)",
+                  border: "1px solid rgba(255,255,255,0.22)",
+                  backdropFilter: "blur(8px)",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = "rgba(255,255,255,0.16)";
+                  el.style.borderColor = "rgba(160,220,140,0.45)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = "rgba(255,255,255,0.08)";
+                  el.style.borderColor = "rgba(255,255,255,0.22)";
+                }}
+              >
+                Request Quote
+                <ArrowUpRight size={13} strokeWidth={2}
+                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+              </Link>
+            </MagneticButton>
           </motion.div>
         </div>
 
