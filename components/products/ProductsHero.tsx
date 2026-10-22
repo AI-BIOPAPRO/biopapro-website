@@ -6,12 +6,12 @@ import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import SectionLabel from "@/components/shared/SectionLabel";
-import { ALL_CATEGORIES, PRODUCT_FAMILIES, type ProductCategory } from "@/lib/products-data";
+import { ALL_CATEGORIES, CATEGORY_COLORS, PRODUCT_FAMILIES, PRODUCTS, type ProductCategory } from "@/lib/products-data";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const STATS = [
-  { value: "30+",  label: "Product SKUs",      sub: "Across 9 categories"   },
+  { value: `${PRODUCTS.length}+`, label: "Product SKUs", sub: `Across ${ALL_CATEGORIES.length} categories` },
   { value: "10K+", label: "Min. Carton Qty",   sub: "Per export shipment"   },
   { value: "18+",  label: "Countries Supplied",sub: "Active export markets"  },
   { value: "100M", label: "Units / Month",     sub: "Production capacity"   },
@@ -253,28 +253,32 @@ export default function ProductsHero() {
             Jump to category
           </p>
           <div className="flex flex-wrap gap-2">
-            {ALL_CATEGORIES.map((cat) => (
-              <a
-                key={cat}
-                href={getCategoryAnchor(cat)}
-                className="font-mono text-[11px] uppercase tracking-[0.16em] px-4 py-2 transition-all duration-200"
-                style={{ border: "1px solid #DDD3C5", color: "#6B5D50", background: "transparent" }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = "#4A7A3D";
-                  el.style.color = "#4A7A3D";
-                  el.style.background = "rgba(74,122,61,0.06)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = "#DDD3C5";
-                  el.style.color = "#6B5D50";
-                  el.style.background = "transparent";
-                }}
-              >
-                {CATEGORY_LABELS[cat]}
-              </a>
-            ))}
+            {ALL_CATEGORIES.map((cat) => {
+              const accent = CATEGORY_COLORS[cat];
+              return (
+                <a
+                  key={cat}
+                  href={getCategoryAnchor(cat)}
+                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] px-4 py-2 transition-all duration-200"
+                  style={{ border: "1px solid #DDD3C5", color: "#6B5D50", background: "transparent" }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.borderColor = accent;
+                    el.style.color = accent;
+                    el.style.background = `${accent}10`;
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.borderColor = "#DDD3C5";
+                    el.style.color = "#6B5D50";
+                    el.style.background = "transparent";
+                  }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: accent }} />
+                  {CATEGORY_LABELS[cat]}
+                </a>
+              );
+            })}
           </div>
         </motion.div>
       </div>

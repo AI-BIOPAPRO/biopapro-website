@@ -31,6 +31,23 @@ export const ALL_CATEGORIES: ProductCategory[] = [
   "Bamboo Sticks",
 ];
 
+// One accent color per category, used to color-code catalog badges and
+// filter chips so the grid reads as distinct ranges at a glance instead of
+// a uniform wall of the same brown badge on every card.
+export const CATEGORY_COLORS: Record<ProductCategory, string> = {
+  Forks:           "#4A7A3D", // brand green
+  Spoons:          "#2D6E8E", // teal blue
+  Knives:          "#B5533C", // terracotta
+  Sporks:          "#7A5C9E", // muted purple
+  Stirrers:        "#8C6239", // coffee brown
+  Scoops:          "#C89A5B", // gold
+  Skewers:         "#A33B3B", // deep red
+  Sets:            "#3C7A6E", // teal-green
+  "Paper Straws":  "#2E5C8A", // blue
+  "Ice Cream":     "#C2577D", // berry pink
+  "Bamboo Sticks": "#6B8F3C", // olive
+};
+
 export interface BioProduct {
   id: string;
   name: string;
