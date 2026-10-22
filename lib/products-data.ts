@@ -253,6 +253,31 @@ export const PRODUCTS: BioProduct[] = [
     ],
   },
 
+  {
+    id: "spoon-160-packed",
+    name: "Individual Packed Spoon 160mm",
+    slug: "individual-packed-160mm-spoon",
+    category: "Spoons",
+    length: "160mm",
+    material: "FSC Birchwood",
+    finish: "Natural smooth",
+    certifications: ["FSC®", "ISO 9001", "BRCGS"],
+    pcsPerBag: 100,
+    bagsPerCarton: 100,
+    pcsPerCarton: 10000,
+    moq: "10,000 pcs",
+    shortDescription:
+      "Individually OPP-sleeved 160mm birchwood spoon — the full-size spoon for hot meals, sealed so it reaches the guest untouched. Made for airline meal trays, hospital food service, hotel room service, and takeaway meal kits.",
+    applications: ["Airlines", "Hospitals", "Room service", "Takeaway meal kits", "Hotels", "Premium catering"],
+    isIndividuallyPacked: true,
+    primaryImage: `${CDN}/products/W3_1_a6553262-d845-4b67-858e-e826356b8630.jpg?v=1665051943`,
+    galleryImages: [
+      `${CDN}/products/W3_1_a6553262-d845-4b67-858e-e826356b8630.jpg?v=1665051943`,
+      `${CDN}/products/NewProject_8_4f36430d-c81c-4878-93d6-cffde38fea48.png?v=1665051943`,
+      `${CDN}/products/G46_1.jpg?v=1665051943`,
+    ],
+  },
+
   // ── KNIVES ─────────────────────────────────────────────────────────────────
   {
     id: "knife-140",
@@ -547,8 +572,8 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Complete 3-piece cutlery set — birchwood fork, knife, and tissue — pre-packed in a single OPP sleeve so nothing has to be assembled or picked separately at packing time. Drop one sleeve into a delivery bag, airline tray, or amenity kit and the cutlery is done.",
     applications: ["Airlines", "Food delivery", "Hotels", "Premium takeaway", "Cloud kitchens", "Corporate meal programs", "Meal kit services"],
-    primaryImage: `${CDN}/products/G52_1.jpg?v=1664961427`,
-    galleryImages: [`${CDN}/products/G52_1.jpg?v=1664961427`],
+    primaryImage: "/products/real/set-fork-knife-tissue.jpg",
+    galleryImages: ["/products/real/set-fork-knife-tissue.jpg"],
     highlight: true,
   },
 
@@ -570,7 +595,11 @@ export const PRODUCTS: BioProduct[] = [
       "Standard 6mm paper straw for water, juices, and everyday cold beverages. Holds its structure for up to 3 hours submerged in liquid — the threshold that matters for table service, where a straw sitting through a long meal can't go soft halfway through.",
     applications: ["Juice bars", "Cafés", "Hotels", "Restaurants", "Cloud kitchens", "Food delivery", "Corporate cafeterias"],
     primaryImage: `${CDN}/products/W40_1.jpg?v=1665051402`,
-    galleryImages: [`${CDN}/products/W40_1.jpg?v=1665051402`],
+    galleryImages: [
+      `${CDN}/products/W40_1.jpg?v=1665051402`,
+      `${CDN}/products/NewProject_7.png?v=1665051506`,
+      `${CDN}/products/W41_1.jpg?v=1665051506`,
+    ],
   },
   {
     id: "straw-8mm",
@@ -589,7 +618,10 @@ export const PRODUCTS: BioProduct[] = [
       "Wide 8mm paper straw with reinforced multi-layer construction built for beverages a standard straw can't handle — thick milkshakes, smoothies, and bubble tea where tapioca pearls need to pass through without clogging or crushing the straw.",
     applications: ["Bubble tea", "Milkshakes", "Smoothies", "QSR", "Dessert parlors", "Food trucks"],
     primaryImage: `${CDN}/products/W38_1.jpg?v=1665051710`,
-    galleryImages: [`${CDN}/products/W38_1.jpg?v=1665051710`],
+    galleryImages: [
+      `${CDN}/products/W38_1.jpg?v=1665051710`,
+      `${CDN}/products/NewProject_7.png?v=1665051506`,
+    ],
     highlight: true,
   },
   {
@@ -609,7 +641,54 @@ export const PRODUCTS: BioProduct[] = [
       "Extra-wide 10mm paper straw built for beverages with something to pull through, not just liquid — slushies, fruit chunks, and layered cocktails. The size premium bars and resort beverage programs stock when a standard straw would bottleneck the drink.",
     applications: ["Slushies", "Premium beverages", "Fruit drinks", "Bars", "Juice bars", "Resorts"],
     primaryImage: `${CDN}/products/W40_1.jpg?v=1665051402`,
-    galleryImages: [`${CDN}/products/W40_1.jpg?v=1665051402`],
+    galleryImages: [
+      `${CDN}/products/W40_1.jpg?v=1665051402`,
+      `${CDN}/products/NewProject_7.png?v=1665051506`,
+    ],
+  },
+  {
+    id: "straw-6mm-wrapped",
+    name: "Paper Straws 6mm Wrapped",
+    slug: "6mm-paper-straws-wrapped",
+    category: "Paper Straws",
+    length: "200mm",
+    material: "Food-grade paper",
+    finish: "Individually paper-wrapped",
+    certifications: ["ISO 9001", "ISO 14001", "BRCGS"],
+    pcsPerBag: 100,
+    bagsPerCarton: 100,
+    pcsPerCarton: 10000,
+    moq: "10,000 pcs",
+    shortDescription:
+      "Standard 6mm paper straw, individually paper-wrapped so each one stays sealed until the guest opens it. For takeaway and delivery orders, hotels, and cafés where straws are handed out loose.",
+    applications: ["Takeaway", "Food delivery", "Hotels", "Cafés", "QSR", "Juice bars"],
+    primaryImage: `${CDN}/products/W34_1.jpg?v=1665051635`,
+    galleryImages: [
+      `${CDN}/products/W34_1.jpg?v=1665051635`,
+      `${CDN}/products/WhatsAppImage2022-09-20at3.47.40PM_8b12c9d9-bc56-43f0-9a2c-f16d4bca23f8.jpg?v=1665051635`,
+    ],
+  },
+  {
+    id: "straw-8mm-wrapped",
+    name: "Paper Straws 8mm Wrapped",
+    slug: "8mm-paper-straws-wrapped",
+    category: "Paper Straws",
+    length: "200mm",
+    material: "Food-grade paper",
+    finish: "Individually paper-wrapped",
+    certifications: ["ISO 9001", "ISO 14001", "BRCGS"],
+    pcsPerBag: 100,
+    bagsPerCarton: 50,
+    pcsPerCarton: 5000,
+    moq: "5,000 pcs",
+    shortDescription:
+      "Wider 8mm paper straw, individually paper-wrapped for hygiene. Sized for shakes, smoothies, and cold coffees served in takeaway and delivery, where each straw needs to arrive sealed.",
+    applications: ["Milkshakes", "Smoothies", "Cold coffee", "Takeaway", "Food delivery", "Cafés"],
+    primaryImage: `${CDN}/products/W34_1_1b4186f3-768f-4e35-9905-067948b50ad7.jpg?v=1665051752`,
+    galleryImages: [
+      `${CDN}/products/W34_1_1b4186f3-768f-4e35-9905-067948b50ad7.jpg?v=1665051752`,
+      `${CDN}/products/WhatsAppImage2022-09-20at3.47.40PM.jpg?v=1665051752`,
+    ],
   },
   {
     id: "skewer-9cm",
@@ -1534,7 +1613,7 @@ export const PRODUCT_FAMILIES: ProductFamily[] = [
       "Four sizes: 110mm, 140mm, and 160mm bulk — plus individually sleeved 110mm for premium service. Heat-resistant for hot food and soup service, and sized right down for desserts and single servings.",
     applications: ["Dairy", "Cafés", "Hotels", "Food Service", "Ice Cream Parlors", "Hospitals", "Institutions", "Cloud Kitchens"],
     moqRange: "10,000 pcs",
-    skuCount: 12,
+    skuCount: 13,
     heroImage: `${CDN}/collections/C5.png?v=1662374075`,
     sectionId: "spoons",
   },
@@ -1606,7 +1685,7 @@ export const PRODUCT_FAMILIES: ProductFamily[] = [
       "6mm, 8mm, and 10mm food-grade kraft paper straws. 50,000 units per carton. Holds integrity for 3+ hours — from thin juices to thick bubble tea. ISO 9001 and BRCGS certified manufacturing.",
     applications: ["Juice Bars", "Cafés", "QSR", "Bubble Tea", "Hotels", "Restaurants", "Food Delivery", "Bars"],
     moqRange: "50,000 pcs",
-    skuCount: 3,
+    skuCount: 5,
     heroImage: `${CDN}/products/W40_1.jpg?v=1665051402`,
     sectionId: "straws",
   },
