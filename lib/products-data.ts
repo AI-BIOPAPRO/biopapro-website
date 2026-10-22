@@ -15,7 +15,7 @@ export type ProductCategory =
   | "Sets"
   | "Paper Straws"
   | "Ice Cream"
-  | "Bamboo Sticks";
+  | "Sticks";
 
 export const ALL_CATEGORIES: ProductCategory[] = [
   "Forks",
@@ -28,7 +28,7 @@ export const ALL_CATEGORIES: ProductCategory[] = [
   "Sets",
   "Paper Straws",
   "Ice Cream",
-  "Bamboo Sticks",
+  "Sticks",
 ];
 
 // One accent color per category, used to color-code catalog badges and
@@ -45,7 +45,7 @@ export const CATEGORY_COLORS: Record<ProductCategory, string> = {
   Sets:            "#3C7A6E", // teal-green
   "Paper Straws":  "#2E5C8A", // blue
   "Ice Cream":     "#C2577D", // berry pink
-  "Bamboo Sticks": "#6B8F3C", // olive
+  Sticks: "#6B8F3C", // olive
 };
 
 export interface BioProduct {
@@ -124,8 +124,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Standard 160mm birchwood fork built for everyday dine-in and takeaway volume. The size restaurants, cloud kitchens, and institutional canteens default to when they need one fork that works across the entire menu — starters, mains, and rice dishes alike.",
     applications: ["Restaurants", "Hotels", "Food service", "Catering", "Cloud kitchens", "Food courts", "Canteens", "Institutional dining"],
-    primaryImage: `${CDN}/products/W7_1_713c7c76-f698-4bb9-9de4-1d75c61e9853.jpg`,
+    primaryImage: "/products/new/fork-160mm.jpg",
     galleryImages: [
+      "/products/new/fork-160mm.jpg",
       `${CDN}/products/W7_1_713c7c76-f698-4bb9-9de4-1d75c61e9853.jpg`,
       `${CDN}/products/NewProject_9_143a7464-1d51-4229-aeae-ca3d69539708.png`,
       `${CDN}/products/G39_1_f8528960-81ae-449d-bf2e-423ae76183d6.jpg`,
@@ -174,8 +175,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Compact 110mm spoon sized for single servings — ice cream tubs, yogurt cups, mini desserts, and tasting samples. The size dairy brands, gelaterias, and dessert parlors reach for when the spoon needs to disappear into the experience, not compete with it.",
     applications: ["Dairy", "Ice cream", "Desserts", "Sampling", "Ice cream parlors", "Bakeries & confectioneries", "Frozen yogurt shops", "Gelaterias"],
-    primaryImage: `${CDN}/products/W3_1_7b597730-c22b-4b48-aec6-867408a3080d.jpg`,
+    primaryImage: "/products/new/spoon-110mm.jpg",
     galleryImages: [
+      "/products/new/spoon-110mm.jpg",
       `${CDN}/products/W3_1_7b597730-c22b-4b48-aec6-867408a3080d.jpg`,
     ],
   },
@@ -195,8 +197,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Medium 140mm birchwood spoon balanced for everyday use — cereal, curd rice, salads, soups, and breakfast trays. The all-rounder size cloud kitchens and café chains standardize on so they don't have to stock a different spoon for every menu category.",
     applications: ["Cafés", "Breakfast", "Soups", "Airlines", "Cloud kitchens", "Salad bars", "Food trucks", "Corporate cafeterias"],
-    primaryImage: `${CDN}/products/W3_1_3390b722-b808-4bc3-9398-e09eb12185a8.jpg`,
+    primaryImage: "/products/new/spoon-140mm.jpg",
     galleryImages: [
+      "/products/new/spoon-140mm.jpg",
       `${CDN}/products/W3_1_3390b722-b808-4bc3-9398-e09eb12185a8.jpg`,
     ],
   },
@@ -216,8 +219,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Full-size 160mm birchwood spoon built for hot food — dal, sambar, gravies, and soups — without going soft or bending under weight. The size hospitals, canteens, and banquet caterers rely on for high-volume plated service where the spoon has to hold up meal after meal.",
     applications: ["Restaurants", "Hotels", "Catering", "Institutions", "Canteens", "Hospitals", "Banquet halls", "Wedding catering"],
-    primaryImage: `${CDN}/products/W3_1_ac837677-7a66-4363-bb00-675eb726043d.jpg`,
+    primaryImage: "/products/new/spoon-160mm.jpg",
     galleryImages: [
+      "/products/new/spoon-160mm.jpg",
       `${CDN}/products/W3_1_ac837677-7a66-4363-bb00-675eb726043d.jpg`,
       `${CDN}/products/NewProject_8_11a0612f-43bb-4e7f-84ea-48ec0fbde693.png`,
       `${CDN}/products/G46_1_1b0f0709-fad5-40a6-a9ea-200af8d865d0.jpg`,
@@ -266,8 +270,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Compact 140mm birchwood knife sized to fit inside sealed meal boxes and airline trays without adding bulk. The size delivery-first kitchens and travel caterers choose when the whole cutlery set has to fit a fixed-size compartment.",
     applications: ["Airlines", "Takeaway", "Travel catering", "Cafeterias", "Food delivery", "Meal kit services"],
-    primaryImage: `${CDN}/products/W1_1.jpg?v=1665052308`,
+    primaryImage: "/products/new/knife-140mm.jpg",
     galleryImages: [
+      "/products/new/knife-140mm.jpg",
       `${CDN}/products/W1_1.jpg?v=1665052308`,
       `${CDN}/products/NewProject_10.png?v=1665052308`,
       `${CDN}/products/G54_1.jpg?v=1665052308`,
@@ -289,8 +294,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Full-size 165mm birchwood knife with enough rigidity to cut through paneer, parathas, and firm proteins without flexing — a common failure point for thinner cutlery. The default choice for sit-down restaurants and banquet caterers plating full meals.",
     applications: ["Restaurants", "Hotels", "Food service", "Catering", "Cloud kitchens", "Banquet halls", "Institutional dining"],
-    primaryImage: `${CDN}/products/W1_1_beb99461-f1f0-41b4-bf81-20b902898748.jpg`,
+    primaryImage: "/products/new/knife-165mm.jpg",
     galleryImages: [
+      "/products/new/knife-165mm.jpg",
       `${CDN}/products/W1_1_beb99461-f1f0-41b4-bf81-20b902898748.jpg`,
       `${CDN}/products/NewProject_10_ad844645-1fd5-4387-84e8-da5b80d56a4b.png`,
       `${CDN}/products/G54_1_0af0e0cd-742b-43e0-b52d-a098954c6df1.jpg`,
@@ -315,8 +321,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Compact 140mm spork — one utensil doing a spoon's and fork's job — built for meal formats with only room for one implement per pack: airline trays, single-serve meal kits, and outdoor events where fewer pieces means less to carry and less to throw away.",
     applications: ["Airlines", "Travel catering", "Fast casual", "Takeaway", "Meal kit services", "Picnics & outdoor events", "Food delivery"],
-    primaryImage: `${CDN}/products/W9_1.png?v=1662714451`,
-    galleryImages: [`${CDN}/products/W9_1.png?v=1662714451`],
+    primaryImage: "/products/new/spork-140mm.jpg",
+    galleryImages: [
+      "/products/new/spork-140mm.jpg",`${CDN}/products/W9_1.png?v=1662714451`],
     highlight: true,
   },
   {
@@ -335,8 +342,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Full-size 160mm spork for kitchens that would rather stock one utensil than two. Popular with cloud kitchens and food-delivery brands packing rice bowls and one-dish meals, where a single spork replaces a separate spoon and fork without shortchanging the customer.",
     applications: ["Restaurants", "Food delivery", "Catering", "Institutions", "Cloud kitchens", "Food trucks"],
-    primaryImage: `${CDN}/products/W9_1_2b4bd9de-74ff-476c-986f-c81e43cb8ec8.png`,
+    primaryImage: "/products/new/spork-160mm.jpg",
     galleryImages: [
+      "/products/new/spork-160mm.jpg",
       `${CDN}/products/W9_1_2b4bd9de-74ff-476c-986f-c81e43cb8ec8.png`,
     ],
   },
@@ -358,8 +366,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Compact 110mm coffee stirrer sized for espresso cups and small beverage formats. High-volume carton of 50,000 units, built for office pantries, co-working spaces, and compact café counters that go through stirrers by the thousand every week.",
     applications: ["Espresso bars", "Offices", "Compact cafés", "Events", "Co-working spaces", "Hotel lobby cafés"],
-    primaryImage: `${CDN}/products/W20.png?v=1662714572`,
-    galleryImages: [`${CDN}/products/W20.png?v=1662714572`],
+    primaryImage: "/products/new/coffee-stirrer-110mm.jpg",
+    galleryImages: [
+      "/products/new/coffee-stirrer-110mm.jpg",`${CDN}/products/W20.png?v=1662714572`],
   },
   {
     id: "stirrer-140",
@@ -377,8 +386,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Standard 140mm coffee stirrer — the size café chains and QSR counters default to because it fits every standard cup without needing a second size on hand. The single highest-volume SKU in the range for a reason.",
     applications: ["Coffee chains", "QSR", "Hotels", "Catering", "Cloud kitchens", "Bakeries", "Corporate pantries"],
-    primaryImage: `${CDN}/products/W20_f40b8f4a-3ebe-4145-b013-43d53ebb9a1b.png`,
+    primaryImage: "/products/new/coffee-stirrer-140mm.jpg",
     galleryImages: [
+      "/products/new/coffee-stirrer-140mm.jpg",
       `${CDN}/products/W20_f40b8f4a-3ebe-4145-b013-43d53ebb9a1b.png`,
     ],
     highlight: true,
@@ -402,8 +412,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Long 190mm stirrer built to reach the bottom of tall glasses — cold brew, iced lattes, and layered beverages where a shorter stirrer just doesn't get there. Standard stock for premium cafés, hotel lounges, and bars serving tall-format drinks.",
     applications: ["Specialty coffee", "Cold brew", "Hotels", "Premium cafés", "Bars", "Lounges"],
-    primaryImage: `${CDN}/products/W20_1e981daa-2dc8-4741-947b-bfe64cddb1ce.png`,
+    primaryImage: "/products/new/coffee-stirrer-190mm.jpg",
     galleryImages: [
+      "/products/new/coffee-stirrer-190mm.jpg",
       `${CDN}/products/W20_1e981daa-2dc8-4741-947b-bfe64cddb1ce.png`,
     ],
   },
@@ -446,8 +457,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Compact 7cm gun skewer built for mini-bite presentation — canapés, cocktail appetizers, and plated starters where the skewer is as much a styling tool as a utensil. The signature gun-tip shape holds food securely without piercing all the way through delicate bites.",
     applications: ["Canapés", "Appetizers", "Events", "Banqueting", "Cocktail parties", "Wedding catering", "Hotel bars"],
-    primaryImage: `${CDN}/products/W26_1_105630ca-3689-4bea-8946-706190417455.jpg?v=1664946421`,
+    primaryImage: "/products/new/gun-skewer-7cm.jpg",
     galleryImages: [
+      "/products/new/gun-skewer-7cm.jpg",
       `${CDN}/products/W26_1_105630ca-3689-4bea-8946-706190417455.jpg?v=1664946421`,
     ],
   },
@@ -467,8 +479,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Standard 10cm gun skewer sized for kebabs, brochettes, and grilled street food — long enough to hold multiple pieces, short enough to grill evenly without charring the handle. A staple at food courts, night markets, and QSR grill counters.",
     applications: ["Kebabs", "Street food", "Food courts", "Events", "Food trucks", "Night markets"],
-    primaryImage: `${CDN}/products/W26_1_ab0c6646-1d0d-4a90-8f4f-ca4e6d0d1639.jpg?v=1664946360`,
+    primaryImage: "/products/new/gun-skewer-10cm.jpg",
     galleryImages: [
+      "/products/new/gun-skewer-10cm.jpg",
       `${CDN}/products/W26_1_ab0c6646-1d0d-4a90-8f4f-ca4e6d0d1639.jpg?v=1664946360`,
       `${CDN}/products/G19_ad4bdb4d-80cb-4edd-920b-5f395d8d443e.jpg`,
     ],
@@ -490,8 +503,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Mid-size 15cm gun skewer for satay, yakitori, and grill platters — long enough to plate as a centerpiece, sturdy enough to survive an open flame. The most popular skewer size across hospitality and banqueting worldwide, and the one Asian-cuisine restaurants keep in steady rotation.",
     applications: ["Satay", "Yakitori", "Grill", "Hospitality", "Restaurants", "BBQ joints"],
-    primaryImage: `${CDN}/products/W26_1_b883d15b-dfbf-46ca-b101-9a413464dfd3.jpg`,
+    primaryImage: "/products/new/gun-skewer-15cm.jpg",
     galleryImages: [
+      "/products/new/gun-skewer-15cm.jpg",
       `${CDN}/products/W26_1_b883d15b-dfbf-46ca-b101-9a413464dfd3.jpg`,
     ],
   },
@@ -511,8 +525,9 @@ export const PRODUCTS: BioProduct[] = [
     shortDescription:
       "Long 21cm gun skewer built for heavy proteins on professional grills — full cuts of meat, churrasco-style service, and BBQ platters where a shorter skewer would burn through before the food is done. The choice for steakhouses and outdoor grill events.",
     applications: ["BBQ", "Churrasco", "Grill meats", "Street BBQ", "Steakhouses", "Outdoor catering"],
-    primaryImage: `${CDN}/products/W26_1.jpg?v=1664945885`,
-    galleryImages: [`${CDN}/products/W26_1.jpg?v=1664945885`],
+    primaryImage: "/products/new/gun-skewer-21cm.jpg",
+    galleryImages: [
+      "/products/new/gun-skewer-21cm.jpg",`${CDN}/products/W26_1.jpg?v=1664945885`],
   },
 
   // ── SETS ───────────────────────────────────────────────────────────────────
@@ -1166,8 +1181,8 @@ export const PRODUCTS: BioProduct[] = [
     pcsPerCarton: 10000,
     moq: "Contact us",
     shortDescription:
-      "94mm wooden ice cream stick, the standard handle size for molded ice cream bars and popsicles.",
-    applications: ["Ice cream manufacturing", "Frozen dessert brands", "Dairy"],
+      "94mm flat birchwood ice cream stick with a wide paddle-shaped head, for scooping and tasting from ice cream cups, tubs, and kulfi.",
+    applications: ["Ice cream cups", "Ice cream parlors", "Frozen dessert brands", "Dairy"],
     primaryImage: "/products/new/ice-cream-stick-94mm.jpg",
     galleryImages: ["/products/new/ice-cream-stick-94mm.jpg"],
   },
@@ -1251,7 +1266,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "tongue-depressor-150",
     name: "Tongue Depressor 150mm",
     slug: "tongue-depressor-150mm",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "150mm",
     material: "FSC Birchwood",
     finish: "Natural smooth",
@@ -1270,7 +1285,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "bamboo-round-stick-4in",
     name: "Bamboo Round Stick 4in",
     slug: "bamboo-round-stick-4in",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "102mm (4 inch)",
     material: "Bamboo",
     finish: "Natural, pointed tip",
@@ -1289,7 +1304,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "bamboo-round-stick-6in",
     name: "Bamboo Round Stick 6in (5mm)",
     slug: "bamboo-round-stick-6in",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "152mm (6 inch)",
     material: "Bamboo",
     finish: "Natural, pointed tip",
@@ -1308,7 +1323,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "bamboo-round-stick-7in",
     name: "Bamboo Round Stick 7in (5mm)",
     slug: "bamboo-round-stick-7in",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "178mm (7 inch)",
     material: "Bamboo",
     finish: "Natural, pointed tip",
@@ -1327,7 +1342,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "bamboo-round-stick-8in",
     name: "Bamboo Round Stick 8in (5mm)",
     slug: "bamboo-round-stick-8in",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "203mm (8 inch)",
     material: "Bamboo",
     finish: "Natural, pointed tip",
@@ -1346,7 +1361,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "bamboo-round-stick-10in",
     name: "Bamboo Round Stick 10in",
     slug: "bamboo-round-stick-10in",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "254mm (10 inch)",
     material: "Bamboo",
     finish: "Natural, pointed tip",
@@ -1365,7 +1380,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "bamboo-round-stick-12in",
     name: "Bamboo Round Stick 12in",
     slug: "bamboo-round-stick-12in",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "305mm (12 inch)",
     material: "Bamboo",
     finish: "Natural, pointed tip",
@@ -1384,7 +1399,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "round-stick-100",
     name: "Round Stick 100mm",
     slug: "round-stick-100mm",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "100mm",
     material: "FSC Birchwood",
     finish: "Natural smooth",
@@ -1403,7 +1418,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "round-stick-150",
     name: "Round Stick 150mm",
     slug: "round-stick-150mm",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "150mm",
     material: "FSC Birchwood",
     finish: "Natural smooth",
@@ -1422,7 +1437,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "round-stick-200",
     name: "Round Stick 200mm",
     slug: "round-stick-200mm",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "200mm",
     material: "FSC Birchwood",
     finish: "Natural smooth",
@@ -1441,7 +1456,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "candy-stick-93-straight",
     name: "Candy Stick 93mm Straight Edge",
     slug: "candy-stick-93mm-straight",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "93mm",
     material: "FSC Birchwood",
     finish: "Natural smooth, straight edge",
@@ -1460,7 +1475,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "candy-stick-93-round",
     name: "Candy Stick 93mm Round Edge",
     slug: "candy-stick-93mm-round",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "93mm",
     material: "FSC Birchwood",
     finish: "Natural smooth, round edge",
@@ -1479,7 +1494,7 @@ export const PRODUCTS: BioProduct[] = [
     id: "stick-65",
     name: "Wooden Stick 65mm",
     slug: "wooden-stick-65mm",
-    category: "Bamboo Sticks",
+    category: "Sticks",
     length: "65mm",
     material: "FSC Birchwood",
     finish: "Natural smooth",
@@ -1609,8 +1624,8 @@ export const PRODUCT_FAMILIES: ProductFamily[] = [
   },
   {
     id: "bamboo-sticks",
-    category: "Bamboo Sticks",
-    headline: "Bamboo & Craft Sticks",
+    category: "Sticks",
+    headline: "Wooden & Bamboo Sticks",
     description:
       "Round bamboo sticks (4\" to 12\"), blunt round sticks, tongue depressors, and candy sticks for craft, confectionery, and healthcare use. Contact our team for pricing and minimum order quantity.",
     applications: ["Craft & DIY", "Confectionery", "Healthcare", "Education"],
