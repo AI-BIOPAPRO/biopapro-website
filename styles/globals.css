@@ -132,6 +132,22 @@
     outline-offset: 2px;
   }
 
+  /* Universal press feedback — every button and link compresses slightly on
+     click, like a physical control, instead of just swapping color. This is
+     the single biggest "does this feel alive" signal on a site: real UI
+     answers back the instant you touch it. */
+  a, button, [role="button"] {
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+  a:active, button:active, [role="button"]:active {
+    transform: scale(0.97);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a:active, button:active, [role="button"]:active {
+      transform: none;
+    }
+  }
+
   /* Scrollbar — brand green */
   ::-webkit-scrollbar       { width: 4px; }
   ::-webkit-scrollbar-track { background: #F6F1E8; }
