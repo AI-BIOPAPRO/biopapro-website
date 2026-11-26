@@ -7,6 +7,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import StructuredData from "@/components/shared/StructuredData";
 import SplashProvider from "@/components/layout/SplashProvider";
+import NavigationProgress from "@/components/shared/NavigationProgress";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -125,6 +126,7 @@ export default function RootLayout({
       </head>
       <body>
         <StructuredData />
+        <NavigationProgress />
         <SplashProvider>
           <SmoothScrollProvider>
             <Navbar />
