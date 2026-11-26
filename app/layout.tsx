@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google";
+import { Cormorant_Garamond, Inter, JetBrains_Mono, Outfit } from "next/font/google";
 import "@/styles/globals.css";
 import { siteUrl, absoluteUrl } from "@/lib/site";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import StructuredData from "@/components/shared/StructuredData";
+import SplashProvider from "@/components/layout/SplashProvider";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -14,6 +15,14 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   display: "swap",
 });
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -105,7 +114,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${inter.variable} ${jetbrains.variable}`}
+      className={`${cormorant.variable} ${inter.variable} ${jetbrains.variable} ${outfit.variable}`}
     >
       <head>
         {/* Preconnect to CDN so image requests don't wait on DNS + TLS */}
@@ -116,11 +125,13 @@ export default function RootLayout({
       </head>
       <body>
         <StructuredData />
-        <SmoothScrollProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </SmoothScrollProvider>
+        <SplashProvider>
+          <SmoothScrollProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </SmoothScrollProvider>
+        </SplashProvider>
       </body>
     </html>
   );
