@@ -84,15 +84,15 @@ export default function HomePage() {
       {/* S6b — Women Workforce intro image */}
       <section className="relative overflow-hidden" style={{ height: "clamp(280px,42vw,580px)", background: "#1A4731" }}>
         <Image
-          src="https://biopapro.com/cdn/shop/files/8_1_1.jpg"
-          alt="Biopapro female worker inspecting wooden cutlery at the Mumbai factory"
+          src="https://biopapro.com/cdn/shop/files/F4.png"
+          alt="Biopapro female worker at the production line, Mumbai factory"
           fill
-          className="object-cover object-center"
+          className="object-cover object-left"
           sizes="100vw"
         />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, rgba(245,240,230,0.0) 60%, rgba(245,240,230,1) 100%)" }}
+          style={{ background: "linear-gradient(to bottom, rgba(245,240,230,0.0) 55%, rgba(245,240,230,1) 100%)" }}
         />
       </section>
 
