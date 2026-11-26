@@ -16,24 +16,31 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <main style={{ background: "#F6F1E8", minHeight: "100vh" }}>
+    <main style={{ background: "#F5F0E6", minHeight: "100vh" }}>
       {/* Header */}
-      <section style={{ background: "#2D5228" }} className="px-6 md:px-12 lg:px-20 py-24">
+      <section style={{ background: "#1A4731" }} className="px-6 md:px-12 lg:px-20 pt-32 pb-20">
         <div className="max-w-[1440px] mx-auto">
-          <p className="font-mono text-[11px] uppercase tracking-[0.32em] mb-6" style={{ color: "rgba(168,198,134,0.65)" }}>
+          <p className="font-mono text-[11px] uppercase tracking-[0.32em] mb-6" style={{ color: "rgba(245,240,230,0.45)" }}>
             Biopapro · Blog & News
           </p>
           <h1
-            className="font-display font-light leading-[0.92] mb-6"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4.4rem)", color: "#F6F1E8" }}
+            style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 900,
+              fontSize: "clamp(2.8rem, 6vw, 5.2rem)",
+              lineHeight: 0.9,
+              letterSpacing: "-0.04em",
+              color: "#F5F0E6",
+              marginBottom: "1.25rem",
+            }}
           >
             Industry insights
             <br />
-            <em style={{ color: "#A8C686", fontStyle: "italic" }}>& company news.</em>
+            <span style={{ color: "#E97316" }}>& company news.</span>
           </h1>
           <p
             className="font-sans font-light leading-relaxed max-w-[520px]"
-            style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)", color: "rgba(200,230,185,0.65)" }}
+            style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)", color: "rgba(245,240,230,0.55)" }}
           >
             Sustainability trends, plastic ban updates, product announcements,
             and news from India&apos;s leading birchwood cutlery manufacturer.

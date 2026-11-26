@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const related = POSTS.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 3);
 
   return (
-    <main style={{ background: "#F6F1E8", minHeight: "100vh" }}>
+    <main style={{ background: "#F5F0E6", minHeight: "100vh" }}>
       {/* Back nav */}
       <div className="max-w-[800px] mx-auto px-6 md:px-12 pt-28 md:pt-32">
         <Link
@@ -87,8 +87,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         <h1
-          className="font-display font-light leading-[0.95] mb-6"
-          style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "#2A2118" }}
+          style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontWeight: 900,
+            fontSize: "clamp(1.8rem, 4vw, 3rem)",
+            lineHeight: 0.93,
+            letterSpacing: "-0.035em",
+            color: "#1A1208",
+            marginBottom: "1.5rem",
+          }}
         >
           {post.title}
         </h1>
@@ -113,8 +120,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div key={i}>
             {block.heading && (
               <h2
-                className="font-display font-light leading-snug mt-10 mb-4"
-                style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.8rem)", color: "#2A2118" }}
+                style={{
+                  fontFamily: "'Outfit', sans-serif",
+                  fontWeight: 800,
+                  fontSize: "clamp(1.3rem, 2vw, 1.65rem)",
+                  lineHeight: 1.0,
+                  letterSpacing: "-0.025em",
+                  color: "#1A1208",
+                  marginTop: "2.5rem",
+                  marginBottom: "1rem",
+                }}
               >
                 {block.heading}
               </h2>
@@ -141,7 +156,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 key={r.slug}
                 href={`/blog/${r.slug}`}
                 className="group flex flex-col overflow-hidden"
-                style={{ border: "1px solid #DDD3C5", background: "#FDFAF5" }}
+                style={{ border: "1px solid rgba(26,71,49,0.12)", background: "#F5F0E6" }}
               >
                 <div className="w-full overflow-hidden relative" style={{ aspectRatio: "4 / 3" }}>
                   <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.06] relative">
@@ -150,8 +165,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </div>
                 <div className="p-4">
                   <h3
-                    className="font-display font-light leading-snug transition-colors duration-200 group-hover:text-[#4A7A3D]"
-                    style={{ fontSize: "0.95rem", color: "#2A2118" }}
+                    style={{
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 700,
+                      fontSize: "0.9rem",
+                      lineHeight: 1.15,
+                      letterSpacing: "-0.02em",
+                      color: "#1A1208",
+                    }}
                   >
                     {r.title}
                   </h3>
@@ -163,20 +184,28 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       )}
 
       {/* Footer CTA */}
-      <div style={{ background: "#2D5228" }}>
+      <div style={{ background: "#1A4731" }}>
         <div className="max-w-[800px] mx-auto px-6 md:px-12 py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.24em] mb-1" style={{ color: "rgba(168,198,134,0.65)" }}>
+            <p className="font-mono text-[11px] uppercase tracking-[0.24em] mb-1" style={{ color: "rgba(245,240,230,0.45)" }}>
               Interested in our products?
             </p>
-            <p className="font-sans font-light text-sm" style={{ color: "rgba(200,230,185,0.7)" }}>
-              Get in touch with our team for samples and pricing.
+            <p
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 700,
+                fontSize: "1.1rem",
+                letterSpacing: "-0.02em",
+                color: "#F5F0E6",
+              }}
+            >
+              Get in touch for samples and pricing.
             </p>
           </div>
           <Link
             href="/contact"
-            className="font-mono text-[11px] uppercase tracking-[0.2em] px-6 py-3 flex-shrink-0 transition-colors duration-200"
-            style={{ background: "#F6F1E8", color: "#2D5228" }}
+            className="font-mono text-[11px] uppercase tracking-[0.2em] px-6 py-3 flex-shrink-0 transition-colors duration-200 hover:bg-[#E97316]"
+            style={{ background: "#F5F0E6", color: "#1A4731" }}
           >
             Contact Us →
           </Link>
