@@ -4,18 +4,22 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 
-const E = [0.16, 1, 0.3, 1] as const;
+const E  = [0.16, 1, 0.3, 1] as const;
+const EI = [0.76, 0, 0.24, 1] as const; // ease-in-out for the iris collapse
+
 const LETTERS = "BIOPAPRO".split("");
+
+const SWEEP = `@keyframes iris-sweep{from{transform:translateX(-115%)}to{transform:translateX(400%)}}`;
 
 export default function SplashLoader({ onDone }: { onDone?: () => void }) {
   const [phase, setPhase] = useState<"enter" | "hold" | "exit" | "gone">("enter");
 
   useEffect(() => {
-    // enter: 0–900ms (letters reveal)
-    // hold:  900–1700ms
-    // exit:  1700ms → slide up 950ms → done at 2650ms
-    const t1 = setTimeout(() => setPhase("hold"), 900);
-    const t2 = setTimeout(() => setPhase("exit"), 1700);
+    // enter: 0–900ms (letters clip-reveal up)
+    // hold:  900–1500ms
+    // exit:  1500ms → iris collapses 1100ms → done 2600ms
+    const t1 = setTimeout(() => setPhase("hold"),  900);
+    const t2 = setTimeout(() => setPhase("exit"), 1500);
     const t3 = setTimeout(() => { setPhase("gone"); onDone?.(); }, 2650);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [onDone]);
@@ -25,38 +29,54 @@ export default function SplashLoader({ onDone }: { onDone?: () => void }) {
   const exiting = phase === "exit";
 
   return (
-    // The whole panel slides UP like a stage curtain on exit
+    /*
+     * The overlay is clipped by a circle. On exit the circle
+     * shrinks to 0% at the logo center — the page is revealed
+     * from the outer edges inward, like a camera iris closing.
+     */
     <motion.div
-      animate={exiting ? { y: "-100%" } : { y: "0%" }}
+      initial={{ clipPath: "circle(150% at 50% 50%)" }}
+      animate={exiting
+        ? { clipPath: "circle(0% at 50% 50%)" }
+        : { clipPath: "circle(150% at 50% 50%)" }
+      }
       transition={exiting
-        ? { duration: 0.95, ease: [0.76, 0, 0.24, 1] }
+        ? { duration: 1.15, ease: EI }
         : { duration: 0 }
       }
       style={{
-        position:   "fixed",
-        inset:      0,
-        zIndex:     9999,
-        background: "#1A4731",
-        display:    "flex",
+        position:  "fixed",
+        inset:     0,
+        zIndex:    9999,
+        background:"#1A4731",
+        display:   "flex",
         flexDirection: "column",
         alignItems:    "center",
-        justifyContent: "center",
-        gap:        "28px",
-        overflow:   "hidden",
+        justifyContent:"center",
+        gap:       "24px",
+        overflow:  "hidden",
         pointerEvents: exiting ? "none" : "auto",
       }}
       role="status"
       aria-label="Loading Biopapro"
     >
-      {/* Logo — fades + scales in */}
+      <style>{SWEEP}</style>
+
+      {/* Logo — scales in, then contracts toward center on exit */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.55, ease: E }}
+        initial={{ opacity: 0, scale: 0.75 }}
+        animate={exiting
+          ? { opacity: 0, scale: 0.3 }
+          : { opacity: 1, scale: 1   }
+        }
+        transition={exiting
+          ? { duration: 0.6, ease: EI }
+          : { duration: 0.6, ease: E  }
+        }
         style={{
           position: "relative",
-          width:    "clamp(72px, 11vw, 130px)",
-          height:   "clamp(72px, 11vw, 130px)",
+          width:    "clamp(72px, 10vw, 120px)",
+          height:   "clamp(72px, 10vw, 120px)",
         }}
       >
         <Image
@@ -64,13 +84,20 @@ export default function SplashLoader({ onDone }: { onDone?: () => void }) {
           alt=""
           fill
           priority
-          sizes="clamp(72px, 11vw, 130px)"
+          sizes="clamp(72px, 10vw, 120px)"
           style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
         />
       </motion.div>
 
-      {/* BIOPAPRO — each letter reveals upward from a clip boundary */}
-      <div style={{ display: "flex", alignItems: "flex-end" }}>
+      {/* BIOPAPRO — each letter clips up from overflow:hidden, fades on exit */}
+      <motion.div
+        style={{ display: "flex", alignItems: "flex-end" }}
+        animate={exiting ? { opacity: 0, scale: 0.85 } : { opacity: 1, scale: 1 }}
+        transition={exiting
+          ? { duration: 0.5, ease: EI }
+          : { duration: 0 }
+        }
+      >
         {LETTERS.map((letter, i) => (
           <span
             key={i}
@@ -81,7 +108,7 @@ export default function SplashLoader({ onDone }: { onDone?: () => void }) {
                 display:       "block",
                 fontFamily:    "'Outfit', sans-serif",
                 fontWeight:    900,
-                fontSize:      "clamp(3.2rem, 11vw, 10rem)",
+                fontSize:      "clamp(3rem, 10vw, 9.5rem)",
                 color:         "#F5F0E6",
                 letterSpacing: "-0.03em",
                 lineHeight:    0.88,
@@ -89,8 +116,8 @@ export default function SplashLoader({ onDone }: { onDone?: () => void }) {
               initial={{ y: "108%" }}
               animate={{ y: "0%" }}
               transition={{
-                delay:    0.08 + i * 0.06,
-                duration: 0.7,
+                delay:    0.07 + i * 0.065,
+                duration: 0.72,
                 ease:     E,
               }}
             >
@@ -98,17 +125,20 @@ export default function SplashLoader({ onDone }: { onDone?: () => void }) {
             </motion.span>
           </span>
         ))}
-      </div>
+      </motion.div>
 
       {/* Tagline */}
       <motion.span
         initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 0.45, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.5 }}
+        animate={exiting
+          ? { opacity: 0 }
+          : { opacity: 0.4, y: 0 }
+        }
+        transition={{ delay: exiting ? 0 : 0.72, duration: 0.45 }}
         style={{
           fontFamily:    "var(--font-jetbrains, 'JetBrains Mono', monospace)",
-          fontSize:      "clamp(8px, 0.95vw, 11px)",
-          letterSpacing: "0.34em",
+          fontSize:      "clamp(8px, 0.9vw, 11px)",
+          letterSpacing: "0.36em",
           textTransform: "uppercase" as const,
           color:         "#F5F0E6",
         }}
@@ -116,24 +146,28 @@ export default function SplashLoader({ onDone }: { onDone?: () => void }) {
         India&apos;s Eco Cutlery
       </motion.span>
 
-      {/* Orange accent bar — sweeps in from left, then out before curtain rises */}
+      {/* Orange progress line — sweeps during hold, disappears on exit */}
       <motion.div
-        initial={{ scaleX: 0 }}
-        animate={exiting ? { scaleX: 0, opacity: 0 } : { scaleX: 1 }}
-        transition={exiting
-          ? { duration: 0.3, ease: "easeIn" }
-          : { delay: 0.55, duration: 0.9, ease: E }
-        }
+        initial={{ opacity: 0 }}
+        animate={exiting ? { opacity: 0 } : { opacity: 1 }}
+        transition={{ delay: exiting ? 0 : 0.5, duration: 0.3 }}
         style={{
-          position:        "absolute",
-          bottom:          0,
-          left:            0,
-          right:           0,
-          height:          "3px",
-          background:      "#E97316",
-          transformOrigin: "left",
+          position: "fixed",
+          bottom:   0,
+          left:     0,
+          right:    0,
+          height:   "2.5px",
+          background: "rgba(245,240,230,0.1)",
+          overflow: "hidden",
         }}
-      />
+      >
+        <div style={{
+          height:   "100%",
+          width:    "40%",
+          background: "#E97316",
+          animation: "iris-sweep 1.6s cubic-bezier(.37,0,.63,1) infinite",
+        }} />
+      </motion.div>
     </motion.div>
   );
 }
