@@ -17,6 +17,7 @@ const NAV_LINKS = [
   { label: "Sustainability",  href: "/sustainability"  },
   { label: "Global Presence", href: "/global-presence" },
   { label: "Certifications",  href: "/certifications"  },
+  { label: "About",           href: "/about"           },
   { label: "Blog",            href: "/blog"            },
   { label: "Contact",         href: "/contact"         },
 ];
