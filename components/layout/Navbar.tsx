@@ -11,6 +11,7 @@ import { COMPANY_FACTS } from "@/lib/company-facts";
 import { useScrollLock } from "@/lib/use-scroll-lock";
 
 const NAV_LINKS = [
+  { label: "Home",            href: "/"                },
   { label: "Products",        href: "/products"        },
   { label: "Manufacturing",   href: "/manufacturing"   },
   { label: "Sustainability",  href: "/sustainability"  },
@@ -84,7 +85,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="relative whitespace-nowrap text-[11px] font-medium tracking-[0.1em] uppercase transition-colors duration-200 py-1 group"
+                  className="relative whitespace-nowrap text-[10px] font-medium tracking-[0.06em] uppercase transition-colors duration-200 py-1 group"
                   style={{
                     color: pathname === link.href ? "#E97316" : "#1A1208",
                   }}
