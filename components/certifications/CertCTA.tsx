@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -12,7 +12,7 @@ export default function CertCTA() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#2D5228" }} aria-labelledby="cert-cta-heading">
+    <section style={{ background: "#1A4731" }} aria-labelledby="cert-cta-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
@@ -23,7 +23,7 @@ export default function CertCTA() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, ease: EASE }}
               className="font-mono text-[11px] uppercase tracking-[0.28em] mb-5"
-              style={{ color: "rgba(200,230,190,0.55)" }}
+              style={{ color: "rgba(245,240,230,0.5)" }}
             >
               05 · Request Documentation
             </motion.p>
@@ -33,8 +33,15 @@ export default function CertCTA() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
-              className="font-display font-light leading-[0.92] mb-8"
-              style={{ fontSize: "clamp(2.2rem, 3.8vw, 3.6rem)", color: "#F6F1E8" }}
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 900,
+                letterSpacing: "-0.035em",
+                fontSize: "clamp(2.2rem, 3.8vw, 3.6rem)",
+                color: "#F5F0E6",
+                lineHeight: 0.92,
+                marginBottom: "1.5rem",
+              }}
             >
               Need certificate
               <br />
@@ -48,7 +55,7 @@ export default function CertCTA() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.68, ease: EASE, delay: 0.16 }}
               className="font-sans font-light leading-relaxed max-w-[480px] mb-10"
-              style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)", color: "rgba(200,230,190,0.75)" }}
+              style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)", color: "rgba(245,240,230,0.7)" }}
             >
               Contact us with your destination market and required certifications.
               We issue a full documentation package — FSC®, ISO 9001, ISO 14001,
@@ -64,17 +71,9 @@ export default function CertCTA() {
               <Link
                 href="/contact"
                 className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] transition-all duration-300"
-                style={{ background: "#F6F1E8", color: "#2D5228" }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.background = "#FBF8F2";
-                  el.style.boxShadow = "0 4px 20px rgba(0,0,0,0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.background = "#F6F1E8";
-                  el.style.boxShadow = "none";
-                }}
+                style={{ background: "#E97316", color: "#FFFFFF", borderRadius: "4px" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#C4580A"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#E97316"; }}
               >
                 Request Certificate Package
                 <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
@@ -82,9 +81,9 @@ export default function CertCTA() {
               <Link
                 href="/products"
                 className="font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200"
-                style={{ color: "rgba(200,230,190,0.65)" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,1)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,0.65)")}
+                style={{ color: "rgba(245,240,230,0.5)" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(245,240,230,0.9)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(245,240,230,0.5)")}
               >
                 Browse products →
               </Link>
@@ -112,22 +111,22 @@ export default function CertCTA() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, ease: EASE, delay: 0.3 + i * 0.1 }}
-                className="p-5"
-                style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(200,230,190,0.15)" }}
+                className="p-6"
+                style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "8px" }}
               >
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] mb-1" style={{ color: "rgba(200,230,190,0.45)" }}>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] mb-1" style={{ color: "rgba(245,240,230,0.45)" }}>
                   {office.label}
                 </p>
-                <p className="font-sans font-semibold text-[12px] mb-3" style={{ color: "#F6F1E8" }}>
+                <p className="font-sans font-semibold text-[13px] mb-4" style={{ color: "#F5F0E6" }}>
                   {office.contact}
                 </p>
-                <div className="flex flex-col gap-1.5">
+                <div className="flex flex-col gap-2">
                   <a
                     href={`mailto:${office.email}`}
                     className="flex items-center gap-2 group transition-opacity duration-200 hover:opacity-80"
                   >
-                    <Mail size={11} style={{ color: "rgba(200,230,190,0.5)" }} />
-                    <span className="font-mono text-[11px]" style={{ color: "rgba(200,230,190,0.65)" }}>
+                    <Mail size={11} style={{ color: "rgba(245,240,230,0.5)" }} />
+                    <span className="font-mono text-[11px]" style={{ color: "rgba(245,240,230,0.7)" }}>
                       {office.email}
                     </span>
                   </a>
@@ -135,13 +134,13 @@ export default function CertCTA() {
                     href={`tel:${office.phone.replace(/\s/g, "")}`}
                     className="flex items-center gap-2 group transition-opacity duration-200 hover:opacity-80"
                   >
-                    <Phone size={11} style={{ color: "rgba(200,230,190,0.5)" }} />
-                    <span className="font-mono text-[11px]" style={{ color: "rgba(200,230,190,0.65)" }}>
+                    <Phone size={11} style={{ color: "rgba(245,240,230,0.5)" }} />
+                    <span className="font-mono text-[11px]" style={{ color: "rgba(245,240,230,0.7)" }}>
                       {office.phone}
                     </span>
                   </a>
                 </div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.1em] mt-3" style={{ color: "rgba(200,230,190,0.3)" }}>
+                <p className="font-mono text-[11px] uppercase tracking-[0.1em] mt-4" style={{ color: "rgba(245,240,230,0.3)" }}>
                   {office.note}
                 </p>
               </motion.div>

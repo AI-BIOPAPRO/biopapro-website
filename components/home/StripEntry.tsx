@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 /**
  * S2 — Documentary Strip Entry
@@ -54,7 +54,7 @@ export default function StripEntry() {
       {/* Dark overlay — animates in on scroll */}
       <motion.div
         className="absolute inset-0"
-        style={{ backgroundColor: "#1A2E1A", opacity: bgOpacity }}
+        style={{ backgroundColor: "#1A4731", opacity: bgOpacity }}
         aria-hidden="true"
       />
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -10,6 +10,13 @@ import { COMPANY_FACTS } from "@/lib/company-facts";
 const EASE = [0.16, 1, 0.3, 1] as const;
 const PLASTIC_KG = COMPANY_FACTS.plasticSavedPerDay.toLocaleString();
 
+const CREAM  = "#F5F0E6";
+const CREAM2 = "#EDE5D4";
+const GREEN  = "#1A4731";
+const ORANGE = "#E97316";
+const INK    = "#1A1208";
+const MUTED  = "#7A6B54";
+
 export default function SustainabilityHero() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
@@ -17,140 +24,156 @@ export default function SustainabilityHero() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden grain pt-[72px]"
-      style={{ background: "#1D1610" }}
+      className="relative overflow-hidden pt-[72px]"
+      style={{ background: CREAM }}
       aria-labelledby="sus-hero-heading"
     >
-      {/* Sustainability video background */}
-      <div className="absolute inset-0 z-0">
-        <video
-          autoPlay muted loop playsInline
-          className="w-full h-full object-cover"
-          style={{ opacity: 0.4 }}
-        >
-          <source src="/videos/Sustainibilty 1-2.mp4" type="video/mp4" />
-        </video>
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, rgba(29,22,16,0.4) 0%, rgba(29,22,16,0.78) 100%)" }}
-        />
-        {/* Bottom-right vignette — this source footage has an AI-tool watermark
-            (wordmark, not just a small icon) spanning roughly the last quarter
-            of the frame width along the bottom edge. Wide/short ellipse to
-            match that footprint rather than a small corner circle. */}
-        <div
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 42% 26% at 100% 100%, rgba(29,22,16,1) 0%, rgba(29,22,16,0.85) 45%, transparent 100%)" }}
-        />
-      </div>
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-16 pt-5 pb-3">
 
-      <div
-        className="relative z-10 h-[2px] w-full"
-        style={{ background: "linear-gradient(90deg, transparent 0%, #4A7A3D 40%, #2D5228 70%, transparent 100%)" }}
-      />
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-3">
 
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-20 lg:pt-24 lg:pb-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-          {/* Left — headline */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, ease: EASE }}
-              className="mb-8"
-            >
-              <SectionLabel index="01" label="Sustainability" />
-            </motion.div>
-
-            <motion.h1
-              id="sus-hero-heading"
-              initial={{ opacity: 0, y: 28 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
-              className="font-display font-light leading-[0.92] mb-8"
-              style={{ fontSize: "clamp(2.8rem, 5.5vw, 5rem)", color: "#F6F1E8" }}
-            >
-              {PLASTIC_KG}kg of plastic.
-              <br />
-              <em className="not-italic" style={{ color: "#7DB870", fontStyle: "italic", fontFamily: "inherit" }}>
-                Not today.
-              </em>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.18 }}
-              className="font-sans font-light leading-relaxed max-w-[560px] mb-10"
-              style={{ fontSize: "clamp(1rem, 1.3vw, 1.1rem)", color: "rgba(230,210,185,0.70)" }}
-            >
-              Every day, Biopapro's birchwood tableware displaces {PLASTIC_KG}kg of single-use
-              plastic from the global supply chain. FSC-certified sourcing. ISO 14001
-              environmental management. This is not a brand position — it is
-              what the product does.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, ease: EASE, delay: 0.26 }}
-              className="flex flex-wrap items-center gap-4"
-            >
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.12em] transition-colors duration-300"
-                style={{ background: "#4A7A3D", color: "#F6F1E8" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
-              >
-                Source Sustainably
-                <ArrowUpRight size={13} strokeWidth={2.5} />
-              </Link>
-              <Link
-                href="/certifications"
-                className="font-sans text-[13px] transition-colors duration-200"
-                style={{ color: "rgba(230,210,185,0.5)" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(230,210,185,0.9)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(230,210,185,0.5)")}
-              >
-                View certifications →
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Right — impact statement */}
+          {/* Left — headline card */}
           <motion.div
-            className="lg:col-span-5"
-            initial={{ opacity: 0, x: 20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: EASE, delay: 0.16 }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.78, ease: EASE }}
+            className="flex flex-col justify-between"
+            style={{ background: CREAM2, borderRadius: "20px", padding: "clamp(28px,4vw,52px)" }}
           >
-            <div className="flex flex-col gap-3">
-              {[
-                { value: `${PLASTIC_KG}kg`,  label: "Plastic displaced every single day"         },
-                { value: "100M+",    label: "Units shipped per month, replacing plastic"  },
-                { value: "FSC® 100%",label: "Certified sustainable sourcing"              },
-                { value: "BRCGS",    label: "Global consumer products standard"           },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, x: 12 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, ease: EASE, delay: 0.3 + i * 0.07 }}
-                  className="flex items-center gap-5 p-5"
-                  style={{ border: "1px solid #3D2E22", background: "rgba(255,255,255,0.02)" }}
+            <div>
+              <div className="mb-7">
+                <SectionLabel index="01" label="Sustainability" />
+              </div>
+
+              <h1
+                id="sus-hero-heading"
+                style={{
+                  fontFamily:    "'Outfit', sans-serif",
+                  fontWeight:    900,
+                  fontSize:      "clamp(3rem, 5.5vw, 5.2rem)",
+                  lineHeight:    0.87,
+                  letterSpacing: "-0.045em",
+                  color:         INK,
+                  marginBottom:  "24px",
+                }}
+              >
+                {PLASTIC_KG}KG<br />
+                OF PLASTIC.<br />
+                <span style={{ color: GREEN }}>NOT TODAY.</span>
+              </h1>
+
+              <p style={{ color: MUTED, fontFamily: "'Outfit', sans-serif", fontSize: "clamp(0.9rem,1.1vw,1rem)", lineHeight: 1.75, maxWidth: "520px", marginBottom: "32px" }}>
+                Every day, Biopapro&apos;s birchwood tableware displaces {PLASTIC_KG}kg of single-use
+                plastic from the global supply chain. FSC-certified sourcing. ISO 14001
+                environmental management. This is what the product does.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.12em] transition-colors duration-300"
+                  style={{ background: ORANGE, color: "#fff", borderRadius: "10px" }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#C4580A")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = ORANGE)}
                 >
-                  <span className="font-mono font-bold flex-shrink-0" style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)", color: "#7DB870", minWidth: "90px" }}>
-                    {item.value}
-                  </span>
-                  <span className="font-sans text-[14px]" style={{ color: "rgba(230,210,185,0.65)" }}>
-                    {item.label}
-                  </span>
-                </motion.div>
-              ))}
+                  Source Sustainably
+                  <ArrowUpRight size={13} strokeWidth={2.5} />
+                </Link>
+                <Link
+                  href="/certifications"
+                  className="font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200"
+                  style={{ color: GREEN }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = ORANGE)}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = GREEN)}
+                >
+                  View certifications →
+                </Link>
+              </div>
             </div>
           </motion.div>
+
+          {/* Right — video + stats */}
+          <div className="flex flex-col gap-3">
+
+            {/* Video card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.72, ease: EASE, delay: 0.1 }}
+              className="relative overflow-hidden"
+              style={{ borderRadius: "20px", minHeight: "280px", flex: 1 }}
+            >
+              <video
+                autoPlay muted loop playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+              >
+                <source src="/videos/Sustainibilty 1-2.mp4" type="video/mp4" />
+              </video>
+              <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(to top, rgba(26,71,49,0.65) 0%, transparent 55%)" }}
+              />
+              <div className="absolute bottom-5 left-5 right-5">
+                <p
+                  style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 900,
+                    fontSize:   "clamp(1.2rem, 2vw, 1.6rem)",
+                    lineHeight: 0.95,
+                    color:      CREAM,
+                    letterSpacing: "-0.025em",
+                  }}
+                >
+                  FSC® CERTIFIED.<br />
+                  <span style={{ color: ORANGE }}>ZERO COMPROMISE.</span>
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Impact stats strip */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.68, ease: EASE, delay: 0.2 }}
+              className="grid grid-cols-2 gap-3"
+            >
+              {[
+                { value: `${PLASTIC_KG}kg`, label: "Plastic displaced daily" },
+                { value: "100M+",           label: "Units shipped per month" },
+                { value: "FSC® 100%",       label: "Certified sourcing"      },
+                { value: "BRCGS",           label: "Global food safety std"  },
+              ].map((item, i) => (
+                <div
+                  key={item.label}
+                  style={{
+                    background:   i % 2 === 0 ? GREEN : CREAM2,
+                    borderRadius: "14px",
+                    padding:      "18px 20px",
+                  }}
+                >
+                  <span
+                    style={{
+                      display:    "block",
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 900,
+                      fontSize:   "clamp(1rem,1.5vw,1.3rem)",
+                      color:      i % 2 === 0 ? CREAM : INK,
+                      marginBottom: "4px",
+                    }}
+                  >
+                    {item.value}
+                  </span>
+                  <span
+                    className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                    style={{ color: i % 2 === 0 ? "rgba(245,240,230,0.5)" : MUTED }}
+                  >
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

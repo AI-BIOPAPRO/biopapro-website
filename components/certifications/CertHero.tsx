@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -18,12 +18,12 @@ export default function CertHero() {
     <section
       ref={ref}
       className="relative overflow-hidden paper pt-[72px]"
-      style={{ background: "#F6F1E8" }}
+      style={{ background: "#EDE5D4" }}
       aria-labelledby="cert-hero-heading"
     >
       <div
         className="h-[2px] w-full"
-        style={{ background: "linear-gradient(90deg, transparent 0%, #C89A5B 30%, #8C6239 60%, transparent 100%)" }}
+        style={{ background: "linear-gradient(90deg, transparent 0%, #E97316 30%, #7A6B54 60%, transparent 100%)" }}
       />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-0 lg:pt-20">
@@ -45,13 +45,13 @@ export default function CertHero() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.92] mb-8"
-              style={{ fontSize: "clamp(2.6rem, 4.5vw, 4.4rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2.6rem, 4.5vw, 4.4rem)" }}
             >
               Every certification
               <br />
               is a{" "}
-              <em className="not-italic" style={{ color: "#C89A5B", fontStyle: "italic", fontFamily: "inherit" }}>
+              <em className="not-italic" style={{ color: "#E97316", fontStyle: "italic", fontFamily: "inherit" }}>
                 promise kept.
               </em>
             </motion.h1>
@@ -74,11 +74,11 @@ export default function CertHero() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease: EASE, delay: 0.22 }}
               className="grid grid-cols-2 sm:grid-cols-4 gap-px mb-10"
-              style={{ background: "#DDD3C5", border: "1px solid #DDD3C5" }}
+              style={{ background: "rgba(26,71,49,0.12)", border: "1px solid rgba(26,71,49,0.12)" }}
             >
               {COMPLIANCE_STATS.map((s) => (
-                <div key={s.label} className="flex flex-col px-5 py-4" style={{ background: "#F6F1E8" }}>
-                  <span className="font-mono font-bold text-[1.5rem] leading-none mb-1" style={{ color: "#C89A5B" }}>
+                <div key={s.label} className="flex flex-col px-5 py-4" style={{ background: "#EDE5D4" }}>
+                  <span className="font-mono font-bold text-[1.5rem] leading-none mb-1" style={{ color: "#E97316" }}>
                     {s.value}
                   </span>
                   <span className="font-sans text-[13px] font-semibold text-ink leading-tight mb-1">
@@ -100,9 +100,9 @@ export default function CertHero() {
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.12em] text-white transition-colors duration-300"
-                style={{ background: "#4A7A3D" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
+                style={{ background: "#1A4731" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#145229")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#1A4731")}
               >
                 Request Certificate Package
                 <ArrowUpRight size={13} strokeWidth={2.5} />
@@ -135,8 +135,8 @@ export default function CertHero() {
                     transition={{ duration: 0.5, ease: EASE, delay: 0.28 + i * 0.055 }}
                     className="flex flex-col items-center justify-center text-center px-3 py-5 group"
                     style={{
-                      background: "#FFFFFF",
-                      border: "1px solid #DDD3C5",
+                      background: "#F5F0E6",
+                      border: "1px solid rgba(26,71,49,0.12)",
                       transition: "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
                     }}
                     onMouseEnter={(e) => {
@@ -147,7 +147,7 @@ export default function CertHero() {
                     }}
                     onMouseLeave={(e) => {
                       const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = "#DDD3C5";
+                      el.style.borderColor = "rgba(26,71,49,0.12)";
                       el.style.boxShadow = "none";
                       el.style.transform = "translateY(0)";
                     }}
@@ -171,7 +171,7 @@ export default function CertHero() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, ease: EASE, delay: 0.6 }}
           className="border-t pb-8 pt-5 flex flex-wrap items-center gap-x-6 gap-y-2"
-          style={{ borderColor: "#DDD3C5" }}
+          style={{ borderColor: "rgba(26,71,49,0.12)" }}
         >
           <span className="font-sans text-[12px] font-medium text-ink-muted">
             Certifications held:

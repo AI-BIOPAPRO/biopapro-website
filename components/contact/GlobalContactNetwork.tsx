@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -13,7 +13,7 @@ export default function GlobalContactNetwork() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#EFE6D7" }} aria-labelledby="offices-heading">
+    <section style={{ background: "#EDE5D4" }} aria-labelledby="offices-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-12">
@@ -30,12 +30,12 @@ export default function GlobalContactNetwork() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-            className="font-display font-light text-ink leading-[0.95] max-w-2xl"
-            style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                        style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
           >
             Speak directly
             <br />
-            <span style={{ color: "#C89A5B" }}>with our team.</span>
+            <span style={{ color: "#E97316" }}>with our team.</span>
           </motion.h2>
         </div>
 
@@ -47,17 +47,17 @@ export default function GlobalContactNetwork() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.65, ease: EASE, delay: 0.12 + i * 0.12 }}
               className="p-7"
-              style={{ background: "#FBF8F2", border: "1px solid #DDD3C5" }}
+              style={{ background: "#F5F0E6", border: "1px solid rgba(26,71,49,0.12)" }}
             >
               {/* Header */}
-              <div className="flex items-start justify-between gap-4 mb-6 pb-5 border-b" style={{ borderColor: "#EDE5D8" }}>
+              <div className="flex items-start justify-between gap-4 mb-6 pb-5 border-b" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                 <div>
                   <span
                     className="inline-block font-sans text-[11px] font-semibold uppercase tracking-[0.1em] px-2.5 py-1 mb-2"
                     style={{
                       background: office.type === "origin" ? "rgba(200,154,91,0.1)" : "rgba(74,122,61,0.1)",
                       border: `1px solid ${office.type === "origin" ? "rgba(200,154,91,0.3)" : "rgba(74,122,61,0.3)"}`,
-                      color: office.type === "origin" ? "#8C6239" : "#4A7A3D",
+                      color: office.type === "origin" ? "#7A6B54" : "#1A4731",
                     }}
                   >
                     {office.type === "origin" ? "Manufacturing HQ" : "Regional Office"}
@@ -78,7 +78,7 @@ export default function GlobalContactNetwork() {
                 </p>
                 {office.contacts.map((c) => (
                   <div key={c.name} className="flex items-center gap-2 mb-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#C89A5B" }} />
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#E97316" }} />
                     <span className="font-sans font-semibold text-[14px] text-ink">{c.name}</span>
                     <span className="font-sans text-[13px] text-ink-muted">— {c.role}</span>
                   </div>
@@ -88,25 +88,25 @@ export default function GlobalContactNetwork() {
               {/* Contact details */}
               <div className="flex flex-col gap-3 mb-5">
                 <a href={`mailto:${office.email}`} className="flex items-center gap-3 group">
-                  <Mail size={15} style={{ color: "#C89A5B", flexShrink: 0 }} />
+                  <Mail size={15} style={{ color: "#E97316", flexShrink: 0 }} />
                   <span className="font-sans text-[14px] text-ink group-hover:text-ink-muted transition-colors">{office.email}</span>
                 </a>
                 <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 group">
-                  <Phone size={15} style={{ color: "#C89A5B", flexShrink: 0 }} />
+                  <Phone size={15} style={{ color: "#E97316", flexShrink: 0 }} />
                   <span className="font-sans text-[14px] text-ink group-hover:text-ink-muted transition-colors">{office.phone}</span>
                 </a>
                 <div className="flex items-start gap-3">
-                  <Clock size={15} style={{ color: "#C89A5B", flexShrink: 0, marginTop: 2 }} />
+                  <Clock size={15} style={{ color: "#E97316", flexShrink: 0, marginTop: 2 }} />
                   <span className="font-sans text-[14px] text-ink-light">{office.hours}</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <MapPin size={15} style={{ color: "#C89A5B", flexShrink: 0, marginTop: 2 }} />
+                  <MapPin size={15} style={{ color: "#E97316", flexShrink: 0, marginTop: 2 }} />
                   <span className="font-sans text-[13px] text-ink-muted leading-snug">{office.address}</span>
                 </div>
               </div>
 
               {/* Note */}
-              <p className="font-sans text-[13px] text-ink-muted leading-relaxed pt-4 border-t" style={{ borderColor: "#EDE5D8" }}>
+              <p className="font-sans text-[13px] text-ink-muted leading-relaxed pt-4 border-t" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                 {office.note}
               </p>
             </motion.div>

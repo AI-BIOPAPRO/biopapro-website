@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -12,7 +12,7 @@ export default function SustainabilityCTA() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#2D5228" }} aria-labelledby="sus-cta-heading">
+    <section style={{ background: "#F5F0E6" }} aria-labelledby="sus-cta-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
         <div className="max-w-[800px]">
           <motion.p
@@ -20,7 +20,7 @@ export default function SustainabilityCTA() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, ease: EASE }}
             className="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] mb-5"
-            style={{ color: "rgba(200,230,190,0.55)" }}
+            style={{ color: "#7A6B54" }}
           >
             07 · Sustainable Procurement
           </motion.p>
@@ -30,8 +30,8 @@ export default function SustainabilityCTA() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
-            className="font-display font-light leading-[0.92] mb-8"
-            style={{ fontSize: "clamp(2.4rem, 4.5vw, 4.2rem)", color: "#F6F1E8" }}
+                        style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2.4rem, 4.5vw, 4.2rem)", color: "#1A1208" }}
           >
             Replace plastic in your
             <br />
@@ -43,7 +43,7 @@ export default function SustainabilityCTA() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.68, ease: EASE, delay: 0.16 }}
             className="font-sans font-light leading-relaxed max-w-[560px] mb-10"
-            style={{ fontSize: "clamp(1rem, 1.2vw, 1.05rem)", color: "rgba(200,230,190,0.75)" }}
+            style={{ fontSize: "clamp(1rem, 1.2vw, 1.05rem)", color: "#7A6B54" }}
           >
             Share your current cutlery volumes and markets. We will respond with
             a product recommendation, sustainability documentation package, and
@@ -59,16 +59,14 @@ export default function SustainabilityCTA() {
             <Link
               href="/contact"
               className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.12em] transition-all duration-300"
-              style={{ background: "#F6F1E8", color: "#2D5228" }}
+              style={{ background: "#1A4731", color: "#F5F0E6" }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.background = "#FBF8F2";
-                el.style.boxShadow = "0 4px 20px rgba(0,0,0,0.15)";
+                el.style.background = "#E97316";
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.background = "#F6F1E8";
-                el.style.boxShadow = "none";
+                el.style.background = "#1A4731";
               }}
             >
               Request Sustainability Package
@@ -77,9 +75,9 @@ export default function SustainabilityCTA() {
             <Link
               href="/products"
               className="font-sans text-[13px] transition-colors duration-200"
-              style={{ color: "rgba(200,230,190,0.60)" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,1)")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,0.60)")}
+              style={{ color: "#7A6B54" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#1A1208")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#7A6B54")}
             >
               Browse products →
             </Link>

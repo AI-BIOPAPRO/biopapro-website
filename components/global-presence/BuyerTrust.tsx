@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -16,7 +16,7 @@ export default function BuyerTrust() {
     // Warm light — trust signals feel more authentic on cream than dark
     <section
       className="paper"
-      style={{ background: "#F6F1E8" }}
+      style={{ background: "#EDE5D4" }}
       aria-labelledby="trust-heading"
     >
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-20">
@@ -38,14 +38,14 @@ export default function BuyerTrust() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               Certified.
               <br />
               Consistent.
               <br />
-              <span style={{ color: "#C89A5B" }}>Export-ready.</span>
+              <span style={{ color: "#E97316" }}>Export-ready.</span>
             </motion.h2>
 
             <motion.p
@@ -78,7 +78,7 @@ export default function BuyerTrust() {
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "#DDD3C5";
+                el.style.borderColor = "rgba(26,71,49,0.12)";
                 el.style.boxShadow = "none";
               }}
             >
@@ -88,11 +88,11 @@ export default function BuyerTrust() {
                   className="w-7 h-7 flex items-center justify-center"
                   style={{ background: "rgba(74,122,61,0.1)", border: "1px solid rgba(74,122,61,0.25)" }}
                 >
-                  <Check size={12} style={{ color: "#4A7A3D" }} strokeWidth={2.5} />
+                  <Check size={12} style={{ color: "#1A4731" }} strokeWidth={2.5} />
                 </div>
                 <span
                   className="font-mono text-[11px] uppercase tracking-[0.16em] px-2 py-0.5"
-                  style={{ background: "rgba(200,154,91,0.1)", border: "1px solid rgba(200,154,91,0.25)", color: "#8C6239" }}
+                  style={{ background: "rgba(200,154,91,0.1)", border: "1px solid rgba(200,154,91,0.25)", color: "#7A6B54" }}
                 >
                   {signal.tag}
                 </span>
@@ -115,11 +115,11 @@ export default function BuyerTrust() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.62, ease: EASE, delay: 0.7 }}
           className="mt-12 pt-10 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
-          style={{ borderColor: "#DDD3C5" }}
+          style={{ borderColor: "rgba(26,71,49,0.12)" }}
         >
           <p
-            className="font-display font-light italic text-ink-light"
-            style={{ fontSize: "clamp(1.05rem, 1.8vw, 1.4rem)", maxWidth: 580 }}
+                        style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(1.05rem, 1.8vw, 1.4rem)", maxWidth: 580 }}
           >
             "One manufacturing standard. Five certifications. Eighteen markets.
             Every buyer gets the same product, the same documentation, the same quality."

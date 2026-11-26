@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -42,20 +42,20 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── Scroll-progress bar — primary green ── */}
+      {/* ── Scroll-progress bar ── */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] origin-left z-[60] bg-green"
-        style={{ scaleX: scrollYProgress }}
+        className="fixed top-0 left-0 right-0 h-[2px] origin-left z-[60]"
+        style={{ scaleX: scrollYProgress, background: "#E97316" }}
       />
 
       {/* ── Header ── */}
       <header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          scrolled
-            ? "bg-bg/96 backdrop-blur-md border-b border-border"
-            : "bg-transparent"
-        )}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          background: "#F5F0E6",
+          borderBottom: scrolled ? "1px solid rgba(5,46,22,0.12)" : "1px solid rgba(5,46,22,0.06)",
+          boxShadow: scrolled ? "0 2px 16px rgba(5,46,22,0.08)" : "none",
+        }}
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-5 xl:px-20">
           <div className="flex items-center justify-between h-[72px]">
@@ -66,13 +66,13 @@ export default function Navbar() {
               className="flex items-center flex-shrink-0 group"
               aria-label="Biopapro — home"
             >
-              <div className="relative h-8 w-[140px]">
+              <div className="relative" style={{ height: 44, width: 160 }}>
                 <Image
                   src="https://biopapro.com/cdn/shop/files/BioPapro_logo-8.png?v=1663665457"
                   alt="Biopapro — biodegradable tableware manufacturer"
                   fill
                   className="object-contain object-left"
-                  sizes="140px"
+                  sizes="160px"
                   priority
                 />
               </div>
@@ -84,22 +84,26 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={cn(
-                    "relative whitespace-nowrap text-[11px] font-medium tracking-[0.1em] uppercase transition-colors duration-200 py-1 group",
-                    pathname === link.href
-                      ? "text-green-deep"
-                      : scrolled
-                        ? "text-ink-light hover:text-ink"
-                        : "text-white hover:text-green-light"
-                  )}
-                  style={!scrolled && pathname !== link.href ? { textShadow: "0 1px 6px rgba(0,0,0,0.55)" } : undefined}
+                  className="relative whitespace-nowrap text-[11px] font-medium tracking-[0.1em] uppercase transition-colors duration-200 py-1 group"
+                  style={{
+                    color: pathname === link.href ? "#E97316" : "#1A1208",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (pathname !== link.href)
+                      (e.currentTarget as HTMLElement).style.color = "#E97316";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (pathname !== link.href)
+                      (e.currentTarget as HTMLElement).style.color = "#1A1208";
+                  }}
                 >
                   {link.label}
                   <span
-                    className={cn(
-                      "absolute bottom-0 left-0 h-px bg-green transition-all duration-300",
-                      pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
-                    )}
+                    className="absolute bottom-0 left-0 h-px transition-all duration-300"
+                    style={{
+                      background: "#E97316",
+                      width: pathname === link.href ? "100%" : "0",
+                    }}
                   />
                 </Link>
               ))}
@@ -109,7 +113,10 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               <Link
                 href="/contact"
-                className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-green text-white text-[11px] font-bold uppercase tracking-[0.12em] hover:bg-green-deep transition-colors duration-200 flex-shrink-0"
+                className="hidden lg:flex items-center gap-2 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.12em] flex-shrink-0 transition-colors duration-200"
+                style={{ background: "#E97316", color: "#FFFFFF", borderRadius: "6px" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#C4580A"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#E97316"; }}
               >
                 Request Quote
                 <ArrowUpRight size={11} strokeWidth={2.5} />
@@ -117,11 +124,8 @@ export default function Navbar() {
 
               <button
                 onClick={() => setMenuOpen((v) => !v)}
-                className={cn(
-                  "lg:hidden w-11 h-11 flex items-center justify-center transition-colors duration-200",
-                  scrolled || menuOpen ? "text-ink hover:text-green-deep" : "text-white hover:text-green-light"
-                )}
-                style={!scrolled && !menuOpen ? { filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.55))" } : undefined}
+                className="lg:hidden w-11 h-11 flex items-center justify-center transition-colors duration-200 text-ink-light hover:text-emerald"
+                style={{ color: "#4A3D32" }}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
               >
@@ -173,13 +177,13 @@ export default function Navbar() {
             {/* Mirror header */}
             <div className="flex items-center justify-between h-[72px] px-6 border-b border-border flex-shrink-0">
               <Link href="/" className="flex items-center flex-shrink-0" onClick={() => setMenuOpen(false)}>
-                <div className="relative h-8 w-[140px]">
+                <div className="relative" style={{ height: 44, width: 160 }}>
                   <Image
                     src="https://biopapro.com/cdn/shop/files/BioPapro_logo-8.png?v=1663665457"
                     alt="Biopapro"
                     fill
                     className="object-contain object-left"
-                    sizes="140px"
+                    sizes="160px"
                   />
                 </div>
               </Link>
@@ -212,7 +216,7 @@ export default function Navbar() {
                           : "text-ink-light hover:text-ink"
                       )}
                     >
-                      <span className="font-display font-light text-4xl tracking-tight">
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, letterSpacing: "-0.01em" }}>
                         {link.label}
                       </span>
                       <ArrowUpRight
@@ -233,7 +237,8 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setMenuOpen(false)}
-                  className="inline-flex items-center gap-2 px-7 py-4 bg-green text-white text-sm font-bold uppercase tracking-[0.14em] hover:bg-green-deep transition-colors duration-200"
+                  className="inline-flex items-center gap-2 px-7 py-4 text-sm font-bold uppercase tracking-[0.14em] transition-colors duration-200"
+                  style={{ background: "#E97316", color: "#FFFFFF", borderRadius: "6px" }}
                 >
                   Request Quote
                   <ArrowUpRight size={14} strokeWidth={2.5} />

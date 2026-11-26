@@ -1,185 +1,141 @@
-"use client";
+﻿"use client";
 
 /**
- * S4 — Domestic B2B Supply
- *
- * Biopapro is manufacturer-first: it supplies India's food-service
- * industry at commercial scale, not just an export operation. This
- * section exists to make that half of the business immediately
- * legible on the homepage, using the exact card/header pattern
- * already established on Global Presence's "Industries We Supply"
- * (components/global-presence/IndustriesServed.tsx) — same visual
- * language, no new design system introduced.
- *
- * Segment descriptions are deliberately generic (no invented MOQs,
- * client counts, or volume figures per segment) — Biopapro doesn't
- * have verified per-segment numbers to cite.
+ * Domestic B2B Supply — Bold India-first section
+ * Full mango-to-forest gradient with bold industry tiles
  */
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import SectionLabel from "@/components/shared/SectionLabel";
+import { ArrowUpRight, UtensilsCrossed, Coffee, Store, Users, Building2, ShoppingBag } from "lucide-react";
+import { Aurora, ScrollFloat } from "@/components/reactbits";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const E = [0.16, 1, 0.3, 1] as const;
 
 const SEGMENTS = [
-  {
-    id: "restaurants",
-    icon: "🍽",
-    name: "Restaurants & Cafés",
-    description: "Everyday dining service — consistent quality tableware built for high-volume covers.",
-  },
-  {
-    id: "qsr",
-    icon: "🍔",
-    name: "QSRs & Cloud Kitchens",
-    description: "Built for speed and consistency — sturdy, functional cutlery for fast-turnaround service.",
-  },
-  {
-    id: "hotels",
-    icon: "🏨",
-    name: "Hotels & Hospitality",
-    description: "In-room dining, banqueting, and F&B outlets — premium presentation at scale.",
-  },
-  {
-    id: "caterers",
-    icon: "🎪",
-    name: "Caterers & Events",
-    description: "Reliable bulk supply for events of any size, delivered on schedule.",
-  },
-  {
-    id: "corporate",
-    icon: "🏢",
-    name: "Corporate Cafeterias",
-    description: "Sustainable tableware for employee dining programs, sized to your headcount.",
-  },
-  {
-    id: "distributors",
-    icon: "📦",
-    name: "Distributors & Wholesalers",
-    description: "Bulk supply partnerships for businesses reselling across their own networks.",
-  },
+  { icon: UtensilsCrossed, label: "Restaurants & Cafés",      desc: "Everyday tableware at high-volume scale" },
+  { icon: Store,           label: "QSRs & Cloud Kitchens",    desc: "Speed and consistency for fast-turnaround service" },
+  { icon: Building2,       label: "Hotels & Hospitality",     desc: "Premium presentation at scale" },
+  { icon: Users,           label: "Caterers & Events",        desc: "Single-use with upscale wooden aesthetics" },
+  { icon: Coffee,          label: "Corporate Cafeterias",     desc: "Daily supply contracts, consistent quality" },
+  { icon: ShoppingBag,     label: "Distributors & Wholesale", desc: "Pan-India B2B supply at competitive pricing" },
 ] as const;
 
 export default function DomesticSupply() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-8% 0px" });
+  const ref    = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
 
   return (
-    <section className="bg-parchment" aria-labelledby="domestic-heading">
-      <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-24 pb-20 md:pb-24">
+    <section
+      ref={ref}
+      className="relative overflow-hidden"
+      style={{ background: "#F5F0E6" }}
+      aria-label="Biopapro domestic B2B supply"
+    >
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-28 pb-20 md:pb-28">
 
         {/* Header */}
-        <div className="mb-14">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 mb-14">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, ease: EASE }}
-            className="mb-7"
+            transition={{ duration: 0.65, ease: E }}
           >
-            <SectionLabel index="04" label="Domestic B2B Supply" />
+            <div className="flex items-center gap-2 mb-5">
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em]" style={{ color: "#E97316" }}>04</span>
+              <span className="w-5 h-px" style={{ background: "rgba(233,115,22,0.3)" }} />
+              <span className="font-mono text-[11px] uppercase tracking-[0.28em]" style={{ color: "#1A1208" }}>Domestic Supply</span>
+            </div>
+            <h2
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2.8rem, 6vw, 6rem)",
+                lineHeight:    0.9,
+                letterSpacing: "-0.03em",
+                color:         "#1A1208",
+              }}
+            >
+              BUILT FOR
+              <br />
+              <span style={{ color: "#E97316" }}>{"INDIA'S"}</span>
+              <br />
+              FOOD-SERVICE.
+            </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
-            <motion.h2
-              id="domestic-heading"
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
-            >
-              Built for India&rsquo;s
-              <br />
-              <span style={{ color: "#4A7A3D" }}>food-service industry.</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.68, ease: EASE, delay: 0.16 }}
-              className="font-sans font-light text-ink-light text-base leading-relaxed flex items-center"
-            >
-              From restaurants and QSRs to hotels, caterers and distributors,
-              Biopapro supplies sustainable single-use tableware for businesses
-              that require consistent quality, dependable supply, and
-              commercial-scale volumes.
-            </motion.p>
-          </div>
+          <motion.p
+            initial={{ opacity: 0, x: 20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.6, ease: E }}
+            className="font-sans text-sm leading-relaxed lg:max-w-[320px]"
+            style={{ color: "#7A6B54" }}
+          >
+            From restaurants and QSRs to hotels, caterers and corporate campuses — Biopapro supplies sustainable single-use tableware at the scale, consistency and dependable supply India&apos;s food-service industry requires.
+          </motion.p>
         </div>
 
-        {/* Segment cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
-          {SEGMENTS.map((segment, i) => (
-            <motion.div
-              key={segment.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.62, ease: EASE, delay: 0.18 + i * 0.07 }}
-              className="group flex flex-col bg-surface border border-border p-6"
-              style={{ transition: "border-color 0.28s, box-shadow 0.32s, transform 0.28s" }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "rgba(74,122,61,0.4)";
-                el.style.boxShadow = "0 8px 28px rgba(44,36,27,0.1)";
-                el.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "#DDD3C5";
-                el.style.boxShadow = "none";
-                el.style.transform = "translateY(0)";
-              }}
-            >
-              <div className="flex items-center gap-3 mb-3">
+        {/* 6-segment grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {SEGMENTS.map((seg, i) => {
+            const Icon = seg.icon;
+            return (
+              <motion.div
+                key={seg.label}
+                initial={{ opacity: 0, y: 24 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.1 + i * 0.08, duration: 0.65, ease: E }}
+                className="group flex items-start gap-5 p-6 md:p-7 transition-all duration-300 cursor-default"
+                style={{
+                  background:   "rgba(26,18,8,0.03)",
+                  border:       "1px solid rgba(26,18,8,0.07)",
+                  borderRadius: "4px",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background   = "rgba(233,115,22,0.05)";
+                  (e.currentTarget as HTMLElement).style.borderColor  = "rgba(233,115,22,0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background   = "rgba(26,18,8,0.03)";
+                  (e.currentTarget as HTMLElement).style.borderColor  = "rgba(26,18,8,0.07)";
+                }}
+              >
                 <div
-                  className="w-10 h-10 flex items-center justify-center text-[18px] flex-shrink-0"
-                  style={{ background: "rgba(74,122,61,0.08)", border: "1px solid rgba(74,122,61,0.22)" }}
+                  className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded"
+                  style={{ background: "rgba(233,115,22,0.1)" }}
                 >
-                  {segment.icon}
+                  <Icon size={18} strokeWidth={2} style={{ color: "#E97316" }} />
                 </div>
-                <h3 className="font-sans font-semibold text-ink text-[13px] leading-tight">
-                  {segment.name}
-                </h3>
-              </div>
-              <p className="font-sans text-[12.5px] font-light text-ink-light leading-relaxed">
-                {segment.description}
-              </p>
-            </motion.div>
-          ))}
+                <div>
+                  <p
+                    className="font-sans font-bold text-sm mb-1"
+                    style={{ color: "#1A1208" }}
+                  >
+                    {seg.label}
+                  </p>
+                  <p className="font-sans text-xs leading-relaxed" style={{ color: "#7A6B54" }}>
+                    {seg.desc}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Domestic procurement CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pt-8 border-t border-border"
-        >
-          <p className="font-sans text-ink-light text-sm">
-            Sourcing for a restaurant, hotel, or distribution business in India?
-          </p>
+        {/* CTA */}
+        <ScrollFloat delay={0.3} className="flex justify-start mt-12">
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200 flex-shrink-0"
-            style={{ border: "1px solid #4A7A3D", color: "#4A7A3D" }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = "#4A7A3D";
-              el.style.color = "#F6F1E8";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = "transparent";
-              el.style.color = "#4A7A3D";
-            }}
+            className="group inline-flex items-center gap-2 px-7 py-3.5 font-mono text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-300"
+            style={{ background: "#E97316", color: "#FFFFFF", borderRadius: "4px" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#C4580A"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#E97316"; }}
           >
-            Source for India
-            <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+            Get Domestic Pricing
+            <ArrowUpRight size={12} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
           </Link>
-        </motion.div>
+        </ScrollFloat>
 
       </div>
     </section>

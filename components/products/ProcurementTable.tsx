@@ -88,9 +88,16 @@ export default function ProcurementTable() {
     }
   }
 
+  const GREEN  = "#1A4731";
+  const ORANGE = "#E97316";
+  const INK    = "#1A1208";
+  const MUTED  = "#7A6B54";
+  const CREAM  = "#F5F0E6";
+  const CREAM2 = "#EDE5D4";
+
   return (
     <section
-      style={{ background: "#FBF8F2" }}
+      style={{ background: CREAM }}
       aria-labelledby="table-heading"
     >
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-20">
@@ -112,10 +119,17 @@ export default function ProcurementTable() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2rem, 3.2vw, 3rem)",
+                lineHeight:    0.92,
+                letterSpacing: "-0.03em",
+                color:         INK,
+              }}
             >
-              Full SKU Reference
+              FULL SKU<br />
+              <span style={{ color: GREEN }}>REFERENCE.</span>
             </motion.h2>
 
             {/* Category filter */}
@@ -129,11 +143,11 @@ export default function ProcurementTable() {
                 <button
                   key={cat}
                   onClick={() => setFilterCat(cat)}
-                  className="font-sans text-[12px] uppercase tracking-[0.08em] px-3 py-2 transition-all duration-200"
+                  className="font-mono text-[11px] uppercase tracking-[0.14em] px-3 py-1.5 transition-all duration-200 rounded-lg"
                   style={{
-                    background: filterCat === cat ? "#4A7A3D" : "transparent",
-                    color: filterCat === cat ? "#ffffff" : "#6B5D50",
-                    border: `1px solid ${filterCat === cat ? "#4A7A3D" : "#DDD3C5"}`,
+                    background: filterCat === cat ? GREEN : "rgba(26,71,49,0.06)",
+                    color:      filterCat === cat ? "#ffffff" : MUTED,
+                    border:     `1px solid ${filterCat === cat ? GREEN : "rgba(26,71,49,0.1)"}`,
                   }}
                 >
                   {cat}
@@ -148,26 +162,26 @@ export default function ProcurementTable() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
-          className="overflow-x-auto border"
-          style={{ borderColor: "#DDD3C5" }}
+          className="overflow-x-auto"
+          style={{ border: "1px solid rgba(26,71,49,0.14)", borderRadius: "14px" }}
         >
           <table className="w-full min-w-[800px]">
             <thead>
-              <tr style={{ background: "#F6F1E8", borderBottom: "2px solid #DDD3C5" }}>
+              <tr style={{ background: CREAM2, borderBottom: "1px solid rgba(26,71,49,0.12)" }}>
                 {COLUMNS.map((col) => (
                   <th
                     key={col.label}
                     onClick={() => handleSort(col.key)}
-                    className={`text-left py-4 px-4 ${col.key ? "cursor-pointer hover:text-ink transition-colors" : ""}`}
+                    className={`text-left py-4 px-4 ${col.key ? "cursor-pointer transition-colors" : ""}`}
                   >
                     <div className="flex items-center gap-1.5">
-                      <span className="font-sans text-[11px] uppercase tracking-[0.1em] text-ink-muted">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: MUTED }}>
                         {col.label}
                       </span>
                       {col.key && (
                         <ArrowUpDown
                           size={9}
-                          className={sortKey === col.key ? "text-wood" : "text-border"}
+                          style={{ color: sortKey === col.key ? GREEN : "rgba(122,107,84,0.4)" }}
                         />
                       )}
                     </div>
@@ -180,20 +194,23 @@ export default function ProcurementTable() {
                 <tr
                   key={row.id}
                   style={{
-                    borderBottom: "1px solid #EDE5D8",
-                    background: i % 2 === 0 ? "#FFFFFF" : "#FDFAF6",
+                    borderBottom: "1px solid rgba(26,71,49,0.07)",
+                    background: i % 2 === 0 ? "transparent" : "rgba(26,71,49,0.025)",
                   }}
                 >
                   {/* Product name */}
                   <td className="py-3.5 px-4">
                     <div className="flex items-center gap-2">
-                      <span className="font-sans text-[12px] font-medium text-ink">
+                      <span
+                        className="text-[12px] font-medium"
+                        style={{ color: INK, fontFamily: "'Outfit', sans-serif" }}
+                      >
                         {row.name}
                       </span>
                       {row.isIndividuallyPacked && (
                         <span
-                          className="font-mono text-[11px] uppercase tracking-[0.12em] px-1.5 py-0.5"
-                          style={{ background: "rgba(200,154,91,0.12)", border: "1px solid rgba(200,154,91,0.3)", color: "#8C6239" }}
+                          className="font-mono text-[10px] uppercase tracking-[0.14em] px-1.5 py-0.5 rounded"
+                          style={{ background: "rgba(233,115,22,0.1)", border: "1px solid rgba(233,115,22,0.3)", color: ORANGE }}
                         >
                           Sleeved
                         </span>
@@ -203,30 +220,30 @@ export default function ProcurementTable() {
                   {/* Category */}
                   <td className="py-3.5 px-4">
                     <span
-                      className="font-mono text-[11px] uppercase tracking-[0.16em] px-2.5 py-1"
-                      style={{ background: "rgba(74,122,61,0.08)", border: "1px solid rgba(74,122,61,0.18)", color: "#4A7A3D" }}
+                      className="font-mono text-[10px] uppercase tracking-[0.16em] px-2.5 py-1 rounded"
+                      style={{ background: "rgba(26,71,49,0.08)", border: "1px solid rgba(26,71,49,0.18)", color: GREEN }}
                     >
                       {row.category}
                     </span>
                   </td>
                   {/* Length */}
-                  <td className="py-3.5 px-4 font-mono text-[11px] text-ink">{row.length}</td>
+                  <td className="py-3.5 px-4 font-mono text-[11px]" style={{ color: INK }}>{row.length}</td>
                   {/* Material */}
-                  <td className="py-3.5 px-4 font-sans text-[11px] text-ink-light">{row.material}</td>
+                  <td className="py-3.5 px-4 font-mono text-[11px]" style={{ color: MUTED }}>{row.material}</td>
                   {/* Pcs/carton */}
-                  <td className="py-3.5 px-4 font-mono text-[11px] font-bold" style={{ color: "#C89A5B" }}>
+                  <td className="py-3.5 px-4 font-mono text-[11px] font-bold" style={{ color: GREEN }}>
                     {row.pcsPerCarton.toLocaleString()}
                   </td>
                   {/* MOQ */}
-                  <td className="py-3.5 px-4 font-mono text-[11px] text-ink">{row.moq}</td>
+                  <td className="py-3.5 px-4 font-mono text-[11px]" style={{ color: INK }}>{row.moq}</td>
                   {/* Certifications */}
                   <td className="py-3.5 px-4">
                     <div className="flex flex-wrap gap-1">
                       {row.certifications.slice(0, 3).map((cert) => (
                         <span
                           key={cert}
-                          className="font-mono text-[11px] uppercase tracking-[0.1em] px-1.5 py-0.5"
-                          style={{ background: "#F6F1E8", border: "1px solid #DDD3C5", color: "#6B5D50" }}
+                          className="font-mono text-[10px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded"
+                          style={{ background: CREAM2, border: "1px solid rgba(26,71,49,0.14)", color: MUTED }}
                         >
                           {cert}
                         </span>
@@ -246,15 +263,15 @@ export default function ProcurementTable() {
           transition={{ duration: 0.55, ease: EASE, delay: 0.36 }}
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6"
         >
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-muted">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: MUTED }}>
             Showing {sorted.length} of {TABLE_ROWS.length} SKUs · Click column headers to sort
           </p>
           <Link
             href="/contact"
             className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200"
-            style={{ color: "#4A7A3D" }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#2D5228")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#4A7A3D")}
+            style={{ color: GREEN }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = ORANGE)}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = GREEN)}
           >
             Request full spec sheet PDF
             <ArrowUpRight size={10} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useEffect, useState } from "react";
 import {
@@ -206,7 +206,7 @@ export default function SpinningGlobe({ triggered }: { triggered: boolean }) {
                   cx={dot.pt[0]}
                   cy={dot.pt[1]}
                   r={2.8}
-                  fill="#C89A5B"
+                  fill="#E97316"
                   opacity={0.92}
                 />
               ) : null
@@ -219,8 +219,8 @@ export default function SpinningGlobe({ triggered }: { triggered: boolean }) {
                   fill="rgba(200,154,91,0.08)" />
                 <circle cx={indiaPt[0]} cy={indiaPt[1]} r={9}
                   fill="rgba(200,154,91,0.18)" />
-                <circle cx={indiaPt[0]} cy={indiaPt[1]} r={5.5} fill="#C89A5B" />
-                <circle cx={indiaPt[0]} cy={indiaPt[1]} r={2.8} fill="#8C6239" />
+                <circle cx={indiaPt[0]} cy={indiaPt[1]} r={5.5} fill="#E97316" />
+                <circle cx={indiaPt[0]} cy={indiaPt[1]} r={2.8} fill="#7A6B54" />
               </>
             )}
           </g>
@@ -243,14 +243,14 @@ export default function SpinningGlobe({ triggered }: { triggered: boolean }) {
         animate={triggered ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.55, duration: 0.5 }}
         className="absolute bottom-3 left-3 px-3 py-2.5"
-        style={{ background: "#1D1610", border: "1px solid #3D2E22" }}
+        style={{ background: "#F5F0E6", border: "1px solid rgba(26,71,49,0.15)", borderRadius: "8px" }}
       >
         <p className="font-mono text-[11px] uppercase tracking-[0.22em]"
-          style={{ color: "rgba(200,154,91,0.7)" }}>
+          style={{ color: "#7A6B54" }}>
           Manufacturing Origin
         </p>
         <p className="font-mono text-[11px] uppercase tracking-[0.14em] mt-0.5"
-          style={{ color: "#F6F1E8" }}>
+          style={{ color: "#1A1208" }}>
           Mumbai, India
         </p>
       </motion.div>

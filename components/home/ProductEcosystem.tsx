@@ -1,370 +1,243 @@
-"use client";
+﻿"use client";
 
 /**
- * S7 — Product Ecosystem
- *
- * Full product range in a premium editorial layout.
- * NOT an e-commerce grid. Products feel engineered, not listed.
- *
- * Layout:
- *   - Section header with category filters
- *   - Masonry-inspired staggered card grid
- *   - Each card: real CDN product image + name + sizes + MOQ + certifications
- *   - Hover: wood-amber top bar + slight elevation + spec reveal
- *   - CTA: full catalog link
- *
- * Images: sourced from biopapro.com CDN — no placeholders needed for
- *   the 6 hero products. Additional products show warm gradient placeholders.
+ * The Range — staggered product grid with real photos
+ * Category-filtered showcase of actual SKUs
  */
 
 import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "motion/react";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import SectionLabel from "@/components/shared/SectionLabel";
+import { ArrowUpRight } from "lucide-react";
+import { getProductById } from "@/lib/products-data";
+import { ScrollFloat } from "@/components/reactbits";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const E = [0.16, 1, 0.3, 1] as const;
 
-type Category = "All" | "Cutlery" | "Café" | "Dairy" | "Grill" | "Packaging";
+type Category = "All" | "Cutlery" | "Café" | "Dairy" | "Grill";
 
-const CATEGORIES: Category[] = ["All", "Cutlery", "Café", "Dairy", "Grill", "Packaging"];
+const PRODUCTS_BY_CAT = {
+  Cutlery: ["fork-160", "spoon-160", "knife-165", "spork-140", "fork-170", "fork-165-premium"],
+  Café:    ["stirrer-140", "stirrer-190", "stirrer-110", "straw-8mm", "straw-6mm-wrapped"],
+  Dairy:   ["scoop-95", "spoon-110", "fruit-fork-90", "chips-fork-85"],
+  Grill:   ["skewer-10cm", "skewer-15cm", "skewer-21cm", "skewer-7cm", "skewer-9cm"],
+} as const;
 
-interface Product {
-  id: string;
-  name: string;
-  category: Category;
-  sizes: string;
-  moq: string;
-  material: string;
-  certifications: string[];
-  cdnImage: string | null;   // null = use warm gradient placeholder
-  highlight?: boolean;       // span 2 columns on desktop
-  shot: "context" | "spec";  // context = in-use lifestyle photography, spec = isolated product shot
-}
-
-const PRODUCTS: Product[] = [
-  {
-    id: "spork",
-    name: "Birchwood Spork",
-    category: "Cutlery",
-    sizes: "140mm · 160mm",
-    moq: "100,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "ISO 9001", "BRCGS"],
-    cdnImage: "https://biopapro.com/cdn/shop/collections/C2_2.png?v=1663670170&width=800",
-    shot: "spec",
-  },
-  {
-    id: "fork",
-    name: "Birchwood Fork",
-    category: "Cutlery",
-    sizes: "140mm · 160mm · 180mm",
-    moq: "100,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "ISO 9001", "BRCGS"],
-    cdnImage: "https://biopapro.com/cdn/shop/collections/C4_4.png?v=1662374267&width=800",
-    highlight: true,
-    shot: "context",
-  },
-  {
-    id: "spoon",
-    name: "Birchwood Spoon",
-    category: "Cutlery",
-    sizes: "110mm · 130mm · 160mm",
-    moq: "100,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "ISO 9001", "BRCGS"],
-    cdnImage: "https://biopapro.com/cdn/shop/collections/C5.png?v=1662374075&width=800",
-    shot: "context",
-  },
-  {
-    id: "knife",
-    name: "Birchwood Knife",
-    category: "Cutlery",
-    sizes: "165mm · 185mm",
-    moq: "100,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "ISO 9001", "BRCGS"],
-    cdnImage: "https://biopapro.com/cdn/shop/collections/C3_3.png?v=1662374387&width=800",
-    shot: "context",
-  },
-  {
-    id: "packaged",
-    name: "Individually Sleeved Set",
-    category: "Packaging",
-    sizes: "Custom packaging available",
-    moq: "50,000 sets",
-    material: "FSC Birchwood + Kraft Paper",
-    certifications: ["FSC®", "ISO 9001", "BRCGS"],
-    cdnImage: "https://biopapro.com/cdn/shop/collections/C6_4.png?v=1662375675&width=800",
-    highlight: true,
-    shot: "context",
-  },
-  {
-    id: "stirrer",
-    name: "Coffee Stirrer",
-    category: "Café",
-    sizes: "110mm · 140mm · 160mm · 190mm",
-    moq: "500,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "ISO 9001"],
-    cdnImage: "https://biopapro.com/cdn/shop/collections/Untitled_design_61.png?v=1662375316&width=800",
-    shot: "spec",
-  },
-  {
-    id: "skewer",
-    name: "Gun Skewer",
-    category: "Grill",
-    sizes: "150mm · 200mm · 250mm · 300mm",
-    moq: "250,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "ISO 9001", "BRCGS"],
-    cdnImage: "https://biopapro.com/cdn/shop/collections/Untitled_design_58.png?v=1663670146&width=800",
-    shot: "spec",
-  },
-  {
-    id: "icecream",
-    name: "Ice Cream Stick",
-    category: "Dairy",
-    sizes: "75mm · 93mm · 114mm",
-    moq: "1,000,000 units",
-    material: "FSC Birchwood",
-    certifications: ["FSC®", "ISO 9001", "BRCGS"],
-    cdnImage: null,
-    shot: "spec",
-  },
+const ALL_IDS = [
+  "fork-160", "spoon-160", "knife-165", "spork-140",
+  "stirrer-140", "stirrer-190", "straw-8mm", "straw-6mm-wrapped",
+  "scoop-95", "skewer-10cm", "skewer-15cm", "fruit-fork-90",
+  "fork-170", "fork-165-premium", "skewer-21cm", "chips-fork-85",
 ];
 
-/* ── Product card ── */
-function ProductCard({ product, index }: { product: Product; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-8% 0px" });
+const CATS: Category[] = ["All", "Cutlery", "Café", "Dairy", "Grill"];
+
+function ProductCard({
+  id,
+  delay,
+  tall,
+}: {
+  id:    string;
+  delay: number;
+  tall?: boolean;
+}) {
+  const product = getProductById(id);
+  const ref     = useRef<HTMLDivElement>(null);
+  const inView  = useInView(ref, { once: true, margin: "-60px 0px" });
+
+  if (!product) return null;
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 22 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4, ease: EASE, delay: index * 0.04 }}
-      className={`group relative flex flex-col bg-card border border-border hover:border-wood/40 hover:shadow-md transition-all duration-400 overflow-hidden cursor-pointer ${
-        product.highlight ? "lg:col-span-2" : ""
-      }`}
+      initial={{ opacity: 0, y: 28, scale: 0.97 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ delay, duration: 0.65, ease: E }}
+      className="group relative overflow-hidden"
+      style={{
+        borderRadius: "6px",
+        aspectRatio:  tall ? "3/4" : "1/1",
+        background:   "linear-gradient(155deg, #F2EBDD 0%, #E7DCC7 100%)",
+      }}
     >
-      {/* Wood top-bar reveal */}
-      <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-wood origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 z-10" />
-
-      {/* Category + zone + MOQ header */}
-      <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-border">
-        <span className="flex items-center gap-2">
-          <span className="font-mono text-[11px] text-wood tracking-[0.22em] uppercase">
-            {product.category}
-          </span>
-          <span className="font-mono text-[11px] text-ink-muted/80 tracking-[0.15em] uppercase">
-            · {product.shot === "context" ? "In the Kitchen" : "The Range"}
-          </span>
-        </span>
-        <span className="font-mono text-[11px] text-ink-muted tracking-wider uppercase flex-shrink-0">
-          MOQ {product.moq.split(" ")[0]}
-        </span>
-      </div>
-
-      {/* Image area */}
-      <div
-        className="relative flex-1 overflow-hidden"
-        style={{ minHeight: product.highlight ? "280px" : "220px" }}
+      <Link
+        href={`/products?product=${encodeURIComponent(product.slug)}#catalog`}
+        aria-label={`View ${product.name}`}
       >
-        {product.cdnImage ? (
-          <Image
-            src={product.cdnImage}
-            alt={product.name}
-            fill
-            priority={product.highlight}
-            className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-700"
-            style={{ filter: "saturate(0.94) contrast(1.02) sepia(0.03)" }}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        ) : (
-          /* Warm gradient placeholder for products without CDN images */
-          <div
-            className="absolute inset-0 flex flex-col items-center justify-center gap-2"
-            style={{
-              background: "linear-gradient(155deg, #F0E4CE 0%, #E5D9C5 50%, #DDD0B8 100%)",
-            }}
-          >
-            <span className="font-mono text-[11px] text-wood/60 tracking-[0.2em] uppercase text-center leading-loose">
-              Product Photo
-              <br />Coming Soon
-            </span>
-          </div>
-        )}
+        <Image
+          src={product.primaryImage}
+          alt={product.name}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-108"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        />
 
-        {/* Hover overlay with specs */}
-        <div
-          className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ background: "linear-gradient(to top, rgba(44,36,27,0.82) 0%, transparent 55%)" }}
+        {/* Category pill */}
+        <span
+          className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-[0.16em] px-2 py-1"
+          style={{
+            background:     "rgba(26,18,8,0.68)",
+            color:          "#E97316",
+            backdropFilter: "blur(4px)",
+            borderRadius:   "2px",
+          }}
         >
-          <div className="flex flex-wrap gap-1.5">
-            {product.certifications.map((cert) => (
-              <span
-                key={cert}
-                className="font-mono text-[11px] tracking-[0.16em] uppercase px-2 py-1"
-                style={{
-                  background: "rgba(200,154,91,0.2)",
-                  border: "1px solid rgba(200,154,91,0.4)",
-                  color: "#E5C99A",
-                }}
-              >
-                {cert}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
+          {product.category}
+        </span>
 
-      {/* Product info footer */}
-      <div className="px-4 py-4">
-        <p className="font-sans text-[13px] font-semibold text-ink mb-1.5 group-hover:text-wood-dark transition-colors duration-300 leading-snug">
-          {product.name}
-        </p>
-        <p className="font-mono text-[11px] text-ink-muted tracking-[0.08em] uppercase">
-          {product.sizes}
-        </p>
-        <p className="font-mono text-[11px] text-ink-muted/85 tracking-[0.05em] mt-1">
-          {product.material} · Min {product.moq}
-        </p>
-      </div>
+        {/* Hover overlay */}
+        <div
+          className="absolute inset-0 flex flex-col items-start justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ background: "linear-gradient(to top, rgba(26,18,8,0.92) 0%, transparent 60%)" }}
+        >
+          <p
+            className="font-sans font-bold text-sm leading-tight text-white mb-1"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
+          >
+            {product.name}
+          </p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.14em] mb-2" style={{ color: "rgba(255,255,255,0.5)" }}>
+            {product.length} · {product.material}
+          </p>
+          <span
+            className="inline-flex items-center gap-1 font-mono text-[9px] font-bold uppercase tracking-[0.16em]"
+            style={{ color: "#E97316" }}
+          >
+            View Specs <ArrowUpRight size={9} strokeWidth={2.5} />
+          </span>
+        </div>
+      </Link>
     </motion.div>
   );
 }
 
-/* ── Main section ── */
 export default function ProductEcosystem() {
-  const [activeCategory, setActiveCategory] = useState<Category>("All");
-  const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, margin: "-10% 0px" });
+  const [active, setActive] = useState<Category>("All");
+  const ref    = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
 
-  const filtered = activeCategory === "All"
-    ? PRODUCTS
-    : PRODUCTS.filter((p) => p.category === activeCategory);
+  const ids =
+    active === "All"
+      ? ALL_IDS
+      : [...PRODUCTS_BY_CAT[active]].map(String);
+
+  const displayed = ids.slice(0, 12);
 
   return (
-    <section className="bg-bg paper" aria-labelledby="products-heading">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-20 pt-20 pb-8">
-
-        {/* ── Section header ── */}
-        <div ref={headerRef} className="mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, ease: EASE }}
-            className="mb-7"
-          >
-            <SectionLabel index="05" label="Product Range" />
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-            <motion.h2
-              id="products-heading"
-              initial={{ opacity: 0, y: 18 }}
-              animate={headerInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2.2rem, 4vw, 3.6rem)" }}
-            >
-              Every product,{" "}
-              <span className="text-wood">engineered</span>
-              <br />for global food service.
-            </motion.h2>
-
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={headerInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.68, ease: EASE, delay: 0.2 }}
-              className="flex flex-col justify-center"
-            >
-              <p className="font-sans font-light text-ink-light text-base leading-relaxed mb-5">
-                Six product families. One manufacturing standard. FSC-certified
-                birchwood, precision-stamped, optically sorted, UV-sterilised,
-                and shipped in bulk to airlines, hospitality groups, and
-                distributors in 18+ countries.
-              </p>
-              <Link
-                href="/products"
-                className="group inline-flex items-center gap-2.5 self-start font-mono text-[11px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
-                style={{ border: "1px solid #C89A5B", color: "#C89A5B" }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.background = "#C89A5B";
-                  el.style.color = "#1D1610";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.background = "transparent";
-                  el.style.color = "#C89A5B";
-                }}
-              >
-                View Full Product Catalog
-                <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* ── Category filter ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: EASE, delay: 0.3 }}
-          className="flex items-center gap-1 flex-wrap mb-8 border-b border-border pb-5"
+    <section
+      ref={ref}
+      className="relative overflow-hidden"
+      style={{ background: "#F5F0E6" }}
+      aria-label="Biopapro product range"
+    >
+      {/* Big watermark */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
+      >
+        <span
+          style={{
+            fontFamily:    "'Outfit', sans-serif",
+            fontWeight:    900,
+            fontSize:      "clamp(6rem, 20vw, 18rem)",
+            lineHeight:    1,
+            color:         "rgba(233,115,22,0.04)",
+            letterSpacing: "-0.04em",
+            whiteSpace:    "nowrap",
+          }}
         >
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className="font-mono text-[11px] uppercase tracking-[0.18em] px-4 py-2 min-h-[44px] inline-flex items-center justify-center transition-all duration-200"
-              style={{
-                background: activeCategory === cat ? "#C89A5B" : "transparent",
-                color: activeCategory === cat ? "#1D1610" : "#9E9083",
-                border: `1px solid ${activeCategory === cat ? "#C89A5B" : "#DDD3C5"}`,
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-          <span className="ml-auto font-mono text-[11px] text-ink-muted uppercase tracking-[0.15em]">
-            {filtered.length} product{filtered.length !== 1 ? "s" : ""}
-          </span>
-        </motion.div>
-
-        {/* ── Product grid ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-auto">
-          {filtered.map((product, i) => (
-            <ProductCard key={product.id} product={product} index={i} />
-          ))}
-        </div>
-
+          THE RANGE
+        </span>
       </div>
 
-      {/* ── Bottom CTA bar ── */}
-      <div className="border-t border-border mt-12">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-20 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <p className="font-sans font-medium text-ink text-sm">
-              Need custom sizing, branding, or packaging?
-            </p>
-            <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.14em] mt-0.5">
-              Laser engraving · Custom dimensions · Private label · OEM welcome
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-2.5 px-6 py-3 bg-ink text-birch text-[11px] font-bold uppercase tracking-[0.14em] hover:bg-wood-dark transition-colors duration-300 flex-shrink-0"
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-28 pb-20 md:pb-28">
+
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.65, ease: E }}
           >
-            Request Custom Quote
-            <ArrowRight size={11} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-300" />
-          </Link>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em]" style={{ color: "#E97316" }}>04</span>
+              <span className="w-5 h-px" style={{ background: "rgba(233,115,22,0.3)" }} />
+              <span className="font-mono text-[11px] uppercase tracking-[0.28em]" style={{ color: "#1A1208" }}>Product Range</span>
+            </div>
+            <h2
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2.8rem, 6vw, 6rem)",
+                lineHeight:    0.9,
+                letterSpacing: "-0.03em",
+                color:         "#1A1208",
+              }}
+            >
+              THE
+              <br />
+              <span style={{ color: "#E97316" }}>RANGE.</span>
+            </h2>
+          </motion.div>
+
+          {/* Category filters */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.6, ease: E }}
+            className="flex flex-wrap gap-2"
+          >
+            {CATS.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] px-4 py-2 transition-all duration-250"
+                style={{
+                  background:   active === cat ? "#E97316" : "transparent",
+                  color:        active === cat ? "#FFFFFF" : "#1A1208",
+                  border:       `1px solid ${active === cat ? "#E97316" : "rgba(26,18,8,0.2)"}`,
+                  borderRadius: "2px",
+                }}
+                onMouseEnter={(e) => {
+                  if (active !== cat) (e.currentTarget as HTMLElement).style.borderColor = "#E97316";
+                }}
+                onMouseLeave={(e) => {
+                  if (active !== cat) (e.currentTarget as HTMLElement).style.borderColor = "rgba(26,18,8,0.2)";
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+          </motion.div>
         </div>
+
+        {/* Staggered product grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+          {displayed.map((id, i) => (
+            <ProductCard
+              key={`${active}-${id}`}
+              id={id}
+              delay={i * 0.05}
+              tall={i === 0 || i === 5 || i === 10}
+            />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <ScrollFloat delay={0.3} className="flex justify-center mt-14">
+          <Link
+            href="/products"
+            className="group inline-flex items-center gap-3 px-8 py-4 font-mono text-[12px] font-bold uppercase tracking-[0.22em] transition-all duration-300"
+            style={{ background: "#1A4731", color: "#FFFFFF", borderRadius: "4px" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#1A4731"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#1A4731"; }}
+          >
+            View Full Catalog — 30+ SKUs
+            <ArrowUpRight size={14} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+          </Link>
+        </ScrollFloat>
+
       </div>
     </section>
   );

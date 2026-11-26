@@ -12,89 +12,95 @@
 @theme {
   /* ── Typography ── */
   --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-sans:    var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+  --font-outfit:  var(--font-outfit), "Outfit", sans-serif;
+  --font-sans:    var(--font-inter), Inter, system-ui, sans-serif;
   --font-mono:    var(--font-jetbrains), "JetBrains Mono", "SF Mono", monospace;
 
+  /* ── EcoSoul palette (Biopapro v5) ── */
+  --color-emerald:      #1A4731;
+  --color-emerald-deep: #145229;
+  --color-emerald-dk:   #145229;
+  --color-emerald-lt:   #2D6A3A;
+  --color-emerald-bg:   #EDE5D4;
+  --color-amber:        #E97316;
+  --color-amber-lt:     #F0A050;
+  --color-amber-bg:     #F5F0E6;
+  --color-amber-dk:     #C4580A;
+  --color-cream:        #F5F0E6;
+  --color-forest-dark:  #1A4731;
+
   /* ─────────────────────────────────────────────────────────
-     WARM SURFACES — 70% of site
-     Birch cream → parchment → card white.
-     These feel like natural materials, not web UI.
+     WARM SURFACES — EcoSoul cream palette
      ───────────────────────────────────────────────────────── */
-  --color-birch:        #F6F1E8;   /* Page background — birch bark in warm light */
-  --color-parchment:    #EFE6D7;   /* Alt sections — aged parchment */
-  --color-card:         #FBF8F2;   /* Card surface — warm white */
-  --color-pale:         #E8DCCB;   /* Inset panels, code blocks */
+  --color-birch:        #F5F0E6;   /* Page background — EcoSoul cream */
+  --color-parchment:    #EDE5D4;   /* Alt sections — CREAM2 */
+  --color-card:         #F5F0E6;   /* Card surface */
+  --color-pale:         #EDE5D4;   /* Inset panels */
 
   /* Aliased as bg/surface for Tailwind utility classes */
-  --color-bg:           #F6F1E8;
-  --color-surface:      #FBF8F2;
-  --color-surface-alt:  #EFE6D7;
+  --color-bg:           #F5F0E6;
+  --color-surface:      #F5F0E6;
+  --color-surface-alt:  #EDE5D4;
 
   /* ─────────────────────────────────────────────────────────
-     TEXT — warm browns, never cool grey
+     TEXT — EcoSoul ink tones
      ───────────────────────────────────────────────────────── */
-  --color-ink:          #2C241B;   /* Primary — very dark warm brown */
-  --color-ink-light:    #4A3D32;   /* Secondary — raised for legibility */
-  --color-ink-muted:    #6B5D50;   /* Captions, labels — raised for legibility */
+  --color-ink:          #1A1208;   /* Primary INK */
+  --color-ink-light:    #3D2E22;   /* Secondary */
+  --color-ink-muted:    #7A6B54;   /* Captions — EcoSoul MUTED */
 
   /* ─────────────────────────────────────────────────────────
-     WOOD ACCENT — primary brand colour
-     Represents the birchwood material itself.
-     Used for: CTAs, highlights, active states, counters.
+     ORANGE ACCENT — EcoSoul primary action colour
      ───────────────────────────────────────────────────────── */
-  --color-wood:         #C89A5B;   /* Warm amber — sunlit birchwood */
-  --color-wood-dark:    #8C6239;   /* Deep wood — hover/active */
-  --color-wood-deep:    #5C3D1E;   /* Darkest wood — used sparingly */
-  --color-wood-light:   #E5C99A;   /* Light wood — decorative fills */
-  --color-wood-pale:    #F0E4CE;   /* Ghost wood — subtle tints */
-  --color-wood-ghost:   rgba(200, 154, 91, 0.08);
+  --color-wood:         #E97316;   /* EcoSoul orange */
+  --color-wood-dark:    #C4580A;   /* Hover/active */
+  --color-wood-deep:    #A84A08;   /* Darkest — used sparingly */
+  --color-wood-light:   #F0A050;   /* Light — decorative fills */
+  --color-wood-pale:    rgba(233,115,22,0.1);
+  --color-wood-ghost:   rgba(233,115,22,0.06);
 
   /* ─────────────────────────────────────────────────────────
-     FOREST — used for sustainability sections
-     Deep green secondary accent — earthy, not neon.
+     FOREST — EcoSoul green palette
      ───────────────────────────────────────────────────────── */
-  --color-forest:       #4F6B4A;   /* Deep forest */
-  --color-forest-light: #738A6E;   /* Mid-tone forest */
-  --color-forest-pale:  #D4DFD0;   /* Light forest wash */
+  --color-forest:       #1A4731;   /* Primary brand green */
+  --color-forest-light: #2D6A3A;   /* Mid-tone */
+  --color-forest-pale:  rgba(26,71,49,0.08);  /* Light wash */
 
   /* ─────────────────────────────────────────────────────────
-     BORDERS
+     BORDERS — green-tinted
      ───────────────────────────────────────────────────────── */
-  --color-border:       #DDD3C5;   /* Standard — warm grey-brown */
-  --color-border-light: #EDE5D8;   /* Hairline */
+  --color-border:       rgba(26,71,49,0.14);
+  --color-border-light: rgba(26,71,49,0.08);
 
   /* ─────────────────────────────────────────────────────────
-     DARK SECTIONS — 30% of site
-     Manufacturing · Statistics · Global map · Certifications
-     Deep warm brown-black, like cross-cut birchwood in shadow.
-     NOT pure black, NOT cool charcoal.
+     SECTION VARIANTS — no pure dark sections
+     "dark" now maps to CREAM2 so legacy bg-dark classes
+     resolve to light rather than near-black.
      ───────────────────────────────────────────────────────── */
-  --color-dark:         #1D1610;   /* Dark section bg — deep warm brown */
-  --color-dark-raised:  #2C2118;   /* Elevated on dark */
-  --color-dark-border:  #3D2E22;   /* Border on dark */
-  --color-dark-text:    #F6F1E8;   /* Text on dark — birch cream */
-  --color-dark-muted:   rgba(230, 210, 185, 0.65);
+  --color-dark:         #EDE5D4;   /* Legacy dark → CREAM2 */
+  --color-dark-raised:  #F5F0E6;   /* Legacy raised → CREAM */
+  --color-dark-border:  rgba(26,71,49,0.14);
+  --color-dark-text:    #1A1208;   /* Text on (now cream) sections */
+  --color-dark-muted:   #7A6B54;
 
   /* ─────────────────────────────────────────────────────────
-     PRIMARY BRAND GREEN — Biopapro identity
-     All components using text-green / bg-green / border-green
-     now render in the authentic Biopapro brand green.
+     PRIMARY BRAND GREEN — EcoSoul
      ───────────────────────────────────────────────────────── */
-  --color-green:        #4A7A3D;   /* Primary Biopapro green */
-  --color-green-deep:   #2D5228;   /* Deep — hover, active, strong text */
-  --color-green-forest: #1B3317;   /* Forest — darkest, used sparingly */
-  --color-green-light:  #7AAE6B;   /* Mid-tone — highlights */
-  --color-green-pale:   #C8DFC0;   /* Pale — fills, tints */
-  --color-green-ghost:  rgba(74, 122, 61, 0.08);
+  --color-green:        #1A4731;   /* EcoSoul primary green */
+  --color-green-deep:   #145229;   /* Hover/active */
+  --color-green-forest: #1A4731;   /* Forest alias */
+  --color-green-light:  #2D6A3A;   /* Mid-tone */
+  --color-green-pale:   rgba(26,71,49,0.08);
+  --color-green-ghost:  rgba(26,71,49,0.05);
 
-  /* Legacy aliases — all route to green */
-  --color-gold:         #4A7A3D;
-  --color-gold-deep:    #2D5228;
-  --color-gold-light:   #7AAE6B;
+  /* Orange accent */
+  --color-gold:         #E97316;
+  --color-gold-deep:    #C4580A;
+  --color-gold-light:   #F0A050;
 
-  --color-ink-secondary: #2C2118;
-  --color-ink-tertiary:  #3D2E22;
-  --color-border-dark:   #3D2E22;
+  --color-ink-secondary: #3D2E22;
+  --color-ink-tertiary:  #7A6B54;
+  --color-border-dark:   rgba(26,71,49,0.14);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -116,19 +122,19 @@
   }
 
   body {
-    background-color: #F6F1E8;
-    color: #2C241B;
+    background-color: #F5F0E6;
+    color: #1A1208;
     font-family: var(--font-inter), Inter, system-ui, sans-serif;
     overflow-x: hidden;
   }
 
   ::selection {
-    background-color: rgba(74, 122, 61, 0.2);
-    color: #1B3317;
+    background-color: rgba(233, 115, 22, 0.2);
+    color: #1A4731;
   }
 
   :focus-visible {
-    outline: 2px solid #4A7A3D;
+    outline: 2px solid #E97316;
     outline-offset: 2px;
   }
 
@@ -150,12 +156,12 @@
 
   /* Scrollbar — brand green */
   ::-webkit-scrollbar       { width: 4px; }
-  ::-webkit-scrollbar-track { background: #F6F1E8; }
+  ::-webkit-scrollbar-track { background: #EDE5D4; }
   ::-webkit-scrollbar-thumb {
-    background: rgba(74, 122, 61, 0.35);
+    background: rgba(233, 115, 22, 0.35);
     border-radius: 0;
   }
-  ::-webkit-scrollbar-thumb:hover { background: #4A7A3D; }
+  ::-webkit-scrollbar-thumb:hover { background: #E97316; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────

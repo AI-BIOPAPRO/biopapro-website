@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "motion/react";
@@ -58,7 +58,7 @@ export default function ProcurementMetrics() {
 
   return (
     <section
-      style={{ background: "#F6F1E8" }}
+      style={{ background: "#EDE5D4" }}
       className="paper"
       aria-labelledby="metrics-heading"
     >
@@ -80,12 +80,12 @@ export default function ProcurementMetrics() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-            className="font-display font-light text-ink leading-[0.95]"
-            style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                        style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
           >
             The numbers behind
             <br />
-            <span style={{ color: "#C89A5B" }}>the supply chain.</span>
+            <span style={{ color: "#E97316" }}>the supply chain.</span>
           </motion.h2>
         </div>
 
@@ -98,11 +98,11 @@ export default function ProcurementMetrics() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease: EASE, delay: 0.2 + i * 0.08 }}
               className="flex flex-col items-center justify-center text-center p-6 border-r border-b border-border last:border-r-0"
-              style={{ borderColor: "#DDD3C5" }}
+              style={{ borderColor: "rgba(26,71,49,0.12)" }}
             >
               <span
                 className="font-mono font-bold mb-2"
-                style={{ fontSize: "clamp(1.6rem, 2.5vw, 2.4rem)", color: "#C89A5B", lineHeight: 1 }}
+                style={{ fontSize: "clamp(1.6rem, 2.5vw, 2.4rem)", color: "#E97316", lineHeight: 1 }}
               >
                 <AnimatedStat stat={stat} triggered={inView} index={i} />
               </span>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "motion/react";
@@ -30,7 +30,7 @@ export default function ImpactMetrics() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section className="relative overflow-hidden paper" style={{ background: "#F6F1E8" }} aria-labelledby="impact-heading">
+    <section className="relative overflow-hidden paper" style={{ background: "#EDE5D4" }} aria-labelledby="impact-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-14">
@@ -48,12 +48,12 @@ export default function ImpactMetrics() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               The numbers
               <br />
-              <span style={{ color: "#4A7A3D" }}>that matter.</span>
+              <span style={{ color: "#1A4731" }}>that matter.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -69,7 +69,7 @@ export default function ImpactMetrics() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px" style={{ background: "#DDD3C5", border: "1px solid #DDD3C5" }}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px" style={{ background: "rgba(26,71,49,0.12)", border: "1px solid rgba(26,71,49,0.12)" }}>
           {IMPACT_METRICS.map((m, i) => (
             <motion.div
               key={m.label}
@@ -77,9 +77,9 @@ export default function ImpactMetrics() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, ease: EASE, delay: 0.12 + i * 0.08 }}
               className="flex flex-col px-7 py-10"
-              style={{ background: "#F6F1E8" }}
+              style={{ background: "#EDE5D4" }}
             >
-              <span className="font-mono font-bold leading-none mb-3" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#4A7A3D" }}>
+              <span className="font-mono font-bold leading-none mb-3" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#1A4731" }}>
                 <AnimatedNumber target={m.value} suffix={m.suffix} triggered={inView} />
               </span>
               <span className="font-sans font-semibold text-ink mb-1.5" style={{ fontSize: "15px" }}>

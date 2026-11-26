@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -9,12 +9,19 @@ import { SUSTAINABILITY_CERTS } from "@/lib/sustainability-data";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+const CREAM  = "#F5F0E6";
+const CREAM2 = "#EDE5D4";
+const GREEN  = "#1A4731";
+const ORANGE = "#E97316";
+const INK    = "#1A1208";
+const MUTED  = "#7A6B54";
+
 export default function SustainabilityCerts() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#1D1610" }} className="grain" aria-labelledby="sus-certs-heading">
+    <section style={{ background: CREAM }} aria-labelledby="sus-certs-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -34,19 +41,25 @@ export default function SustainabilityCerts() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light leading-[0.95] mb-6"
-              style={{ fontSize: "clamp(2rem, 3.2vw, 3rem)", color: "#F6F1E8" }}
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2rem, 3.2vw, 3rem)",
+                lineHeight:    0.92,
+                letterSpacing: "-0.035em",
+                color:         INK,
+                marginBottom:  "20px",
+              }}
             >
-              Verified.
-              <br />
-              <span style={{ color: "#7DB870" }}>Not self-declared.</span>
+              VERIFIED.<br />
+              <span style={{ color: GREEN }}>NOT SELF-DECLARED.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.65, ease: EASE, delay: 0.16 }}
-              className="font-sans font-light leading-relaxed mb-8"
-              style={{ fontSize: "clamp(1rem, 1.1vw, 1.05rem)", color: "rgba(230,210,185,0.65)" }}
+              className="font-sans leading-relaxed mb-8"
+              style={{ fontSize: "clamp(1rem, 1.1vw, 1.05rem)", color: MUTED }}
             >
               Every sustainability claim Biopapro makes is independently verified
               and documented. Certificate copies available to procurement and
@@ -59,13 +72,13 @@ export default function SustainabilityCerts() {
             >
               <Link
                 href="/certifications"
-                className="inline-flex items-center gap-2.5 font-sans text-[13px] font-semibold transition-colors duration-200"
-                style={{ color: "#7DB870" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#A8D8A0")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#7DB870")}
+                className="inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200"
+                style={{ color: GREEN }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = ORANGE)}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = GREEN)}
               >
                 View all 5 certifications
-                <ArrowUpRight size={14} strokeWidth={2} />
+                <ArrowUpRight size={12} strokeWidth={2.5} />
               </Link>
             </motion.div>
           </div>
@@ -80,20 +93,33 @@ export default function SustainabilityCerts() {
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.55, ease: EASE, delay: 0.18 + i * 0.08 }}
                   className="p-5"
-                  style={{ border: "1px solid #3D2E22", background: "rgba(255,255,255,0.02)" }}
+                  style={{ border: "1px solid rgba(26,71,49,0.1)", background: CREAM2, borderRadius: "14px" }}
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <span
                       className="font-mono font-bold text-[13px] px-2.5 py-1"
-                      style={{ background: `${cert.color}18`, border: `1px solid ${cert.color}40`, color: cert.color === "#004494" ? "#8AABCF" : "#7DB870" }}
+                      style={{
+                        background: "rgba(26,71,49,0.08)",
+                        border: "1px solid rgba(26,71,49,0.18)",
+                        color: GREEN,
+                        borderRadius: "6px",
+                      }}
                     >
                       {cert.code}
                     </span>
                   </div>
-                  <h3 className="font-sans font-semibold mb-1.5" style={{ fontSize: "15px", color: "#F6F1E8" }}>
+                  <h3
+                    style={{
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 700,
+                      fontSize:   "15px",
+                      color:      INK,
+                      marginBottom: "6px",
+                    }}
+                  >
                     {cert.name}
                   </h3>
-                  <p className="font-sans text-[13px]" style={{ color: "rgba(230,210,185,0.5)" }}>
+                  <p className="font-sans text-[13px]" style={{ color: MUTED }}>
                     {cert.detail}
                   </p>
                 </motion.div>

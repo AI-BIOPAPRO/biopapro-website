@@ -8,6 +8,13 @@ import SectionLabel from "@/components/shared/SectionLabel";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+const CREAM  = "#F5F0E6";
+const CREAM2 = "#EDE5D4";
+const GREEN  = "#1A4731";
+const ORANGE = "#E97316";
+const INK    = "#1A1208";
+const MUTED  = "#7A6B54";
+
 const PACKAGING_TIERS = [
   {
     icon: Box,
@@ -54,12 +61,12 @@ const PACKAGING_TIERS = [
 ];
 
 const CONTAINER_DATA = [
-  { product: "Wooden Fork 160mm", cartonPcs: "10,000", cartons20ft: "~800", cartons40ft: "~1,600" },
-  { product: "Wooden Spoon 160mm", cartonPcs: "10,000", cartons20ft: "~820", cartons40ft: "~1,650" },
-  { product: "Wooden Knife 165mm", cartonPcs: "10,000", cartons20ft: "~780", cartons40ft: "~1,580" },
-  { product: "Wooden Spork 140mm", cartonPcs: "10,000", cartons20ft: "~860", cartons40ft: "~1,720" },
-  { product: "Coffee Stirrer 140mm", cartonPcs: "50,000", cartons20ft: "~600", cartons40ft: "~1,200" },
-  { product: "Gun Skewer 15cm", cartonPcs: "20,000", cartons20ft: "~700", cartons40ft: "~1,400" },
+  { product: "Wooden Fork 160mm",    cartonPcs: "10,000", cartons20ft: "~800",  cartons40ft: "~1,600" },
+  { product: "Wooden Spoon 160mm",   cartonPcs: "10,000", cartons20ft: "~820",  cartons40ft: "~1,650" },
+  { product: "Wooden Knife 165mm",   cartonPcs: "10,000", cartons20ft: "~780",  cartons40ft: "~1,580" },
+  { product: "Wooden Spork 140mm",   cartonPcs: "10,000", cartons20ft: "~860",  cartons40ft: "~1,720" },
+  { product: "Coffee Stirrer 140mm", cartonPcs: "50,000", cartons20ft: "~600",  cartons40ft: "~1,200" },
+  { product: "Gun Skewer 15cm",      cartonPcs: "20,000", cartons20ft: "~700",  cartons40ft: "~1,400" },
 ];
 
 export default function PackagingExport() {
@@ -68,16 +75,10 @@ export default function PackagingExport() {
 
   return (
     <section
-      className="relative overflow-hidden grain"
-      style={{ background: "#1D1610" }}
+      className="relative overflow-hidden"
+      style={{ background: CREAM2 }}
       aria-labelledby="packaging-heading"
     >
-      {/* Top accent */}
-      <div
-        className="h-[1px] w-full"
-        style={{ background: "linear-gradient(90deg, transparent 0%, #3D2E22 40%, #5C3D1E 60%, transparent 100%)" }}
-      />
-
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-20">
 
         {/* Header */}
@@ -88,7 +89,7 @@ export default function PackagingExport() {
             transition={{ duration: 0.55, ease: EASE }}
             className="mb-7"
           >
-            <SectionLabel index="04" label="Packaging & Export" inverted />
+            <SectionLabel index="04" label="Packaging & Export" />
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
@@ -97,20 +98,25 @@ export default function PackagingExport() {
               initial={{ opacity: 0, y: 18 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.72, ease: EASE, delay: 0.08 }}
-              className="font-display font-light leading-[0.93]"
-              style={{ color: "#F6F1E8", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2rem, 3.5vw, 3.2rem)",
+                lineHeight:    0.93,
+                letterSpacing: "-0.03em",
+                color:         INK,
+              }}
             >
-              Export-ready.
-              <br />
-              <span style={{ color: "#C89A5B" }}>Every carton.</span>
+              EXPORT-READY.<br />
+              <span style={{ color: GREEN }}>EVERY CARTON.</span>
             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.68, ease: EASE, delay: 0.16 }}
-              className="font-sans font-light text-base leading-relaxed flex items-center"
-              style={{ color: "rgba(230,210,185,0.7)" }}
+              className="text-base leading-relaxed flex items-center"
+              style={{ color: MUTED, fontFamily: "'Outfit', sans-serif" }}
             >
               Packaging is not an afterthought. Every product ships in
               standardised cartons sized for container optimisation. Bulk,
@@ -131,57 +137,62 @@ export default function PackagingExport() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.65, ease: EASE, delay: 0.24 + i * 0.08 }}
                 className="flex flex-col p-6"
-                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid #3D2E22" }}
+                style={{ background: CREAM, border: "1px solid rgba(26,71,49,0.15)", borderRadius: "12px" }}
               >
-                {/* Badge */}
+                {/* Badge row */}
                 <div className="flex items-center justify-between mb-5">
                   <div
-                    className="w-9 h-9 flex items-center justify-center"
-                    style={{ background: "rgba(200,154,91,0.12)", border: "1px solid rgba(200,154,91,0.3)" }}
+                    className="w-9 h-9 flex items-center justify-center rounded-lg"
+                    style={{ background: "rgba(26,71,49,0.1)", border: "1px solid rgba(26,71,49,0.2)" }}
                   >
-                    <Icon size={15} style={{ color: "#C89A5B" }} />
+                    <Icon size={15} style={{ color: GREEN }} />
                   </div>
                   <span
-                    className="font-mono text-[11px] uppercase tracking-[0.2em] px-2.5 py-1"
-                    style={{ background: "rgba(200,154,91,0.12)", border: "1px solid rgba(200,154,91,0.25)", color: "#C89A5B" }}
+                    className="font-mono text-[11px] uppercase tracking-[0.2em] px-2.5 py-1 rounded"
+                    style={{ background: "rgba(233,115,22,0.1)", border: "1px solid rgba(233,115,22,0.25)", color: ORANGE }}
                   >
                     {tier.badge}
                   </span>
                 </div>
 
                 <h3
-                  className="font-display font-light mb-1"
-                  style={{ fontSize: "1.2rem", color: "#F6F1E8" }}
+                  style={{
+                    fontFamily:   "'Outfit', sans-serif",
+                    fontWeight:   700,
+                    fontSize:     "1.1rem",
+                    color:        INK,
+                    marginBottom: "0.25rem",
+                  }}
                 >
                   {tier.title}
                 </h3>
                 <p
                   className="font-mono text-[11px] uppercase tracking-[0.2em] mb-4"
-                  style={{ color: "rgba(200,154,91,0.65)" }}
+                  style={{ color: GREEN }}
                 >
                   {tier.subtitle}
                 </p>
 
                 <p
-                  className="font-sans text-[12.5px] font-light leading-relaxed mb-5 flex-1"
-                  style={{ color: "rgba(230,210,185,0.65)" }}
+                  className="text-[12.5px] leading-relaxed mb-5 flex-1"
+                  style={{ color: MUTED, fontFamily: "'Outfit', sans-serif" }}
                 >
                   {tier.description}
                 </p>
 
                 {/* Spec rows */}
-                <div className="border-t pt-4 space-y-2" style={{ borderColor: "#3D2E22" }}>
+                <div className="border-t pt-4 space-y-2" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                   {tier.specs.map((spec) => (
                     <div key={spec.label} className="flex items-center justify-between">
                       <span
                         className="font-mono text-[11px] uppercase tracking-[0.12em]"
-                        style={{ color: "rgba(230,210,185,0.45)" }}
+                        style={{ color: "rgba(122,107,84,0.7)" }}
                       >
                         {spec.label}
                       </span>
                       <span
                         className="font-mono text-[11px] font-medium"
-                        style={{ color: "rgba(230,210,185,0.8)" }}
+                        style={{ color: INK }}
                       >
                         {spec.value}
                       </span>
@@ -200,30 +211,31 @@ export default function PackagingExport() {
           transition={{ duration: 0.68, ease: EASE, delay: 0.48 }}
         >
           <div className="flex items-center gap-3 mb-5">
-            <Container size={14} style={{ color: "#C89A5B" }} />
+            <Container size={14} style={{ color: GREEN }} />
             <p
               className="font-mono text-[11px] uppercase tracking-[0.28em]"
-              style={{ color: "rgba(200,154,91,0.7)" }}
+              style={{ color: MUTED }}
             >
               Container Loading Reference (Indicative)
             </p>
           </div>
 
-          <div className="overflow-x-auto">
+          <div
+            className="overflow-x-auto rounded-xl"
+            style={{ border: "1px solid rgba(26,71,49,0.15)", background: CREAM }}
+          >
             <table className="w-full min-w-[600px]">
               <thead>
-                <tr style={{ borderBottom: "1px solid #3D2E22" }}>
-                  {["Product", "Pcs / Carton", "20ft Container", "40ft Container"].map(
-                    (h) => (
-                      <th
-                        key={h}
-                        className="font-mono text-[11px] uppercase tracking-[0.2em] text-left py-3 px-4"
-                        style={{ color: "rgba(200,154,91,0.55)" }}
-                      >
-                        {h}
-                      </th>
-                    )
-                  )}
+                <tr style={{ borderBottom: "1px solid rgba(26,71,49,0.1)" }}>
+                  {["Product", "Pcs / Carton", "20ft Container", "40ft Container"].map((h) => (
+                    <th
+                      key={h}
+                      className="font-mono text-[11px] uppercase tracking-[0.2em] text-left py-3 px-4"
+                      style={{ color: MUTED }}
+                    >
+                      {h}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -231,31 +243,31 @@ export default function PackagingExport() {
                   <tr
                     key={row.product}
                     style={{
-                      borderBottom: "1px solid rgba(61,46,34,0.5)",
-                      background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
+                      borderBottom: "1px solid rgba(26,71,49,0.07)",
+                      background: i % 2 === 0 ? "transparent" : "rgba(26,71,49,0.03)",
                     }}
                   >
                     <td
-                      className="font-sans text-[12px] font-light py-3.5 px-4"
-                      style={{ color: "rgba(246,241,232,0.85)" }}
+                      className="text-[12px] py-3.5 px-4"
+                      style={{ color: INK, fontFamily: "'Outfit', sans-serif" }}
                     >
                       {row.product}
                     </td>
                     <td
-                      className="font-mono text-[11px] py-3.5 px-4"
-                      style={{ color: "#C89A5B" }}
+                      className="font-mono text-[11px] py-3.5 px-4 font-bold"
+                      style={{ color: GREEN }}
                     >
                       {row.cartonPcs}
                     </td>
                     <td
                       className="font-mono text-[11px] py-3.5 px-4"
-                      style={{ color: "rgba(246,241,232,0.65)" }}
+                      style={{ color: MUTED }}
                     >
                       {row.cartons20ft} cartons
                     </td>
                     <td
                       className="font-mono text-[11px] py-3.5 px-4"
-                      style={{ color: "rgba(246,241,232,0.65)" }}
+                      style={{ color: MUTED }}
                     >
                       {row.cartons40ft} cartons
                     </td>
@@ -267,7 +279,7 @@ export default function PackagingExport() {
 
           <p
             className="font-mono text-[11px] uppercase tracking-[0.16em] mt-4"
-            style={{ color: "rgba(230,210,185,0.3)" }}
+            style={{ color: "rgba(122,107,84,0.55)" }}
           >
             * Quantities are indicative. Exact loading depends on carton dimensions and stacking configuration. Contact for precise container quotations.
           </p>
@@ -279,15 +291,15 @@ export default function PackagingExport() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: EASE, delay: 0.58 }}
           className="mt-14 pt-10 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
-          style={{ borderColor: "#3D2E22" }}
+          style={{ borderColor: "rgba(26,71,49,0.15)" }}
         >
           <div>
-            <p className="font-sans font-light" style={{ fontSize: "1.05rem", color: "rgba(246,241,232,0.9)" }}>
+            <p style={{ fontSize: "1.05rem", color: INK, fontFamily: "'Outfit', sans-serif", fontWeight: 500 }}>
               Need a container-level quotation?
             </p>
             <p
               className="font-mono text-[11px] uppercase tracking-[0.18em] mt-1"
-              style={{ color: "rgba(200,154,91,0.55)" }}
+              style={{ color: MUTED }}
             >
               Lead time · Freight terms · Certificate documentation — all in one quote
             </p>
@@ -295,13 +307,9 @@ export default function PackagingExport() {
           <Link
             href="/contact"
             className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-300 flex-shrink-0"
-            style={{ background: "#4A7A3D" }}
-            onMouseEnter={(e) =>
-              ((e.currentTarget as HTMLElement).style.background = "#2D5228")
-            }
-            onMouseLeave={(e) =>
-              ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")
-            }
+            style={{ background: ORANGE, borderRadius: "8px" }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#C4580A")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = ORANGE)}
           >
             Request Container Quote
             <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />

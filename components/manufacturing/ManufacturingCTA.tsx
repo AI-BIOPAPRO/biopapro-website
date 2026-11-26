@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -12,7 +12,7 @@ export default function ManufacturingCTA() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#2D5228" }} aria-labelledby="mfg-cta-heading">
+    <section style={{ background: "#F5F0E6" }} aria-labelledby="mfg-cta-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
@@ -23,7 +23,7 @@ export default function ManufacturingCTA() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, ease: EASE }}
               className="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] mb-5"
-              style={{ color: "rgba(200,230,190,0.55)" }}
+              style={{ color: "#7A6B54" }}
             >
               09 · Start the Conversation
             </motion.p>
@@ -33,8 +33,8 @@ export default function ManufacturingCTA() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
-              className="font-display font-light leading-[0.92] mb-8"
-              style={{ fontSize: "clamp(2.2rem, 3.8vw, 3.6rem)", color: "#F6F1E8" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2.2rem, 3.8vw, 3.6rem)", color: "#1A1208" }}
             >
               Ready to source at scale?
             </motion.h2>
@@ -44,7 +44,7 @@ export default function ManufacturingCTA() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.68, ease: EASE, delay: 0.16 }}
               className="font-sans font-light leading-relaxed max-w-[500px] mb-10"
-              style={{ fontSize: "clamp(1rem, 1.2vw, 1.05rem)", color: "rgba(200,230,190,0.75)" }}
+              style={{ fontSize: "clamp(1rem, 1.2vw, 1.05rem)", color: "#7A6B54" }}
             >
               Share your volume requirements and target market. We will respond with
               production availability, lead times, packaging options, and a preliminary quotation.
@@ -59,16 +59,14 @@ export default function ManufacturingCTA() {
               <Link
                 href="/contact"
                 className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.12em] transition-all duration-300"
-                style={{ background: "#F6F1E8", color: "#2D5228" }}
+                style={{ background: "#1A4731", color: "#F5F0E6" }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.background = "#FBF8F2";
-                  el.style.boxShadow = "0 4px 20px rgba(0,0,0,0.15)";
+                  el.style.background = "#E97316";
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.background = "#F6F1E8";
-                  el.style.boxShadow = "none";
+                  el.style.background = "#1A4731";
                 }}
               >
                 Request Quote
@@ -77,9 +75,9 @@ export default function ManufacturingCTA() {
               <Link
                 href="/certifications"
                 className="font-sans text-[13px] transition-colors duration-200"
-                style={{ color: "rgba(200,230,190,0.65)" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,1)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,0.65)")}
+                style={{ color: "#7A6B54" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#1A1208")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#7A6B54")}
               >
                 View certifications →
               </Link>
@@ -108,25 +106,25 @@ export default function ManufacturingCTA() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, ease: EASE, delay: 0.3 + i * 0.1 }}
                 className="p-5"
-                style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(200,230,190,0.15)" }}
+                style={{ background: "#EDE5D4", border: "1px solid rgba(26,71,49,0.1)" }}
               >
-                <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.14em] mb-1" style={{ color: "rgba(200,230,190,0.45)" }}>
+                <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.14em] mb-1" style={{ color: "#7A6B54" }}>
                   {office.label}
                 </p>
-                <p className="font-sans font-semibold text-[14px] mb-3" style={{ color: "#F6F1E8" }}>
+                <p className="font-sans font-semibold text-[14px] mb-3" style={{ color: "#1A1208" }}>
                   {office.contact}
                 </p>
                 <div className="flex flex-col gap-2">
                   <a href={`mailto:${office.email}`} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                    <Mail size={12} style={{ color: "rgba(200,230,190,0.5)", flexShrink: 0 }} />
-                    <span className="font-sans text-[13px]" style={{ color: "rgba(200,230,190,0.70)" }}>{office.email}</span>
+                    <Mail size={12} style={{ color: "#E97316", flexShrink: 0 }} />
+                    <span className="font-sans text-[13px]" style={{ color: "#1A4731" }}>{office.email}</span>
                   </a>
                   <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                    <Phone size={12} style={{ color: "rgba(200,230,190,0.5)", flexShrink: 0 }} />
-                    <span className="font-sans text-[13px]" style={{ color: "rgba(200,230,190,0.70)" }}>{office.phone}</span>
+                    <Phone size={12} style={{ color: "#E97316", flexShrink: 0 }} />
+                    <span className="font-sans text-[13px]" style={{ color: "#1A4731" }}>{office.phone}</span>
                   </a>
                 </div>
-                <p className="font-sans text-[12px] mt-3" style={{ color: "rgba(200,230,190,0.35)" }}>{office.note}</p>
+                <p className="font-sans text-[12px] mt-3" style={{ color: "#7A6B54" }}>{office.note}</p>
               </motion.div>
             ))}
           </motion.div>

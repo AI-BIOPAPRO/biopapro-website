@@ -5,7 +5,6 @@ import OriginToWorld          from "@/components/global-presence/OriginToWorld";
 import RegionalFootprint      from "@/components/global-presence/RegionalFootprint";
 import IndustriesServed       from "@/components/global-presence/IndustriesServed";
 import ExportInfrastructure   from "@/components/global-presence/ExportInfrastructure";
-import ContainerJourney       from "@/components/global-presence/ContainerJourney";
 import BuyerTrust             from "@/components/global-presence/BuyerTrust";
 import ProcurementMetrics     from "@/components/global-presence/ProcurementMetrics";
 import ExportPartnershipCTA   from "@/components/global-presence/ExportPartnershipCTA";
@@ -28,10 +27,7 @@ export default function GlobalPresenceClient() {
       {/* S5 — Export Infrastructure: scale, container loading, QC, documentation, lead times */}
       <ExportInfrastructure />
 
-      {/* S6 — A Container's Journey: 9-step supply chain timeline */}
-      <ContainerJourney />
-
-      {/* S7 — Why Buyers Choose Biopapro: certifications, trust signals, quote */}
+      {/* S6 — Why Buyers Choose Biopapro: certifications, trust signals, quote */}
       <BuyerTrust />
 
       {/* S8 — Procurement Metrics: animated counters, real company stats */}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -12,7 +12,7 @@ export default function ContainerJourney() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#FBF8F2" }} aria-labelledby="journey-heading">
+    <section style={{ background: "#F5F0E6" }} aria-labelledby="journey-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-20">
 
         {/* Header */}
@@ -32,12 +32,12 @@ export default function ContainerJourney() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               Forest to your
               <br />
-              <span style={{ color: "#C89A5B" }}>loading dock.</span>
+              <span style={{ color: "#E97316" }}>loading dock.</span>
             </motion.h2>
 
             <motion.p
@@ -58,7 +58,7 @@ export default function ContainerJourney() {
           {/* Vertical connector line */}
           <motion.div
             className="absolute left-[19px] top-6 bottom-6 w-px hidden md:block"
-            style={{ background: "linear-gradient(to bottom, #DDD3C5, #C89A5B, #DDD3C5)" }}
+            style={{ background: "linear-gradient(to bottom, rgba(26,71,49,0.12), #E97316, rgba(26,71,49,0.12))" }}
             initial={{ scaleY: 0, transformOrigin: "top" }}
             animate={inView ? { scaleY: 1 } : {}}
             transition={{ duration: 1.8, ease: "easeOut", delay: 0.3 }}
@@ -74,20 +74,20 @@ export default function ContainerJourney() {
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.55, ease: EASE, delay: 0.3 + i * 0.08 }}
                   className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-5"
-                  style={{ borderBottom: isLast ? "none" : "1px solid #EDE5D8" }}
+                  style={{ borderBottom: isLast ? "none" : "1px solid rgba(26,71,49,0.1)" }}
                 >
                   {/* Step number + dot */}
                   <div className="md:col-span-1 flex items-start gap-3 md:flex-col md:gap-0">
                     <div
                       className="w-10 h-10 flex items-center justify-center flex-shrink-0 relative z-10"
                       style={{
-                        background: i === 0 || i === JOURNEY_STEPS.length - 1 ? "#C89A5B" : "#FBF8F2",
-                        border: `1.5px solid ${i === 0 || i === JOURNEY_STEPS.length - 1 ? "#C89A5B" : "#DDD3C5"}`,
+                        background: i === 0 || i === JOURNEY_STEPS.length - 1 ? "#E97316" : "#F5F0E6",
+                        border: `1.5px solid ${i === 0 || i === JOURNEY_STEPS.length - 1 ? "#E97316" : "rgba(26,71,49,0.12)"}`,
                       }}
                     >
                       <span
                         className="font-mono text-[11px] font-bold"
-                        style={{ color: i === 0 || i === JOURNEY_STEPS.length - 1 ? "#1D1610" : "#6B5D50" }}
+                        style={{ color: i === 0 || i === JOURNEY_STEPS.length - 1 ? "#1A1208" : "#7A6B54" }}
                       >
                         {step.step}
                       </span>
@@ -101,7 +101,7 @@ export default function ContainerJourney() {
                       style={{
                         background: "rgba(200,154,91,0.1)",
                         border: "1px solid rgba(200,154,91,0.25)",
-                        color: "#8C6239",
+                        color: "#7A6B54",
                       }}
                     >
                       {step.tag}

@@ -1,472 +1,334 @@
 "use client";
 
-/**
- * S1 — Opening Section  (Full-screen cinematic revision)
- *
- * Architecture change: video is now the full-screen stage.
- * Content overlays the video — no more left/right split.
- * One story. One composition. One emotional experience.
- *
- * Content hierarchy (5-second test):
- *   1s  — BIOPAPRO (dominant, impossible to miss)
- *   2s  — "The Global Standard for Birchwood Tableware."
- *   3s  — 100M+ / 18+ Countries / plastic replaced per day / FSC® (stats bar)
- *   4s  — CTA: View Products / Request Export Quote
- *   5s  — Cert badges confirm trust
- */
-
-import { useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Leaf, ShieldCheck, Globe } from "lucide-react";
 import { COMPANY_FACTS, getCumulativeUnitsProduced, formatUnitsShort } from "@/lib/company-facts";
-import MagneticButton from "@/components/shared/MagneticButton";
-
+import { PRODUCTS } from "@/lib/products-data";
 
 const E = [0.16, 1, 0.3, 1] as const;
 
-const TRUST_MARKS = ["FSC® 100%", "ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "BRCGS Certified"] as const;
+const FEATURED_IDS = ["fork-160", "spoon-160", "knife-165"] as const;
+const FEATURED = FEATURED_IDS.map((id) => PRODUCTS.find((p) => p.id === id)!).filter(Boolean);
 
-function HeroVideo() {
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    v.muted = true;
-    v.play().catch(() => {});
-  }, []);
-  return (
-    <video
-      ref={ref}
-      src="/videos/hero-background-v2.mp4"
-      autoPlay muted loop playsInline
-      disablePictureInPicture preload="metadata"
-      className="absolute inset-0 w-full h-full object-cover"
-      aria-hidden="true"
-    />
-  );
-}
-
-// Native position of the Gemini video's sparkle watermark within its own
-// 1280x720 source frame (not screen percentages — those only hold at one
-// specific aspect ratio). Reverse-derived from an on-screen measurement at
-// a known viewport size via the object-cover crop math below.
-const VIDEO_NATIVE_ASPECT = 1280 / 720;
-const WATERMARK_FX = 0.8915; // fraction across the native frame
-const WATERMARK_FY = 0.83; // fraction down the native frame
-
-/**
- * Positions the watermark-cover patch using the video element's *actual*
- * rendered box, not an assumed 100vh/100vw. The hero section is
- * `min-height: 100svh` — its real height grows past one viewport when the
- * text content needs more room than that (confirmed: ~1467px tall at a
- * 1440x900 test, well over 900px), and that overflow is proportionally far
- * larger at short/wide windows. A pure-CSS vh/vw version of this looked
- * right at the one size it was tuned against and drifted off the real
- * watermark everywhere else — this measures the real box on mount and on
- * resize instead of assuming it.
- */
-function useWatermarkCoverPosition(
-  sectionRef: React.RefObject<HTMLElement | null>,
-  coverRef: React.RefObject<HTMLDivElement | null>
-) {
-  useEffect(() => {
-    const section = sectionRef.current;
-    const cover = coverRef.current;
-    if (!section || !cover) return;
-
-    const reposition = () => {
-      const rect = section.getBoundingClientRect();
-      const containerAspect = rect.width / rect.height;
-
-      let scaledW: number, scaledH: number, cropX: number, cropY: number;
-      if (containerAspect < VIDEO_NATIVE_ASPECT) {
-        // object-cover fills by height, crops left/right
-        scaledH = rect.height;
-        scaledW = scaledH * VIDEO_NATIVE_ASPECT;
-        cropX = (scaledW - rect.width) / 2;
-        cropY = 0;
-      } else {
-        // object-cover fills by width, crops top/bottom
-        scaledW = rect.width;
-        scaledH = scaledW / VIDEO_NATIVE_ASPECT;
-        cropX = 0;
-        cropY = (scaledH - rect.height) / 2;
-      }
-
-      const x = WATERMARK_FX * scaledW - cropX;
-      const y = WATERMARK_FY * scaledH - cropY;
-
-      cover.style.left = `${x}px`;
-      cover.style.top = `${y}px`;
-    };
-
-    reposition();
-    window.addEventListener("resize", reposition);
-    return () => window.removeEventListener("resize", reposition);
-  }, [sectionRef, coverRef]);
-}
-
+const TRUST_BADGES = [
+  { Icon: Leaf,        label: "FSC® Certified",   sub: "100% Sustainable Wood"    },
+  { Icon: ShieldCheck, label: "ISO 9001:2015",     sub: "Quality Management"       },
+  { Icon: ShieldCheck, label: "BRCGS Certified",   sub: "Food Safety Standard"     },
+  { Icon: Globe,       label: "18+ Countries",     sub: "Global Export Network"    },
+];
 
 export default function OpeningSection() {
-  // Computed fresh on every render (client component — the whole module
-  // re-executes on each real page load) so this climbs by 100M every month
-  // automatically, no manual update or redeploy needed. Explicitly a rough
-  // always-100M/month estimate, not an audited historical total — see the
-  // comment on getCumulativeUnitsProduced() in lib/company-facts.ts.
   const cumulativeUnits = getCumulativeUnitsProduced();
 
   const STATS = [
-    { value: formatUnitsShort(cumulativeUnits), label: "Units Produced", sub: `Since ${COMPANY_FACTS.founded}` },
-    { value: `${COMPANY_FACTS.exportMarkets}+`,     label: "Countries Served",  sub: "Active markets" },
-    { value: `${COMPANY_FACTS.plasticSavedPerDay.toLocaleString()}kg`, label: "Plastic Replaced",  sub: "Every single day" },
-    { value: "FSC®",    label: "100% Certified",    sub: "Chain of custody"      },
+    { value: formatUnitsShort(cumulativeUnits), label: "Units Produced",  sup: false },
+    { value: `${COMPANY_FACTS.exportMarkets}+`,  label: "Countries Served", sup: false },
+    { value: `${COMPANY_FACTS.womenPercent}%`,   label: "Women-led",       sup: false },
   ];
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const watermarkCoverRef = useRef<HTMLDivElement>(null);
-  useWatermarkCoverPosition(sectionRef, watermarkCoverRef);
-
   return (
-    <section ref={sectionRef} className="relative w-full overflow-hidden" style={{ minHeight: "100svh" }}>
+    <section
+      className="w-full"
+      style={{ background: "#F5F0E6", paddingTop: "72px" }}
+      aria-labelledby="hero-heading"
+    >
+      {/* ── MAIN HERO ── */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-10 xl:gap-16 items-center py-14 lg:py-20">
 
-      {/* ══════════════════════════════════
-          LAYER 0 — Video (full bleed)
-          ══════════════════════════════ */}
-      <HeroVideo />
+          {/* LEFT — headline + CTAs */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: E }}
+              className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-[0.2em]"
+              style={{ background: "#1A4731", color: "#F5F0E6" }}
+            >
+              <Leaf size={11} />
+              FSC-Certified Manufacturer · Est. {COMPANY_FACTS.founded} · Mumbai, India
+            </motion.div>
 
-      {/* ══════════════════════════════════
-          LAYER 1 — Gradient overlays
-          Left: dark enough for text
-          Right: lighter, video breathes
-          Bottom: stats readability
-          ══════════════════════════════ */}
-
-      {/* Primary atmospheric overlay */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(108deg, rgba(12,22,10,0.92) 0%, rgba(12,22,10,0.82) 46%, rgba(12,22,10,0.4) 68%, rgba(12,22,10,0.1) 100%)",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Bottom stats scrim */}
-      <div
-        className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
-        style={{ height: "38%", background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 55%, transparent 100%)" }}
-        aria-hidden="true"
-      />
-
-      {/* Watermark cover — hero-background-v2.mp4 (the Gemini-generated
-          replacement) has a small sparkle watermark. A flat dark overlay
-          looked right at one moment in the loop but wrong at every other
-          (the frame genuinely brightens/dims throughout — drifting light,
-          dust), so a blurred patch is used instead: it smears the sparkle
-          into nothing while sampling the *actual* video pixels underneath
-          live, tracking real brightness automatically.
-
-          Position is set by useWatermarkCoverPosition() above, in pixels,
-          from the video element's own measured box — not a CSS percentage
-          or vh/vw assumption. Both of those drifted off the real watermark
-          at viewport sizes other than the one they were tuned against,
-          because the hero section's actual height isn't exactly 100vh —
-          it overflows past that when the text content needs more room,
-          and that overflow is proportionally much bigger at short/wide
-          windows. See useWatermarkCoverPosition's comment for the full
-          object-cover crop math this replaced. */}
-      <div
-        ref={watermarkCoverRef}
-        className="absolute z-10 pointer-events-none"
-        style={{
-          width: 170,
-          height: 170,
-          transform: "translate(-50%, -50%)",
-          backdropFilter: "blur(60px)",
-          WebkitBackdropFilter: "blur(60px)",
-          maskImage: "radial-gradient(circle, black 55%, transparent 90%)",
-          WebkitMaskImage: "radial-gradient(circle, black 55%, transparent 90%)",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Top scrim — label area */}
-      <div
-        className="absolute top-0 left-0 right-0 z-10 pointer-events-none"
-        style={{ height: "22%", background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%)" }}
-        aria-hidden="true"
-      />
-
-      {/* Below-1400px scrim — the content column runs full-width until the layout has
-          real room to breathe, so the angled gradient above doesn't reliably clear the
-          carved wordmark art behind the CTA/stat row from mobile through small laptop
-          widths (verified failing at 1280). Flat coverage only where needed; 1440+
-          already reads clean with just the gradient above. */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none hidden max-[1399px]:block"
-        style={{ background: "rgba(10,18,9,0.72)" }}
-        aria-hidden="true"
-      />
-
-      {/* ══════════════════════════════════
-          LAYER 2 — All content
-          ══════════════════════════════ */}
-      <div className="relative z-20 flex flex-col min-h-[100svh]
-                      px-6 md:px-12 lg:px-16 xl:px-20
-                      pt-[88px] md:pt-[100px]">
-
-        {/* ── TOP ROW: Manufacturer label + cert trust marks ── */}
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6, ease: E }}
-          className="flex items-center flex-wrap gap-4 mb-auto pb-6"
-        >
-          {/* Manufacturer badge */}
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5"
-            style={{
-              background: "rgba(74,122,61,0.22)",
-              border: "1px solid rgba(74,122,61,0.45)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            <CheckCircle2 size={10} color="rgba(160,220,140,0.9)" />
-            <span className="font-mono text-[11px] tracking-[0.25em] uppercase font-semibold"
-              style={{ color: "rgba(180,230,160,0.95)" }}>
-              Global FSC-Certified Manufacturer
-            </span>
-          </div>
-
-          {/* Cert marks — desktop */}
-          <div className="hidden md:flex items-center gap-1">
-            {TRUST_MARKS.map((cert, i) => (
-              <span key={cert}>
-                <span className="font-mono text-[11px] tracking-[0.16em] uppercase"
-                  style={{ color: "rgba(200,230,185,0.65)" }}>
-                  {cert}
-                </span>
-                {i < TRUST_MARKS.length - 1 && (
-                  <span className="mx-2 font-mono text-[11px]"
-                    style={{ color: "rgba(180,210,160,0.3)" }}>·</span>
-                )}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ── CENTRE: The primary brand statement ── */}
-        <div className="flex flex-col justify-center flex-1 max-w-[600px] lg:max-w-[620px]
-                        py-8 md:py-12">
-
-          {/* Context label */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-            className="font-mono uppercase tracking-[0.32em] mb-5 md:mb-6"
-            style={{
-              fontSize: "clamp(0.62rem, 0.8vw, 0.72rem)",
-              color: "rgba(160,210,140,0.52)",
-            }}
-          >
-            Indian Manufacturer &nbsp;·&nbsp; Est. {COMPANY_FACTS.founded}
-          </motion.p>
-
-          {/* ── BIOPAPRO — refined brand anchor, not dominant ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.28, duration: 0.7, ease: E }}
-            className="flex items-center gap-4 mb-7 md:mb-8"
-          >
-            <span
-              className="font-mono font-semibold uppercase tracking-[0.42em]"
+            <motion.h1
+              id="hero-heading"
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.12, duration: 0.72, ease: E }}
               style={{
-                fontSize: "clamp(0.82rem, 1.1vw, 1.05rem)",
-                color: "rgba(195,228,175,0.72)",
-                letterSpacing: "0.42em",
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2.8rem, 6vw, 6.5rem)",
+                lineHeight:    0.92,
+                letterSpacing: "-0.03em",
+                color:         "#1A1208",
+                marginBottom:  "1.4rem",
               }}
             >
-              BIOPAPRO
-            </span>
-            <span
-              className="flex-shrink-0 h-px w-8"
-              style={{ background: "rgba(160,210,140,0.3)" }}
-            />
-            <span
-              className="font-mono uppercase tracking-[0.22em]"
+              INDIA&apos;S<br />
+              <span style={{ color: "#1A4731" }}>ECO</span><br />
+              CUTLERY.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.28, duration: 0.65, ease: E }}
               style={{
-                fontSize: "clamp(0.62rem, 0.8vw, 0.72rem)",
-                color: "rgba(170,210,150,0.45)",
+                fontFamily: "'Outfit', sans-serif",
+                fontSize:   "clamp(0.95rem, 1.2vw, 1.1rem)",
+                lineHeight: 1.75,
+                color:      "#5A4D3A",
+                maxWidth:   "520px",
+                marginBottom: "2rem",
               }}
             >
-              Sustainable by Nature
-            </span>
-          </motion.div>
+              FSC-certified birchwood cutlery manufactured at scale in Mumbai —
+              supplying airlines, hotels, QSR chains and B2B distributors across
+              {COMPANY_FACTS.exportMarkets}+ export markets.
+            </motion.p>
 
-          {/* ── Headline — primary focus ── */}
-          <div className="mb-7 md:mb-9">
-            <h1
-              className="font-display font-normal leading-[0.93] tracking-[-0.02em]"
-              style={{ fontSize: "clamp(2.8rem, 5.5vw, 5.8rem)" }}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.42, duration: 0.6, ease: E }}
+              className="flex items-center gap-3 flex-wrap"
             >
-              {[
-                { text: "The Global Standard",  accent: false, delay: 0.42  },
-                { text: "for Birchwood",         accent: false, delay: 0.55 },
-                { text: "Tableware.",             accent: true,  delay: 0.68 },
-              ].map((line) => (
-                <motion.span
-                  key={line.text}
-                  initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
-                  animate={{ opacity: 1, y: 0,  filter: "blur(0px)" }}
-                  transition={{ delay: line.delay, duration: 0.88, ease: E }}
-                  className="block"
-                  style={{ color: line.accent ? "#7AAE6B" : "rgba(242,248,236,0.96)" }}
-                >
-                  {line.text}
-                </motion.span>
-              ))}
-            </h1>
-          </div>
-
-          {/* ── Subtitle ── */}
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.88, duration: 0.78, ease: E }}
-            className="font-sans font-light leading-relaxed mb-10"
-            style={{
-              fontSize: "clamp(1rem, 1.3vw, 1.15rem)",
-              color: "rgba(230,240,220,0.82)",
-              maxWidth: "520px",
-            }}
-          >
-            Precision-manufactured FSC-certified birchwood cutlery
-            for restaurants, hotels, cloud kitchens, and caterers
-            across India — and airlines, QSRs, and distributors
-            worldwide. Replacing {COMPANY_FACTS.plasticSavedPerDay.toLocaleString()}&thinsp;kg of plastic every day.
-          </motion.p>
-
-          {/* ── CTAs ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.72, ease: E }}
-            className="flex flex-col sm:flex-row items-start gap-3"
-          >
-            <MagneticButton>
               <Link
                 href="/products"
-                className="group inline-flex items-center gap-2.5 px-8 py-4 text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300"
-                style={{ background: "#4A7A3D", color: "#FFFFFF" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#2D5228"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#4A7A3D"; }}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 text-[13px] font-bold uppercase tracking-[0.14em] transition-all duration-200"
+                style={{ background: "#E97316", color: "#FFFFFF", borderRadius: "8px" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#C4580A"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#E97316"; }}
               >
-                View Product Range
-                <ArrowRight size={13} strokeWidth={2.5}
-                  className="group-hover:translate-x-1 transition-transform duration-300" />
+                Shop Products
+                <ArrowRight size={14} strokeWidth={2.5} />
               </Link>
-            </MagneticButton>
-            <MagneticButton>
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2.5 px-8 py-4 text-[11px] font-medium uppercase tracking-[0.18em] transition-all duration-300"
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  color: "rgba(240,248,235,0.95)",
-                  border: "1px solid rgba(255,255,255,0.22)",
-                  backdropFilter: "blur(8px)",
-                }}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em] transition-all duration-200"
+                style={{ border: "2px solid #1A4731", color: "#1A4731", borderRadius: "8px", background: "transparent" }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.background = "rgba(255,255,255,0.16)";
-                  el.style.borderColor = "rgba(160,220,140,0.45)";
+                  el.style.background = "#1A4731";
+                  el.style.color = "#F5F0E6";
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.background = "rgba(255,255,255,0.08)";
-                  el.style.borderColor = "rgba(255,255,255,0.22)";
+                  el.style.background = "transparent";
+                  el.style.color = "#1A4731";
                 }}
               >
-                Request Quote
-                <ArrowUpRight size={13} strokeWidth={2}
-                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                Get a Quote
+                <ArrowUpRight size={14} strokeWidth={2} />
               </Link>
-            </MagneticButton>
+            </motion.div>
+
+            {/* Stats row */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.65, duration: 0.6 }}
+              className="flex items-center gap-8 mt-10 pt-8 flex-wrap"
+              style={{ borderTop: "1px solid rgba(26,71,49,0.15)" }}
+            >
+              {STATS.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 + i * 0.08, duration: 0.5, ease: E }}
+                >
+                  <div
+                    suppressHydrationWarning={i === 0}
+                    className="font-black leading-none mb-1"
+                    style={{
+                      fontFamily: "'Outfit', sans-serif",
+                      fontSize:   "clamp(1.6rem, 2.4vw, 2.4rem)",
+                      color:      "#1A4731",
+                      fontVariantNumeric: "lining-nums tabular-nums",
+                    }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div
+                    className="text-[11px] font-semibold uppercase tracking-[0.16em]"
+                    style={{ color: "#7A6B54" }}
+                  >
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* RIGHT — product cards on warm wood surface */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.75, ease: E }}
+            className="relative hidden lg:block"
+          >
+            {/* Main card */}
+            <div
+              className="relative overflow-hidden"
+              style={{
+                background:    "#EDE5D4",
+                borderRadius:  "24px",
+                padding:       "32px",
+                border:        "1px solid rgba(26,71,49,0.1)",
+              }}
+            >
+              {/* Decorative leaf watermark */}
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  top: "-20px", right: "-20px",
+                  width: "180px", height: "180px",
+                  background: "radial-gradient(circle, rgba(26,71,49,0.07) 0%, transparent 70%)",
+                  borderRadius: "50%",
+                }}
+                aria-hidden="true"
+              />
+
+              <div className="text-[11px] font-bold uppercase tracking-[0.22em] mb-5" style={{ color: "#7A6B54" }}>
+                Featured Products
+              </div>
+
+              <div className="flex flex-col gap-3">
+                {FEATURED.map((product, i) => (
+                  <Link key={product.id} href={`/products/${product.slug}`} className="block">
+                    <motion.div
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 + i * 0.1, duration: 0.55, ease: E }}
+                      className="flex items-center gap-4 p-4 group cursor-pointer transition-all duration-200"
+                      style={{
+                        background:   "#FDFAF4",
+                        border:       "1px solid rgba(26,71,49,0.1)",
+                        borderRadius: "14px",
+                      }}
+                      onMouseEnter={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.borderColor = "#E97316";
+                        el.style.boxShadow = "0 4px 20px rgba(233,115,22,0.12)";
+                      }}
+                      onMouseLeave={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.borderColor = "rgba(26,71,49,0.1)";
+                        el.style.boxShadow = "none";
+                      }}
+                    >
+                      <div
+                        className="relative flex-shrink-0 overflow-hidden"
+                        style={{ width: 72, height: 72, background: "#F5F0E6", borderRadius: "10px" }}
+                      >
+                        <Image
+                          src={product.primaryImage}
+                          alt={product.name}
+                          fill
+                          className="object-cover"
+                          sizes="72px"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div
+                          className="text-[14px] font-semibold truncate mb-0.5"
+                          style={{ fontFamily: "'Outfit', sans-serif", color: "#1A1208" }}
+                        >
+                          {product.name}
+                        </div>
+                        <div
+                          className="text-[11px] uppercase tracking-[0.1em] truncate mb-1"
+                          style={{ color: "#7A6B54" }}
+                        >
+                          {product.length} · {product.finish}
+                        </div>
+                        <div
+                          className="text-[11px] font-bold uppercase tracking-[0.12em]"
+                          style={{ color: "#1A4731" }}
+                        >
+                          MOQ {product.moq}
+                        </div>
+                      </div>
+                      <ArrowUpRight
+                        size={16}
+                        className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                        style={{ color: "#E97316" }}
+                      />
+                    </motion.div>
+                  </Link>
+                ))}
+              </div>
+
+              {/* CTA inside card */}
+              <div className="mt-5 pt-4" style={{ borderTop: "1px solid rgba(26,71,49,0.1)" }}>
+                <Link
+                  href="/products"
+                  className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.16em] transition-opacity hover:opacity-70"
+                  style={{ color: "#1A4731" }}
+                >
+                  View All Products
+                  <ArrowUpRight size={12} strokeWidth={2.5} />
+                </Link>
+              </div>
+            </div>
+
+            {/* Floating cert badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, duration: 0.5, ease: E }}
+              className="absolute -bottom-5 -left-5 px-4 py-3 shadow-lg"
+              style={{
+                background:   "#1A4731",
+                borderRadius: "12px",
+                border:       "2px solid #F5F0E6",
+              }}
+            >
+              <div className="text-[11px] font-bold uppercase tracking-[0.18em] mb-0.5" style={{ color: "rgba(245,240,230,0.6)" }}>Certified</div>
+              <div className="flex gap-2 flex-wrap">
+                {["FSC®", "ISO", "BRCGS"].map((c) => (
+                  <span key={c} className="text-[11px] font-black" style={{ color: "#F5F0E6" }}>{c}</span>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
         </div>
+      </div>
 
-        {/* ── BOTTOM: Stats bar ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.15, duration: 0.8, ease: E }}
-          className="border-t pb-8 md:pb-10 pt-6"
-          style={{ borderColor: "rgba(255,255,255,0.14)" }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 md:gap-y-0">
-            {STATS.map((stat, i) => (
+      {/* ── TRUST BADGES STRIP ── */}
+      <div
+        className="border-t"
+        style={{ borderColor: "rgba(26,71,49,0.12)", background: "#EDE5D4" }}
+      >
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
+            {TRUST_BADGES.map(({ Icon, label, sub }, i) => (
               <motion.div
-                key={stat.value}
+                key={label}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.22 + i * 0.08, duration: 0.55, ease: E }}
-                className="pr-6 md:border-r last:border-r-0 md:[&:nth-child(2)]:border-r"
-                style={{ borderColor: "rgba(255,255,255,0.1)" }}
+                transition={{ delay: 0.6 + i * 0.08, duration: 0.5, ease: E }}
+                className="flex items-center gap-3 px-6 py-5"
+                style={{ borderColor: "rgba(26,71,49,0.1)" }}
               >
                 <div
-                  suppressHydrationWarning={i === 0}
-                  className="font-display font-light leading-none mb-2"
-                  style={{
-                    fontSize: "clamp(1.8rem, 3.2vw, 2.6rem)",
-                    color: "#FFFFFF",
-                    // Cormorant Garamond's default figures are old-style —
-                    // digits sit at varying heights like lowercase letters,
-                    // which reads as misaligned in a stat row. Force uniform,
-                    // same-baseline lining figures instead.
-                    fontVariantNumeric: "lining-nums tabular-nums",
-                  }}
+                  className="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full"
+                  style={{ background: "rgba(26,71,49,0.1)" }}
                 >
-                  {stat.value}
+                  <Icon size={15} style={{ color: "#1A4731" }} />
                 </div>
-                <div
-                  className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] mb-0.5"
-                  style={{ color: "rgba(180,230,160,0.9)" }}
-                >
-                  {stat.label}
-                </div>
-                <div
-                  className="font-mono text-[11px] uppercase tracking-[0.12em]"
-                  style={{ color: "rgba(200,220,185,0.55)" }}
-                >
-                  {stat.sub}
+                <div>
+                  <div className="text-[12px] font-bold" style={{ color: "#1A1208" }}>{label}</div>
+                  <div className="text-[10px] uppercase tracking-[0.1em]" style={{ color: "#7A6B54" }}>{sub}</div>
                 </div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
-
-      </div>{/* /Content */}
-
-      {/* ── Scroll indicator ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute bottom-6 right-8 z-20 hidden lg:flex flex-col items-center gap-2"
-      >
-        <div className="w-px h-10 overflow-hidden"
-          style={{ background: "rgba(255,255,255,0.15)" }}>
-          <div className="w-full h-1/2 bg-green-light animate-scroll-line" />
         </div>
-        <span className="font-mono text-[11px] tracking-[0.3em] uppercase"
-          style={{ color: "rgba(180,220,160,0.5)", writingMode: "vertical-rl" }}>
-          Scroll
-        </span>
-      </motion.div>
-
+      </div>
     </section>
   );
 }

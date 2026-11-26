@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -7,24 +7,30 @@ import { FACTORY_CAPABILITIES, QA_CHECKPOINTS } from "@/lib/manufacturing-data";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+const CREAM  = "#F5F0E6";
+const CREAM2 = "#EDE5D4";
+const GREEN  = "#1A4731";
+const ORANGE = "#E97316";
+const INK    = "#1A1208";
+const MUTED  = "#7A6B54";
+
 const STAGE_COLORS: Record<string, string> = {
-  "Pre-Production": "#C89A5B",
-  "In-Process":     "#8C6239",
-  "Post-Production":"#4A7A3D",
-  "Food Safety":    "#4A7A3D",
-  "Packaging":      "#C89A5B",
-  "Pre-Shipment":   "#C89A5B",
+  "Pre-Production": ORANGE,
+  "In-Process":     MUTED,
+  "Post-Production": GREEN,
+  "Food Safety":    GREEN,
+  "Packaging":      ORANGE,
+  "Pre-Shipment":   ORANGE,
 };
 
 export default function QualityAssurance() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
-  // Group checkpoints by stage
   const stages = Array.from(new Set(QA_CHECKPOINTS.map((c) => c.stage)));
 
   return (
-    <section style={{ background: "#1D1610" }} className="grain" aria-labelledby="qa-heading">
+    <section style={{ background: CREAM2 }} aria-labelledby="qa-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-14">
@@ -42,19 +48,24 @@ export default function QualityAssurance() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)", color: "#F6F1E8" }}
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2rem, 3.5vw, 3.2rem)",
+                lineHeight:    0.92,
+                letterSpacing: "-0.035em",
+                color:         INK,
+              }}
             >
-              Every shipment
-              <br />
-              <span style={{ color: "#C89A5B" }}>controlled and repeatable.</span>
+              EVERY SHIPMENT<br />
+              <span style={{ color: ORANGE }}>CONTROLLED AND REPEATABLE.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.68, ease: EASE, delay: 0.16 }}
-              className="font-sans font-light leading-relaxed flex items-center"
-              style={{ fontSize: "clamp(1rem, 1.1vw, 1.05rem)", color: "rgba(230,210,185,0.70)" }}
+              className="font-sans leading-relaxed flex items-center"
+              style={{ fontSize: "clamp(1rem, 1.1vw, 1.05rem)", color: MUTED }}
             >
               ISO 9001:2015 certified quality management. BRCGS Food Safety certified.
               12+ controlled checkpoints from material intake to container loading —
@@ -71,8 +82,8 @@ export default function QualityAssurance() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, ease: EASE, delay: 0.2 }}
-              className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] mb-5"
-              style={{ color: "rgba(200,154,91,0.65)" }}
+              className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] mb-5"
+              style={{ color: MUTED }}
             >
               Operational Capabilities
             </motion.p>
@@ -84,20 +95,27 @@ export default function QualityAssurance() {
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, ease: EASE, delay: 0.2 + i * 0.07 }}
                   className="p-5"
-                  style={{ border: "1px solid #3D2E22", background: "rgba(255,255,255,0.02)" }}
+                  style={{ border: "1px solid rgba(26,71,49,0.1)", background: CREAM, borderRadius: "14px" }}
                 >
                   <div className="flex items-start justify-between gap-4 mb-2">
-                    <h3 className="font-sans font-semibold text-[15px]" style={{ color: "#F6F1E8" }}>
+                    <h3
+                      style={{
+                        fontFamily: "'Outfit', sans-serif",
+                        fontWeight: 700,
+                        fontSize:   "15px",
+                        color:      INK,
+                      }}
+                    >
                       {cap.title}
                     </h3>
                     <span
                       className="font-mono text-[11px] px-2.5 py-1 flex-shrink-0"
-                      style={{ background: "rgba(200,154,91,0.1)", border: "1px solid rgba(200,154,91,0.25)", color: "#C89A5B" }}
+                      style={{ background: "rgba(233,115,22,0.08)", border: "1px solid rgba(233,115,22,0.2)", color: ORANGE, borderRadius: "6px" }}
                     >
                       {cap.metric}
                     </span>
                   </div>
-                  <p className="font-sans text-[14px] leading-relaxed" style={{ color: "rgba(230,210,185,0.65)" }}>
+                  <p className="font-sans text-[14px] leading-relaxed" style={{ color: MUTED }}>
                     {cap.body}
                   </p>
                 </motion.div>
@@ -111,15 +129,15 @@ export default function QualityAssurance() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, ease: EASE, delay: 0.2 }}
-              className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] mb-5"
-              style={{ color: "rgba(200,154,91,0.65)" }}
+              className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] mb-5"
+              style={{ color: MUTED }}
             >
               Quality Checkpoints — 12 per batch
             </motion.p>
             <div className="flex flex-col gap-6">
               {stages.map((stage, si) => {
                 const checks = QA_CHECKPOINTS.filter((c) => c.stage === stage);
-                const color = STAGE_COLORS[stage] ?? "#C89A5B";
+                const color = STAGE_COLORS[stage] ?? ORANGE;
                 return (
                   <motion.div
                     key={stage}
@@ -129,13 +147,13 @@ export default function QualityAssurance() {
                   >
                     <div className="flex items-center gap-2 mb-3">
                       <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: color }} />
-                      <span className="font-sans text-[12px] font-semibold uppercase tracking-[0.1em]" style={{ color }}>
+                      <span className="font-mono text-[12px] font-bold uppercase tracking-[0.1em]" style={{ color }}>
                         {stage}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-2 pl-4" style={{ borderLeft: `1px solid ${color}33` }}>
+                    <div className="flex flex-col gap-2 pl-4" style={{ borderLeft: `1px solid ${color}30` }}>
                       {checks.map((c) => (
-                        <p key={c.check} className="font-sans text-[13px] leading-snug" style={{ color: "rgba(230,210,185,0.65)" }}>
+                        <p key={c.check} className="font-sans text-[13px] leading-snug" style={{ color: MUTED }}>
                           {c.check}
                         </p>
                       ))}

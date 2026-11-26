@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -29,7 +29,7 @@ const NAV = {
   ],
 } as const;
 
-const CERTS = ["FSC® 100%", "ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "BRCGS Certified"] as const;
+const CERTS = ["FSCÂ® 100%", "ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "BRCGS Certified"] as const;
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -37,7 +37,7 @@ export default function Footer() {
   return (
     <footer
       className="relative overflow-hidden"
-      style={{ background: "#1D1610" }}
+      style={{ background: "#EDE5D4" }}
       aria-label="Site footer"
     >
       {/* Top accent */}
@@ -45,11 +45,11 @@ export default function Footer() {
         className="h-[2px] w-full"
         style={{
           background:
-            "linear-gradient(90deg, transparent 0%, #4A7A3D 35%, #2D5228 65%, transparent 100%)",
+            "linear-gradient(90deg, transparent 0%, rgba(26,71,49,0.1) 25%, #E97316 55%, rgba(26,71,49,0.1) 80%, transparent 100%)",
         }}
       />
 
-      {/* ── Main grid ── */}
+      {/* â”€â”€ Main grid â”€â”€ */}
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-14">
 
@@ -62,7 +62,7 @@ export default function Footer() {
                   src="https://biopapro.com/cdn/shop/files/BioPapro_logo-8.png?v=1663665457"
                   alt="Biopapro"
                   fill
-                  className="object-contain object-left brightness-0 invert"
+                  className="object-contain object-left"
                   sizes="148px"
                 />
               </div>
@@ -71,7 +71,7 @@ export default function Footer() {
             {/* Tagline */}
             <p
               className="font-sans font-light text-sm leading-relaxed max-w-[280px]"
-              style={{ color: "rgba(230,220,205,0.65)" }}
+              style={{ color: "#7A6B54" }}
             >
               Indian FSC-certified birchwood tableware manufacturer.
               Supplying India and exporting to {COMPANY_FACTS.exportMarkets}+ countries since {COMPANY_FACTS.founded}.
@@ -83,7 +83,7 @@ export default function Footer() {
                 <span
                   key={c}
                   className="font-mono text-[11px] uppercase tracking-[0.18em]"
-                  style={{ color: "rgba(160,215,135,0.55)" }}
+                  style={{ color: "rgba(26,71,49,0.5)" }}
                 >
                   {c}
                 </span>
@@ -96,21 +96,21 @@ export default function Footer() {
                 href="mailto:export@biopapro.com"
                 className="inline-flex items-center gap-2.5 group"
               >
-                <Mail size={12} style={{ color: "rgba(160,215,135,0.5)", flexShrink: 0 }} />
+                <Mail size={12} style={{ color: "#E97316", flexShrink: 0 }} />
                 <span
                   className="font-mono text-[11px] uppercase tracking-[0.16em] group-hover:underline"
-                  style={{ color: "rgba(220,215,205,0.7)" }}
+                  style={{ color: "#7A6B54" }}
                 >
                   export@biopapro.com
                 </span>
               </a>
               <div className="inline-flex items-center gap-2.5">
-                <MapPin size={12} style={{ color: "rgba(160,215,135,0.5)", flexShrink: 0 }} />
+                <MapPin size={12} style={{ color: "#E97316", flexShrink: 0 }} />
                 <span
                   className="font-mono text-[11px] uppercase tracking-[0.16em]"
-                  style={{ color: "rgba(220,215,205,0.6)" }}
+                  style={{ color: "#7A6B54" }}
                 >
-                  India · Exporting globally
+                  India Â· Exporting globally
                 </span>
               </div>
             </div>
@@ -121,7 +121,7 @@ export default function Footer() {
             <div key={group} className="lg:col-span-2 flex flex-col gap-4">
               <span
                 className="font-mono text-[11px] uppercase tracking-[0.28em] font-bold"
-                style={{ color: "rgba(160,215,135,0.6)" }}
+                style={{ color: "#1A4731" }}
               >
                 {group}
               </span>
@@ -131,12 +131,12 @@ export default function Footer() {
                     <Link
                       href={link.href}
                       className="font-sans text-[13px] transition-colors duration-200"
-                      style={{ color: "rgba(220,215,205,0.6)" }}
+                      style={{ color: "#7A6B54" }}
                       onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.color = "rgba(220,215,205,0.95)";
+                        (e.currentTarget as HTMLElement).style.color = "#1A1208";
                       }}
                       onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.color = "rgba(220,215,205,0.6)";
+                        (e.currentTarget as HTMLElement).style.color = "#7A6B54";
                       }}
                     >
                       {link.label}
@@ -151,25 +151,25 @@ export default function Footer() {
           <div className="lg:col-span-2 flex flex-col gap-5">
             <span
               className="font-mono text-[11px] uppercase tracking-[0.28em] font-bold"
-              style={{ color: "rgba(160,215,135,0.6)" }}
+              style={{ color: "#1A4731" }}
             >
               Partner With Us
             </span>
             <p
               className="font-sans text-[13px] font-light leading-relaxed"
-              style={{ color: "rgba(220,215,205,0.6)" }}
+              style={{ color: "#7A6B54" }}
             >
               Ready to source FSC-certified birchwood tableware at scale?
             </p>
             <Link
               href="/contact"
               className="group inline-flex items-center gap-2 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.16em] transition-colors duration-300 self-start"
-              style={{ background: "#4A7A3D", color: "#FFFFFF" }}
+              style={{ background: "#E97316", color: "#FFFFFF", borderRadius: "6px" }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "#2D5228";
+                (e.currentTarget as HTMLElement).style.background = "#C4580A";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "#4A7A3D";
+                (e.currentTarget as HTMLElement).style.background = "#E97316";
               }}
             >
               Request Quote
@@ -183,16 +183,16 @@ export default function Footer() {
 
         </div>
 
-        {/* ── Bottom strip ── */}
+        {/* â”€â”€ Bottom strip â”€â”€ */}
         <div
           className="border-t pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-          style={{ borderColor: "rgba(255,255,255,0.08)" }}
+          style={{ borderColor: "rgba(26,71,49,0.1)" }}
         >
           <p
             className="font-mono text-[11px] uppercase tracking-[0.16em]"
-            style={{ color: "rgba(180,170,155,0.4)" }}
+            style={{ color: "#7A6B54" }}
           >
-            © {year} Biopapro Pvt. Ltd. · All rights reserved
+            Â© {year} Biopapro Pvt. Ltd. Â· All rights reserved
           </p>
           <div className="flex items-center gap-5">
             {["Privacy Policy", "Terms of Use", "Cookie Policy"].map((label) => (
@@ -200,12 +200,12 @@ export default function Footer() {
                 key={label}
                 href="/contact"
                 className="font-mono text-[11px] uppercase tracking-[0.14em] transition-colors duration-200"
-                style={{ color: "rgba(180,170,155,0.4)" }}
+                style={{ color: "#7A6B54" }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "rgba(180,170,155,0.75)";
+                  (e.currentTarget as HTMLElement).style.color = "#1A1208";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "rgba(180,170,155,0.4)";
+                  (e.currentTarget as HTMLElement).style.color = "#7A6B54";
                 }}
               >
                 {label}
@@ -217,3 +217,4 @@ export default function Footer() {
     </footer>
   );
 }
+

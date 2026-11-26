@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -6,6 +6,13 @@ import { Factory, ShieldCheck, Package, FileCheck, Truck, Zap } from "lucide-rea
 import SectionLabel from "@/components/shared/SectionLabel";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+const CREAM  = "#F5F0E6";
+const CREAM2 = "#EDE5D4";
+const GREEN  = "#1A4731";
+const ORANGE = "#E97316";
+const INK    = "#1A1208";
+const MUTED  = "#7A6B54";
 
 const CAPABILITIES = [
   {
@@ -52,15 +59,9 @@ export default function ExportInfrastructure() {
 
   return (
     <section
-      className="relative grain"
-      style={{ background: "#1D1610" }}
+      style={{ background: CREAM2 }}
       aria-labelledby="infrastructure-heading"
     >
-      <div
-        className="h-[1px] w-full"
-        style={{ background: "linear-gradient(90deg, transparent 0%, #3D2E22 40%, #5C3D1E 60%, transparent 100%)" }}
-      />
-
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-20">
 
         {/* Header */}
@@ -71,7 +72,7 @@ export default function ExportInfrastructure() {
             transition={{ duration: 0.55, ease: EASE }}
             className="mb-7"
           >
-            <SectionLabel index="05" label="Export Infrastructure" inverted />
+            <SectionLabel index="05" label="Export Infrastructure" />
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
@@ -80,20 +81,25 @@ export default function ExportInfrastructure() {
               initial={{ opacity: 0, y: 18 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.72, ease: EASE, delay: 0.08 }}
-              className="font-display font-light leading-[0.93]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)", color: "#F6F1E8" }}
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2rem, 3.5vw, 3.2rem)",
+                lineHeight:    0.92,
+                letterSpacing: "-0.035em",
+                color:         INK,
+              }}
             >
-              Can they handle
-              <br />
-              <span style={{ color: "#C89A5B" }}>procurement at scale?</span>
+              CAN THEY HANDLE<br />
+              <span style={{ color: ORANGE }}>PROCUREMENT AT SCALE?</span>
             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.68, ease: EASE, delay: 0.16 }}
-              className="font-sans font-light text-base leading-relaxed flex items-center"
-              style={{ color: "rgba(246,241,232,0.68)" }}
+              className="font-sans text-base leading-relaxed flex items-center"
+              style={{ color: MUTED }}
             >
               Yes. Biopapro operates dedicated production lines, certified
               quality systems, and an export-ready logistics infrastructure
@@ -113,28 +119,36 @@ export default function ExportInfrastructure() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.62, ease: EASE, delay: 0.22 + i * 0.07 }}
                 className="flex flex-col p-6"
-                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid #3D2E22" }}
+                style={{ background: CREAM, border: "1px solid rgba(26,71,49,0.1)", borderRadius: "16px" }}
               >
                 <div className="flex items-center justify-between mb-5">
                   <div
-                    className="w-9 h-9 flex items-center justify-center"
-                    style={{ background: "rgba(200,154,91,0.1)", border: "1px solid rgba(200,154,91,0.28)" }}
+                    className="w-9 h-9 flex items-center justify-center rounded"
+                    style={{ background: "rgba(26,71,49,0.08)", border: "1px solid rgba(26,71,49,0.14)" }}
                   >
-                    <Icon size={15} style={{ color: "#C89A5B" }} />
+                    <Icon size={15} style={{ color: GREEN }} />
                   </div>
                   <span
                     className="font-mono text-[11px] uppercase tracking-[0.18em] px-2.5 py-1"
-                    style={{ background: "rgba(200,154,91,0.08)", border: "1px solid rgba(200,154,91,0.2)", color: "#C89A5B" }}
+                    style={{ background: "rgba(233,115,22,0.08)", border: "1px solid rgba(233,115,22,0.2)", color: ORANGE, borderRadius: "6px" }}
                   >
                     {cap.stat}
                   </span>
                 </div>
 
-                <h3 className="font-sans font-semibold text-[13px] mb-3 leading-snug" style={{ color: "#F6F1E8" }}>
+                <h3
+                  style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 700,
+                    fontSize:   "14px",
+                    color:      INK,
+                    marginBottom: "10px",
+                  }}
+                >
                   {cap.title}
                 </h3>
 
-                <p className="font-sans text-[12px] font-light leading-relaxed" style={{ color: "rgba(246,241,232,0.58)" }}>
+                <p className="font-sans text-[12px] leading-relaxed" style={{ color: MUTED }}>
                   {cap.body}
                 </p>
               </motion.div>

@@ -1,248 +1,267 @@
-"use client";
+﻿"use client";
 
 /**
- * S4 — Why Wood Won
- *
- * A material specification, not a marketing comparison table.
- * Structure: editorial thesis line, then a technical spec-sheet body
- * (hairlines, mono data, no colored icon badges), closing on a quiet
- * material/temperature cue rather than a second visual bit.
- *
- * Design philosophy:
- *   - Reads like a datasheet a procurement engineer would actually receive.
- *   - Color carries the verdict (terracotta vs. forest green text), not icons.
- *   - The table doesn't perform an entrance — it's just there, precise and still.
+ * Why Wood Won — Bold two-panel manifesto
+ * LEFT (#1A1208 dark): PLASTIC problem stats
+ * RIGHT (#E97316 mango): BIRCHWOOD solution stats
  */
 
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import SectionLabel from "@/components/shared/SectionLabel";
-import { COMPANY_FACTS } from "@/lib/company-facts";
-
-/* ── Palette ── */
-const PLASTIC = {
-  accent: "#B5432A",
-  muted:  "#9A6050",
-};
-const WOOD = {
-  accent: "#3F6B42",
-  muted:  "#5A7A5A",
-};
-
-/* ── Comparison data — unchanged from source ── */
-const COMPARISONS: {
-  category:  string;
-  plastic:   { headline: string; detail: string };
-  birchwood: { headline: string; detail: string };
-}[] = [
-  {
-    category: "Source",
-    plastic:   { headline: "Petroleum-derived",     detail: "Non-renewable fossil fuel. Each gram requires extraction, refining, and chemical synthesis." },
-    birchwood: { headline: "FSC Certified Forests",  detail: "Birch grown in sustainably managed state forests. Replanted continuously. FSC Chain of Custody." },
-  },
-  {
-    category: "End of Life",
-    plastic:   { headline: "500+ year persistence",  detail: "Does not biodegrade — fragments into microplastics that persist in soil and ocean indefinitely." },
-    birchwood: { headline: "Compostable in weeks",     detail: "Biodegrades in industrial composting within weeks — a natural material, not a plastic with a coating. Lab-tested: zero detectable heavy metals." },
-  },
-  {
-    category: "Food Safety",
-    plastic:   { headline: "Chemical migration risk", detail: "Phthalates, BPA, styrene, and other plasticizers leach into food — especially at high temperatures." },
-    birchwood: { headline: "Lab-Tested Food Contact",  detail: "Zero chemical contact. No bleach, wax, or coatings. Independently tested for heavy metals and phthalates — results on request." },
-  },
-  {
-    category: "Heat Performance",
-    plastic:   { headline: "Warps above 70°C",        detail: "Structural failure and chemical release at temperatures common in cooked food and hot beverages." },
-    birchwood: { headline: "Holds up to heat",         detail: "Withstands hot food and beverages without warping or softening — structural integrity far beyond plastic." },
-  },
-  {
-    category: "Ocean Impact",
-    plastic:   { headline: "Microplastic pollution",  detail: "Breaks into nano-particles that enter the marine food chain. Detected in human blood." },
-    birchwood: { headline: "Zero ocean persistence",  detail: "Biodegrades fully. No accumulation. No microplastic generation. No marine toxicity." },
-  },
-  {
-    category: "Brand Signal",
-    plastic:   { headline: "Consumer rejection",      detail: "Growing regulatory bans and consumer preference are pushing food-service brands away from single-use plastic worldwide." },
-    birchwood: { headline: "Premium perception",      detail: "Wooden cutlery is chosen by premium airlines, Michelin-starred catering, and sustainable food brands globally." },
-  },
-];
+import { Aurora, ScrollFloat } from "@/components/reactbits";
 
 const E = [0.16, 1, 0.3, 1] as const;
 
-/* ── Single spec row — static, no per-row entrance motion ── */
-function SpecRow({ row, index }: { row: typeof COMPARISONS[number]; index: number }) {
+const PLASTIC_STATS = [
+  { number: "500+",  unit: "YEARS",    desc: "to decompose in landfill" },
+  { number: "8M",    unit: "TONS",     desc: "enter oceans every year" },
+  { number: "BPA",   unit: "+ TOXINS", desc: "leach into your food" },
+] as const;
+
+const WOOD_STATS = [
+  { number: "90",    unit: "DAYS",     desc: "to fully biodegrade" },
+  { number: "FSC®",  unit: "CERT.",    desc: "responsible forest origin" },
+  { number: "ZERO",  unit: "CHEMS",    desc: "no chemicals. ever." },
+] as const;
+
+function StatRow({
+  number, unit, desc, accentColor, descColor, borderColor, inView, delay,
+}: {
+  number: string; unit: string; desc: string;
+  accentColor: string; descColor: string; borderColor: string;
+  inView: boolean; delay: number;
+}) {
   return (
-    <div
-      className="grid grid-cols-1 md:grid-cols-[232px_1fr_1fr] border-t"
-      style={{ borderColor: "#E3DDD3" }}
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ delay, duration: 0.6, ease: E }}
+      className="flex items-baseline gap-4 py-5 border-b"
+      style={{ borderColor }}
     >
-      {/* Category label — font-sans to match the headline/detail columns
-          instead of font-mono, which read as a mismatched, unrelated
-          typeface sitting next to them. whitespace-nowrap so it can never
-          silently wrap to a second line again (the 160px column this
-          replaced was just barely too narrow for "04 — HEAT PERFORMANCE",
-          so only that one row wrapped while the other five sat on one line).
-          Left padding was 0 on desktop (md:px-0 md:pl-0), so the label sat
-          flush against the table's outer border with no breathing room
-          while the two content columns next to it have px-7 — matched to
-          pl-7 here so the whole row reads as one evenly-spaced table
-          instead of the label column looking visually cramped. */}
-      <div className="flex items-center px-6 md:pl-7 md:pr-0 pt-5 md:pt-6 pb-1 md:pb-6">
-        <span className="font-sans text-[12px] font-semibold tracking-[0.06em] text-ink-muted uppercase whitespace-nowrap">
-          {String(index + 1).padStart(2, "0")} — {row.category}
+      <span
+        style={{
+          fontFamily:    "'Outfit', sans-serif",
+          fontWeight:    900,
+          fontSize:      "clamp(2.4rem, 4vw, 3.8rem)",
+          lineHeight:    1,
+          color:         accentColor,
+          letterSpacing: "-0.02em",
+          minWidth:      "5rem",
+        }}
+      >
+        {number}
+      </span>
+      <div>
+        <span
+          className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] block mb-0.5"
+          style={{ color: accentColor, opacity: 0.7 }}
+        >
+          {unit}
+        </span>
+        <span className="font-sans text-sm" style={{ color: descColor }}>
+          {desc}
         </span>
       </div>
-
-      {/* Plastic spec */}
-      <div
-        className="px-6 md:px-7 py-3 md:py-6 md:border-l"
-        style={{ borderColor: "#E3DDD3" }}
-      >
-        <p className="md:hidden font-sans text-[12px] font-semibold tracking-[0.06em] uppercase mb-1.5" style={{ color: PLASTIC.accent }}>
-          Plastic
-        </p>
-        <p className="font-sans font-semibold text-sm mb-1" style={{ color: PLASTIC.accent }}>
-          {row.plastic.headline}
-        </p>
-        <p className="font-sans text-[12px] leading-relaxed" style={{ color: PLASTIC.muted }}>
-          {row.plastic.detail}
-        </p>
-      </div>
-
-      {/* Birchwood spec */}
-      <div
-        className="px-6 md:px-7 py-3 md:py-6 pb-6 md:pb-6 md:border-l"
-        style={{ borderColor: "#E3DDD3" }}
-      >
-        <p className="md:hidden font-sans text-[12px] font-semibold tracking-[0.06em] uppercase mb-1.5" style={{ color: WOOD.accent }}>
-          Birchwood
-        </p>
-        <p className="font-sans font-semibold text-sm mb-1" style={{ color: WOOD.accent }}>
-          {row.birchwood.headline}
-        </p>
-        <p className="font-sans text-[12px] leading-relaxed" style={{ color: WOOD.muted }}>
-          {row.birchwood.detail}
-        </p>
-      </div>
-    </div>
+    </motion.div>
   );
 }
 
-/* ── Main component ── */
 export default function WhyWoodWon() {
-  const headerRef  = useRef<HTMLDivElement>(null);
-  const headerView = useInView(headerRef, { once: true, margin: "-60px" });
+  const ref    = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px 0px" });
 
   return (
-    <section className="bg-surface">
+    <section
+      ref={ref}
+      className="relative overflow-hidden"
+      aria-label="Why birchwood beats plastic"
+    >
+      <div className="flex flex-col lg:flex-row min-h-[600px]">
 
-      {/* ── Editorial thesis ── */}
-      <div
-        ref={headerRef}
-        className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-28 pb-12 md:pb-16"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={headerView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: E }}
-          className="mb-6"
+        {/* ── LEFT: PLASTIC (THE PROBLEM) ── */}
+        <div
+          className="relative flex-1 overflow-hidden"
+          style={{ background: "#F5F0E6" }}
         >
-          <SectionLabel index="01" label="Material Comparison" />
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 18 }}
-          animate={headerView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.08, duration: 0.7, ease: E }}
-          className="font-display font-light text-ink leading-[0.9] tracking-[-0.02em] max-w-[720px]"
-          style={{ fontSize: "clamp(2.6rem, 5vw, 4.4rem)" }}
-        >
-          Why Wood Won.
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={headerView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.16, duration: 0.65, ease: E }}
-          className="font-sans font-light text-ink-light text-base md:text-lg mt-4 max-w-[460px]"
-        >
-          The science is clear. The choice is inevitable.
-        </motion.p>
-      </div>
-
-      {/* ── Spec sheet — static, no entrance choreography ── */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-20">
-        <div className="border" style={{ borderColor: "#E3DDD3" }}>
-          {/* Header row — desktop only, mobile repeats labels per row */}
-          <div className="hidden md:grid grid-cols-[232px_1fr_1fr] pb-3 pt-1">
-            <div />
-            <div className="px-7 border-l" style={{ borderColor: "#E3DDD3" }}>
-              <span className="font-sans text-[12px] font-semibold tracking-[0.1em] uppercase" style={{ color: PLASTIC.accent }}>
-                Plastic
-              </span>
-            </div>
-            <div className="px-7 border-l" style={{ borderColor: "#E3DDD3" }}>
-              <span className="font-sans text-[12px] font-semibold tracking-[0.1em] uppercase" style={{ color: WOOD.accent }}>
-                Birchwood
-              </span>
-            </div>
-          </div>
-
-          {COMPARISONS.map((row, i) => (
-            <SpecRow key={row.category} row={row} index={i} />
-          ))}
-        </div>
-      </div>
-
-      {/* ── Material conclusion — quiet warmth cue, no split-screen ── */}
-      <div
-        className="border-t border-border"
-        style={{
-          background: "linear-gradient(135deg, #F2F7EE 0%, #F2F7EE 55%, #F5EEDD 100%)",
-        }}
-      >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-10 md:py-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-
-          <div>
-            <p
-              className="font-display font-light leading-[1.1] tracking-tight"
-              style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", color: WOOD.accent }}
-            >
-              Birchwood wins.
-              <br />
-              <span className="text-ink font-light">Every category. Every time.</span>
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.2em] max-w-[300px] leading-relaxed">
-              {COMPANY_FACTS.plasticSavedPerDay.toLocaleString()} kg of plastic not produced
-              <br />today. Because of Biopapro.
-            </p>
-            <Link
-              href="/certifications"
-              className="group inline-flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
-              style={{ border: "1px solid #4A7A3D", color: "#4A7A3D" }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "#4A7A3D";
-                el.style.color = "#F6F1E8";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "transparent";
-                el.style.color = "#4A7A3D";
+          {/* Watermark */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex items-end justify-start pointer-events-none select-none overflow-hidden pb-4 pl-6"
+          >
+            <span
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(5rem, 14vw, 14rem)",
+                lineHeight:    1,
+                color:         "rgba(26,71,49,0.04)",
+                letterSpacing: "-0.04em",
               }}
             >
-              View All Certifications
-              <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-            </Link>
+              PLASTIC
+            </span>
           </div>
 
+          <div className="relative z-10 p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, ease: E }}
+              className="inline-flex items-center gap-2 self-start mb-8"
+            >
+              <span
+                className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] px-3 py-1.5"
+                style={{ background: "rgba(181,67,42,0.2)", color: "#B5432A", borderRadius: "2px" }}
+              >
+                THE PROBLEM
+              </span>
+            </motion.div>
+
+            {/* Stats */}
+            <div className="flex-1">
+              {PLASTIC_STATS.map((s, i) => (
+                <StatRow
+                  key={s.number}
+                  {...s}
+                  accentColor="#B5432A"
+                  descColor="#7A6B54"
+                  borderColor="rgba(26,71,49,0.1)"
+                  inView={inView}
+                  delay={0.15 + i * 0.1}
+                />
+              ))}
+            </div>
+
+            {/* Footer */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.6, duration: 0.7 }}
+              className="font-mono text-[11px] uppercase tracking-[0.2em] mt-8"
+              style={{ color: "rgba(26,71,49,0.45)" }}
+            >
+              Single-use plastic: a global crisis
+            </motion.p>
+          </div>
         </div>
+
+        {/* ── MIDDLE VS BADGE ── */}
+        <div
+          className="relative z-20 flex items-center justify-center lg:w-14 py-6 lg:py-0"
+          style={{ background: "#EDE5D4" }}
+        >
+          <div
+            className="font-mono text-[10px] font-black uppercase tracking-[0.18em] lg:rotate-90"
+            style={{
+              color:   "#1A4731",
+              padding: "0.5rem 0.75rem",
+              background: "#EDE5D4",
+            }}
+          >
+            VS
+          </div>
+        </div>
+
+        {/* ── RIGHT: BIRCHWOOD (THE SOLUTION) ── */}
+        <div
+          className="relative flex-1 overflow-hidden"
+          style={{ background: "#E97316" }}
+        >
+          <Aurora col1="#C4580A" col2="#E97316" col3="#E97316" opacity={0.3} />
+
+          {/* Watermark */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex items-end justify-end pointer-events-none select-none overflow-hidden pb-4 pr-6"
+          >
+            <span
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(5rem, 14vw, 14rem)",
+                lineHeight:    1,
+                color:         "rgba(255,255,255,0.055)",
+                letterSpacing: "-0.04em",
+              }}
+            >
+              BIRCH
+            </span>
+          </div>
+
+          <div className="relative z-10 p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.1, duration: 0.5, ease: E }}
+              className="inline-flex items-center gap-2 self-start mb-8"
+            >
+              <span
+                className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] px-3 py-1.5"
+                style={{ background: "rgba(255,255,255,0.18)", color: "#FFFFFF", borderRadius: "2px" }}
+              >
+                THE SOLUTION
+              </span>
+            </motion.div>
+
+            {/* Stats */}
+            <div className="flex-1">
+              {WOOD_STATS.map((s, i) => (
+                <StatRow
+                  key={s.number}
+                  {...s}
+                  accentColor="#FFFFFF"
+                  descColor="rgba(255,255,255,0.75)"
+                  borderColor="rgba(255,255,255,0.15)"
+                  inView={inView}
+                  delay={0.2 + i * 0.1}
+                />
+              ))}
+            </div>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.65, duration: 0.7 }}
+              className="mt-8 flex items-center gap-4"
+            >
+              <Link
+                href="/sustainability"
+                className="group inline-flex items-center gap-2 px-6 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.18em] transition-colors duration-300"
+                style={{ background: "#1A4731", color: "#FFFFFF", borderRadius: "4px" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#1A4731"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#1A4731"; }}
+              >
+                Our Sustainability Story
+                <ArrowUpRight size={12} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+
       </div>
 
+      {/* Bottom strip */}
+      <div
+        className="flex items-center justify-center py-5 px-8"
+        style={{ background: "#EDE5D4", borderTop: "1px solid rgba(26,71,49,0.1)" }}
+      >
+        <ScrollFloat delay={0.1}>
+          <p
+            className="font-mono text-[11px] uppercase tracking-[0.24em] text-center"
+            style={{ color: "#7A6B54" }}
+          >
+            That is why{" "}
+            <span style={{ color: "#E97316", fontWeight: 700 }}>18+ countries</span>
+            {" "}chose Biopapro birchwood over plastic
+          </p>
+        </ScrollFloat>
+      </div>
     </section>
   );
 }

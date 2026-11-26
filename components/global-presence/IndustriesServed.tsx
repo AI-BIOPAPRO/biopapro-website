@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -12,7 +12,7 @@ export default function IndustriesServed() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#EFE6D7" }} aria-labelledby="industries-heading">
+    <section style={{ background: "#EDE5D4" }} aria-labelledby="industries-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-20">
 
         {/* Header */}
@@ -32,12 +32,12 @@ export default function IndustriesServed() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               Built for
               <br />
-              <span style={{ color: "#C89A5B" }}>global food service.</span>
+              <span style={{ color: "#E97316" }}>global food service.</span>
             </motion.h2>
 
             <motion.p
@@ -71,7 +71,7 @@ export default function IndustriesServed() {
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "#DDD3C5";
+                el.style.borderColor = "rgba(26,71,49,0.12)";
                 el.style.boxShadow = "none";
                 el.style.transform = "translateY(0)";
               }}
@@ -88,7 +88,7 @@ export default function IndustriesServed() {
                   <h3 className="font-sans font-semibold text-ink text-[13px] leading-tight">
                     {industry.name}
                   </h3>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: "#C89A5B" }}>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: "#E97316" }}>
                     MOQ {industry.moq}
                   </p>
                 </div>
@@ -108,7 +108,7 @@ export default function IndustriesServed() {
                     <span
                       key={p}
                       className="font-mono text-[11px] uppercase tracking-[0.1em] px-2 py-1"
-                      style={{ background: "rgba(74,122,61,0.07)", border: "1px solid rgba(74,122,61,0.18)", color: "#4A7A3D" }}
+                      style={{ background: "rgba(74,122,61,0.07)", border: "1px solid rgba(74,122,61,0.18)", color: "#1A4731" }}
                     >
                       {p}
                     </span>
@@ -117,7 +117,7 @@ export default function IndustriesServed() {
               </div>
 
               {/* Clients note */}
-              <div className="pt-3 border-t" style={{ borderColor: "#EDE5D8" }}>
+              <div className="pt-3 border-t" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                 <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.1em] leading-relaxed">
                   {industry.clients}
                 </p>

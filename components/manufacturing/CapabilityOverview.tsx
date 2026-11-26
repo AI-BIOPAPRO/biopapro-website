@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -12,7 +12,7 @@ export default function CapabilityOverview() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#F6F1E8" }} className="paper" aria-labelledby="capability-heading">
+    <section style={{ background: "#EDE5D4" }} className="paper" aria-labelledby="capability-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-12">
@@ -30,12 +30,12 @@ export default function CapabilityOverview() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               Investor-grade
               <br />
-              <span style={{ color: "#C89A5B" }}>manufacturing facts.</span>
+              <span style={{ color: "#E97316" }}>manufacturing facts.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -51,7 +51,7 @@ export default function CapabilityOverview() {
         </div>
 
         {/* Metrics grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: "#DDD3C5", border: "1px solid #DDD3C5" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: "rgba(26,71,49,0.12)", border: "1px solid rgba(26,71,49,0.12)" }}>
           {CAPABILITY_METRICS.map((m, i) => (
             <motion.div
               key={m.label}
@@ -59,7 +59,7 @@ export default function CapabilityOverview() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, ease: EASE, delay: 0.1 + i * 0.05 }}
               className="flex flex-col px-7 py-6"
-              style={{ background: "#F6F1E8" }}
+              style={{ background: "#EDE5D4" }}
             >
               <span className="font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-ink-muted mb-2">
                 {m.label}

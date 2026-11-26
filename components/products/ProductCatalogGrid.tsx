@@ -18,9 +18,15 @@ import {
 } from "@/lib/products-data";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const IMG_BG = "#EDE6D8";
 
-// Count SKUs per category for filter badges
+const CREAM  = "#F5F0E6";
+const CREAM2 = "#EDE5D4";
+const GREEN  = "#1A4731";
+const ORANGE = "#E97316";
+const INK    = "#1A1208";
+const MUTED  = "#7A6B54";
+const IMG_BG = "#E0D4C4";
+
 const CATEGORY_COUNTS: Record<string, number> = { All: PRODUCTS.length };
 ALL_CATEGORIES.forEach((cat) => {
   CATEGORY_COUNTS[cat] = PRODUCTS.filter((p) => p.category === cat).length;
@@ -31,10 +37,6 @@ ALL_CATEGORIES.forEach((cat) => {
 function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () => void }) {
   const [activeImage, setActiveImage] = useState(0);
   const scrollableRef = useRef<HTMLElement>(null);
-
-  // Background stays locked; the drawer's own content (scrollableRef) keeps
-  // scrolling normally — see lib/use-scroll-lock.ts for why the simpler
-  // overflow-only approach isn't reliable here.
   useScrollLock(true, scrollableRef);
 
   useEffect(() => {
@@ -45,30 +47,28 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
   }, [product, onClose]);
 
   const specs = [
-    { label: "Length",       value: product.length },
-    { label: "Material",     value: product.material },
-    { label: "Finish",       value: product.finish },
-    { label: "Pcs / Bag",   value: `${product.pcsPerBag.toLocaleString()} pcs` },
-    { label: "Bags / Carton",value: `${product.bagsPerCarton} bags` },
-    { label: "Pcs / Carton", value: `${product.pcsPerCarton.toLocaleString()} pcs` },
-    { label: "Min. Order",   value: product.moq },
+    { label: "Length",        value: product.length },
+    { label: "Material",      value: product.material },
+    { label: "Finish",        value: product.finish },
+    { label: "Pcs / Bag",    value: `${product.pcsPerBag.toLocaleString()} pcs` },
+    { label: "Bags / Carton", value: `${product.bagsPerCarton} bags` },
+    { label: "Pcs / Carton",  value: `${product.pcsPerCarton.toLocaleString()} pcs` },
+    { label: "Min. Order",    value: product.moq },
   ];
 
   return (
     <>
-      {/* Backdrop */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.22 }}
         className="fixed inset-0 z-40"
-        style={{ background: "rgba(29,22,16,0.55)" }}
+        style={{ background: "rgba(26,18,8,0.5)" }}
         onClick={onClose}
         aria-hidden
       />
 
-      {/* Drawer */}
       <motion.aside
         ref={scrollableRef}
         initial={{ x: "100%" }}
@@ -76,7 +76,7 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
         exit={{ x: "100%" }}
         transition={{ duration: 0.4, ease: EASE }}
         className="fixed right-0 top-0 h-full z-50 overflow-y-auto"
-        style={{ width: "min(540px, 100vw)", background: "#FBF8F2", borderLeft: "1px solid #DDD3C5" }}
+        style={{ width: "min(540px, 100vw)", background: CREAM, borderLeft: `1px solid rgba(26,71,49,0.15)` }}
         aria-label="Product detail"
         role="dialog"
         aria-modal
@@ -84,19 +84,19 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
         {/* Sticky header */}
         <div
           className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b"
-          style={{ background: "#FBF8F2", borderColor: "#DDD3C5" }}
+          style={{ background: CREAM, borderColor: "rgba(26,71,49,0.12)" }}
         >
           <div className="flex items-center gap-2.5">
             <span
-              className="font-mono text-[11px] uppercase tracking-[0.22em] px-2.5 py-1"
+              className="font-mono text-[11px] uppercase tracking-[0.22em] px-2.5 py-1 rounded"
               style={{ background: CATEGORY_COLORS[product.category], color: "#FFFFFF" }}
             >
               {product.category}
             </span>
             {product.isIndividuallyPacked && (
               <span
-                className="font-mono text-[11px] uppercase tracking-[0.18em] px-2 py-1"
-                style={{ background: "rgba(200,154,91,0.12)", border: "1px solid rgba(200,154,91,0.35)", color: "#8C6239" }}
+                className="font-mono text-[11px] uppercase tracking-[0.18em] px-2 py-1 rounded"
+                style={{ background: "rgba(233,115,22,0.12)", border: "1px solid rgba(233,115,22,0.3)", color: ORANGE }}
               >
                 Individually Packed
               </span>
@@ -104,7 +104,8 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center text-ink-muted hover:text-ink transition-colors"
+            className="w-8 h-8 flex items-center justify-center transition-colors"
+            style={{ color: MUTED }}
             aria-label="Close"
           >
             <X size={16} />
@@ -112,18 +113,24 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
         </div>
 
         <div className="px-6 py-6">
-          {/* Product name */}
           <h2
-            className="font-display font-light text-ink mb-5 leading-tight"
-            style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+            style={{
+              fontFamily:    "'Outfit', sans-serif",
+              fontWeight:    900,
+              fontSize:      "clamp(1.5rem, 3vw, 2rem)",
+              letterSpacing: "-0.03em",
+              color:         INK,
+              lineHeight:    0.95,
+              marginBottom:  "20px",
+            }}
           >
-            {product.name}
+            {product.name.toUpperCase()}
           </h2>
 
           {/* Hero image */}
           <div
             className="relative mb-3 overflow-hidden"
-            style={{ height: "300px", background: IMG_BG }}
+            style={{ height: "280px", background: IMG_BG, borderRadius: "12px" }}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -145,7 +152,7 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
             </AnimatePresence>
           </div>
 
-          {/* Thumbnail strip */}
+          {/* Thumbnails */}
           {product.galleryImages.length > 1 && (
             <div className="flex gap-2 mb-6">
               {product.galleryImages.map((img, i) => (
@@ -156,7 +163,8 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
                   style={{
                     width: 60, height: 60,
                     background: IMG_BG,
-                    border: `1.5px solid ${i === activeImage ? "#C89A5B" : "#DDD3C5"}`,
+                    borderRadius: "8px",
+                    border: `1.5px solid ${i === activeImage ? ORANGE : "rgba(26,71,49,0.15)"}`,
                   }}
                   aria-label={`Image ${i + 1}`}
                 >
@@ -166,22 +174,24 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
             </div>
           )}
 
-          {/* Description */}
-          <p className="font-sans text-[13px] font-light text-ink-light leading-relaxed mb-6">
+          <p
+            className="text-[13px] leading-relaxed mb-6"
+            style={{ color: MUTED, fontFamily: "'Outfit', sans-serif" }}
+          >
             {product.shortDescription}
           </p>
 
           {/* Applications */}
           <div className="mb-6">
-            <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-ink-muted mb-2.5">
+            <p className="font-mono text-[11px] uppercase tracking-[0.26em] mb-2.5" style={{ color: MUTED }}>
               Applications
             </p>
             <div className="flex flex-wrap gap-1.5">
               {product.applications.map((app) => (
                 <span
                   key={app}
-                  className="font-mono text-[11px] uppercase tracking-[0.12em] px-3 py-1.5"
-                  style={{ background: "rgba(74,122,61,0.07)", border: "1px solid rgba(74,122,61,0.2)", color: "#4A7A3D" }}
+                  className="font-mono text-[11px] uppercase tracking-[0.12em] px-3 py-1.5 rounded"
+                  style={{ background: "rgba(26,71,49,0.07)", border: "1px solid rgba(26,71,49,0.18)", color: GREEN }}
                 >
                   {app}
                 </span>
@@ -192,38 +202,40 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
           {/* Specs */}
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-3">
-              <Package size={11} className="text-ink-muted" />
-              <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-ink-muted">
+              <Package size={11} style={{ color: MUTED }} />
+              <p className="font-mono text-[11px] uppercase tracking-[0.26em]" style={{ color: MUTED }}>
                 Technical Specifications
               </p>
             </div>
-            <table className="w-full border" style={{ borderColor: "#EDE5D8" }}>
-              <tbody>
-                {specs.map((spec, i) => (
-                  <tr
-                    key={spec.label}
-                    style={{ background: i % 2 === 0 ? "rgba(246,241,232,0.55)" : "#FBF8F2", borderBottom: "1px solid #EDE5D8" }}
-                  >
-                    <td
-                      className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-muted py-2.5 px-3"
-                      style={{ width: "42%", borderRight: "1px solid #EDE5D8" }}
-                    >
-                      {spec.label}
-                    </td>
-                    <td className="font-mono text-[11px] text-ink py-2.5 px-3 font-medium">
-                      {spec.value}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div
+              className="overflow-hidden"
+              style={{ border: "1px solid rgba(26,71,49,0.12)", borderRadius: "10px" }}
+            >
+              {specs.map((spec, i) => (
+                <div
+                  key={spec.label}
+                  className="flex items-center justify-between px-4 py-2.5"
+                  style={{
+                    background: i % 2 === 0 ? "rgba(26,71,49,0.03)" : "transparent",
+                    borderBottom: i < specs.length - 1 ? "1px solid rgba(26,71,49,0.08)" : "none",
+                  }}
+                >
+                  <span className="font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: MUTED }}>
+                    {spec.label}
+                  </span>
+                  <span className="font-mono text-[11px] font-medium" style={{ color: INK }}>
+                    {spec.value}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Certifications */}
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-3">
-              <Award size={11} className="text-ink-muted" />
-              <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-ink-muted">
+              <Award size={11} style={{ color: MUTED }} />
+              <p className="font-mono text-[11px] uppercase tracking-[0.26em]" style={{ color: MUTED }}>
                 Certifications
               </p>
             </div>
@@ -231,8 +243,8 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
               {product.certifications.map((cert) => (
                 <span
                   key={cert}
-                  className="font-mono text-[11px] uppercase tracking-[0.14em] px-3 py-1.5"
-                  style={{ background: "#F6F1E8", border: "1px solid #DDD3C5", color: "#6B5D50" }}
+                  className="font-mono text-[11px] uppercase tracking-[0.14em] px-3 py-1.5 rounded"
+                  style={{ background: CREAM2, border: "1px solid rgba(26,71,49,0.14)", color: MUTED }}
                 >
                   {cert}
                 </span>
@@ -240,29 +252,29 @@ function ProductDrawer({ product, onClose }: { product: BioProduct; onClose: () 
             </div>
           </div>
 
-          {/* Dark CTA block */}
+          {/* CTA block — green, not dark */}
           <div
-            className="p-5 border"
-            style={{ background: "#1D1610", borderColor: "#3D2E22" }}
+            className="p-5 rounded-xl"
+            style={{ background: GREEN }}
           >
             <p
-              className="font-sans text-[13px] font-light mb-1"
-              style={{ color: "rgba(246,241,232,0.85)" }}
+              className="text-[13px] mb-1"
+              style={{ color: "rgba(245,240,230,0.85)", fontFamily: "'Outfit', sans-serif" }}
             >
               Ready to source {product.name}?
             </p>
             <p
               className="font-mono text-[11px] uppercase tracking-[0.18em] mb-4"
-              style={{ color: "rgba(200,154,91,0.65)" }}
+              style={{ color: "rgba(245,240,230,0.45)" }}
             >
               MOQ {product.moq} · {product.pcsPerCarton.toLocaleString()} pcs per export carton
             </p>
             <Link
               href={`/contact?category=${encodeURIComponent(product.category)}&sku=${encodeURIComponent(product.name)}#inquiry-form`}
-              className="group inline-flex items-center gap-2 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200"
-              style={{ background: "#4A7A3D" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
+              className="group inline-flex items-center gap-2 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200 rounded-lg"
+              style={{ background: ORANGE }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#C4580A")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = ORANGE)}
             >
               Request Quote
               <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
@@ -295,70 +307,72 @@ function ProductCard({
       initial={{ opacity: 0, y: 18 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: EASE, delay: (index % 4) * 0.055 }}
-      className="group relative flex flex-col bg-surface overflow-hidden"
+      className="group relative flex flex-col overflow-hidden"
       style={{
-        border: "1px solid #DDD3C5",
-        borderTop: `3px solid #DDD3C5`,
-        transition: "border-color 0.28s, box-shadow 0.32s, transform 0.32s",
+        background:   CREAM,
+        border:       "1px solid rgba(26,71,49,0.12)",
+        borderRadius: "16px",
+        transition:   "border-color 0.28s, box-shadow 0.32s, transform 0.3s",
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLElement;
         el.style.borderColor = accent;
-        el.style.boxShadow = "0 10px 36px rgba(44,36,27,0.13), 0 2px 8px rgba(44,36,27,0.06)";
-        el.style.transform = "translateY(-2px)";
+        el.style.boxShadow = `0 10px 36px rgba(26,71,49,0.1), 0 2px 8px rgba(26,71,49,0.06)`;
+        el.style.transform = "translateY(-3px)";
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLElement;
-        el.style.borderColor = "#DDD3C5";
-        el.style.borderTopColor = "#DDD3C5";
+        el.style.borderColor = "rgba(26,71,49,0.12)";
         el.style.boxShadow = "none";
         el.style.transform = "translateY(0)";
       }}
     >
-      {/* Image — full bleed, warm bg fallback */}
-      <div className="relative overflow-hidden" style={{ height: "220px", background: IMG_BG }}>
+      {/* Image */}
+      <div
+        className="relative overflow-hidden"
+        style={{ height: "200px", background: IMG_BG, borderRadius: "15px 15px 0 0" }}
+      >
         <Image
           src={product.primaryImage}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
 
-        {/* Category badge — color-coded per category so the grid reads as
-            distinct ranges at a glance */}
-        <div className="absolute top-0 left-0 z-10">
+        {/* Category chip */}
+        <div className="absolute top-3 left-3 z-10">
           <span
-            className="font-mono text-[11px] uppercase tracking-[0.16em] px-2.5 py-1.5 block"
-            style={{ background: accent, color: "#FFFFFF" }}
+            className="font-mono text-[10px] uppercase tracking-[0.18em] px-2.5 py-1 rounded-md"
+            style={{ background: accent, color: "#fff" }}
           >
             {product.category}
           </span>
         </div>
 
-        {/* Individually packed badge */}
+        {/* Sleeved badge */}
         {product.isIndividuallyPacked && (
-          <div className="absolute top-0 right-0 z-10">
+          <div className="absolute top-3 right-3 z-10">
             <span
-              className="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1.5 block"
-              style={{ background: "rgba(200,154,91,0.88)", color: "#1D1610" }}
+              className="font-mono text-[10px] uppercase tracking-[0.14em] px-2.5 py-1 rounded-md"
+              style={{ background: "rgba(233,115,22,0.88)", color: "#fff" }}
             >
               Sleeved
             </span>
           </div>
         )}
 
-        {/* Hover overlay — cert badges emerge from bottom */}
+        {/* Hover overlay — cert tags */}
         <div
           className="absolute inset-0 flex flex-col justify-end px-3 pb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ background: "linear-gradient(to top, rgba(29,22,16,0.82) 0%, rgba(29,22,16,0.15) 55%, transparent 100%)" }}
+          style={{ background: "linear-gradient(to top, rgba(26,71,49,0.82) 0%, transparent 60%)" }}
         >
           <div className="flex flex-wrap gap-1">
             {product.certifications.slice(0, 3).map((cert) => (
               <span
                 key={cert}
-                className="font-mono text-[11px] uppercase tracking-[0.1em] px-2 py-1"
-                style={{ background: "rgba(200,154,91,0.18)", border: "1px solid rgba(200,154,91,0.45)", color: "#E5C99A" }}
+                className="font-mono text-[10px] uppercase tracking-[0.1em] px-2 py-1 rounded"
+                style={{ background: "rgba(245,240,230,0.14)", border: "1px solid rgba(245,240,230,0.3)", color: "rgba(245,240,230,0.9)" }}
               >
                 {cert}
               </span>
@@ -369,63 +383,70 @@ function ProductCard({
 
       {/* Info */}
       <div className="flex flex-col flex-1 px-4 pt-4 pb-4">
-        <h3 className="font-sans text-[13px] font-semibold text-ink mb-1 leading-snug">
+        <h3
+          style={{
+            fontFamily:    "'Outfit', sans-serif",
+            fontWeight:    700,
+            fontSize:      "0.95rem",
+            color:         INK,
+            letterSpacing: "-0.02em",
+            marginBottom:  "4px",
+            lineHeight:    1.2,
+          }}
+        >
           {product.name}
         </h3>
-        <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.1em] mb-4">
+        <p className="font-mono text-[10px] uppercase tracking-[0.12em] mb-4" style={{ color: MUTED }}>
           {product.length} · {product.material}
         </p>
 
-        {/* MOQ row */}
+        {/* Footer row */}
         <div
           className="flex items-center justify-between pt-3 mt-auto border-t"
-          style={{ borderColor: "#EDE5D8" }}
+          style={{ borderColor: "rgba(26,71,49,0.1)" }}
         >
           <div>
-            <span className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.12em]">
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(122,107,84,0.6)" }}>
               Min. Order
             </span>
-            <p className="font-mono text-[11px] font-bold text-ink mt-0.5">{product.moq}</p>
+            <p className="font-mono text-[10px] font-bold mt-0.5" style={{ color: INK }}>{product.moq}</p>
           </div>
           <div className="flex items-center gap-1.5">
-            {/* Quick "request this" action — carries straight to the Contact
-                form with this exact product attached, Zomato/Amazon-style,
-                without needing to open the drawer first. */}
             <Link
               href={`/contact?category=${encodeURIComponent(product.category)}&sku=${encodeURIComponent(product.name)}#inquiry-form`}
-              className="inline-flex items-center justify-center w-[30px] h-[30px] transition-all duration-200"
-              style={{ border: "1px solid #DDD3C5", color: "#6B5D50" }}
+              className="inline-flex items-center justify-center w-[30px] h-[30px] transition-all duration-200 rounded-lg"
+              style={{ border: "1px solid rgba(26,71,49,0.14)", color: MUTED }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "#4A7A3D";
-                el.style.color = "#4A7A3D";
-                el.style.background = "rgba(74,122,61,0.07)";
+                el.style.borderColor = GREEN;
+                el.style.color = GREEN;
+                el.style.background = "rgba(26,71,49,0.07)";
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "#DDD3C5";
-                el.style.color = "#6B5D50";
+                el.style.borderColor = "rgba(26,71,49,0.14)";
+                el.style.color = MUTED;
                 el.style.background = "transparent";
               }}
               aria-label={`Request a quote for ${product.name}`}
-              title="Request a quote for this product"
+              title="Request a quote"
             >
               <ArrowUpRight size={13} strokeWidth={2.5} />
             </Link>
             <button
               onClick={() => onOpen(product)}
-              className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] px-3 py-2 transition-all duration-200"
-              style={{ border: "1px solid #DDD3C5", color: "#6B5D50" }}
+              className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.14em] px-3 py-2 transition-all duration-200 rounded-lg"
+              style={{ border: "1px solid rgba(26,71,49,0.14)", color: MUTED }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "#C89A5B";
-                el.style.color = "#8C6239";
-                el.style.background = "rgba(200,154,91,0.07)";
+                el.style.borderColor = ORANGE;
+                el.style.color = ORANGE;
+                el.style.background = "rgba(233,115,22,0.07)";
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "#DDD3C5";
-                el.style.color = "#6B5D50";
+                el.style.borderColor = "rgba(26,71,49,0.14)";
+                el.style.color = MUTED;
                 el.style.background = "transparent";
               }}
               aria-label={`View details for ${product.name}`}
@@ -453,10 +474,6 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
   const headerInView = useInView(headerRef, { once: true, margin: "-10% 0px" });
   const searchParams = useSearchParams();
 
-  // Deep-link support — clicking a product elsewhere on the site (the
-  // homepage product strip, say) can link straight to ?product=<slug>#catalog
-  // and this opens that exact product's spec drawer on load, instead of
-  // dropping the visitor on the catalog grid to go find it themselves.
   useEffect(() => {
     const slug = searchParams.get("product");
     if (!slug) return;
@@ -470,13 +487,12 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
 
   return (
     <>
-      {/* White (card surface) bg — distinct from parchment families section above */}
       <section
         id="catalog"
-        style={{ background: "#FBF8F2" }}
+        style={{ background: CREAM2 }}
         aria-labelledby="catalog-heading"
       >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-20">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-16 pt-20 pb-20">
 
           {/* Header */}
           <div ref={headerRef} className="mb-12">
@@ -495,57 +511,58 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
                 initial={{ opacity: 0, y: 16 }}
                 animate={headerInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-                className="font-display font-light text-ink leading-[0.95]"
-                style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)" }}
+                style={{
+                  fontFamily:    "'Outfit', sans-serif",
+                  fontWeight:    900,
+                  fontSize:      "clamp(2rem, 3.5vw, 3.2rem)",
+                  lineHeight:    0.92,
+                  letterSpacing: "-0.03em",
+                  color:         INK,
+                }}
               >
-                Full Product Range
+                FULL PRODUCT<br />
+                <span style={{ color: GREEN }}>RANGE.</span>
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={headerInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.55, ease: EASE, delay: 0.18 }}
-                className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-muted"
+                className="font-mono text-[11px] uppercase tracking-[0.22em]"
+                style={{ color: MUTED }}
               >
                 {filtered.length} SKU{filtered.length !== 1 ? "s" : ""} · FSC® certified birchwood
               </motion.p>
             </div>
           </div>
 
-          {/* Category filter tabs with counts */}
+          {/* Category filters */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, ease: EASE, delay: 0.22 }}
-            className="flex items-center gap-1.5 flex-wrap mb-8 pb-5 border-b"
-            style={{ borderColor: "#DDD3C5" }}
+            className="flex items-center gap-2 flex-wrap mb-8 pb-6 border-b"
+            style={{ borderColor: "rgba(26,71,49,0.12)" }}
           >
             {(["All", ...ALL_CATEGORIES] as string[]).map((cat) => {
               const isActive = activeCategory === cat;
-              const count = CATEGORY_COUNTS[cat] ?? 0;
-              const accent = cat === "All" ? "#4A7A3D" : CATEGORY_COLORS[cat as ProductCategory];
+              const accent = cat === "All" ? GREEN : CATEGORY_COLORS[cat as ProductCategory];
               return (
                 <button
                   key={cat}
                   onClick={() => onCategoryChange(cat)}
-                  className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] px-3.5 py-2 transition-all duration-200"
+                  className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] px-3.5 py-2 rounded-lg transition-all duration-200"
                   style={{
-                    background: isActive ? accent : "transparent",
-                    color: isActive ? "#ffffff" : "#6B5D50",
-                    border: `1px solid ${isActive ? accent : "#DDD3C5"}`,
+                    background: isActive ? accent          : "rgba(26,71,49,0.06)",
+                    color:      isActive ? "#ffffff"       : MUTED,
+                    border:     `1px solid ${isActive ? accent : "rgba(26,71,49,0.1)"}`,
                   }}
                 >
                   {!isActive && (
-                    <span
-                      className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                      style={{ background: accent }}
-                    />
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: accent }} />
                   )}
                   {cat}
-                  <span
-                    className="font-mono text-[11px]"
-                    style={{ opacity: isActive ? 0.7 : 0.5 }}
-                  >
-                    {count}
+                  <span className="font-mono text-[10px]" style={{ opacity: isActive ? 0.7 : 0.5 }}>
+                    {CATEGORY_COUNTS[cat] ?? 0}
                   </span>
                 </button>
               );
@@ -573,28 +590,36 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
             </motion.div>
           </AnimatePresence>
 
-          {/* Custom / OEM bottom bar */}
+          {/* OEM CTA bottom bar */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, ease: EASE, delay: 0.36 }}
-            className="mt-14 p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border"
-            style={{ background: "#F6F1E8", borderColor: "#DDD3C5" }}
+            className="mt-14 p-8 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+            style={{ background: GREEN }}
           >
             <div>
-              <p className="font-sans font-semibold text-ink text-sm mb-1">
+              <p
+                style={{
+                  fontFamily:   "'Outfit', sans-serif",
+                  fontWeight:   700,
+                  fontSize:     "1rem",
+                  color:        "#F5F0E6",
+                  marginBottom: "6px",
+                }}
+              >
                 Need custom sizing, laser engraving, or private label packaging?
               </p>
-              <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.16em]">
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: "rgba(245,240,230,0.5)" }}>
                 OEM · Custom dimensions · Kraft paper sleeve · Logo printing · All available
               </p>
             </div>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200 flex-shrink-0"
-              style={{ background: "#1D1610" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#1D1610")}
+              className="group inline-flex items-center gap-2.5 px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200 flex-shrink-0 rounded-xl"
+              style={{ background: ORANGE }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#C4580A")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = ORANGE)}
             >
               Request Custom Quote
               <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
@@ -603,7 +628,6 @@ export default function ProductCatalogGrid({ activeCategory, onCategoryChange }:
         </div>
       </section>
 
-      {/* Product detail drawer */}
       <AnimatePresence>
         {selectedProduct && (
           <ProductDrawer product={selectedProduct} onClose={() => setSelectedProduct(null)} />

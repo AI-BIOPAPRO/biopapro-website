@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Blog cover art — per-category line-art graphics instead of stock photos
  * or AI-generated images. Keeps the same "datasheet, not stock photography"
  * editorial language used across the rest of the site, and costs nothing
@@ -6,14 +6,14 @@
  */
 
 const CATEGORY_STYLE: Record<string, { bg: string; accent: string; pattern: "stamp" | "rings" | "bars" | "cutlery" | "line" }> = {
-  "regulations":      { bg: "#EEF1F6", accent: "#1A3A6B", pattern: "stamp" },
-  "sustainability":    { bg: "#EEF4EA", accent: "#2D5228", pattern: "rings" },
-  "industry-news":     { bg: "#F7F1E4", accent: "#9A7A3F", pattern: "bars" },
-  "product-updates":   { bg: "#F4EDE4", accent: "#8B5E3C", pattern: "cutlery" },
-  "company-news":      { bg: "#EFECE7", accent: "#2A2118", pattern: "line" },
+  "regulations":      { bg: "#EDE5D4", accent: "#1A4731", pattern: "stamp" },
+  "sustainability":    { bg: "#EDE5D4", accent: "#145229", pattern: "rings" },
+  "industry-news":     { bg: "#F5F0E6", accent: "#7A6B54", pattern: "bars" },
+  "product-updates":   { bg: "#F5F0E6", accent: "#E97316", pattern: "cutlery" },
+  "company-news":      { bg: "#EDE5D4", accent: "#1A1208", pattern: "line" },
 };
 
-const FALLBACK = { bg: "#F4EDE4", accent: "#4A7A3D", pattern: "rings" as const };
+const FALLBACK = { bg: "#EDE5D4", accent: "#1A4731", pattern: "rings" as const };
 
 function StampPattern({ accent }: { accent: string }) {
   return (

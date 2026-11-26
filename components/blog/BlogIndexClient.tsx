@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
@@ -46,8 +46,8 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
           onClick={() => setActiveCategory(null)}
           className="font-mono text-[11px] uppercase tracking-[0.18em] px-3.5 py-2 transition-colors duration-200"
           style={{
-            background: activeCategory === null ? "#4A7A3D" : "#EDE7DC",
-            color: activeCategory === null ? "#F6F1E8" : "#4A7A3D",
+            background: activeCategory === null ? "#1A4731" : "#EDE5D4",
+            color: activeCategory === null ? "#EDE5D4" : "#1A4731",
           }}
         >
           All ({posts.length})
@@ -61,8 +61,8 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
               onClick={() => setActiveCategory(active ? null : cat)}
               className="font-mono text-[11px] uppercase tracking-[0.18em] px-3.5 py-2 transition-colors duration-200"
               style={{
-                background: active ? "#4A7A3D" : "#EDE7DC",
-                color: active ? "#F6F1E8" : "#4A7A3D",
+                background: active ? "#1A4731" : "#EDE5D4",
+                color: active ? "#EDE5D4" : "#1A4731",
               }}
             >
               {CATEGORY_LABELS[cat] ?? cat} ({count})
@@ -77,7 +77,7 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
             key={post.slug}
             href={`/blog/${post.slug}`}
             className="group flex flex-col overflow-hidden"
-            style={{ border: "1px solid #DDD3C5", background: "#FDFAF5" }}
+            style={{ border: "1px solid rgba(26,71,49,0.12)", background: "#F5F0E6" }}
           >
             <div className="w-full overflow-hidden relative" style={{ aspectRatio: "4 / 3" }}>
               <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.06] relative">
@@ -89,35 +89,34 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
               <div className="flex items-center gap-3 flex-wrap">
                 <span
                   className="font-mono text-[11px] uppercase tracking-[0.22em] px-2.5 py-1"
-                  style={{ background: "#EDE7DC", color: "#4A7A3D" }}
+                  style={{ background: "#EDE5D4", color: "#1A4731" }}
                 >
                   {CATEGORY_LABELS[post.category] ?? post.category}
                 </span>
-                <span className="font-mono text-[11px]" style={{ color: "#B8A898" }}>
+                <span className="font-mono text-[11px]" style={{ color: "#7A6B54" }}>
                   {formatDate(post.publishedAt)}
                 </span>
-                <span className="font-mono text-[11px]" style={{ color: "#B8A898" }}>
+                <span className="font-mono text-[11px]" style={{ color: "#7A6B54" }}>
                   · {estimateReadingMinutes(post)} min read
                 </span>
               </div>
 
               <h2
-                className="font-display font-light leading-snug transition-colors duration-200 group-hover:text-[#4A7A3D]"
-                style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.35rem)", color: "#2A2118" }}
+                style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 900, fontSize: "clamp(1.1rem, 1.8vw, 1.35rem)", lineHeight: 0.92, letterSpacing: "-0.035em", color: "#1A1208" }}
               >
                 {post.title}
               </h2>
 
               <p
                 className="font-sans font-light leading-relaxed flex-1"
-                style={{ fontSize: "14px", color: "#7A6A58" }}
+                style={{ fontSize: "14px", color: "#7A6B54" }}
               >
                 {post.excerpt}
               </p>
 
               <div
-                className="font-mono text-[11px] uppercase tracking-[0.2em] mt-2 transition-colors duration-200 group-hover:text-[#4A7A3D]"
-                style={{ color: "#B8A898" }}
+                className="font-mono text-[11px] uppercase tracking-[0.2em] mt-2 transition-colors duration-200 group-hover:text-[#1A4731]"
+                style={{ color: "#7A6B54" }}
               >
                 Read article →
               </div>
@@ -127,7 +126,7 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
       </div>
 
       {filtered.length === 0 && (
-        <p className="font-sans text-sm" style={{ color: "#B8A898" }}>
+        <p className="font-sans text-sm" style={{ color: "#7A6B54" }}>
           No posts in this category yet.
         </p>
       )}

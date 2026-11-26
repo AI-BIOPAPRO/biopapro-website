@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -18,13 +18,13 @@ export default function GlobalHero() {
     <section
       ref={ref}
       className="relative overflow-hidden paper pt-[72px]"
-      style={{ background: "#F6F1E8" }}
+      style={{ background: "#EDE5D4" }}
       aria-labelledby="global-hero-heading"
     >
       {/* Top amber accent */}
       <div
         className="h-[2px] w-full"
-        style={{ background: "linear-gradient(90deg, transparent 0%, #C89A5B 30%, #8C6239 60%, transparent 100%)" }}
+        style={{ background: "linear-gradient(90deg, transparent 0%, #E97316 30%, #7A6B54 60%, transparent 100%)" }}
       />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
@@ -46,14 +46,14 @@ export default function GlobalHero() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.92] mb-8"
-              style={{ fontSize: "clamp(2.8rem, 5vw, 4.8rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2.8rem, 5vw, 4.8rem)" }}
             >
               Manufactured
               <br />
               in India.
               <br />
-              <em className="not-italic" style={{ color: "#C89A5B", fontStyle: "italic", fontFamily: "inherit" }}>
+              <em className="not-italic" style={{ color: "#E97316", fontStyle: "italic", fontFamily: "inherit" }}>
                 Delivered
               </em>{" "}
               worldwide.
@@ -87,9 +87,9 @@ export default function GlobalHero() {
                 <div
                   key={s.label}
                   className="flex flex-col items-center px-6 py-4 flex-1"
-                  style={{ borderRight: i < 2 ? "1px solid #DDD3C5" : "none" }}
+                  style={{ borderRight: i < 2 ? "1px solid rgba(26,71,49,0.12)" : "none" }}
                 >
-                  <span className="font-mono font-bold text-[1.4rem] leading-none" style={{ color: "#C89A5B" }}>
+                  <span className="font-mono font-bold text-[1.4rem] leading-none" style={{ color: "#E97316" }}>
                     {s.value}
                   </span>
                   <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted mt-1 text-center">
@@ -112,9 +112,9 @@ export default function GlobalHero() {
                 <div
                   key={o.location}
                   className="flex items-center gap-2 px-3 py-1.5"
-                  style={{ border: "1px solid #DDD3C5", background: "rgba(255,255,255,0.5)" }}
+                  style={{ border: "1px solid rgba(26,71,49,0.12)", background: "rgba(255,255,255,0.5)" }}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#C89A5B" }} />
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#E97316" }} />
                   <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-muted">
                     {o.location}
                   </span>
@@ -132,9 +132,9 @@ export default function GlobalHero() {
               <Link
                 href="/contact"
                 className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-300"
-                style={{ background: "#4A7A3D" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
+                style={{ background: "#1A4731" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#145229")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#1A4731")}
               >
                 Request Export Quote
                 <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
@@ -165,7 +165,7 @@ export default function GlobalHero() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.65, ease: EASE, delay: 0.55 }}
           className="border-t pb-10 pt-6 flex flex-wrap items-center gap-x-6 gap-y-2"
-          style={{ borderColor: "#DDD3C5" }}
+          style={{ borderColor: "rgba(26,71,49,0.12)" }}
         >
           <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-ink-muted">
             Active markets

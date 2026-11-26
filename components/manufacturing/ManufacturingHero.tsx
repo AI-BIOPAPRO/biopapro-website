@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -9,6 +9,13 @@ import { MFG_HERO_STATS } from "@/lib/manufacturing-data";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+const CREAM  = "#F5F0E6";
+const CREAM2 = "#EDE5D4";
+const GREEN  = "#1A4731";
+const ORANGE = "#E97316";
+const INK    = "#1A1208";
+const MUTED  = "#7A6B54";
+
 export default function ManufacturingHero() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
@@ -16,124 +23,155 @@ export default function ManufacturingHero() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden grain pt-[72px]"
-      style={{ background: "#1D1610" }}
+      className="relative overflow-hidden pt-[72px]"
+      style={{ background: CREAM }}
       aria-labelledby="mfg-hero-heading"
     >
-      {/* Background video — manufacturing floor */}
-      <div className="absolute inset-0 z-0">
-        <video
-          autoPlay muted loop playsInline
-          className="w-full h-full object-cover"
-          style={{ opacity: 0.18 }}
-        >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
-        </video>
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, rgba(29,22,16,0.5) 0%, rgba(29,22,16,0.85) 100%)" }}
-        />
-        {/* Corner vignette — this source footage has a faint AI-tool watermark
-            in the bottom-right corner; low base opacity already mostly hides
-            it, this adds a safety margin. */}
-        <div
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(circle at 100% 100%, rgba(29,22,16,0.95) 0%, rgba(29,22,16,0.5) 12%, transparent 26%)" }}
-        />
-      </div>
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-16 pt-5 pb-3">
 
-      {/* Amber top accent */}
-      <div
-        className="relative z-10 h-[2px] w-full"
-        style={{ background: "linear-gradient(90deg, transparent 0%, #C89A5B 30%, #8C6239 60%, transparent 100%)" }}
-      />
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-3">
 
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-20 lg:pt-24 lg:pb-24">
-        <div className="max-w-[860px]">
+          {/* Left — headline card */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, ease: EASE }}
-            className="mb-8"
+            transition={{ duration: 0.78, ease: EASE }}
+            className="flex flex-col justify-between"
+            style={{ background: CREAM2, borderRadius: "20px", padding: "clamp(28px,4vw,52px)" }}
           >
-            <SectionLabel index="01" label="Manufacturing" />
-          </motion.div>
-
-          <motion.h1
-            id="mfg-hero-heading"
-            initial={{ opacity: 0, y: 28 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
-            className="font-display font-light leading-[0.92] mb-8"
-            style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)", color: "#F6F1E8" }}
-          >
-            Built for
-            <br />
-            <em className="not-italic" style={{ color: "#C89A5B", fontStyle: "italic", fontFamily: "inherit" }}>
-              supply at scale.
-            </em>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.18 }}
-            className="font-sans font-light leading-relaxed max-w-[580px] mb-12"
-            style={{ fontSize: "clamp(1rem, 1.3vw, 1.15rem)", color: "rgba(230,210,185,0.72)" }}
-          >
-            From a single manufacturing facility in Mumbai, Biopapro delivers
-            consistent, certified birchwood tableware across India and to
-            18+ markets worldwide. 100M+ units per month. Every batch documented.
-            Every shipment on schedule.
-          </motion.p>
-
-          {/* Stats strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.26 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-px mb-12"
-            style={{ background: "#3D2E22", border: "1px solid #3D2E22" }}
-          >
-            {MFG_HERO_STATS.map((s) => (
-              <div key={s.label} className="flex flex-col px-6 py-5" style={{ background: "rgba(29,22,16,0.9)" }}>
-                <span className="font-mono font-bold leading-none mb-1.5" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", color: "#C89A5B" }}>
-                  {s.value}
-                </span>
-                <span className="font-sans text-[13px] font-medium" style={{ color: "rgba(230,210,185,0.55)" }}>
-                  {s.label}
-                </span>
+            <div>
+              <div className="mb-7">
+                <SectionLabel index="01" label="Manufacturing" />
               </div>
-            ))}
+
+              <h1
+                id="mfg-hero-heading"
+                style={{
+                  fontFamily:    "'Outfit', sans-serif",
+                  fontWeight:    900,
+                  fontSize:      "clamp(3rem, 6vw, 5.5rem)",
+                  lineHeight:    0.87,
+                  letterSpacing: "-0.045em",
+                  color:         INK,
+                  marginBottom:  "24px",
+                }}
+              >
+                BUILT FOR<br />
+                <span style={{ color: ORANGE }}>SUPPLY AT SCALE.</span>
+              </h1>
+
+              <p style={{ color: MUTED, fontFamily: "'Outfit', sans-serif", fontSize: "clamp(0.9rem,1.3vw,1.1rem)", lineHeight: 1.75, maxWidth: "560px", marginBottom: "32px" }}>
+                From a single manufacturing facility in Mumbai, Biopapro delivers
+                consistent, certified birchwood tableware across India and to
+                18+ markets worldwide. 100M+ units per month. Every batch documented.
+                Every shipment on schedule.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.12em] transition-colors duration-300"
+                  style={{ background: GREEN, color: CREAM, borderRadius: "10px" }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#145229")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = GREEN)}
+                >
+                  Request Quote
+                  <ArrowUpRight size={13} strokeWidth={2.5} />
+                </Link>
+                <a
+                  href="#production"
+                  className="font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200"
+                  style={{ color: MUTED }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = INK)}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = MUTED)}
+                >
+                  See how we manufacture →
+                </a>
+              </div>
+            </div>
           </motion.div>
 
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.34 }}
-            className="flex flex-wrap items-center gap-4"
-          >
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.12em] transition-colors duration-300"
-              style={{ background: "#4A7A3D", color: "#F6F1E8" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
+          {/* Right — video + stats */}
+          <div className="flex flex-col gap-3">
+
+            {/* Video card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.72, ease: EASE, delay: 0.1 }}
+              className="relative overflow-hidden flex-1"
+              style={{ borderRadius: "20px", minHeight: "240px" }}
             >
-              Request Quote
-              <ArrowUpRight size={13} strokeWidth={2.5} />
-            </Link>
-            <a
-              href="#production"
-              className="font-sans text-[13px] transition-colors duration-200"
-              style={{ color: "rgba(230,210,185,0.5)" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(230,210,185,0.9)")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(230,210,185,0.5)")}
+              <video
+                autoPlay muted loop playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+              >
+                <source src="/videos/hero-background.mp4" type="video/mp4" />
+              </video>
+              <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(to top, rgba(26,71,49,0.72) 0%, transparent 55%)" }}
+              />
+              <div className="absolute bottom-5 left-5">
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: "rgba(245,240,230,0.5)" }}>
+                  Mumbai, India
+                </p>
+                <p
+                  style={{
+                    fontFamily:    "'Outfit', sans-serif",
+                    fontWeight:    900,
+                    fontSize:      "clamp(1.1rem,1.8vw,1.4rem)",
+                    lineHeight:    0.95,
+                    letterSpacing: "-0.025em",
+                    color:         CREAM,
+                    marginTop:     "4px",
+                  }}
+                >
+                  INDIA&apos;S LARGEST<br />
+                  <span style={{ color: ORANGE }}>BIRCHWOOD FACILITY.</span>
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Stats grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.68, ease: EASE, delay: 0.2 }}
+              className="grid grid-cols-2 gap-3"
             >
-              See how we manufacture →
-            </a>
-          </motion.div>
+              {MFG_HERO_STATS.map((s, i) => (
+                <div
+                  key={s.label}
+                  style={{
+                    background:   i % 2 === 0 ? GREEN : CREAM2,
+                    borderRadius: "14px",
+                    padding:      "18px 20px",
+                  }}
+                >
+                  <span
+                    style={{
+                      display:    "block",
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 900,
+                      fontSize:   "clamp(1.1rem,1.8vw,1.5rem)",
+                      color:      i % 2 === 0 ? ORANGE : INK,
+                      marginBottom: "4px",
+                    }}
+                  >
+                    {s.value}
+                  </span>
+                  <span
+                    className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                    style={{ color: i % 2 === 0 ? "rgba(245,240,230,0.5)" : MUTED }}
+                  >
+                    {s.label}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

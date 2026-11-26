@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -12,7 +12,7 @@ export default function ContactIndustries() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#F6F1E8" }} className="paper" aria-labelledby="industries-heading">
+    <section style={{ background: "#EDE5D4" }} className="paper" aria-labelledby="industries-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-12">
@@ -29,11 +29,11 @@ export default function ContactIndustries() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-            className="font-display font-light text-ink leading-[0.95] max-w-2xl"
-            style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                        style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
           >
             We supply eight{" "}
-            <span style={{ color: "#C89A5B" }}>industry segments.</span>
+            <span style={{ color: "#E97316" }}>industry segments.</span>
           </motion.h2>
         </div>
 
@@ -45,7 +45,7 @@ export default function ContactIndustries() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, ease: EASE, delay: 0.08 + i * 0.06 }}
               className="p-6 flex flex-col"
-              style={{ background: "#FBF8F2", border: "1px solid #DDD3C5" }}
+              style={{ background: "#F5F0E6", border: "1px solid rgba(26,71,49,0.12)" }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
                 el.style.borderColor = "rgba(200,154,91,0.45)";
@@ -55,7 +55,7 @@ export default function ContactIndustries() {
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "#DDD3C5";
+                el.style.borderColor = "rgba(26,71,49,0.12)";
                 el.style.boxShadow = "none";
                 el.style.transform = "translateY(0)";
               }}
@@ -67,7 +67,7 @@ export default function ContactIndustries() {
               <p className="font-sans text-[13px] text-ink-light leading-relaxed mb-4 flex-1">
                 {industry.body}
               </p>
-              <p className="font-mono text-[11px] text-ink-muted pt-3 border-t" style={{ borderColor: "#EDE5D8" }}>
+              <p className="font-mono text-[11px] text-ink-muted pt-3 border-t" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                 {industry.highlight}
               </p>
             </motion.div>

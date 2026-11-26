@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 /**
  * S2 — Product Strip
@@ -75,12 +75,12 @@ function StripCard({
         <div
           className="relative overflow-hidden"
           style={{
-            width: 140,
-            height: 140,
-            borderRadius: "20px",
+            width: 200,
+            height: 200,
+            borderRadius: "14px",
             background: "linear-gradient(155deg, #F2EBDD 0%, #E7DCC7 100%)",
-            border: "1px solid #DDD3C5",
-            boxShadow: "0 10px 24px rgba(44,36,27,0.1)",
+            border: "1px solid rgba(26,71,49,0.12)",
+            boxShadow: "0 14px 32px rgba(44,36,27,0.12)",
           }}
         >
           <Image
@@ -100,7 +100,7 @@ function StripCard({
           {/* Hover reveal — reinforces that the card is clickable, not just decorative */}
           <div
             className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-1 py-2 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
-            style={{ background: "linear-gradient(to top, rgba(74,122,61,0.92) 0%, transparent 100%)" }}
+            style={{ background: "linear-gradient(to top, rgba(196,88,10,0.92) 0%, transparent 100%)" }}
           >
             <span className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-white">
               View Specs
@@ -110,10 +110,18 @@ function StripCard({
         </div>
       </div>
       <div className="text-center">
-        <p className="font-sans text-[12px] font-semibold text-ink whitespace-nowrap transition-colors duration-200 group-hover:text-[#4A7A3D]">
+        <p
+          className="whitespace-nowrap transition-colors duration-200"
+          style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontWeight: 700,
+            fontSize:   "0.8rem",
+            color:      "#1A1208",
+          }}
+        >
           {product.name}
         </p>
-        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-muted mt-0.5">
+        <p className="font-mono text-[10px] uppercase tracking-[0.14em] mt-0.5" style={{ color: "#7A6B54" }}>
           {product.length} &middot; {product.material}
         </p>
       </div>
@@ -188,16 +196,16 @@ export default function ProductStrip() {
     <section
       ref={sectionRef}
       className="relative overflow-hidden pt-9 pb-10 md:pt-11 md:pb-12"
-      style={{ background: "#FBF8F2", borderBottom: "1px solid #EDE5D8" }}
+      style={{ background: "#FEE8D4", borderBottom: "1px solid rgba(233,115,22,0.15)" }}
       aria-label="Product range preview"
     >
       {/* Small context label — the strip otherwise floats with no framing */}
       <div className="flex items-center justify-center gap-3 mb-6 px-6">
-        <span className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#4A7A3D" }}>
+        <span className="font-mono text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: "#C4580A" }}>
           30+ SKUs
         </span>
-        <span className="block w-5 h-px" style={{ background: "#DDD3C5" }} />
-        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-muted">
+        <span className="block w-5 h-px" style={{ background: "rgba(196,88,10,0.3)" }} />
+        <span className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#1A1208" }}>
           The Full Range
         </span>
       </div>
@@ -205,11 +213,11 @@ export default function ProductStrip() {
       {/* Edge fades so cards don't look like they're cut off mid-frame */}
       <div
         className="absolute inset-y-0 left-0 w-24 md:w-40 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to right, #FBF8F2 0%, transparent 100%)" }}
+        style={{ background: "linear-gradient(to right, #FEE8D4 0%, transparent 100%)" }}
       />
       <div
         className="absolute inset-y-0 right-0 w-24 md:w-40 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to left, #FBF8F2 0%, transparent 100%)" }}
+        style={{ background: "linear-gradient(to left, #FEE8D4 0%, transparent 100%)" }}
       />
 
       <div className="product-strip-track flex items-start w-max">

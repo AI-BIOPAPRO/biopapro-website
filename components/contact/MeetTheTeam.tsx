@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 /**
  * S4.5 — Meet the Team
@@ -32,11 +32,11 @@ function TeamCard({ member }: { member: (typeof TEAM)[number] }) {
   return (
     <div
       className="flex-shrink-0 flex flex-col items-center text-center p-6"
-      style={{ width: 220, background: "#FBF8F2", border: "1px solid #DDD3C5" }}
+      style={{ width: 220, background: "#F5F0E6", border: "1px solid rgba(26,71,49,0.12)" }}
     >
       <div
         className="w-24 h-24 rounded-full flex items-center justify-center mb-4 flex-shrink-0"
-        style={{ border: "1.5px dashed #DDD3C5", background: "#F6F1E8" }}
+        style={{ border: "1.5px dashed rgba(26,71,49,0.12)", background: "#EDE5D4" }}
       >
         {member.photo ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -48,7 +48,7 @@ function TeamCard({ member }: { member: (typeof TEAM)[number] }) {
       <p className="font-sans font-semibold text-[14px] text-ink mb-1">
         {member.name ?? "Photo coming soon"}
       </p>
-      <p className="font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: "#C89A5B" }}>
+      <p className="font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: "#E97316" }}>
         {member.role}
       </p>
     </div>
@@ -60,7 +60,7 @@ export default function MeetTheTeam() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#F6F1E8" }} className="paper" aria-labelledby="team-heading">
+    <section style={{ background: "#EDE5D4" }} className="paper" aria-labelledby="team-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
         <div className="mb-10">
           <motion.div
@@ -76,12 +76,12 @@ export default function MeetTheTeam() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-            className="font-display font-light text-ink leading-[0.95] max-w-2xl"
-            style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                        style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
           >
             The people
             <br />
-            <span style={{ color: "#C89A5B" }}>behind every shipment.</span>
+            <span style={{ color: "#E97316" }}>behind every shipment.</span>
           </motion.h2>
         </div>
 

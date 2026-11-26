@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "motion/react";
@@ -6,6 +6,13 @@ import SectionLabel from "@/components/shared/SectionLabel";
 import { MFG_METRICS, BUYER_TRUST_POINTS } from "@/lib/manufacturing-data";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+const CREAM  = "#F5F0E6";
+const CREAM2 = "#EDE5D4";
+const GREEN  = "#1A4731";
+const ORANGE = "#E97316";
+const INK    = "#1A1208";
+const MUTED  = "#7A6B54";
 
 function AnimatedNumber({ target, suffix, triggered }: { target: number; suffix: string; triggered: boolean }) {
   const [display, setDisplay] = useState(0);
@@ -23,15 +30,9 @@ function AnimatedNumber({ target, suffix, triggered }: { target: number; suffix:
     requestAnimationFrame(step);
   }, [triggered, target]);
 
-  const formatted = display >= 1000
-    ? display.toLocaleString()
-    : display.toString();
+  const formatted = display >= 1000 ? display.toLocaleString() : display.toString();
 
-  return (
-    <span>
-      {formatted}{suffix}
-    </span>
-  );
+  return <span>{formatted}{suffix}</span>;
 }
 
 export default function ManufacturingMetrics() {
@@ -41,7 +42,7 @@ export default function ManufacturingMetrics() {
   const numericValue = (raw: string) => parseInt(raw.replace(/[^0-9]/g, ""), 10) || 0;
 
   return (
-    <section style={{ background: "#1D1610" }} className="grain" aria-labelledby="metrics-heading">
+    <section style={{ background: CREAM }} aria-labelledby="metrics-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         {/* Metrics */}
@@ -55,7 +56,10 @@ export default function ManufacturingMetrics() {
             <SectionLabel index="07" label="Manufacturing Metrics" />
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-px" style={{ background: "#3D2E22", border: "1px solid #3D2E22" }}>
+          <div
+            className="grid grid-cols-2 md:grid-cols-3 gap-px"
+            style={{ background: "rgba(26,71,49,0.1)", border: "1px solid rgba(26,71,49,0.1)", borderRadius: "16px", overflow: "hidden" }}
+          >
             {MFG_METRICS.map((m, i) => (
               <motion.div
                 key={m.label}
@@ -63,12 +67,17 @@ export default function ManufacturingMetrics() {
                 animate={inView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.1 + i * 0.08 }}
                 className="flex flex-col px-7 py-8"
-                style={{ background: "#1D1610" }}
+                style={{ background: i % 2 === 0 ? CREAM : CREAM2 }}
               >
                 <span
-                  id={`metrics-heading-${i}`}
-                  className="font-mono font-bold leading-none mb-3"
-                  style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#C89A5B" }}
+                  style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 900,
+                    fontSize:   "clamp(2rem, 3.5vw, 3rem)",
+                    color:      ORANGE,
+                    lineHeight: 1,
+                    marginBottom: "10px",
+                  }}
                 >
                   <AnimatedNumber
                     target={numericValue(m.value)}
@@ -76,10 +85,18 @@ export default function ManufacturingMetrics() {
                     triggered={inView}
                   />
                 </span>
-                <span className="font-sans font-semibold mb-1" style={{ fontSize: "15px", color: "#F6F1E8" }}>
+                <span
+                  style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 700,
+                    fontSize:   "15px",
+                    color:      INK,
+                    marginBottom: "4px",
+                  }}
+                >
                   {m.label}
                 </span>
-                <span className="font-sans text-[13px]" style={{ color: "rgba(230,210,185,0.45)" }}>
+                <span className="font-sans text-[13px]" style={{ color: MUTED }}>
                   {m.sub}
                 </span>
               </motion.div>
@@ -95,16 +112,22 @@ export default function ManufacturingMetrics() {
             transition={{ duration: 0.55, ease: EASE, delay: 0.3 }}
             className="mb-8"
           >
-            <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.14em]" style={{ color: "rgba(200,154,91,0.65)" }}>
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] mb-3" style={{ color: MUTED }}>
               08 · Why Global Buyers Trust Biopapro
             </p>
             <h2
               id="metrics-heading"
-              className="font-display font-light leading-[0.95] mt-3"
-              style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)", color: "#F6F1E8" }}
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(1.8rem, 3vw, 2.8rem)",
+                lineHeight:    0.92,
+                letterSpacing: "-0.035em",
+                color:         INK,
+              }}
             >
-              Reliable supply.
-              <span style={{ color: "#C89A5B" }}> Every time.</span>
+              RELIABLE SUPPLY.
+              <span style={{ color: ORANGE }}> EVERY TIME.</span>
             </h2>
           </motion.div>
 
@@ -116,15 +139,22 @@ export default function ManufacturingMetrics() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, ease: EASE, delay: 0.35 + i * 0.07 }}
                 className="p-5"
-                style={{ border: "1px solid #3D2E22", background: "rgba(255,255,255,0.02)" }}
+                style={{ border: "1px solid rgba(26,71,49,0.1)", background: CREAM2, borderRadius: "14px" }}
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#C89A5B" }} />
-                  <h3 className="font-sans font-semibold text-[15px]" style={{ color: "#F6F1E8" }}>
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: ORANGE }} />
+                  <h3
+                    style={{
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 700,
+                      fontSize:   "15px",
+                      color:      INK,
+                    }}
+                  >
                     {point.title}
                   </h3>
                 </div>
-                <p className="font-sans text-[14px] leading-relaxed" style={{ color: "rgba(230,210,185,0.65)" }}>
+                <p className="font-sans text-[14px] leading-relaxed" style={{ color: MUTED }}>
                   {point.body}
                 </p>
               </motion.div>

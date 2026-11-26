@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -30,7 +30,7 @@ export default function WorkforceSection() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#FBF8F2" }} className="paper" aria-labelledby="workforce-heading">
+    <section style={{ background: "#F5F0E6" }} className="paper" aria-labelledby="workforce-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -44,7 +44,7 @@ export default function WorkforceSection() {
           >
             <div
               className="relative overflow-hidden"
-              style={{ aspectRatio: "4/5", background: "#1D1610" }}
+              style={{ aspectRatio: "4/5", background: "#EDE5D4" }}
             >
               <video
                 autoPlay muted loop playsInline
@@ -58,7 +58,7 @@ export default function WorkforceSection() {
                 className="absolute bottom-0 left-0 right-0 px-6 py-5"
                 style={{ background: "linear-gradient(to top, rgba(29,22,16,0.88) 0%, transparent 100%)" }}
               >
-                <p className="font-mono font-bold text-[2rem] leading-none" style={{ color: "#C89A5B" }}>70%+</p>
+                <p className="font-mono font-bold text-[2rem] leading-none" style={{ color: "#E97316" }}>70%+</p>
                 <p className="font-sans text-[14px] mt-1" style={{ color: "rgba(246,241,232,0.8)" }}>Women in workforce</p>
               </div>
             </div>
@@ -80,12 +80,19 @@ export default function WorkforceSection() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95] mb-6"
-              style={{ fontSize: "clamp(2rem, 3.2vw, 3rem)" }}
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2rem, 3.2vw, 3rem)",
+                lineHeight:    0.92,
+                letterSpacing: "-0.035em",
+                color:         "#1A1208",
+                marginBottom:  "20px",
+              }}
             >
-              The people behind
+              THE PEOPLE BEHIND
               <br />
-              <span style={{ color: "#C89A5B" }}>every shipment.</span>
+              <span style={{ color: "#E97316" }}>EVERY SHIPMENT.</span>
             </motion.h2>
 
             <motion.p
@@ -109,7 +116,7 @@ export default function WorkforceSection() {
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, ease: EASE, delay: 0.22 + i * 0.07 }}
                   className="p-5"
-                  style={{ background: "#F6F1E8", border: "1px solid #DDD3C5" }}
+                  style={{ background: "#EDE5D4", border: "1px solid rgba(26,71,49,0.12)" }}
                 >
                   <h3 className="font-sans font-semibold text-ink mb-2" style={{ fontSize: "15px" }}>
                     {point.title}

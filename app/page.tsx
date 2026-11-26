@@ -9,6 +9,7 @@ import WomenWorkforce           from "@/components/home/WomenWorkforce";
 import InUse                    from "@/components/home/InUse";
 import DomesticSupply           from "@/components/home/DomesticSupply";
 import ProductEcosystem         from "@/components/home/ProductEcosystem";
+import MarqueeStrip             from "@/components/home/MarqueeStrip";
 import GlobalPresence           from "@/components/home/GlobalPresence";
 import Certifications           from "@/components/home/Certifications";
 import ContactTeaser            from "@/components/home/ContactTeaser";
@@ -75,6 +76,9 @@ export default function HomePage() {
 
       {/* S6  — Manufacturing Credibility: 6-step production journey */}
       <ManufacturingCredibility />
+
+      {/* Kinetic text marquee — editorial break, motionsites.ai-inspired */}
+      <MarqueeStrip />
 
       {/* S6b — Women Workforce: the people behind the operation */}
       <WomenWorkforce />

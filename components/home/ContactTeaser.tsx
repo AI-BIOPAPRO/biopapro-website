@@ -1,27 +1,17 @@
-"use client";
+﻿"use client";
 
 /**
- * S11 — Contact / Export Partnership CTA
- *
- * Final section. Light warm background — ends the page on an open,
- * welcoming note. Not a standard "contact us" footer-adjacent block.
- * Positioned as "Start Your Export Partnership."
- *
- * Two columns:
- *   Left  — Emotional close: what a partnership with Biopapro means
- *   Right — Inline quick-contact form with Formspree/server action hook
- *
- * Form fields: Company · Country · Product interest · Volume · Message
+ * Partner CTA — Bold mango left panel + dark forest right form
  */
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
-import { ArrowRight, MapPin, Mail, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { COMPANY_FACTS } from "@/lib/company-facts";
-import SectionLabel from "@/components/shared/SectionLabel";
+import { Aurora, ScrollFloat } from "@/components/reactbits";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const E = [0.16, 1, 0.3, 1] as const;
 
 const PRODUCTS_LIST = [
   "Birchwood Cutlery (Fork / Spoon / Knife)",
@@ -29,311 +19,335 @@ const PRODUCTS_LIST = [
   "Coffee Stirrer",
   "Ice Cream Stick",
   "Skewer / BBQ Stick",
+  "Wrapped Cutlery Set",
   "Custom / OEM",
-  "Full Range",
 ];
 
-// facts-allow: customer-selectable order-volume ranges, not a Biopapro production claim
-const VOLUMES = [
-  "Under 500K units/year",
-  "500K – 2M units/year",
-  "2M – 10M units/year",
-  "10M – 50M units/year",
-  "50M+ units/year",
+const BENEFITS = [
+  "FSC® certified, food-grade birchwood",
+  "10M+ units/month production capacity",
+  `Exporting to ${COMPANY_FACTS.exportMarkets}+ countries`,
+  "ISO 9001 · ISO 14001 · BRCGS certified",
 ];
 
 export default function ContactTeaser() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const ref    = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
 
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending] = useState(false);
+  const [form, setForm] = useState({
+    company: "", country: "", product: "", volume: "", message: "",
+  });
+  const [sent, setSent] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (sending) return;
-    setSending(true);
-
-    const fd = new FormData(e.currentTarget);
-    const company = String(fd.get("company") || "");
-    const country = String(fd.get("country") || "");
-    const email = String(fd.get("email") || "");
-    const product = String(fd.get("product") || "");
-    const volume = String(fd.get("volume") || "");
-    const message = String(fd.get("message") || "");
-    const website = String(fd.get("website") || ""); // honeypot
-
-    const mailto = () => {
-      const subject = encodeURIComponent(`Export Enquiry — ${company} (${country})`);
-      const body = encodeURIComponent(
-        `Company: ${company}\nCountry: ${country}\nEmail: ${email}\nProduct interest: ${product}\nAnnual volume: ${volume}\n\nMessage:\n${message}`,
-      );
-      window.location.href = `mailto:export@biopapro.com?subject=${subject}&body=${body}`;
-    };
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: company, // teaser form has no name field; company stands in
-          company,
-          country,
-          email,
-          products: product,
-          volume,
-          message,
-          website,
-          source: "homepage-teaser",
-        }),
-      });
-
-      if (!res.ok) {
-        const { error } = await res.json().catch(() => ({ error: "send_failed" }));
-        if (error === "email_not_configured" || error === "send_failed") mailto();
-      }
-    } catch {
-      mailto();
-    } finally {
-      setSending(false);
-      setSubmitted(true);
-    }
-  }
+    setSent(true);
+  };
 
   return (
     <section
       ref={ref}
-      className="bg-birch paper"
-      aria-labelledby="contact-heading"
+      className="relative overflow-hidden"
+      aria-label="Contact Biopapro for export partnership"
     >
-      {/* Warm divider */}
-      <div className="h-[2px]" style={{ background: "linear-gradient(90deg, transparent, #DDD3C5 30%, #DDD3C5 70%, transparent)" }} />
+      <div className="flex flex-col lg:flex-row min-h-[640px]">
 
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-20 pt-20 pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        {/* ── LEFT: Mango CTA panel ── */}
+        <div
+          className="relative flex-1 overflow-hidden"
+          style={{ background: "#E97316" }}
+        >
+          <Aurora col1="#C4580A" col2="#E97316" col3="#E97316" opacity={0.3} />
 
-          {/* ── Left: Partnership pitch — one quiet fade, not a staggered reveal ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE }}
+          {/* Watermark */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex items-end justify-start overflow-hidden pointer-events-none select-none pb-0"
           >
-            <div className="mb-7">
-              <SectionLabel index="08" label="Get in Touch" />
-            </div>
-
-            <h2
-              id="contact-heading"
-              className="font-display font-light text-ink leading-[0.95] mb-8"
-              style={{ fontSize: "clamp(2.2rem, 4vw, 3.6rem)" }}
+            <span
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(5rem, 15vw, 15rem)",
+                lineHeight:    0.85,
+                color:         "rgba(255,255,255,0.055)",
+                letterSpacing: "-0.04em",
+              }}
             >
-              Start your
-              <br />
-              supply
-              <br />
-              <span className="text-wood">partnership.</span>
-            </h2>
+              PARTNER
+            </span>
+          </div>
 
-            <div className="space-y-8">
-              <p className="font-sans font-light text-ink-light text-base leading-relaxed max-w-[420px]">
-                Whether you&rsquo;re a restaurant group or distributor sourcing
-                in India, or an airline catering group, food-service operator,
-                or procurement team overseas — we work with buyers at every scale.
-              </p>
+          <div className="relative z-10 p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between">
 
-              {/* What you get */}
-              <div className="space-y-4">
-                {[
-                  { step: "01", text: "Response within 24 hours" },
-                  { step: "02", text: "Sample kit dispatched within 5 business days" },
-                  { step: "03", text: "Tailored quote with container economics" },
-                  { step: "04", text: "Compliance documentation for your market" },
-                ].map((item) => (
-                  <div key={item.step} className="flex items-center gap-4">
-                    <span className="font-mono text-[11px] text-wood/50 tracking-[0.3em] flex-shrink-0">
-                      {item.step}
-                    </span>
-                    <div className="w-4 h-px bg-border flex-shrink-0" />
-                    <span className="font-sans text-[13px] text-ink-light">
-                      {item.text}
-                    </span>
-                  </div>
+            {/* Label */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, ease: E }}
+              className="flex items-center gap-2 mb-10"
+            >
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em]" style={{ color: "rgba(255,255,255,0.5)" }}>11</span>
+              <span className="w-5 h-px" style={{ background: "rgba(255,255,255,0.3)" }} />
+              <span className="font-mono text-[11px] uppercase tracking-[0.28em]" style={{ color: "rgba(255,255,255,0.5)" }}>Export Partnership</span>
+            </motion.div>
+
+            {/* Headline */}
+            <div className="flex-1">
+              <motion.h2
+                initial={{ opacity: 0, y: 24 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.1, duration: 0.65, ease: E }}
+                style={{
+                  fontFamily:    "'Outfit', sans-serif",
+                  fontWeight:    900,
+                  fontSize:      "clamp(2.8rem, 5vw, 5.5rem)",
+                  lineHeight:    0.92,
+                  letterSpacing: "-0.03em",
+                  color:         "#FFFFFF",
+                  marginBottom:  "2rem",
+                }}
+              >
+                PARTNER
+                <br />
+                WITH
+                <br />
+                BIOPAPRO.
+              </motion.h2>
+
+              {/* Benefits */}
+              <div className="space-y-3">
+                {BENEFITS.map((b, i) => (
+                  <ScrollFloat key={b} delay={0.2 + i * 0.08}>
+                    <div className="flex items-start gap-3">
+                      <span
+                        className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5"
+                        style={{ background: "rgba(255,255,255,0.18)" }}
+                      >
+                        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FFFFFF", display: "block" }} />
+                      </span>
+                      <span className="font-sans text-sm" style={{ color: "rgba(255,255,255,0.85)" }}>
+                        {b}
+                      </span>
+                    </div>
+                  </ScrollFloat>
                 ))}
               </div>
-
-              {/* Contact info */}
-              <div
-                className="p-5 space-y-3 border border-border"
-                style={{ background: "#EFE6D7" }}
-              >
-                <div className="flex items-center gap-3">
-                  <Mail size={12} className="text-wood flex-shrink-0" />
-                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-light">
-                    export@biopapro.com
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone size={12} className="text-wood flex-shrink-0" />
-                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-light">
-                    +91 70211 03763 · Available via WhatsApp
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin size={12} className="text-wood flex-shrink-0" />
-                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-light">
-                    Headquarters — {COMPANY_FACTS.location} · Domestic &amp; export supply
-                  </span>
-                </div>
-              </div>
             </div>
-          </motion.div>
 
-          {/* ── Right: Form ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.75, ease: EASE, delay: 0.25 }}
-          >
-            {submitted ? (
-              <div className="flex flex-col items-start justify-center h-full gap-5 py-16">
+            {/* CTA link */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.7, duration: 0.7 }}
+              className="mt-10"
+            >
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-200"
+                style={{ color: "rgba(255,255,255,0.65)" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)"; }}
+              >
+                Full Contact Page
+                <ArrowRight size={12} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+            </motion.div>
+
+          </div>
+        </div>
+
+        {/* ── RIGHT: Cream form panel ── */}
+        <div
+          className="relative lg:w-[52%] flex flex-col justify-center overflow-hidden"
+          style={{ background: "#EDE5D4" }}
+        >
+          <div className="relative z-10 p-8 md:p-12 lg:p-14 xl:p-16">
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.15, duration: 0.65, ease: E }}
+              className="mb-8"
+            >
+              <h3
+                style={{
+                  fontFamily:    "'Outfit', sans-serif",
+                  fontWeight:    900,
+                  fontSize:      "clamp(1.6rem, 3vw, 2.6rem)",
+                  lineHeight:    1,
+                  letterSpacing: "-0.02em",
+                  color:         "#1A1208",
+                  marginBottom:  "0.5rem",
+                }}
+              >
+                START A CONVERSATION
+              </h3>
+              <p className="font-sans text-sm" style={{ color: "#7A6B54" }}>
+                We respond to all trade inquiries within 24 hours.
+              </p>
+            </motion.div>
+
+            {sent ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: E }}
+                className="text-center py-16"
+              >
                 <div
-                  className="w-12 h-12 flex items-center justify-center"
-                  style={{ background: "#F0E4CE", border: "1px solid #DDD3C5" }}
+                  className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
+                  style={{ background: "rgba(26,71,49,0.12)" }}
                 >
-                  <span className="text-wood text-xl">✓</span>
+                  <span style={{ fontSize: "1.6rem", color: "#1A4731" }}>✓</span>
                 </div>
-                <h3 className="font-display font-light text-3xl text-ink leading-tight">
-                  Enquiry received.
-                </h3>
-                <p className="font-sans text-ink-light text-sm leading-relaxed max-w-sm">
-                  Our team will review your enquiry and respond within
-                  24 hours. Check your inbox — and your spam folder, just in case.
-                </p>
-                <Link
-                  href="/products"
-                  className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-wood hover:text-wood-dark transition-colors duration-200 mt-2"
+                <p
+                  style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 700,
+                    fontSize:   "1.1rem",
+                    color:      "#1A4731",
+                  }}
                 >
-                  Browse the full catalog while you wait
-                  <ArrowRight size={10} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-200" />
-                </Link>
-              </div>
+                  Inquiry received!
+                </p>
+                <p className="font-sans text-sm mt-2" style={{ color: "#7A6B54" }}>
+                  Our export team will reach out within 24 hours.
+                </p>
+              </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Honeypot — hidden from users, bots fill it */}
-                <input
-                  type="text"
-                  name="website"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                  style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
-                />
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="col-span-2 sm:col-span-1">
-                    <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
-                      Company *
+              <motion.form
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: 1 } : {}}
+                transition={{ delay: 0.3, duration: 0.7 }}
+                onSubmit={handleSubmit}
+                className="space-y-4"
+              >
+                {/* Company + Country row */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] block mb-1.5" style={{ color: "#7A6B54" }}>
+                      Company
                     </label>
                     <input
                       name="company"
+                      value={form.company}
+                      onChange={handleChange}
+                      placeholder="Your company name"
                       required
-                      placeholder="Acme Food Group"
-                      className="w-full px-4 py-3 bg-card border border-border text-ink text-sm font-sans placeholder:text-ink-muted/50 focus:outline-none focus:border-wood transition-colors duration-200"
+                      className="w-full font-sans text-sm px-4 py-3 outline-none transition-colors duration-200"
+                      style={{
+                        background:   "#F5F0E6",
+                        border:       "1px solid rgba(26,71,49,0.15)",
+                        borderRadius: "4px",
+                        color:        "#1A1208",
+                      }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "#E97316"; }}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(26,71,49,0.15)"; }}
                     />
                   </div>
-                  <div className="col-span-2 sm:col-span-1">
-                    <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
-                      Country *
+                  <div>
+                    <label className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] block mb-1.5" style={{ color: "#7A6B54" }}>
+                      Country
                     </label>
                     <input
                       name="country"
+                      value={form.country}
+                      onChange={handleChange}
+                      placeholder="Shipping destination"
                       required
-                      placeholder="Australia"
-                      className="w-full px-4 py-3 bg-card border border-border text-ink text-sm font-sans placeholder:text-ink-muted/50 focus:outline-none focus:border-wood transition-colors duration-200"
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <label className="block font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
-                      Work Email *
-                    </label>
-                    <input
-                      name="email"
-                      type="email"
-                      required
-                      placeholder="you@company.com"
-                      className="w-full px-4 py-3 bg-card border border-border text-ink text-sm font-sans placeholder:text-ink-muted/50 focus:outline-none focus:border-wood transition-colors duration-200"
+                      className="w-full font-sans text-sm px-4 py-3 outline-none transition-colors duration-200"
+                      style={{
+                        background:   "#F5F0E6",
+                        border:       "1px solid rgba(26,71,49,0.15)",
+                        borderRadius: "4px",
+                        color:        "#1A1208",
+                      }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "#E97316"; }}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(26,71,49,0.15)"; }}
                     />
                   </div>
                 </div>
 
+                {/* Product */}
                 <div>
-                  <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
-                    Product Interest *
+                  <label className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] block mb-1.5" style={{ color: "#7A6B54" }}>
+                    Product Interest
                   </label>
                   <select
                     name="product"
+                    value={form.product}
+                    onChange={handleChange}
                     required
-                    defaultValue=""
-                    className="w-full px-4 py-3 bg-card border border-border text-ink text-sm font-sans focus:outline-none focus:border-wood transition-colors duration-200 appearance-none"
+                    className="w-full font-sans text-sm px-4 py-3 outline-none transition-colors duration-200"
+                    style={{
+                      background:   "#F5F0E6",
+                      border:       "1px solid rgba(26,71,49,0.15)",
+                      borderRadius: "4px",
+                      color:        form.product ? "#1A1208" : "#7A6B54",
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = "#E97316"; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(26,71,49,0.15)"; }}
                   >
-                    <option value="" disabled>Select product category</option>
+                    <option value="" disabled style={{ background: "#F5F0E6" }}>Select a product category</option>
                     {PRODUCTS_LIST.map((p) => (
-                      <option key={p} value={p}>{p}</option>
+                      <option key={p} value={p} style={{ background: "#F5F0E6" }}>{p}</option>
                     ))}
                   </select>
                 </div>
 
+                {/* Volume */}
                 <div>
-                  <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
-                    Annual Volume *
+                  <label className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] block mb-1.5" style={{ color: "#7A6B54" }}>
+                    Monthly Volume (units)
                   </label>
-                  <select
+                  <input
                     name="volume"
-                    required
-                    defaultValue=""
-                    className="w-full px-4 py-3 bg-card border border-border text-ink text-sm font-sans focus:outline-none focus:border-wood transition-colors duration-200 appearance-none"
-                  >
-                    <option value="" disabled>Select volume range</option>
-                    {VOLUMES.map((v) => (
-                      <option key={v} value={v}>{v}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-1.5">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    placeholder="Tell us about your requirements, timeline, or any specific certifications needed…"
-                    className="w-full px-4 py-3 bg-card border border-border text-ink text-sm font-sans placeholder:text-ink-muted/50 focus:outline-none focus:border-wood transition-colors duration-200 resize-none leading-relaxed"
+                    value={form.volume}
+                    onChange={handleChange}
+                    placeholder="e.g. 500,000 / month"
+                    className="w-full font-sans text-sm px-4 py-3 outline-none transition-colors duration-200"
+                    style={{
+                      background:   "#F5F0E6",
+                      border:       "1px solid rgba(26,71,49,0.15)",
+                      borderRadius: "4px",
+                      color:        "#1A1208",
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = "#E97316"; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(26,71,49,0.15)"; }}
                   />
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
-                  disabled={sending}
-                  className="group w-full flex items-center justify-center gap-2.5 px-6 py-4 bg-ink text-birch text-[11px] font-bold uppercase tracking-[0.16em] hover:bg-wood-dark transition-colors duration-300 disabled:opacity-60"
+                  className="w-full font-mono text-[12px] font-bold uppercase tracking-[0.22em] py-4 transition-all duration-300 flex items-center justify-center gap-3 group"
+                  style={{
+                    background:   "#E97316",
+                    color:        "#FFFFFF",
+                    borderRadius: "4px",
+                    marginTop:    "0.5rem",
+                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#C4580A"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#E97316"; }}
                 >
-                  {sending ? (
-                    <span className="inline-block w-3.5 h-3.5 border border-birch/40 border-t-birch rounded-full animate-spin" />
-                  ) : (
-                    <>
-                      Send Export Enquiry
-                      <ArrowRight size={12} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-300" />
-                    </>
-                  )}
+                  Send Inquiry
+                  <ArrowRight size={14} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-200" />
                 </button>
 
-                <p className="font-mono text-[11px] text-ink-muted uppercase tracking-[0.14em] text-center">
-                  No spam · No automated sales sequences · Export team responds directly
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-center mt-3" style={{ color: "#7A6B54" }}>
+                  Response within 24 hours · No spam
                 </p>
-              </form>
+              </motion.form>
             )}
-          </motion.div>
 
+          </div>
         </div>
+
       </div>
     </section>
   );

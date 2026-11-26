@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -21,7 +21,7 @@ export default function ExportOperations() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#EFE6D7" }} aria-labelledby="export-ops-heading">
+    <section style={{ background: "#EDE5D4" }} aria-labelledby="export-ops-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-14">
@@ -39,12 +39,12 @@ export default function ExportOperations() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               Export operations
               <br />
-              <span style={{ color: "#C89A5B" }}>built for scale.</span>
+              <span style={{ color: "#E97316" }}>built for scale.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -75,14 +75,14 @@ export default function ExportOperations() {
                 <div className="flex flex-col items-center flex-shrink-0">
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ background: "#FBF8F2", border: "2px solid #C89A5B" }}
+                    style={{ background: "#F5F0E6", border: "2px solid #E97316" }}
                   >
-                    <span className="font-mono font-bold text-[11px]" style={{ color: "#C89A5B" }}>
+                    <span className="font-mono font-bold text-[11px]" style={{ color: "#E97316" }}>
                       {step.step}
                     </span>
                   </div>
                   {i < LOGISTICS_STEPS.length - 1 && (
-                    <div className="w-px flex-1 my-1" style={{ background: "#DDD3C5", minHeight: 24 }} />
+                    <div className="w-px flex-1 my-1" style={{ background: "rgba(26,71,49,0.12)", minHeight: 24 }} />
                   )}
                 </div>
 
@@ -107,12 +107,12 @@ export default function ExportOperations() {
           >
             <div
               className="p-6 h-full"
-              style={{ background: "#FBF8F2", border: "1px solid #DDD3C5" }}
+              style={{ background: "#F5F0E6", border: "1px solid rgba(26,71,49,0.12)" }}
             >
               <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted mb-5">
                 Export Capability Reference
               </p>
-              <div className="flex flex-col gap-0 divide-y" style={{ borderTop: "1px solid #EDE5D8", borderBottom: "1px solid #EDE5D8" }}>
+              <div className="flex flex-col gap-0 divide-y" style={{ borderTop: "1px solid rgba(26,71,49,0.1)", borderBottom: "1px solid rgba(26,71,49,0.1)" }}>
                 {EXPORT_CAPABILITIES.map((cap) => (
                   <div key={cap.label} className="flex flex-col sm:flex-row sm:gap-6 py-3.5">
                     <span className="font-sans text-[12px] font-semibold text-ink-muted flex-shrink-0 sm:w-36 mb-1 sm:mb-0">

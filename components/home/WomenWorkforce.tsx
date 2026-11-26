@@ -1,234 +1,304 @@
-"use client";
+﻿"use client";
 
-/**
- * Our People — "The Hands Behind Every Shipment."
- *
- * Architecture: full-bleed image, gradient left-to-dark-right,
- * content anchored to the right side.
- *
- * Woman's face fully visible on the left — no overlay.
- * Content reads cleanly on the darkened right area.
- * One composition. Matches the hero section's visual language.
- */
-
-import { useRef } from "react";
-import Image from "next/image";
-import { motion, useInView } from "motion/react";
+import { useRef, useCallback } from "react";
 import Link from "next/link";
-import SectionLabel from "@/components/shared/SectionLabel";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 import { COMPANY_FACTS } from "@/lib/company-facts";
 
 const E = [0.16, 1, 0.3, 1] as const;
 
-const STORY_BLOCKS = [
-  {
-    keyword: "Precision",
-    body: "Every product is inspected and prepared to export-grade standards.",
-  },
-  {
-    keyword: "Consistency",
-    body: "18 production lines operating daily for customers across global markets.",
-  },
-  {
-    keyword: "Impact",
-    body: "100M+ units produced every month with sustainability at the core.",
-  },
+const STORY = [
+  { kw: "Precision",   body: "Every piece inspected to export-grade standards." },
+  { kw: "Consistency", body: "Same quality on every batch, every shift, every day." },
+  { kw: "Pride",       body: "Women-owned livelihoods built on sustainable work." },
 ] as const;
 
-const STATS = [
-  { value: `${COMPANY_FACTS.womenPercent}%+`,  label: "Women Workforce"    },
-  { value: "100M+", label: "Units Produced Monthly" },
-  { value: `${COMPANY_FACTS.exportMarkets}+`,   label: "Export Markets"    },
-  { value: `${COMPANY_FACTS.founded}`,  label: "Established"              },
+const PARTICLES = [
+  { left: "7%",  delay: 0,    dur: 7,  size: 3, op: 0.35 },
+  { left: "17%", delay: 1.4,  dur: 9,  size: 2, op: 0.25 },
+  { left: "29%", delay: 0.5,  dur: 6,  size: 4, op: 0.2  },
+  { left: "43%", delay: 2.2,  dur: 11, size: 2, op: 0.3  },
+  { left: "58%", delay: 0.9,  dur: 8,  size: 3, op: 0.22 },
+  { left: "71%", delay: 1.7,  dur: 7,  size: 4, op: 0.28 },
+  { left: "83%", delay: 0.3,  dur: 10, size: 2, op: 0.3  },
+  { left: "91%", delay: 3.1,  dur: 7,  size: 3, op: 0.18 },
 ] as const;
 
 export default function WomenWorkforce() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const ref    = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
+
+  /* ── Mouse tracking ─────────────────────────────── */
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const sx = useSpring(mouseX, { stiffness: 38, damping: 18 });
+  const sy = useSpring(mouseY, { stiffness: 38, damping: 18 });
+
+  /* Three parallax layers at different depths */
+  const bgX  = useTransform(sx, [-1, 1], [-5,  5]);
+  const bgY  = useTransform(sy, [-1, 1], [-3,  3]);
+  const midX = useTransform(sx, [-1, 1], [-14, 14]);
+  const midY = useTransform(sy, [-1, 1], [-8,  8]);
+  const fgX  = useTransform(sx, [-1, 1], [-26, 26]);
+  const fgY  = useTransform(sy, [-1, 1], [-16, 16]);
+
+  /* Cards get a 3D tilt from mouse */
+  const cardRY = useTransform(sx, [-1, 1], [-7, 7]);
+  const cardRX = useTransform(sy, [-1, 1], [4, -4]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const r = ref.current?.getBoundingClientRect();
+    if (!r) return;
+    mouseX.set(((e.clientX - r.left) / r.width  - 0.5) * 2);
+    mouseY.set(((e.clientY - r.top)  / r.height - 0.5) * 2);
+  }, [mouseX, mouseY]);
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(0);
+    mouseY.set(0);
+  }, [mouseX, mouseY]);
 
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden"
-      style={{ minHeight: "100svh" }}
-      aria-labelledby="workforce-heading"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative overflow-hidden select-none"
+      style={{ background: "#F5F0E6", minHeight: "600px" }}
+      aria-label="Biopapro women workforce"
     >
 
-      {/* ── Full-bleed photograph ── */}
-      <Image
-        src="/Worker Image.png"
-        alt="Biopapro skilled woman operator at birchwood tableware production line"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
-      />
+      {/* ── Floating mango particles (drifting up) ─── */}
+      {PARTICLES.map((p, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full pointer-events-none"
+          style={{ left: p.left, bottom: "0px", width: p.size, height: p.size, background: "#E97316" }}
+          animate={{ y: [-10, -520], opacity: [p.op, 0] }}
+          transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "linear", repeatDelay: 0.5 }}
+        />
+      ))}
 
-      {/* ── Gradient: transparent on left (woman visible) → dark on right (content readable) ── */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to left, rgba(5,14,5,0.97) 0%, rgba(5,14,5,0.94) 28%, rgba(5,14,5,0.7) 50%, rgba(5,14,5,0.18) 70%, rgba(5,14,5,0.0) 100%)",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Top scrim */}
-      <div
-        className="absolute top-0 inset-x-0 h-32 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 100%)" }}
-        aria-hidden="true"
-      />
-
-      {/* ── Content — anchored right ── */}
-      <div
-        className="relative z-10 flex flex-col justify-between min-h-[100svh]
-                   px-6 md:px-12 lg:px-16 xl:px-20 py-24 md:py-28"
+      {/* ── LAYER 1 — deepest: perspective floor grid ─ */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+        style={{ x: bgX, y: bgY }}
       >
-        {/* Content column — right-aligned on desktop */}
-        <div className="flex flex-col flex-1 justify-center
-                        lg:ml-auto lg:w-[50%] xl:w-[46%] lg:pl-8">
+        <div
+          style={{
+            position:           "absolute",
+            bottom:             0,
+            left:               "-25%",
+            right:              "-25%",
+            height:             "52%",
+            backgroundImage:    "linear-gradient(rgba(233,115,22,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(233,115,22,0.1) 1px, transparent 1px)",
+            backgroundSize:     "72px 72px",
+            transform:          "perspective(480px) rotateX(60deg)",
+            transformOrigin:    "50% 100%",
+            maskImage:          "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%)",
+            WebkitMaskImage:    "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%)",
+          }}
+        />
+      </motion.div>
 
-          {/* Label */}
+      {/* ── LAYER 2 — mid: giant watermark "70%" ─────── */}
+      <motion.div
+        className="absolute pointer-events-none overflow-hidden"
+        style={{
+          x:      midX,
+          y:      midY,
+          left:   "clamp(1rem, 4vw, 5rem)",
+          top:    "50%",
+          transform: "translateY(-50%)",
+          zIndex: 2,
+        }}
+      >
+        <motion.span
+          initial={{ opacity: 0, rotateX: -60, y: 80, scale: 0.8 }}
+          animate={inView ? { opacity: 1, rotateX: 0, y: 0, scale: 1 } : {}}
+          transition={{ delay: 0.08, duration: 1.1, ease: E }}
+          style={{
+            display:        "block",
+            fontFamily:     "'Outfit', sans-serif",
+            fontWeight:     900,
+            fontSize:       "clamp(9rem, 26vw, 22rem)",
+            lineHeight:     0.85,
+            letterSpacing:  "-0.04em",
+            color:          "rgba(26,71,49,0.06)",
+            /* Extruded 3D text-shadow stack */
+            textShadow:     [
+              "1px 1px 0 rgba(196,88,10,0.06)",
+              "2px 2px 0 rgba(196,88,10,0.055)",
+              "3px 3px 0 rgba(196,88,10,0.05)",
+              "4px 4px 0 rgba(196,88,10,0.04)",
+              "5px 5px 0 rgba(196,88,10,0.03)",
+              "6px 6px 0 rgba(196,88,10,0.02)",
+              "7px 7px 8px rgba(0,0,0,0.3)",
+            ].join(", "),
+            perspective:     "900px",
+            transformStyle:  "preserve-3d",
+            userSelect:      "none",
+          }}
+        >
+          70%
+        </motion.span>
+      </motion.div>
+
+      {/* ── LAYER 3 — foreground: main content ───────── */}
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-20 gap-14">
+
+          {/* LEFT — stat, deepest parallax layer */}
           <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, ease: E }}
-            className="mb-8"
+            className="flex-shrink-0"
+            style={{ x: fgX, y: fgY }}
           >
-            <SectionLabel index="—" label="Our People" inverted />
+            {/* Section label */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, ease: E }}
+              className="flex items-center gap-2 mb-10"
+            >
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em]" style={{ color: "#E97316" }}>07</span>
+              <span className="w-5 h-px" style={{ background: "rgba(233,115,22,0.4)" }} />
+              <span className="font-mono text-[11px] uppercase tracking-[0.28em]" style={{ color: "#7A6B54" }}>Our People</span>
+            </motion.div>
+
+            {/* 70% — 3D billboard entrance + extruded shadow */}
+            <motion.div
+              initial={{ opacity: 0, rotateX: -45, y: 50, scale: 0.85 }}
+              animate={inView ? { opacity: 1, rotateX: 0, y: 0, scale: 1 } : {}}
+              transition={{ delay: 0.15, duration: 1, ease: E }}
+              style={{ perspective: "900px", transformStyle: "preserve-3d" }}
+            >
+              <div
+                style={{
+                  fontFamily:    "'Outfit', sans-serif",
+                  fontWeight:    900,
+                  fontSize:      "clamp(5rem, 13vw, 12rem)",
+                  lineHeight:    0.86,
+                  letterSpacing: "-0.03em",
+                  color:         "#1A4731",
+                  textShadow:    [
+                    "1px 1px 0 rgba(26,71,49,0.15)",
+                    "2px 2px 0 rgba(26,71,49,0.12)",
+                    "3px 3px 0 rgba(26,71,49,0.08)",
+                    "4px 4px 8px rgba(0,0,0,0.08)",
+                  ].join(", "),
+                }}
+              >
+                {COMPANY_FACTS.womenPercent}%
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.35, duration: 0.7, ease: E }}
+            >
+              <div
+                style={{
+                  fontFamily:    "'Outfit', sans-serif",
+                  fontWeight:    900,
+                  fontSize:      "clamp(1.2rem, 3vw, 2.5rem)",
+                  lineHeight:    1,
+                  letterSpacing: "-0.02em",
+                  color:         "#E97316",
+                  marginTop:     "0.3rem",
+                  marginBottom:  "0.4rem",
+                }}
+              >
+                WOMEN-LED
+              </div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#7A6B54" }}>
+                Factory workforce
+              </p>
+            </motion.div>
+
+            <div className="w-14 h-px my-8" style={{ background: "rgba(233,115,22,0.35)" }} />
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.55, duration: 0.6, ease: E }}
+            >
+              <Link
+                href="/manufacturing#people"
+                className="group inline-flex items-center gap-2 px-6 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300"
+                style={{ background: "#E97316", color: "#FFFFFF", borderRadius: "4px", boxShadow: "0 4px 20px rgba(233,115,22,0.35)" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "#C4580A";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 28px rgba(233,115,22,0.5)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "#E97316";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(233,115,22,0.35)";
+                }}
+              >
+                Meet the Team
+                <ArrowUpRight size={12} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+              </Link>
+            </motion.div>
           </motion.div>
 
-          {/* Headline */}
-          <motion.h2
-            id="workforce-heading"
-            initial={{ opacity: 0, y: 28 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.85, ease: E }}
-            className="font-display font-light leading-[0.9] mb-8"
-            style={{ fontSize: "clamp(2.4rem, 4.3vw, 4.4rem)", color: "#F4F8F0" }}
-          >
-            The Hands
-            <br />Behind Every
-            <br /><span style={{ color: "#7AAE6B" }}>Shipment.</span>
-          </motion.h2>
-
-          {/* Body */}
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.22, duration: 0.72, ease: E }}
-            className="font-sans font-light leading-relaxed mb-10"
+          {/* RIGHT — story cards, mid parallax + 3D mouse tilt */}
+          <motion.div
+            className="flex flex-col gap-4 flex-1"
             style={{
-              fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)",
-              color: "rgba(220,238,210,0.78)",
+              x:             midX,
+              y:             midY,
+              rotateY:       cardRY,
+              rotateX:       cardRX,
+              perspective:   "800px",
+              transformStyle:"preserve-3d",
             }}
           >
-            Behind every FSC-certified spoon, fork, knife, and stirrer
-            shipped across 18+ countries is a workforce built on precision,
-            consistency, and craftsmanship.
-            <br /><br />
-            More than {COMPANY_FACTS.womenPercent}% of Biopapro&apos;s production team is made up of
-            skilled women who manufacture, inspect, and prepare export-grade
-            birchwood tableware every day. Their work powers over
-            100&thinsp;million units every month while helping global
-            food-service operators reduce dependence on single-use plastic.
-          </motion.p>
-
-          {/* Story blocks — editorial row */}
-          <div className="flex flex-col sm:flex-row gap-5 mb-12">
-            {STORY_BLOCKS.map((block, i) => (
+            {STORY.map((s, i) => (
               <motion.div
-                key={block.keyword}
-                initial={{ opacity: 0, y: 12 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.35 + i * 0.1, duration: 0.65, ease: E }}
-                className="flex-1 border-t pt-4"
-                style={{ borderColor: "rgba(74,122,61,0.4)" }}
+                key={s.kw}
+                initial={{ opacity: 0, rotateY: 55, x: 60, scale: 0.9 }}
+                animate={inView ? { opacity: 1, rotateY: 0, x: 0, scale: 1 } : {}}
+                transition={{ delay: 0.3 + i * 0.15, duration: 0.75, ease: E }}
+                className="p-6"
+                style={{
+                  background:     "#EDE5D4",
+                  borderLeft:     "2px solid rgba(233,115,22,0.5)",
+                  border:         "1px solid rgba(26,71,49,0.1)",
+                  borderLeftWidth: "2px",
+                  borderLeftColor: "#E97316",
+                  transformStyle: "preserve-3d",
+                }}
               >
-                <p
-                  className="font-mono text-[11px] uppercase tracking-[0.26em] font-bold mb-2"
-                  style={{ color: "#7AAE6B" }}
-                >
-                  {block.keyword}
-                </p>
-                <p
-                  className="font-sans font-light text-sm leading-relaxed"
-                  style={{ color: "rgba(215,232,205,0.72)" }}
-                >
-                  {block.body}
-                </p>
+                <span className="font-sans font-bold text-sm block mb-1.5" style={{ color: "#E97316" }}>
+                  {s.kw}
+                </span>
+                <span className="font-sans text-sm leading-relaxed" style={{ color: "#7A6B54" }}>
+                  {s.body}
+                </span>
               </motion.div>
             ))}
-          </div>
 
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.65, duration: 0.55 }}
-          >
-            <Link
-              href="/manufacturing"
-              className="group inline-flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] px-5 py-2.5 transition-all duration-200"
-              style={{ border: "1px solid rgba(150,210,125,0.45)", color: "rgba(150,210,125,0.9)" }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "rgba(150,210,125,0.1)";
-                el.style.borderColor = "rgba(150,210,125,0.8)";
-                el.style.color = "rgba(150,210,125,1)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "transparent";
-                el.style.borderColor = "rgba(150,210,125,0.45)";
-                el.style.color = "rgba(150,210,125,0.9)";
-              }}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="font-mono text-[10px] uppercase tracking-[0.18em] mt-2"
+              style={{ color: "#7A6B54" }}
             >
-              See Full Manufacturing Operation
-              <ArrowUpRight size={11} strokeWidth={2.5} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-            </Link>
+              Biopapro factory · Mumbai, India · est. 2018
+            </motion.p>
           </motion.div>
 
         </div>
-
-        {/* ── Stats bar — bottom, full width ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.55, duration: 0.75, ease: E }}
-          className="grid grid-cols-2 md:grid-cols-4 border-t pt-7 mt-10"
-          style={{ borderColor: "rgba(255,255,255,0.12)" }}
-        >
-          {STATS.map((s, i) => (
-            <motion.div
-              key={s.value}
-              initial={{ opacity: 0, y: 6 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.62 + i * 0.08, duration: 0.5, ease: E }}
-              className="pr-6 md:border-r last:border-r-0"
-              style={{ borderColor: "rgba(255,255,255,0.1)" }}
-            >
-              <p
-                className="font-display font-light leading-none mb-1.5"
-                style={{ fontSize: "clamp(1.7rem, 2.8vw, 2.4rem)", color: "#FFFFFF" }}
-              >
-                {s.value}
-              </p>
-              <p
-                className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em]"
-                style={{ color: "rgba(160,215,135,0.82)" }}
-              >
-                {s.label}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-
       </div>
-
     </section>
   );
 }

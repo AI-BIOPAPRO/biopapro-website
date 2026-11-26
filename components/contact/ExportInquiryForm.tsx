@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
@@ -71,7 +71,7 @@ function Label({ children, required }: { children: React.ReactNode; required?: b
   return (
     <label className="block font-sans text-[13px] font-semibold text-ink mb-2">
       {children}
-      {required && <span className="ml-1" style={{ color: "#C89A5B" }}>*</span>}
+      {required && <span className="ml-1" style={{ color: "#E97316" }}>*</span>}
     </label>
   );
 }
@@ -90,10 +90,10 @@ function Input({ value, onChange, placeholder, type = "text", required }: {
       className="w-full font-sans text-base text-ink px-4 py-3 outline-none transition-all duration-200"
       style={{
         background: "#FFFFFF",
-        border: "1px solid #DDD3C5",
+        border: "1px solid rgba(26,71,49,0.12)",
       }}
-      onFocus={(e) => (e.currentTarget.style.borderColor = "#C89A5B")}
-      onBlur={(e) => (e.currentTarget.style.borderColor = "#DDD3C5")}
+      onFocus={(e) => (e.currentTarget.style.borderColor = "#E97316")}
+      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(26,71,49,0.12)")}
     />
   );
 }
@@ -110,11 +110,11 @@ function Select({ value, onChange, options, placeholder, required }: {
       className="w-full font-sans text-base px-4 py-3 outline-none transition-all duration-200 appearance-none"
       style={{
         background: "#FFFFFF",
-        border: "1px solid #DDD3C5",
-        color: value ? "#2C241B" : "#9A8A7A",
+        border: "1px solid rgba(26,71,49,0.12)",
+        color: value ? "#1A1208" : "#9A8A7A",
       }}
-      onFocus={(e) => (e.currentTarget.style.borderColor = "#C89A5B")}
-      onBlur={(e) => (e.currentTarget.style.borderColor = "#DDD3C5")}
+      onFocus={(e) => (e.currentTarget.style.borderColor = "#E97316")}
+      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(26,71,49,0.12)")}
     >
       <option value="" disabled>{placeholder}</option>
       {options.map((o) => <option key={o} value={o}>{o}</option>)}
@@ -143,8 +143,8 @@ function Checkbox({ id, label, checked, onChange }: {
         aria-hidden="true"
         className="w-5 h-5 flex items-center justify-center flex-shrink-0 transition-all duration-200"
         style={{
-          background: checked ? "#C89A5B" : "#FFFFFF",
-          border: `1.5px solid ${checked ? "#C89A5B" : "#DDD3C5"}`,
+          background: checked ? "#E97316" : "#FFFFFF",
+          border: `1.5px solid ${checked ? "#E97316" : "rgba(26,71,49,0.12)"}`,
         }}
       >
         {checked && (
@@ -280,7 +280,7 @@ export default function ExportInquiryForm() {
   return (
     <section
       id="inquiry-form"
-      style={{ background: "#FBF8F2" }}
+      style={{ background: "#F5F0E6" }}
       className="paper"
       aria-labelledby="form-heading"
     >
@@ -301,12 +301,12 @@ export default function ExportInquiryForm() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               Start your
               <br />
-              <span style={{ color: "#C89A5B" }}>procurement enquiry.</span>
+              <span style={{ color: "#E97316" }}>procurement enquiry.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -330,8 +330,8 @@ export default function ExportInquiryForm() {
             className="flex flex-col items-center justify-center py-20 px-6 text-center"
             style={{ border: "1px solid rgba(74,122,61,0.3)", background: "rgba(74,122,61,0.04)" }}
           >
-            <CheckCircle size={40} style={{ color: "#4A7A3D", marginBottom: "1.5rem" }} />
-            <h3 className="font-display font-light text-ink mb-4" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>
+            <CheckCircle size={40} style={{ color: "#1A4731", marginBottom: "1.5rem" }} />
+            <h3 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 900, fontSize: "clamp(1.6rem, 3vw, 2.4rem)", lineHeight: 0.92, letterSpacing: "-0.035em", color: "#1A1208" }}>
               Inquiry submitted.
             </h3>
             <p className="font-sans text-[15px] text-ink-light leading-relaxed max-w-lg mb-6">
@@ -355,8 +355,8 @@ export default function ExportInquiryForm() {
             <div className="lg:col-span-7 flex flex-col gap-6">
 
               {/* Contact info */}
-              <div className="p-6 flex flex-col gap-5" style={{ border: "1px solid #DDD3C5" }}>
-                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted pb-3 border-b" style={{ borderColor: "#EDE5D8" }}>
+              <div className="p-6 flex flex-col gap-5" style={{ border: "1px solid rgba(26,71,49,0.12)" }}>
+                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted pb-3 border-b" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                   Contact Information
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -388,8 +388,8 @@ export default function ExportInquiryForm() {
                   even send a question was unnecessary friction; all three
                   already have a "not sure yet" option, so nothing is lost by
                   letting the inquiry through without them. */}
-              <div className="p-6 flex flex-col gap-5" style={{ border: "1px solid #DDD3C5" }}>
-                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted pb-3 border-b" style={{ borderColor: "#EDE5D8" }}>
+              <div className="p-6 flex flex-col gap-5" style={{ border: "1px solid rgba(26,71,49,0.12)" }}>
+                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted pb-3 border-b" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                   Procurement Details <span className="normal-case font-normal" style={{ color: "#9A8A7A" }}>(optional)</span>
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -409,7 +409,7 @@ export default function ExportInquiryForm() {
               </div>
 
               {/* Message */}
-              <div className="p-6" style={{ border: "1px solid #DDD3C5" }}>
+              <div className="p-6" style={{ border: "1px solid rgba(26,71,49,0.12)" }}>
                 <Label>Additional Requirements</Label>
                 <textarea
                   value={form.message}
@@ -417,9 +417,9 @@ export default function ExportInquiryForm() {
                   placeholder="Describe your specific requirements — product variants, packaging preferences, certifications needed, tender deadlines, or any other relevant detail..."
                   rows={5}
                   className="w-full font-sans text-base text-ink px-4 py-3 outline-none resize-none transition-all duration-200"
-                  style={{ background: "#FFFFFF", border: "1px solid #DDD3C5" }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = "#C89A5B")}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = "#DDD3C5")}
+                  style={{ background: "#FFFFFF", border: "1px solid rgba(26,71,49,0.12)" }}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = "#E97316")}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(26,71,49,0.12)")}
                 />
               </div>
             </div>
@@ -428,10 +428,10 @@ export default function ExportInquiryForm() {
             <div className="lg:col-span-5 flex flex-col gap-6">
 
               {/* Product interest */}
-              <div className="p-6" style={{ border: "1px solid #DDD3C5" }}>
-                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted pb-3 border-b mb-5" style={{ borderColor: "#EDE5D8" }}>
+              <div className="p-6" style={{ border: "1px solid rgba(26,71,49,0.12)" }}>
+                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted pb-3 border-b mb-5" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                   Product Interest
-                  <span className="ml-1 font-normal normal-case tracking-normal" style={{ color: "#C89A5B" }}>*</span>
+                  <span className="ml-1 font-normal normal-case tracking-normal" style={{ color: "#E97316" }}>*</span>
                 </p>
                 <div className="flex flex-col gap-3">
                   {PRODUCT_OPTIONS.map((p) => (
@@ -445,8 +445,8 @@ export default function ExportInquiryForm() {
               </div>
 
               {/* Procurement options */}
-              <div className="p-6" style={{ border: "1px solid #DDD3C5" }}>
-                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted pb-3 border-b mb-5" style={{ borderColor: "#EDE5D8" }}>
+              <div className="p-6" style={{ border: "1px solid rgba(26,71,49,0.12)" }}>
+                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted pb-3 border-b mb-5" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                   Procurement Options
                 </p>
                 <div className="flex flex-col gap-3">
@@ -461,7 +461,7 @@ export default function ExportInquiryForm() {
               </div>
 
               {/* Submit */}
-              <div className="p-6 flex flex-col gap-4" style={{ border: "1px solid #DDD3C5", background: "#F6F1E8" }}>
+              <div className="p-6 flex flex-col gap-4" style={{ border: "1px solid rgba(26,71,49,0.12)", background: "#EDE5D4" }}>
                 <p className="font-sans text-[13px] text-ink-muted leading-relaxed">
                   Your inquiry will be sent directly to Biopapro's team.
                   Response guaranteed within <strong className="text-ink font-semibold">24–48 business hours.</strong>
@@ -480,9 +480,9 @@ export default function ExportInquiryForm() {
                   type="submit"
                   disabled={sending}
                   className="w-full inline-flex items-center justify-center gap-2.5 px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-white transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
-                  style={{ background: "#4A7A3D" }}
-                  onMouseEnter={(e) => !sending && ((e.currentTarget as HTMLElement).style.background = "#2D5228")}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#4A7A3D")}
+                  style={{ background: "#1A4731" }}
+                  onMouseEnter={(e) => !sending && ((e.currentTarget as HTMLElement).style.background = "#145229")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#1A4731")}
                 >
                   {sending ? "Submitting…" : "Submit Export Inquiry"}
                   {!sending && <ArrowUpRight size={14} strokeWidth={2.5} />}

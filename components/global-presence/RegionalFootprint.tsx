@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -14,7 +14,7 @@ export default function RegionalFootprint() {
   return (
     <section
       id="footprint"
-      style={{ background: "#F6F1E8" }}
+      style={{ background: "#EDE5D4" }}
       className="paper"
       aria-labelledby="footprint-heading"
     >
@@ -37,12 +37,12 @@ export default function RegionalFootprint() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               Six regions.
               <br />
-              <span style={{ color: "#C89A5B" }}>17 confirmed markets.</span>
+              <span style={{ color: "#E97316" }}>17 confirmed markets.</span>
             </motion.h2>
 
             <motion.p
@@ -85,7 +85,7 @@ export default function RegionalFootprint() {
                   <div className="text-right">
                     <p
                       className="font-mono font-bold text-[1.3rem] leading-none"
-                      style={{ color: "#C89A5B" }}
+                      style={{ color: "#E97316" }}
                     >
                       {data.markets}
                     </p>
@@ -102,7 +102,7 @@ export default function RegionalFootprint() {
                     style={{
                       background: "rgba(200,154,91,0.1)",
                       border: "1px solid rgba(200,154,91,0.28)",
-                      color: "#8C6239",
+                      color: "#7A6B54",
                     }}
                   >
                     {data.growth}
@@ -115,7 +115,7 @@ export default function RegionalFootprint() {
                     <span
                       key={m.name}
                       className="font-sans text-[12px] px-2.5 py-1"
-                      style={{ background: "#F6F1E8", border: "1px solid #DDD3C5", color: "#6B5D50" }}
+                      style={{ background: "#EDE5D4", border: "1px solid rgba(26,71,49,0.12)", color: "#7A6B54" }}
                     >
                       {m.name}
                     </span>

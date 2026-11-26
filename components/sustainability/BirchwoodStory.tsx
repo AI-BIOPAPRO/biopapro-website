@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -7,25 +7,20 @@ import { BIRCHWOOD_FACTS } from "@/lib/sustainability-data";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+const CREAM  = "#F5F0E6";
+const CREAM2 = "#EDE5D4";
+const GREEN  = "#1A4731";
+const ORANGE = "#E97316";
+const INK    = "#1A1208";
+const MUTED  = "#7A6B54";
+
 export default function BirchwoodStory() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section className="relative overflow-hidden grain" style={{ background: "#1D1610" }} aria-labelledby="birchwood-heading">
-      {/* Sustainability video — subtle background texture */}
-      <div className="absolute inset-0 z-0">
-        <video
-          autoPlay muted loop playsInline
-          className="w-full h-full object-cover"
-          style={{ opacity: 0.45 }}
-        >
-          <source src="/videos/Sustainability page.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0" style={{ background: "rgba(29,22,16,0.55)" }} />
-      </div>
-
-      <div ref={ref} className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
+    <section style={{ background: CREAM2 }} aria-labelledby="birchwood-heading">
+      <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-14">
           <motion.div
@@ -42,19 +37,24 @@ export default function BirchwoodStory() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)", color: "#F6F1E8" }}
+              style={{
+                fontFamily:    "'Outfit', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(2rem, 3.5vw, 3.2rem)",
+                lineHeight:    0.92,
+                letterSpacing: "-0.035em",
+                color:         INK,
+              }}
             >
-              Why birchwood
-              <br />
-              <span style={{ color: "#7DB870" }}>beats plastic.</span>
+              WHY BIRCHWOOD<br />
+              <span style={{ color: GREEN }}>BEATS PLASTIC.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.68, ease: EASE, delay: 0.16 }}
-              className="font-sans font-light leading-relaxed flex items-center"
-              style={{ fontSize: "clamp(1rem, 1.1vw, 1.05rem)", color: "rgba(230,210,185,0.70)" }}
+              className="font-sans leading-relaxed flex items-center"
+              style={{ fontSize: "clamp(1rem, 1.1vw, 1.05rem)", color: MUTED }}
             >
               Birchwood is not chosen for aesthetics alone. It is renewable, biodegradable,
               certifiably sourced, and verified compostable — properties that single-use
@@ -71,8 +71,11 @@ export default function BirchwoodStory() {
           className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12"
         >
           {/* Plastic column */}
-          <div className="p-7" style={{ border: "1px solid #3D2E22", background: "rgba(255,255,255,0.01)" }}>
-            <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.14em] mb-5" style={{ color: "rgba(200,80,80,0.7)" }}>
+          <div
+            className="p-7"
+            style={{ border: "1px solid rgba(200,80,80,0.15)", background: "rgba(200,80,80,0.03)", borderRadius: "16px" }}
+          >
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] mb-5" style={{ color: "rgba(180,60,60,0.7)" }}>
               Single-Use Plastic Cutlery
             </p>
             {[
@@ -84,15 +87,18 @@ export default function BirchwoodStory() {
               "Increasingly banned across EU, India, and other markets",
             ].map((point) => (
               <div key={point} className="flex items-start gap-3 mb-3">
-                <span className="flex-shrink-0 mt-1 text-[13px]" style={{ color: "rgba(200,80,80,0.7)" }}>✗</span>
-                <span className="font-sans text-[14px] leading-snug" style={{ color: "rgba(230,210,185,0.55)" }}>{point}</span>
+                <span className="flex-shrink-0 mt-0.5 font-bold" style={{ color: "rgba(180,60,60,0.7)", fontSize: "13px" }}>✗</span>
+                <span className="font-sans text-[14px] leading-snug" style={{ color: MUTED }}>{point}</span>
               </div>
             ))}
           </div>
 
           {/* Birchwood column */}
-          <div className="p-7" style={{ border: "1px solid rgba(74,122,61,0.35)", background: "rgba(74,122,61,0.04)" }}>
-            <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.14em] mb-5" style={{ color: "#7DB870" }}>
+          <div
+            className="p-7"
+            style={{ border: "1px solid rgba(26,71,49,0.2)", background: "rgba(26,71,49,0.04)", borderRadius: "16px" }}
+          >
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] mb-5" style={{ color: GREEN }}>
               Biopapro Birchwood Cutlery
             </p>
             {[
@@ -104,8 +110,8 @@ export default function BirchwoodStory() {
               "BRCGS Global Standard for Consumer Products certified",
             ].map((point) => (
               <div key={point} className="flex items-start gap-3 mb-3">
-                <span className="flex-shrink-0 mt-1 text-[13px]" style={{ color: "#7DB870" }}>✓</span>
-                <span className="font-sans text-[14px] leading-snug" style={{ color: "rgba(230,210,185,0.75)" }}>{point}</span>
+                <span className="flex-shrink-0 mt-0.5 font-bold" style={{ color: GREEN, fontSize: "13px" }}>✓</span>
+                <span className="font-sans text-[14px] leading-snug" style={{ color: INK }}>{point}</span>
               </div>
             ))}
           </div>
@@ -120,12 +126,20 @@ export default function BirchwoodStory() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, ease: EASE, delay: 0.28 + i * 0.07 }}
               className="p-5"
-              style={{ border: "1px solid #3D2E22", background: "rgba(255,255,255,0.02)" }}
+              style={{ border: "1px solid rgba(26,71,49,0.1)", background: CREAM, borderRadius: "14px" }}
             >
-              <h3 className="font-sans font-semibold mb-3" style={{ fontSize: "15px", color: "#F6F1E8" }}>
+              <h3
+                style={{
+                  fontFamily: "'Outfit', sans-serif",
+                  fontWeight: 700,
+                  fontSize:   "15px",
+                  color:      INK,
+                  marginBottom: "10px",
+                }}
+              >
                 {fact.title}
               </h3>
-              <p className="font-sans text-[14px] leading-relaxed" style={{ color: "rgba(230,210,185,0.65)" }}>
+              <p className="font-sans text-[14px] leading-relaxed" style={{ color: MUTED }}>
                 {fact.body}
               </p>
             </motion.div>

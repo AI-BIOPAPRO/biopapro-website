@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
@@ -14,7 +14,7 @@ export default function ContactFAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section style={{ background: "#EFE6D7" }} aria-labelledby="faq-heading">
+    <section style={{ background: "#EDE5D4" }} aria-labelledby="faq-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-12">
@@ -32,12 +32,12 @@ export default function ContactFAQ() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               Common questions
               <br />
-              <span style={{ color: "#C89A5B" }}>from buyers.</span>
+              <span style={{ color: "#E97316" }}>from buyers.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -59,7 +59,7 @@ export default function ContactFAQ() {
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, ease: EASE, delay: 0.1 + i * 0.05 }}
-              style={{ border: "1px solid #DDD3C5", background: "#FBF8F2" }}
+              style={{ border: "1px solid rgba(26,71,49,0.12)", background: "#F5F0E6" }}
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
@@ -83,7 +83,7 @@ export default function ContactFAQ() {
               >
                 <p
                   className="px-6 pb-5 font-sans text-[14px] leading-relaxed text-ink-light border-t"
-                  style={{ borderColor: "#EDE5D8", paddingTop: "1rem" }}
+                  style={{ borderColor: "rgba(26,71,49,0.1)", paddingTop: "1rem" }}
                 >
                   {faq.a}
                 </p>

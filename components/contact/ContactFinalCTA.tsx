@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -11,7 +11,7 @@ export default function ContactFinalCTA() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#2D5228" }} aria-labelledby="final-cta-heading">
+    <section style={{ background: "#F5F0E6" }} aria-labelledby="final-cta-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-24">
         <div className="max-w-[860px]">
           <motion.p
@@ -19,7 +19,7 @@ export default function ContactFinalCTA() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, ease: EASE }}
             className="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] mb-6"
-            style={{ color: "rgba(200,230,190,0.55)" }}
+            style={{ color: "#7A6B54" }}
           >
             08 · Start Sourcing
           </motion.p>
@@ -29,8 +29,8 @@ export default function ContactFinalCTA() {
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
-            className="font-display font-light leading-[0.92] mb-6"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4.6rem)", color: "#F6F1E8" }}
+                        style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2.4rem, 5vw, 4.6rem)", color: "#1A1208" }}
           >
             Your next order
             <br />
@@ -42,7 +42,7 @@ export default function ContactFinalCTA() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.68, ease: EASE, delay: 0.18 }}
             className="font-sans font-light leading-relaxed max-w-[560px] mb-12"
-            style={{ fontSize: "clamp(1rem, 1.3vw, 1.1rem)", color: "rgba(200,230,190,0.75)" }}
+            style={{ fontSize: "clamp(1rem, 1.3vw, 1.1rem)", color: "#7A6B54" }}
           >
             Speak directly with our procurement team and receive
             procurement-ready information — catalogue, specifications,
@@ -59,16 +59,14 @@ export default function ContactFinalCTA() {
             <a
               href="#inquiry-form"
               className="group inline-flex items-center gap-2.5 px-8 py-4 text-[12px] font-bold uppercase tracking-[0.14em] transition-all duration-300"
-              style={{ background: "#F6F1E8", color: "#2D5228" }}
+              style={{ background: "#1A4731", color: "#F5F0E6" }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.background = "#FBF8F2";
-                el.style.boxShadow = "0 4px 24px rgba(0,0,0,0.18)";
+                el.style.background = "#E97316";
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.background = "#F6F1E8";
-                el.style.boxShadow = "none";
+                el.style.background = "#1A4731";
               }}
             >
               Source for India
@@ -77,16 +75,16 @@ export default function ContactFinalCTA() {
             <a
               href="#inquiry-form"
               className="group inline-flex items-center gap-2.5 px-8 py-4 text-[12px] font-bold uppercase tracking-[0.14em] transition-all duration-300"
-              style={{ border: "1px solid rgba(200,230,190,0.3)", color: "rgba(200,230,190,0.85)" }}
+              style={{ border: "1px solid rgba(26,71,49,0.2)", color: "#7A6B54" }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "rgba(200,230,190,0.6)";
-                el.style.color = "rgba(200,230,190,1)";
+                el.style.borderColor = "#1A4731";
+                el.style.color = "#1A1208";
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "rgba(200,230,190,0.3)";
-                el.style.color = "rgba(200,230,190,0.85)";
+                el.style.borderColor = "rgba(26,71,49,0.2)";
+                el.style.color = "#7A6B54";
               }}
             >
               Source for Your Market
@@ -95,9 +93,9 @@ export default function ContactFinalCTA() {
             <a
               href="mailto:export@biopapro.com"
               className="inline-flex items-center gap-2.5 px-4 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] transition-all duration-300"
-              style={{ color: "rgba(200,230,190,0.65)" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,1)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(200,230,190,0.65)"; }}
+              style={{ color: "#7A6B54" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#1A1208"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#7A6B54"; }}
             >
               <Mail size={14} strokeWidth={2} />
               Email Us
@@ -110,22 +108,22 @@ export default function ContactFinalCTA() {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="border-t pt-8 grid grid-cols-1 sm:grid-cols-2 gap-6"
-            style={{ borderColor: "rgba(200,230,190,0.15)" }}
+            style={{ borderColor: "rgba(26,71,49,0.1)" }}
           >
             {[
               { region: "India — Sourcing Enquiries", email: "export@biopapro.com", phone: "+91 70211 03763", note: "Mon–Sat · IST" },
             ].map((o) => (
               <div key={o.region}>
-                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.1em] mb-2" style={{ color: "rgba(200,230,190,0.45)" }}>
+                <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.1em] mb-2" style={{ color: "#7A6B54" }}>
                   {o.region}
                 </p>
-                <a href={`mailto:${o.email}`} className="block font-sans text-[14px] mb-1 hover:opacity-80 transition-opacity" style={{ color: "rgba(200,230,190,0.80)" }}>
+                <a href={`mailto:${o.email}`} className="block font-sans text-[14px] mb-1 hover:opacity-80 transition-opacity" style={{ color: "#1A4731" }}>
                   {o.email}
                 </a>
-                <a href={`tel:${o.phone.replace(/\s/g, "")}`} className="block font-sans text-[14px] hover:opacity-80 transition-opacity" style={{ color: "rgba(200,230,190,0.80)" }}>
+                <a href={`tel:${o.phone.replace(/\s/g, "")}`} className="block font-sans text-[14px] hover:opacity-80 transition-opacity" style={{ color: "#1A4731" }}>
                   {o.phone}
                 </a>
-                <p className="font-sans text-[12px] mt-1" style={{ color: "rgba(200,230,190,0.35)" }}>{o.note}</p>
+                <p className="font-sans text-[12px] mt-1" style={{ color: "#7A6B54" }}>{o.note}</p>
               </div>
             ))}
           </motion.div>

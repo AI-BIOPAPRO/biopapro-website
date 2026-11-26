@@ -1,4 +1,4 @@
-/**
+﻿/**
  * RouteLoading — minimal, on-brand loading boundary for route-level
  * Suspense fallbacks (each route's loading.tsx).
  *
@@ -13,7 +13,7 @@ export default function RouteLoading({ section }: { section: string }) {
   return (
     <div
       className="flex items-center justify-center"
-      style={{ background: "#F6F1E8", minHeight: "100svh" }}
+      style={{ background: "#EDE5D4", minHeight: "100svh" }}
       role="status"
       aria-label={`Loading ${section}`}
     >

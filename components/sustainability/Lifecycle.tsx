@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -12,7 +12,7 @@ export default function Lifecycle() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section style={{ background: "#EFE6D7" }} aria-labelledby="lifecycle-heading">
+    <section style={{ background: "#EDE5D4" }} aria-labelledby="lifecycle-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-14">
@@ -29,12 +29,12 @@ export default function Lifecycle() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-            className="font-display font-light text-ink leading-[0.95] max-w-2xl"
-            style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                        style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
           >
             From certified forest
             <br />
-            <span style={{ color: "#4A7A3D" }}>back to the earth.</span>
+            <span style={{ color: "#1A4731" }}>back to the earth.</span>
           </motion.h2>
         </div>
 
@@ -46,7 +46,7 @@ export default function Lifecycle() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease: EASE, delay: 0.1 + i * 0.1 }}
               className="relative p-6"
-              style={{ background: "#FBF8F2", border: "1px solid #DDD3C5" }}
+              style={{ background: "#F5F0E6", border: "1px solid rgba(26,71,49,0.12)" }}
             >
               {/* Large step number */}
               <span
@@ -59,7 +59,7 @@ export default function Lifecycle() {
               {/* Tag */}
               <span
                 className="inline-block font-sans text-[11px] font-semibold uppercase tracking-[0.1em] px-2.5 py-1 mb-3"
-                style={{ background: "rgba(74,122,61,0.1)", border: "1px solid rgba(74,122,61,0.25)", color: "#4A7A3D" }}
+                style={{ background: "rgba(74,122,61,0.1)", border: "1px solid rgba(74,122,61,0.25)", color: "#1A4731" }}
               >
                 {stage.tag}
               </span>
@@ -75,7 +75,7 @@ export default function Lifecycle() {
               {i < LIFECYCLE_STAGES.length - 1 && (
                 <div className="hidden lg:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-8 items-center justify-center" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M4 10h12M12 6l4 4-4 4" stroke="#4A7A3D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.45" />
+                    <path d="M4 10h12M12 6l4 4-4 4" stroke="#1A4731" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.45" />
                   </svg>
                 </div>
               )}

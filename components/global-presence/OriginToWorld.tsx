@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
@@ -90,7 +90,7 @@ export default function OriginToWorld() {
   return (
     <section
       id="origin"
-      style={{ background: "#EFE6D7" }}
+      style={{ background: "#EDE5D4" }}
       aria-labelledby="origin-heading"
     >
       {/* Scoped prefetch — this section is the consumer of the world topology on this page */}
@@ -114,12 +114,12 @@ export default function OriginToWorld() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.8vw, 3.4rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.8vw, 3.4rem)" }}
             >
               Every shipment
               <br />
-              <span style={{ color: "#C89A5B" }}>starts here.</span>
+              <span style={{ color: "#E97316" }}>starts here.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -145,16 +145,16 @@ export default function OriginToWorld() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.65, ease: EASE, delay: 0.22 }}
           >
-            <div className="p-5 flex flex-col" style={{ background: "#FBF8F2", border: "1px solid #DDD3C5" }}>
-              <div className="mb-5 pb-4 border-b" style={{ borderColor: "#EDE5D8" }}>
+            <div className="p-5 flex flex-col" style={{ background: "#F5F0E6", border: "1px solid rgba(26,71,49,0.12)" }}>
+              <div className="mb-5 pb-4 border-b" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                 <p className="font-sans text-[11px] font-semibold text-ink-muted mb-2">
                   Manufacturing Origin
                 </p>
-                <p className="font-display font-light text-ink" style={{ fontSize: "1.15rem", lineHeight: 1.2 }}>
+                <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 900, fontSize: "1.15rem", lineHeight: 1.2, letterSpacing: "-0.025em", color: "#1A1208" }}>
                   Mumbai,<br />India
                 </p>
                 <div className="flex items-center gap-1.5 mt-2">
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#C89A5B" }} />
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#E97316" }} />
                   <span className="font-sans text-[11px] text-ink-muted">
                     Est. {COMPANY_FACTS.founded}
                   </span>
@@ -168,7 +168,7 @@ export default function OriginToWorld() {
                   { v: "380+",  l: "Employees" },
                 ].map((m) => (
                   <div key={m.l} className="flex items-baseline gap-2">
-                    <span className="font-mono font-bold text-[1rem] leading-none" style={{ color: "#C89A5B" }}>
+                    <span className="font-mono font-bold text-[1rem] leading-none" style={{ color: "#E97316" }}>
                       {m.v}
                     </span>
                     <span className="font-sans text-[12px] text-ink-muted">{m.l}</span>
@@ -176,7 +176,7 @@ export default function OriginToWorld() {
                 ))}
               </div>
 
-              <div className="border-t pt-4" style={{ borderColor: "#EDE5D8" }}>
+              <div className="border-t pt-4" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                 <p className="font-sans text-[11px] font-semibold text-ink-muted mb-3">Supply Chain</p>
                 <div className="flex flex-col gap-0">
                   {CHAIN_STEPS.map((step, i) => (
@@ -185,8 +185,8 @@ export default function OriginToWorld() {
                         <div
                           className="w-2 h-2 rounded-full flex-shrink-0"
                           style={{
-                            background: i === 0 ? "#C89A5B" : i === CHAIN_STEPS.length - 1 ? "#4A7A3D" : "#DDD3C5",
-                            border: "1.5px solid #DDD3C5",
+                            background: i === 0 ? "#E97316" : i === CHAIN_STEPS.length - 1 ? "#1A4731" : "rgba(26,71,49,0.12)",
+                            border: "1.5px solid rgba(26,71,49,0.12)",
                           }}
                         />
                         <div>
@@ -195,17 +195,17 @@ export default function OriginToWorld() {
                         </div>
                       </div>
                       {i < CHAIN_STEPS.length - 1 && (
-                        <div className="ml-[3.5px] w-px h-3" style={{ background: "#DDD3C5" }} />
+                        <div className="ml-[3.5px] w-px h-3" style={{ background: "rgba(26,71,49,0.12)" }} />
                       )}
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-4 pt-4 border-t" style={{ borderColor: "#EDE5D8" }}>
+              <div className="mt-4 pt-4 border-t" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                 <span
                   className="font-sans text-[12px] font-semibold px-2.5 py-1.5"
-                  style={{ border: "1px solid rgba(74,122,61,0.3)", color: "#4A7A3D", background: "rgba(74,122,61,0.06)" }}
+                  style={{ border: "1px solid rgba(74,122,61,0.3)", color: "#1A4731", background: "rgba(74,122,61,0.06)" }}
                 >
                   FSC® 100% Certified
                 </span>
@@ -226,9 +226,9 @@ export default function OriginToWorld() {
                 onClick={() => setActiveRegion(null)}
                 className="font-sans text-[12px] uppercase tracking-[0.1em] px-3 py-2 transition-all duration-200"
                 style={{
-                  background: !activeRegion ? "#C89A5B" : "transparent",
-                  color: !activeRegion ? "#1D1610" : "#6B5D50",
-                  border: `1px solid ${!activeRegion ? "#C89A5B" : "#DDD3C5"}`,
+                  background: !activeRegion ? "#E97316" : "transparent",
+                  color: !activeRegion ? "#1A1208" : "#7A6B54",
+                  border: `1px solid ${!activeRegion ? "#E97316" : "rgba(26,71,49,0.12)"}`,
                 }}
               >
                 All ({MARKETS.length})
@@ -239,9 +239,9 @@ export default function OriginToWorld() {
                   onClick={() => setActiveRegion(activeRegion === r ? null : r)}
                   className="font-sans text-[12px] uppercase tracking-[0.1em] px-3 py-2 transition-all duration-200"
                   style={{
-                    background: activeRegion === r ? "#C89A5B" : "transparent",
-                    color: activeRegion === r ? "#1D1610" : "#6B5D50",
-                    border: `1px solid ${activeRegion === r ? "#C89A5B" : "#DDD3C5"}`,
+                    background: activeRegion === r ? "#E97316" : "transparent",
+                    color: activeRegion === r ? "#1A1208" : "#7A6B54",
+                    border: `1px solid ${activeRegion === r ? "#E97316" : "rgba(26,71,49,0.12)"}`,
                   }}
                 >
                   {r} ({REGION_DATA[r].markets})
@@ -252,7 +252,7 @@ export default function OriginToWorld() {
             {/* Map */}
             <div
               className="relative border overflow-hidden"
-              style={{ background: "#F5EFE4", borderColor: "#DDD3C5" }}
+              style={{ background: "#F5EFE4", borderColor: "rgba(26,71,49,0.12)" }}
             >
               <ComposableMap
                 projection="geoEquirectangular"
@@ -350,14 +350,14 @@ export default function OriginToWorld() {
                       )}
                       <circle
                         cx={r.dx} cy={r.dy} r={3}
-                        fill={isHovered ? "#C89A5B" : "rgba(250,245,236,0.9)"}
-                        stroke="#C89A5B" strokeWidth={1}
+                        fill={isHovered ? "#E97316" : "rgba(250,245,236,0.9)"}
+                        stroke="#E97316" strokeWidth={1}
                       />
                       {isHovered && (
                         <text
                           x={r.dx} y={r.dy - 8}
                           textAnchor="middle"
-                          style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 7, fill: "#1D1610", fontWeight: 600 }}
+                          style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 7, fill: "#1A1208", fontWeight: 600 }}
                         >
                           {r.name}
                         </text>
@@ -378,8 +378,8 @@ export default function OriginToWorld() {
                     transition={{ delay: 0.5 + i * 0.4, duration: 2.5, repeat: Infinity, repeatDelay: 1.5 }}
                   />
                 ))}
-                <circle cx={INDIA_X} cy={INDIA_Y} r={5}   fill="#C89A5B" />
-                <circle cx={INDIA_X} cy={INDIA_Y} r={2.5} fill="#8C6239" />
+                <circle cx={INDIA_X} cy={INDIA_Y} r={5}   fill="#E97316" />
+                <circle cx={INDIA_X} cy={INDIA_Y} r={2.5} fill="#7A6B54" />
 
                 {/* India label */}
                 <rect
@@ -389,13 +389,13 @@ export default function OriginToWorld() {
                 />
                 <text
                   x={INDIA_X + 11} y={INDIA_Y - 2}
-                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 5.5, fill: "#C89A5B", fontWeight: 700 }}
+                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 5.5, fill: "#E97316", fontWeight: 700 }}
                 >
                   BIOPAPRO
                 </text>
                 <text
                   x={INDIA_X + 11} y={INDIA_Y + 5}
-                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 3.8, fill: "rgba(246,241,232,0.75)" }}
+                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 3.8, fill: "#7A6B54" }}
                 >
                   MFG HUB · MUMBAI
                 </text>
@@ -407,14 +407,14 @@ export default function OriginToWorld() {
                 style={{ background: "rgba(250,245,236,0.92)", border: "1px solid rgba(221,211,197,0.8)" }}
               >
                 <div className="flex items-center gap-1.5">
-                  <div className="w-3 h-3 rounded-full" style={{ background: "#C89A5B" }} />
-                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]" style={{ color: "#6B5D50" }}>
+                  <div className="w-3 h-3 rounded-full" style={{ background: "#E97316" }} />
+                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]" style={{ color: "#7A6B54" }}>
                     Manufacturing Hub
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <div className="w-3 h-3 rounded-full border" style={{ background: "rgba(250,245,236,0.9)", borderColor: "#C89A5B" }} />
-                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]" style={{ color: "#6B5D50" }}>
+                  <div className="w-3 h-3 rounded-full border" style={{ background: "rgba(250,245,236,0.9)", borderColor: "#E97316" }} />
+                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]" style={{ color: "#7A6B54" }}>
                     Export Market
                   </span>
                 </div>
@@ -422,7 +422,7 @@ export default function OriginToWorld() {
                   <svg width="20" height="6">
                     <line x1="0" y1="3" x2="20" y2="3" stroke="rgba(200,154,91,0.65)" strokeWidth="1.5" strokeDasharray="4 2" />
                   </svg>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]" style={{ color: "#6B5D50" }}>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]" style={{ color: "#7A6B54" }}>
                     Shipping Route
                   </span>
                 </div>
@@ -443,8 +443,8 @@ export default function OriginToWorld() {
                   transition={{ delay: 0.75 + i * 0.025 }}
                   className="font-sans text-[12px] px-2.5 py-1.5 cursor-default"
                   style={{
-                    border: `1px solid ${hoveredMarket === m.name ? "#C89A5B" : "#DDD3C5"}`,
-                    color: hoveredMarket === m.name ? "#8C6239" : "#6B5D50",
+                    border: `1px solid ${hoveredMarket === m.name ? "#E97316" : "rgba(26,71,49,0.12)"}`,
+                    color: hoveredMarket === m.name ? "#7A6B54" : "#7A6B54",
                     background: hoveredMarket === m.name ? "rgba(200,154,91,0.1)" : "rgba(255,255,255,0.5)",
                     transition: "all 0.15s",
                   }}
@@ -464,11 +464,11 @@ export default function OriginToWorld() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.65, ease: EASE, delay: 0.38 }}
           >
-            <div className="p-5 flex flex-col" style={{ background: "#FBF8F2", border: "1px solid #DDD3C5" }}>
-              <div className="mb-4 pb-4 border-b" style={{ borderColor: "#EDE5D8" }}>
+            <div className="p-5 flex flex-col" style={{ background: "#F5F0E6", border: "1px solid rgba(26,71,49,0.12)" }}>
+              <div className="mb-4 pb-4 border-b" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                 <p className="font-sans text-[11px] font-semibold text-ink-muted mb-1.5">Export Destinations</p>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-mono font-bold text-[1.5rem] leading-none" style={{ color: "#C89A5B" }}>
+                  <span className="font-mono font-bold text-[1.5rem] leading-none" style={{ color: "#E97316" }}>
                     {COMPANY_FACTS.exportMarkets}+
                   </span>
                   <span className="font-sans text-[12px] text-ink-muted">Active markets</span>
@@ -492,11 +492,11 @@ export default function OriginToWorld() {
                         <div className="flex items-center gap-1.5">
                           <span
                             className="font-sans text-[11px] px-1.5 py-0.5"
-                            style={{ background: "rgba(74,122,61,0.08)", border: "1px solid rgba(74,122,61,0.18)", color: "#4A7A3D" }}
+                            style={{ background: "rgba(74,122,61,0.08)", border: "1px solid rgba(74,122,61,0.18)", color: "#1A4731" }}
                           >
                             {data.growth}
                           </span>
-                          <span className="font-mono font-bold text-[12px]" style={{ color: "#C89A5B" }}>
+                          <span className="font-mono font-bold text-[12px]" style={{ color: "#E97316" }}>
                             {data.markets}
                           </span>
                         </div>
@@ -509,7 +509,7 @@ export default function OriginToWorld() {
                 })}
               </div>
 
-              <div className="mt-4 pt-4 border-t" style={{ borderColor: "#EDE5D8" }}>
+              <div className="mt-4 pt-4 border-t" style={{ borderColor: "rgba(26,71,49,0.1)" }}>
                 <p className="font-sans text-[12px] text-ink-muted">Actively expanding</p>
                 <p className="font-sans text-[11px] text-ink-muted mt-0.5">New markets added quarterly</p>
               </div>

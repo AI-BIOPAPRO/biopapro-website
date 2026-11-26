@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -12,7 +12,7 @@ export default function ProductionJourney() {
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   return (
-    <section id="production" style={{ background: "#EFE6D7" }} aria-labelledby="journey-heading">
+    <section id="production" style={{ background: "#EDE5D4" }} aria-labelledby="journey-heading">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20">
 
         <div className="mb-14">
@@ -30,12 +30,12 @@ export default function ProductionJourney() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               From certified supply
               <br />
-              <span style={{ color: "#C89A5B" }}>to your warehouse.</span>
+              <span style={{ color: "#E97316" }}>to your warehouse.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -60,7 +60,7 @@ export default function ProductionJourney() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease: EASE, delay: 0.1 + i * 0.08 }}
               className="relative p-6"
-              style={{ background: "#FBF8F2", border: "1px solid #DDD3C5" }}
+              style={{ background: "#F5F0E6", border: "1px solid rgba(26,71,49,0.12)" }}
             >
               {/* Step number */}
               <div className="flex items-start justify-between mb-5">
@@ -75,7 +75,7 @@ export default function ProductionJourney() {
                   style={{
                     background: step.accent === "#4A7A3D" ? "rgba(74,122,61,0.1)" : "rgba(200,154,91,0.1)",
                     border: `1px solid ${step.accent}33`,
-                    color: step.accent === "#4A7A3D" ? "#4A7A3D" : "#8C6239",
+                    color: step.accent === "#4A7A3D" ? "#4A7A3D" : "#7A6B54",
                   }}
                 >
                   {step.tag}
@@ -99,7 +99,7 @@ export default function ProductionJourney() {
                   aria-hidden="true"
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M8 12h8M13 8l4 4-4 4" stroke="#C89A5B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5" />
+                    <path d="M8 12h8M13 8l4 4-4 4" stroke="#E97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5" />
                   </svg>
                 </div>
               )}

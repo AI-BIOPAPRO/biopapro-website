@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -10,7 +10,7 @@ import { CERT_LOGOS } from "@/components/certifications/CertLogos";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const STATUS_STYLE = {
-  ACTIVE:    { bg: "rgba(74,122,61,0.15)",  border: "rgba(74,122,61,0.4)",  color: "#4A7A3D"  },
+  ACTIVE:    { bg: "rgba(74,122,61,0.15)",  border: "rgba(74,122,61,0.4)",  color: "#1A4731"  },
   CERTIFIED: { bg: "rgba(46,125,50,0.15)",  border: "rgba(46,125,50,0.4)",  color: "#2E7D32"  },
   COMPLIANT: { bg: "rgba(26,58,107,0.12)",  border: "rgba(26,58,107,0.4)",  color: "#1A3A6B"  },
 } as const;
@@ -32,7 +32,7 @@ function CertCard({ cert, index, inView }: {
       className="flex flex-col"
       style={{
         background: "#FAFAF8",
-        border: "1px solid #DDD3C5",
+        border: "1px solid rgba(26,71,49,0.12)",
         borderTop: `3px solid ${cert.tagColor}`,
       }}
     >
@@ -44,8 +44,8 @@ function CertCard({ cert, index, inView }: {
           style={{
             width: 64,
             height: 64,
-            background: "#FFFFFF",
-            border: "1.5px solid #DDD3C5",
+            background: "#F5F0E6",
+            border: "1.5px solid rgba(26,71,49,0.12)",
           }}
         >
           <Logo size={52} />
@@ -97,7 +97,7 @@ function CertCard({ cert, index, inView }: {
           <span
             key={chip}
             className="font-sans text-[11px] px-2.5 py-1"
-            style={{ border: "1px solid #DDD3C5", color: "#6B5D50", background: "#F6F1E8" }}
+            style={{ border: "1px solid rgba(26,71,49,0.12)", color: "#7A6B54", background: "#EDE5D4" }}
           >
             {chip}
           </span>
@@ -107,7 +107,7 @@ function CertCard({ cert, index, inView }: {
       {/* ── Footer ── */}
       <div
         className="mt-auto flex items-center justify-between px-5 py-3 border-t"
-        style={{ borderColor: "#EDE5D8" }}
+        style={{ borderColor: "rgba(26,71,49,0.1)" }}
       >
         <span className="font-mono text-[11px] text-ink-muted truncate max-w-[55%]">
           {cert.certRef}
@@ -134,7 +134,7 @@ export default function CertificationsGrid() {
   return (
     <section
       id="certifications"
-      style={{ background: "#F6F1E8" }}
+      style={{ background: "#EDE5D4" }}
       className="paper"
       aria-labelledby="certs-heading"
     >
@@ -157,12 +157,12 @@ export default function CertificationsGrid() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-display font-light text-ink leading-[0.95]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+                            style={{
+                fontFamily: "'Outfit', sans-serif", fontWeight: 900, letterSpacing: "-0.035em", fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
             >
               Five certifications.
               <br />
-              <span style={{ color: "#C89A5B" }}>Every claim verified.</span>
+              <span style={{ color: "#E97316" }}>Every claim verified.</span>
             </motion.h2>
             <motion.div
               initial={{ opacity: 0, y: 14 }}
@@ -183,7 +183,7 @@ export default function CertificationsGrid() {
                   { v: "2022",  l: "Certified Since"         },
                 ].map((s) => (
                   <div key={s.l}>
-                    <p className="font-mono font-bold text-[1.4rem] leading-none" style={{ color: "#C89A5B" }}>{s.v}</p>
+                    <p className="font-mono font-bold text-[1.4rem] leading-none" style={{ color: "#E97316" }}>{s.v}</p>
                     <p className="font-sans text-[11px] text-ink-muted mt-1">{s.l}</p>
                   </div>
                 ))}
@@ -205,7 +205,7 @@ export default function CertificationsGrid() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, ease: EASE, delay: 0.6 }}
           className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t"
-          style={{ borderColor: "#DDD3C5" }}
+          style={{ borderColor: "rgba(26,71,49,0.12)" }}
         >
           <p className="font-sans text-[13px] text-ink-muted">
             Full compliance documentation · Certificate copies · NDA available on request
