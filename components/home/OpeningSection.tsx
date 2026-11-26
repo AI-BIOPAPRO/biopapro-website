@@ -34,7 +34,7 @@ export default function OpeningSection() {
     "18+ Export Markets",
     "BRCGS Food Safety",
     "ISO 9001:2015",
-    "Made in Mumbai",
+    "Made in India",
     "Est. 2019",
     "Birchwood Cutlery",
     "72% Women-led",
