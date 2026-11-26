@@ -28,17 +28,70 @@ export default function OpeningSection() {
     { value: `${COMPANY_FACTS.womenPercent}%`,  label: "Women-led",        live: false },
   ];
 
+  const MARQUEE_ITEMS = [
+    "FSC® Certified",
+    "100M+ Units / Month",
+    "18+ Export Markets",
+    "BRCGS Food Safety",
+    "ISO 9001:2015",
+    "Made in Mumbai",
+    "Est. 2019",
+    "Birchwood Cutlery",
+    "72% Women-led",
+  ];
+
   return (
     <section
       className="w-full relative overflow-hidden"
       style={{ background: "#F5F0E6", paddingTop: "80px" }}
       aria-labelledby="hero-heading"
     >
+      {/* Marquee strip */}
+      <style>{`
+        @keyframes marquee-scroll {
+          from { transform: translateX(0) }
+          to   { transform: translateX(-50%) }
+        }
+      `}</style>
+      <div style={{
+        background:  "#1A4731",
+        overflow:    "hidden",
+        whiteSpace:  "nowrap",
+        borderBottom:"1px solid rgba(245,240,230,0.08)",
+      }}>
+        <div style={{
+          display:   "inline-flex",
+          animation: "marquee-scroll 28s linear infinite",
+        }}>
+          {[0, 1].map((copy) => (
+            <div key={copy} style={{ display: "inline-flex", alignItems: "center" }}>
+              {MARQUEE_ITEMS.map((item) => (
+                <span key={item} style={{
+                  display:       "inline-flex",
+                  alignItems:    "center",
+                  gap:           "12px",
+                  padding:       "10px 28px",
+                  fontFamily:    "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                  fontSize:      "10px",
+                  fontWeight:    700,
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase" as const,
+                  color:         "#F5F0E6",
+                }}>
+                  <span style={{ color: "#E97316", fontSize: "14px" }}>·</span>
+                  {item}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Ghost BIOPAPRO watermark — visible immediately so it appears as the splash fades */}
       <div
         aria-hidden="true"
         className="absolute inset-0 flex items-center justify-start pointer-events-none select-none overflow-hidden"
-        style={{ paddingLeft: "4vw" }}
+        style={{ paddingLeft: "4vw", top: "42px" }}
       >
         <span style={{
           fontFamily:    "'Outfit', sans-serif",
@@ -54,7 +107,7 @@ export default function OpeningSection() {
       </div>
 
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_460px] gap-12 xl:gap-20 items-center py-14 lg:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_460px] gap-12 xl:gap-20 items-center py-10 lg:py-14">
 
           {/* LEFT */}
           <div>
