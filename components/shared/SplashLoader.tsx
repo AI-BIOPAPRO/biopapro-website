@@ -20,7 +20,7 @@ export default function SplashLoader({ onDone }: { onDone?: () => void }) {
     // exit:  1500ms → iris collapses 1100ms → done 2600ms
     const t1 = setTimeout(() => setPhase("hold"),  900);
     const t2 = setTimeout(() => setPhase("exit"), 1500);
-    const t3 = setTimeout(() => { setPhase("gone"); onDone?.(); }, 2650);
+    const t3 = setTimeout(() => { setPhase("gone"); onDone?.(); }, 2300);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [onDone]);
 
@@ -35,15 +35,9 @@ export default function SplashLoader({ onDone }: { onDone?: () => void }) {
      * from the outer edges inward, like a camera iris closing.
      */
     <motion.div
-      initial={{ clipPath: "circle(150% at 50% 50%)" }}
-      animate={exiting
-        ? { clipPath: "circle(0% at 50% 50%)" }
-        : { clipPath: "circle(150% at 50% 50%)" }
-      }
-      transition={exiting
-        ? { duration: 1.15, ease: EI }
-        : { duration: 0 }
-      }
+      initial={{ opacity: 1 }}
+      animate={exiting ? { opacity: 0 } : { opacity: 1 }}
+      transition={exiting ? { duration: 0.75, ease: [0.4, 0, 0.2, 1] } : { duration: 0 }}
       style={{
         position:  "fixed",
         inset:     0,
