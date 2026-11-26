@@ -98,11 +98,12 @@ export default function OpeningSection() {
           fontWeight:    900,
           fontSize:      "clamp(5rem, 18vw, 20rem)",
           lineHeight:    1,
-          color:         "rgba(26,71,49,0.045)",
+          color:         "rgba(26,71,49,0.08)",
           letterSpacing: "-0.05em",
           whiteSpace:    "nowrap",
+          textTransform: "lowercase" as const,
         }}>
-          BIOPAPRO
+          biopapro
         </span>
       </div>
 

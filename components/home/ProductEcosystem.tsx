@@ -114,8 +114,16 @@ function ProductCard({
 
 export default function ProductEcosystem() {
   const [active, setActive] = useState<Category>("All");
-  const ref    = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
+  const ref     = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const inView  = useInView(ref, { once: true, margin: "-80px 0px" });
+
+  const handleCatChange = (cat: Category) => {
+    setActive(cat);
+    setTimeout(() => {
+      gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  };
 
   const ids =
     active === "All"
@@ -191,7 +199,7 @@ export default function ProductEcosystem() {
             {CATS.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActive(cat)}
+                onClick={() => handleCatChange(cat)}
                 className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] px-4 py-2 transition-all duration-250"
                 style={{
                   background:   active === cat ? "#E97316" : "transparent",
@@ -213,7 +221,7 @@ export default function ProductEcosystem() {
         </div>
 
         {/* Staggered product grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+        <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
           {displayed.map((id, i) => (
             <ProductCard
               key={`${active}-${id}`}
