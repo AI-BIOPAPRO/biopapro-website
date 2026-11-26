@@ -91,25 +91,21 @@ export default function AboutClient() {
         style={{ background: "#1A4731", minHeight: "72vh" }}
         className="relative overflow-hidden flex flex-col justify-end"
       >
-        {/* Background watermark */}
-        <div
+        {/* Factory background image */}
+        <Image
+          src="https://biopapro.com/cdn/shop/files/F4.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+          priority
           aria-hidden="true"
-          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-        >
-          <span
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 900,
-              fontSize: "clamp(5rem,20vw,22rem)",
-              lineHeight: 1,
-              color: "rgba(255,255,255,0.03)",
-              letterSpacing: "-0.04em",
-              whiteSpace: "nowrap",
-            }}
-          >
-            ABOUT
-          </span>
-        </div>
+        />
+        {/* Dark overlay so text stays readable */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(135deg, rgba(26,71,49,0.92) 0%, rgba(26,71,49,0.75) 50%, rgba(26,71,49,0.6) 100%)" }}
+        />
 
         {/* Orange accent line top */}
         <div
@@ -479,6 +475,28 @@ export default function AboutClient() {
                 </div>
               </FadeUp>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── ECO PACKAGING IMAGE BREAK ── */}
+      <section className="relative overflow-hidden" style={{ background: "#1A1208", height: "clamp(220px,35vw,480px)" }}>
+        <Image
+          src="https://biopapro.com/cdn/shop/files/marcell-viragh-ZQas4Ehf-F4-unsplash_1.jpg"
+          alt="Biopapro eco-certified packaging — plastic-free, compostable, recyclable, biodegradable"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to left, rgba(26,18,8,0.7) 0%, rgba(26,18,8,0.2) 50%, transparent 100%)" }}
+        />
+        <div className="relative z-10 h-full flex items-end justify-end px-6 md:px-12 lg:px-20 pb-10">
+          <div className="text-right">
+            <span className="font-mono text-[10px] uppercase tracking-[0.26em]" style={{ color: "rgba(245,240,230,0.5)" }}>
+              Plastic-free · Compostable · Recyclable · Biodegradable
+            </span>
           </div>
         </div>
       </section>

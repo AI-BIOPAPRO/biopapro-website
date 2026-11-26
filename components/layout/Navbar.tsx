@@ -11,7 +11,6 @@ import { COMPANY_FACTS } from "@/lib/company-facts";
 import { useScrollLock } from "@/lib/use-scroll-lock";
 
 const NAV_LINKS = [
-  { label: "Home",             href: "/"                },
   { label: "Products",        href: "/products"        },
   { label: "Manufacturing",   href: "/manufacturing"   },
   { label: "Sustainability",  href: "/sustainability"  },
@@ -80,7 +79,7 @@ export default function Navbar() {
             </Link>
 
             {/* ── Desktop navigation ── */}
-            <nav className="hidden lg:flex items-center gap-3 xl:gap-8" aria-label="Main navigation">
+            <nav className="hidden lg:flex items-center gap-2 xl:gap-5" aria-label="Main navigation">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
