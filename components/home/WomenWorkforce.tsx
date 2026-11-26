@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useRef, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   motion,
@@ -66,6 +67,23 @@ export default function WomenWorkforce() {
   }, [mouseX, mouseY]);
 
   return (
+    <>
+    {/* Full-width factory worker image — sits flush above the stats, no gap */}
+    <div className="relative overflow-hidden w-full" style={{ height: "clamp(340px,50vw,640px)" }}>
+      <Image
+        src="https://biopapro.com/cdn/shop/files/F4.png"
+        alt="Biopapro female worker at the production line, Mumbai factory"
+        fill
+        className="object-cover object-left-top"
+        sizes="100vw"
+      />
+      {/* Subtle vignette only at the very bottom edge */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-24"
+        style={{ background: "linear-gradient(to bottom, transparent, #F5F0E6)" }}
+      />
+    </div>
+
     <section
       ref={ref}
       onMouseMove={handleMouseMove}
@@ -152,7 +170,7 @@ export default function WomenWorkforce() {
       </motion.div>
 
       {/* ── LAYER 3 — foreground: main content ───────── */}
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28">
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-8 pb-20 md:pt-10 md:pb-28">
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-20 gap-14">
 
           {/* LEFT — stat, deepest parallax layer */}
@@ -300,5 +318,6 @@ export default function WomenWorkforce() {
         </div>
       </div>
     </section>
+    </>
   );
 }

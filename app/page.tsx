@@ -6,7 +6,6 @@ import WhyWoodWon               from "@/components/home/WhyWoodWon";
 import ImpactCounter            from "@/components/home/ImpactCounter";
 import ManufacturingCredibility from "@/components/home/ManufacturingCredibility";
 import WomenWorkforce           from "@/components/home/WomenWorkforce";
-import Image                    from "next/image";
 import InUse                    from "@/components/home/InUse";
 import DomesticSupply           from "@/components/home/DomesticSupply";
 import ProductEcosystem         from "@/components/home/ProductEcosystem";
@@ -80,21 +79,6 @@ export default function HomePage() {
 
       {/* Kinetic text marquee — editorial break, motionsites.ai-inspired */}
       <MarqueeStrip />
-
-      {/* S6b — Women Workforce intro image */}
-      <section className="relative overflow-hidden" style={{ height: "clamp(280px,42vw,580px)", background: "#1A4731" }}>
-        <Image
-          src="https://biopapro.com/cdn/shop/files/F4.png"
-          alt="Biopapro female worker at the production line, Mumbai factory"
-          fill
-          className="object-cover object-left"
-          sizes="100vw"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, rgba(245,240,230,0.0) 55%, rgba(245,240,230,1) 100%)" }}
-        />
-      </section>
 
       {/* S6b — Women Workforce: the people behind the operation */}
       <WomenWorkforce />
