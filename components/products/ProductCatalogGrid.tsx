@@ -329,8 +329,8 @@ function ProductCard({
     >
       {/* Image */}
       <div
-        className="relative overflow-hidden"
-        style={{ height: "200px", background: IMG_BG, borderRadius: "15px 15px 0 0" }}
+        className="relative overflow-hidden w-full"
+        style={{ aspectRatio: "4 / 3", background: IMG_BG, borderRadius: "15px 15px 0 0" }}
       >
         <Image
           src={product.primaryImage}
@@ -392,6 +392,10 @@ function ProductCard({
             letterSpacing: "-0.02em",
             marginBottom:  "4px",
             lineHeight:    1.2,
+            display:       "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical" as const,
+            overflow:      "hidden",
           }}
         >
           {product.name}
