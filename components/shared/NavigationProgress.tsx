@@ -9,7 +9,7 @@ export default function NavigationProgress() {
   const [show, setShow]     = useState(false);
   const [done, setDone]     = useState(false);
   const prevPath  = useRef(pathname);
-  const hideTimer = useRef<ReturnType<typeof setTimeout>>();
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   // Start bar on internal link click — fires BEFORE the page changes
   useEffect(() => {
