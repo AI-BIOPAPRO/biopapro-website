@@ -255,75 +255,74 @@ export default function OpeningSection() {
             {/* B2B Bento grid: Scale card (left tall) + Product + Cert (right stacked) */}
             <div className="grid grid-cols-[1.15fr_1fr] gap-3" style={{ height: "520px" }}>
 
-              {/* Card 1 — SCALE (dark green, editorial, no image) */}
+              {/* Card 1 — FACTORY IMAGE + scale overlay */}
               <Link
                 href="/manufacturing"
-                className="group relative overflow-hidden flex flex-col justify-between p-6"
-                style={{ borderRadius: "20px", background: "#1A4731" }}
+                className="group relative overflow-hidden"
+                style={{ borderRadius: "20px" }}
               >
-                {/* Top row */}
-                <div className="flex items-center justify-between">
-                  <span
-                    className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] px-2.5 py-1"
-                    style={{ background: "rgba(233,115,22,0.95)", color: "#fff", borderRadius: "4px" }}
-                  >
-                    Manufacturing Scale
-                  </span>
-                  <div
-                    className="w-7 h-7 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                    style={{ background: "#E97316" }}
-                  >
-                    <ArrowUpRight size={11} color="#fff" strokeWidth={2.5} />
-                  </div>
+                <Image
+                  src="https://biopapro.com/cdn/shop/files/F7_1_-_Edited_2.png"
+                  alt="Biopapro factory floor — Mumbai production facility at scale"
+                  fill
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1023px) 0px, 300px"
+                  quality={82}
+                />
+                {/* Dark gradient overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(to top, rgba(26,18,8,0.95) 0%, rgba(26,18,8,0.5) 50%, rgba(26,18,8,0.15) 100%)" }}
+                />
+
+                {/* Tag */}
+                <span
+                  className="absolute top-4 left-4 font-mono text-[9px] font-bold uppercase tracking-[0.16em] px-2.5 py-1"
+                  style={{ background: "rgba(233,115,22,0.95)", color: "#fff", borderRadius: "4px" }}
+                >
+                  At Scale
+                </span>
+                <div
+                  className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  style={{ background: "#E97316" }}
+                >
+                  <ArrowUpRight size={13} color="#fff" strokeWidth={2.5} />
                 </div>
 
-                {/* Big stat */}
-                <div>
+                {/* Bottom overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
                   <div
                     style={{
                       fontFamily:    "'Outfit', sans-serif",
                       fontWeight:    900,
-                      fontSize:      "clamp(3rem, 5.5vw, 4.8rem)",
+                      fontSize:      "clamp(2.8rem, 5vw, 4.2rem)",
                       lineHeight:    0.88,
                       letterSpacing: "-0.04em",
                       color:         "#E97316",
+                      marginBottom:  "4px",
                     }}
                   >
                     100M+
                   </div>
-                  <div className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] mt-2" style={{ color: "rgba(245,240,230,0.55)" }}>
-                    Units / Month
+                  <div className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] mb-4" style={{ color: "rgba(245,240,230,0.55)" }}>
+                    Units / Month · Mumbai
                   </div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.14em] mt-1" style={{ color: "rgba(245,240,230,0.3)" }}>
-                    300+ Tons Birchwood · Mumbai
+                  <div className="flex gap-1.5 flex-wrap">
+                    {B2B_CERTS.map((c) => (
+                      <span
+                        key={c}
+                        className="font-mono text-[9px] font-bold uppercase tracking-[0.1em] px-2 py-1"
+                        style={{
+                          background:   "rgba(245,240,230,0.12)",
+                          color:        "rgba(245,240,230,0.75)",
+                          borderRadius: "3px",
+                          border:       "1px solid rgba(245,240,230,0.18)",
+                        }}
+                      >
+                        {c}
+                      </span>
+                    ))}
                   </div>
-                </div>
-
-                {/* Cert badge pills */}
-                <div className="flex flex-wrap gap-1.5">
-                  {B2B_CERTS.map((c) => (
-                    <span
-                      key={c}
-                      className="font-mono text-[9px] font-bold uppercase tracking-[0.1em] px-2.5 py-1.5"
-                      style={{
-                        background:   "rgba(245,240,230,0.08)",
-                        color:        "rgba(245,240,230,0.65)",
-                        borderRadius: "4px",
-                        border:       "1px solid rgba(245,240,230,0.14)",
-                      }}
-                    >
-                      {c}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Location chip */}
-                <div
-                  className="inline-flex items-center gap-2 px-3 py-1.5 self-start"
-                  style={{ background: "rgba(245,240,230,0.08)", borderRadius: "6px" }}
-                >
-                  <span className="font-mono text-[9px] uppercase tracking-[0.18em]" style={{ color: "rgba(245,240,230,0.4)" }}>Located in</span>
-                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.18em]" style={{ color: "#E97316" }}>Mumbai, India</span>
                 </div>
               </Link>
 
@@ -379,60 +378,47 @@ export default function OpeningSection() {
                   </div>
                 </Link>
 
-                {/* Card 3 — CERTIFICATIONS (editorial, cream, no image) */}
+                {/* Card 3 — CERTIFICATIONS (dark green, clean) */}
                 <Link
                   href="/certifications"
                   className="group relative overflow-hidden flex flex-col justify-between p-5"
-                  style={{ borderRadius: "16px", background: "#EDE5D4", flex: "1 1 0", minHeight: 0, border: "1px solid rgba(26,71,49,0.1)" }}
+                  style={{ borderRadius: "16px", background: "#1A4731", flex: "1 1 0", minHeight: 0 }}
                 >
                   <div className="flex items-center justify-between">
                     <span
                       className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] px-2 py-1"
-                      style={{ background: "rgba(26,71,49,0.1)", color: "#1A4731", borderRadius: "3px" }}
+                      style={{ background: "rgba(233,115,22,0.2)", color: "#E97316", borderRadius: "3px" }}
                     >
-                      Certifications
+                      Certified
                     </span>
                     <div
                       className="w-6 h-6 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                      style={{ background: "#1A4731" }}
+                      style={{ background: "#E97316" }}
                     >
-                      <ArrowUpRight size={10} color="#F5F0E6" strokeWidth={2.5} />
+                      <ArrowUpRight size={10} color="#fff" strokeWidth={2.5} />
                     </div>
                   </div>
 
-                  <div>
-                    <p style={{
-                      fontFamily:    "'Outfit', sans-serif",
-                      fontWeight:    900,
-                      fontSize:      "clamp(0.8rem, 1.3vw, 0.95rem)",
-                      lineHeight:    1.1,
-                      letterSpacing: "-0.02em",
-                      color:         "#1A1208",
-                      marginBottom:  "10px",
-                    }}>
-                      CERTIFIED FOR<br />
-                      <span style={{ color: "#1A4731" }}>GLOBAL EXPORT</span>
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {EXPORT_CERTS.map((c) => (
-                        <span
-                          key={c}
-                          className="font-mono text-[9px] font-bold uppercase tracking-[0.1em] px-2 py-1"
-                          style={{
-                            background:   "rgba(26,71,49,0.08)",
-                            color:        "#1A4731",
-                            borderRadius: "3px",
-                            border:       "1px solid rgba(26,71,49,0.15)",
-                          }}
-                        >
-                          {c}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="space-y-1.5">
+                    {["FSC® 100%", "ISO 9001", "BRCGS"].map((c) => (
+                      <div
+                        key={c}
+                        style={{
+                          fontFamily:    "'Outfit', sans-serif",
+                          fontWeight:    900,
+                          fontSize:      "clamp(0.95rem, 1.6vw, 1.15rem)",
+                          letterSpacing: "-0.02em",
+                          color:         "#F5F0E6",
+                          lineHeight:    1.1,
+                        }}
+                      >
+                        {c}
+                      </div>
+                    ))}
                   </div>
 
-                  <p className="font-mono text-[9px] uppercase tracking-[0.16em]" style={{ color: "#7A6B54" }}>
-                    Airlines · Hotels · QSR Chains
+                  <p className="font-mono text-[9px] uppercase tracking-[0.16em]" style={{ color: "rgba(245,240,230,0.4)" }}>
+                    Airlines · Hotels · QSR
                   </p>
                 </Link>
               </div>
@@ -462,21 +448,6 @@ export default function OpeningSection() {
               ))}
             </div>
 
-            {/* Floating cert badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={done ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              transition={{ delay: 0.82, duration: 0.5, ease: E }}
-              className="absolute -top-4 -right-4 px-4 py-3 shadow-lg"
-              style={{ background: "#E97316", borderRadius: "12px", border: "2px solid #F5F0E6" }}
-            >
-              <div className="text-[9px] font-bold uppercase tracking-[0.18em] mb-0.5" style={{ color: "rgba(255,255,255,0.65)" }}>Certified</div>
-              <div className="flex gap-2">
-                {["FSC®", "ISO", "BRCGS"].map((c) => (
-                  <span key={c} className="text-[11px] font-black" style={{ color: "#fff" }}>{c}</span>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
 
         </div>
