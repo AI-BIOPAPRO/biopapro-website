@@ -47,7 +47,7 @@ export default function WorkforceSection() {
               style={{ aspectRatio: "4/5", background: "#EDE5D4" }}
             >
               <video
-                autoPlay muted loop playsInline
+                autoPlay muted loop playsInline preload="none"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ opacity: 0.9 }}
               >

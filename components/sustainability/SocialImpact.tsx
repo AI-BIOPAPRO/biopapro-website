@@ -112,7 +112,7 @@ export default function SocialImpact() {
               style={{ aspectRatio: "3/4", borderRadius: "20px", background: CREAM }}
             >
               <video
-                autoPlay muted loop playsInline
+                autoPlay muted loop playsInline preload="none"
                 className="absolute inset-0 w-full h-full object-cover"
               >
                 <source src="/videos/Manufacturing page women working.mp4" type="video/mp4" />

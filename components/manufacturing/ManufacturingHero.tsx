@@ -104,7 +104,7 @@ export default function ManufacturingHero() {
               style={{ borderRadius: "20px", minHeight: "240px" }}
             >
               <video
-                autoPlay muted loop playsInline
+                autoPlay muted loop playsInline preload="none"
                 className="absolute inset-0 w-full h-full object-cover"
               >
                 <source src="/videos/hero-background.mp4" type="video/mp4" />

@@ -105,7 +105,7 @@ export default function SustainabilityHero() {
               style={{ borderRadius: "20px", minHeight: "280px", flex: 1 }}
             >
               <video
-                autoPlay muted loop playsInline
+                autoPlay muted loop playsInline preload="none"
                 className="absolute inset-0 w-full h-full object-cover"
               >
                 <source src="/videos/Sustainibilty 1-2.mp4" type="video/mp4" />
