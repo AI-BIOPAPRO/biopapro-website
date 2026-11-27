@@ -12,27 +12,30 @@ const E = [0.16, 1, 0.3, 1] as const;
 const HERO_CARDS = [
   {
     src:  "https://biopapro.com/cdn/shop/collections/C3_3.png",
-    alt:  "Wooden fork and knife set in a chocolate tart — premium cutlery in action",
-    tag:  "Best Seller",
-    name: "Wooden Cutlery",
-    sub:  "Fork · Knife · Spoon",
+    alt:  "Birchwood fork and knife in a chocolate tart — Biopapro cutlery set in use",
+    tag:  "Lifestyle",
+    name: "Wooden Cutlery Set",
+    sub:  "Fork + Knife · Birchwood",
     href: "/products",
+    pos:  "center center",
   },
   {
     src:  "https://biopapro.com/cdn/shop/collections/C2_2.png",
-    alt:  "Three birchwood forks — export-grade finish",
-    tag:  "Export Grade",
+    alt:  "Three birchwood wooden forks 160mm — export grade",
+    tag:  "Best Seller",
     name: "Wooden Fork 160mm",
-    sub:  "MOQ 500 pcs",
+    sub:  "MOQ 500 pcs · FSC® Certified",
     href: "/products?product=woodenfork160mm#catalog",
+    pos:  "center center",
   },
   {
-    src:  "https://biopapro.com/cdn/shop/collections/C4_4.png",
-    alt:  "Wooden fork with fresh kiwi — eco-friendly cutlery",
-    tag:  "FSC® Certified",
-    name: "Eco Spork 160mm",
-    sub:  "160mm · Birchwood",
-    href: "/products?product=woodenspork160mm#catalog",
+    src:  "https://biopapro.com/cdn/shop/collections/C5.png",
+    alt:  "Birchwood wooden spoon with cupcakes — food-safe cutlery",
+    tag:  "Food-Safe",
+    name: "Wooden Spoon 160mm",
+    sub:  "UV Sterilised · ISO Certified",
+    href: "/products?product=wooden-spoon-160mm#catalog",
+    pos:  "center 55%",
   },
 ] as const;
 
@@ -277,7 +280,7 @@ export default function OpeningSection() {
             className="relative hidden lg:block"
           >
             {/* Bento grid: tall left + 2 stacked right */}
-            <div className="grid grid-cols-[1.15fr_1fr] gap-3" style={{ height: "460px" }}>
+            <div className="grid grid-cols-[1.15fr_1fr] gap-3" style={{ height: "520px" }}>
 
               {/* Card 1 — tall left, lifestyle hero shot */}
               <Link
@@ -289,9 +292,9 @@ export default function OpeningSection() {
                   src={HERO_CARDS[0].src}
                   alt={HERO_CARDS[0].alt}
                   fill
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  style={{ objectPosition: HERO_CARDS[0].pos }}
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 30vw"
-                  quality={95}
                   unoptimized
                 />
                 <div
@@ -326,7 +329,7 @@ export default function OpeningSection() {
               </Link>
 
               {/* Right column — 2 stacked cards */}
-              <div className="flex flex-col gap-3" style={{ height: "460px" }}>
+              <div className="flex flex-col gap-3" style={{ height: "520px" }}>
                 {HERO_CARDS.slice(1).map((card) => (
                   <Link
                     key={card.name}
@@ -338,9 +341,9 @@ export default function OpeningSection() {
                       src={card.src}
                       alt={card.alt}
                       fill
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      style={{ objectPosition: card.pos }}
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 20vw"
-                      quality={95}
                       unoptimized
                     />
                     <div
