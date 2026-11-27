@@ -15,7 +15,7 @@ const CREDS = [
   { value: "18+",    label: "Export Markets",    sub: "Across 4 continents"    },
 ] as const;
 
-const BADGES = ["FSC®", "ISO 9001", "BRCGS", "UV Sterilised"] as const;
+const BADGES = ["FSC®", "ISO 9001", "BRCGS", "Food-Safe"] as const;
 
 export default function ManufacturingCredibility() {
   const ref = useRef<HTMLElement>(null);
@@ -146,9 +146,9 @@ export default function ManufacturingCredibility() {
               marginBottom: "2.5rem",
             }}
           >
-            Every piece that leaves our Mumbai facility passes optical sorting,
-            AQL 2.5 inspection and UV sterilisation — certified to the standards
-            airlines, hotels and export buyers demand.
+            Precision-finished birchwood cutlery manufactured at scale in Mumbai
+            — FSC-certified, food-safe, and exported to airlines, hotels and
+            QSR chains across {COMPANY_FACTS.exportMarkets}+ markets worldwide.
           </motion.p>
 
           {/* 3 big stats — horizontal */}
