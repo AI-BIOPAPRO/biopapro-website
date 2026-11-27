@@ -290,11 +290,13 @@ export default function OpeningSection() {
                   alt={HERO_CARDS[0].alt}
                   fill
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                  sizes="220px"
+                  sizes="(max-width: 768px) 100vw, 30vw"
+                  quality={95}
+                  unoptimized
                 />
                 <div
                   className="absolute inset-0"
-                  style={{ background: "linear-gradient(to top, rgba(26,18,8,0.80) 0%, transparent 50%)" }}
+                  style={{ background: "linear-gradient(to top, rgba(26,18,8,0.88) 0%, rgba(26,18,8,0.1) 45%, transparent 65%)" }}
                 />
                 <span
                   className="absolute top-4 left-4 font-mono text-[9px] font-bold uppercase tracking-[0.18em] px-2.5 py-1"
@@ -337,11 +339,13 @@ export default function OpeningSection() {
                       alt={card.alt}
                       fill
                       className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                      sizes="200px"
+                      sizes="(max-width: 768px) 100vw, 20vw"
+                      quality={95}
+                      unoptimized
                     />
                     <div
                       className="absolute inset-0"
-                      style={{ background: "linear-gradient(to top, rgba(26,18,8,0.75) 0%, transparent 50%)" }}
+                      style={{ background: "linear-gradient(to top, rgba(26,18,8,0.85) 0%, rgba(26,18,8,0.05) 50%, transparent 70%)" }}
                     />
                     <span
                       className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-[0.16em] px-2 py-1"
