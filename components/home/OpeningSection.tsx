@@ -12,10 +12,10 @@ const E = [0.16, 1, 0.3, 1] as const;
 const HERO_CARDS = [
   {
     src:  "https://biopapro.com/cdn/shop/collections/C3_3.png",
-    alt:  "Birchwood fork and knife in a chocolate tart — Biopapro cutlery set in use",
+    alt:  "Birchwood wooden knife in a chocolate tart — Biopapro food-safe cutlery",
     tag:  "Lifestyle",
-    name: "Wooden Cutlery Set",
-    sub:  "Fork + Knife · Birchwood",
+    name: "Wooden Knife 160mm",
+    sub:  "Birchwood · Food-Safe",
     href: "/products",
     pos:  "center center",
   },
