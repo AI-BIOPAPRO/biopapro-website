@@ -43,8 +43,8 @@ export default function ManufacturingCredibility() {
             alt="Biopapro factory floor — Mumbai production facility"
             fill
             className="object-cover object-center"
-            sizes="(max-width: 1024px) 100vw, 42vw"
-            unoptimized
+            sizes="(max-width: 1023px) 100vw, 42vw"
+            quality={82}
           />
           {/* Subtle vignette — right edge only so image bleeds into cream */}
           <div
@@ -120,12 +120,15 @@ export default function ManufacturingCredibility() {
             </div>
             <div
               style={{
-                fontFamily:    "'Outfit', sans-serif",
-                fontWeight:    900,
-                fontSize:      "clamp(4rem, 8vw, 8.5rem)",
-                lineHeight:    0.88,
-                letterSpacing: "-0.035em",
-                color:         "#1A4731",
+                fontFamily:              "'Outfit', sans-serif",
+                fontWeight:              900,
+                fontSize:                "clamp(4rem, 8vw, 8.5rem)",
+                lineHeight:              0.88,
+                letterSpacing:           "-0.035em",
+                background:              "linear-gradient(to bottom, #FF9933 0%, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%, #138808 100%)",
+                WebkitBackgroundClip:    "text",
+                WebkitTextFillColor:     "transparent",
+                backgroundClip:          "text",
               }}
             >
               INDIA.
