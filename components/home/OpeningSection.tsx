@@ -5,13 +5,36 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, Leaf } from "lucide-react";
 import { COMPANY_FACTS, getCumulativeUnitsProduced, formatUnitsShort } from "@/lib/company-facts";
-import { PRODUCTS } from "@/lib/products-data";
 import { useSplash } from "@/context/SplashContext";
 
 const E = [0.16, 1, 0.3, 1] as const;
 
-const FEATURED_IDS = ["fork-160", "spoon-160", "knife-165"] as const;
-const FEATURED = FEATURED_IDS.map((id) => PRODUCTS.find((p) => p.id === id)!).filter(Boolean);
+const HERO_CARDS = [
+  {
+    src:  "https://biopapro.com/cdn/shop/collections/C3_3.png",
+    alt:  "Wooden fork and knife set in a chocolate tart — premium cutlery in action",
+    tag:  "Best Seller",
+    name: "Wooden Cutlery",
+    sub:  "Fork · Knife · Spoon",
+    href: "/products",
+  },
+  {
+    src:  "https://biopapro.com/cdn/shop/collections/C2_2.png",
+    alt:  "Three birchwood forks — export-grade finish",
+    tag:  "Export Grade",
+    name: "Wooden Fork 160mm",
+    sub:  "MOQ 500 pcs",
+    href: "/products?product=woodenfork160mm#catalog",
+  },
+  {
+    src:  "https://biopapro.com/cdn/shop/collections/C4_4.png",
+    alt:  "Wooden fork with fresh kiwi — eco-friendly cutlery",
+    tag:  "FSC® Certified",
+    name: "Eco Spork 160mm",
+    sub:  "160mm · Birchwood",
+    href: "/products?product=woodenspork160mm#catalog",
+  },
+] as const;
 
 const STATS = [
   { value: "100M+", label: "Units / Month"  },
@@ -256,77 +279,75 @@ export default function OpeningSection() {
             {/* Bento grid: tall left + 2 stacked right */}
             <div className="grid grid-cols-[1.15fr_1fr] gap-3" style={{ height: "460px" }}>
 
-              {/* Card 1 — tall left */}
-              {FEATURED[0] && (
-                <Link
-                  href={`/products?product=${encodeURIComponent(FEATURED[0].slug)}#catalog`}
-                  className="group relative overflow-hidden"
-                  style={{ borderRadius: "20px", background: "#EDE5D4" }}
+              {/* Card 1 — tall left, lifestyle hero shot */}
+              <Link
+                href={HERO_CARDS[0].href}
+                className="group relative overflow-hidden"
+                style={{ borderRadius: "20px", background: "#F5C842" }}
+              >
+                <Image
+                  src={HERO_CARDS[0].src}
+                  alt={HERO_CARDS[0].alt}
+                  fill
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  sizes="220px"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(to top, rgba(26,18,8,0.80) 0%, transparent 50%)" }}
+                />
+                <span
+                  className="absolute top-4 left-4 font-mono text-[9px] font-bold uppercase tracking-[0.18em] px-2.5 py-1"
+                  style={{ background: "rgba(233,115,22,0.95)", color: "#fff", borderRadius: "4px" }}
                 >
-                  <Image
-                    src={FEATURED[0].primaryImage}
-                    alt={FEATURED[0].name}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="220px"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: "linear-gradient(to top, rgba(26,18,8,0.75) 0%, transparent 55%)" }}
-                  />
-                  <span
-                    className="absolute top-4 left-4 font-mono text-[9px] font-bold uppercase tracking-[0.18em] px-2.5 py-1"
-                    style={{ background: "rgba(233,115,22,0.9)", color: "#fff", borderRadius: "4px" }}
-                  >
-                    {FEATURED[0].category}
-                  </span>
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p style={{
-                      fontFamily:    "'Outfit', sans-serif",
-                      fontWeight:    800,
-                      fontSize:      "1.1rem",
-                      letterSpacing: "-0.025em",
-                      color:         "#F5F0E6",
-                      lineHeight:    1.1,
-                      marginBottom:  "4px",
-                    }}>
-                      {FEATURED[0].name}
-                    </p>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(245,240,230,0.55)" }}>
-                      MOQ {FEATURED[0].moq}
-                    </p>
-                  </div>
-                  <div className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ background: "#E97316" }}>
-                    <ArrowUpRight size={13} color="#fff" strokeWidth={2.5} />
-                  </div>
-                </Link>
-              )}
+                  {HERO_CARDS[0].tag}
+                </span>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p style={{
+                    fontFamily:    "'Outfit', sans-serif",
+                    fontWeight:    800,
+                    fontSize:      "1.1rem",
+                    letterSpacing: "-0.025em",
+                    color:         "#F5F0E6",
+                    lineHeight:    1.1,
+                    marginBottom:  "4px",
+                  }}>
+                    {HERO_CARDS[0].name}
+                  </p>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(245,240,230,0.55)" }}>
+                    {HERO_CARDS[0].sub}
+                  </p>
+                </div>
+                <div className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ background: "#E97316" }}>
+                  <ArrowUpRight size={13} color="#fff" strokeWidth={2.5} />
+                </div>
+              </Link>
 
-              {/* Right column — 2 stacked cards with explicit heights */}
+              {/* Right column — 2 stacked cards */}
               <div className="flex flex-col gap-3" style={{ height: "460px" }}>
-                {FEATURED.slice(1).map((product) => (
+                {HERO_CARDS.slice(1).map((card) => (
                   <Link
-                    key={product.id}
-                    href={`/products?product=${encodeURIComponent(product.slug)}#catalog`}
+                    key={card.name}
+                    href={card.href}
                     className="group relative overflow-hidden"
-                    style={{ borderRadius: "16px", background: "#EDE5D4", flex: "1 1 0", minHeight: 0 }}
+                    style={{ borderRadius: "16px", background: "#F5C842", flex: "1 1 0", minHeight: 0 }}
                   >
                     <Image
-                      src={product.primaryImage}
-                      alt={product.name}
+                      src={card.src}
+                      alt={card.alt}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                       sizes="200px"
                     />
                     <div
                       className="absolute inset-0"
-                      style={{ background: "linear-gradient(to top, rgba(26,18,8,0.72) 0%, transparent 55%)" }}
+                      style={{ background: "linear-gradient(to top, rgba(26,18,8,0.75) 0%, transparent 50%)" }}
                     />
                     <span
                       className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-[0.16em] px-2 py-1"
-                      style={{ background: "rgba(26,71,49,0.85)", color: "#F5F0E6", borderRadius: "3px" }}
+                      style={{ background: "rgba(26,71,49,0.90)", color: "#F5F0E6", borderRadius: "3px" }}
                     >
-                      {product.category}
+                      {card.tag}
                     </span>
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <p style={{
@@ -336,8 +357,12 @@ export default function OpeningSection() {
                         letterSpacing: "-0.02em",
                         color:         "#F5F0E6",
                         lineHeight:    1.1,
+                        marginBottom:  "2px",
                       }}>
-                        {product.name}
+                        {card.name}
+                      </p>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(245,240,230,0.5)" }}>
+                        {card.sub}
                       </p>
                     </div>
                     <div className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ background: "#E97316" }}>
