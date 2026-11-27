@@ -9,35 +9,8 @@ import { useSplash } from "@/context/SplashContext";
 
 const E = [0.16, 1, 0.3, 1] as const;
 
-const HERO_CARDS = [
-  {
-    src:  "https://biopapro.com/cdn/shop/collections/C3_3.png",
-    alt:  "Birchwood wooden knife in a chocolate tart — Biopapro food-safe cutlery",
-    tag:  "Lifestyle",
-    name: "Wooden Knife 160mm",
-    sub:  "Birchwood · Food-Safe",
-    href: "/products",
-    pos:  "center center",
-  },
-  {
-    src:  "https://biopapro.com/cdn/shop/collections/C2_2.png",
-    alt:  "Three birchwood wooden forks 160mm — export grade",
-    tag:  "Best Seller",
-    name: "Wooden Fork 160mm",
-    sub:  "MOQ 500 pcs · FSC® Certified",
-    href: "/products?product=woodenfork160mm#catalog",
-    pos:  "center center",
-  },
-  {
-    src:  "https://biopapro.com/cdn/shop/collections/C5.png",
-    alt:  "Birchwood wooden spoon with cupcakes — food-safe cutlery",
-    tag:  "Food-Safe",
-    name: "Wooden Spoon 160mm",
-    sub:  "UV Sterilised · ISO Certified",
-    href: "/products?product=wooden-spoon-160mm#catalog",
-    pos:  "center 55%",
-  },
-] as const;
+const B2B_CERTS = ["FSC® Certified", "ISO 9001", "BRCGS", "Food-Safe"] as const;
+const EXPORT_CERTS = ["FSC®", "ISO 9001", "BRCGS", "Food-Safe", "ISO 14001"] as const;
 
 const STATS = [
   { value: "100M+", label: "Units / Month"  },
@@ -279,104 +252,189 @@ export default function OpeningSection() {
             transition={{ delay: 0.18, duration: 0.75, ease: E }}
             className="relative hidden lg:block"
           >
-            {/* Bento grid: tall left + 2 stacked right */}
+            {/* B2B Bento grid: Scale card (left tall) + Product + Cert (right stacked) */}
             <div className="grid grid-cols-[1.15fr_1fr] gap-3" style={{ height: "520px" }}>
 
-              {/* Card 1 — tall left, lifestyle hero shot */}
+              {/* Card 1 — SCALE (dark green, editorial, no image) */}
               <Link
-                href={HERO_CARDS[0].href}
-                className="group relative overflow-hidden"
-                style={{ borderRadius: "20px", background: "#F5C842" }}
+                href="/manufacturing"
+                className="group relative overflow-hidden flex flex-col justify-between p-6"
+                style={{ borderRadius: "20px", background: "#1A4731" }}
               >
-                <Image
-                  src={HERO_CARDS[0].src}
-                  alt={HERO_CARDS[0].alt}
-                  fill
-                  style={{ objectPosition: HERO_CARDS[0].pos }}
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1023px) 0px, 300px"
-                  quality={88}
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{ background: "linear-gradient(to top, rgba(26,18,8,0.88) 0%, rgba(26,18,8,0.1) 45%, transparent 65%)" }}
-                />
-                <span
-                  className="absolute top-4 left-4 font-mono text-[9px] font-bold uppercase tracking-[0.18em] px-2.5 py-1"
-                  style={{ background: "rgba(233,115,22,0.95)", color: "#fff", borderRadius: "4px" }}
-                >
-                  {HERO_CARDS[0].tag}
-                </span>
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <p style={{
-                    fontFamily:    "'Outfit', sans-serif",
-                    fontWeight:    800,
-                    fontSize:      "1.1rem",
-                    letterSpacing: "-0.025em",
-                    color:         "#F5F0E6",
-                    lineHeight:    1.1,
-                    marginBottom:  "4px",
-                  }}>
-                    {HERO_CARDS[0].name}
-                  </p>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(245,240,230,0.55)" }}>
-                    {HERO_CARDS[0].sub}
-                  </p>
+                {/* Top row */}
+                <div className="flex items-center justify-between">
+                  <span
+                    className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] px-2.5 py-1"
+                    style={{ background: "rgba(233,115,22,0.95)", color: "#fff", borderRadius: "4px" }}
+                  >
+                    Manufacturing Scale
+                  </span>
+                  <div
+                    className="w-7 h-7 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    style={{ background: "#E97316" }}
+                  >
+                    <ArrowUpRight size={11} color="#fff" strokeWidth={2.5} />
+                  </div>
                 </div>
-                <div className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ background: "#E97316" }}>
-                  <ArrowUpRight size={13} color="#fff" strokeWidth={2.5} />
+
+                {/* Big stat */}
+                <div>
+                  <div
+                    style={{
+                      fontFamily:    "'Outfit', sans-serif",
+                      fontWeight:    900,
+                      fontSize:      "clamp(3rem, 5.5vw, 4.8rem)",
+                      lineHeight:    0.88,
+                      letterSpacing: "-0.04em",
+                      color:         "#E97316",
+                    }}
+                  >
+                    100M+
+                  </div>
+                  <div className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] mt-2" style={{ color: "rgba(245,240,230,0.55)" }}>
+                    Units / Month
+                  </div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.14em] mt-1" style={{ color: "rgba(245,240,230,0.3)" }}>
+                    300+ Tons Birchwood · Mumbai
+                  </div>
+                </div>
+
+                {/* Cert badge pills */}
+                <div className="flex flex-wrap gap-1.5">
+                  {B2B_CERTS.map((c) => (
+                    <span
+                      key={c}
+                      className="font-mono text-[9px] font-bold uppercase tracking-[0.1em] px-2.5 py-1.5"
+                      style={{
+                        background:   "rgba(245,240,230,0.08)",
+                        color:        "rgba(245,240,230,0.65)",
+                        borderRadius: "4px",
+                        border:       "1px solid rgba(245,240,230,0.14)",
+                      }}
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Location chip */}
+                <div
+                  className="inline-flex items-center gap-2 px-3 py-1.5 self-start"
+                  style={{ background: "rgba(245,240,230,0.08)", borderRadius: "6px" }}
+                >
+                  <span className="font-mono text-[9px] uppercase tracking-[0.18em]" style={{ color: "rgba(245,240,230,0.4)" }}>Located in</span>
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.18em]" style={{ color: "#E97316" }}>Mumbai, India</span>
                 </div>
               </Link>
 
-              {/* Right column — 2 stacked cards */}
+              {/* Right column */}
               <div className="flex flex-col gap-3" style={{ height: "520px" }}>
-                {HERO_CARDS.slice(1).map((card) => (
-                  <Link
-                    key={card.name}
-                    href={card.href}
-                    className="group relative overflow-hidden"
-                    style={{ borderRadius: "16px", background: "#F5C842", flex: "1 1 0", minHeight: 0 }}
+
+                {/* Card 2 — PRODUCT (image, export specs) */}
+                <Link
+                  href="/products?product=woodenfork160mm#catalog"
+                  className="group relative overflow-hidden"
+                  style={{ borderRadius: "16px", background: "#F5C842", flex: "1 1 0", minHeight: 0 }}
+                >
+                  <Image
+                    src="https://biopapro.com/cdn/shop/collections/C2_2.png"
+                    alt="Three birchwood wooden forks 160mm — export grade B2B cutlery"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    style={{ objectPosition: "center center" }}
+                    sizes="(max-width: 1023px) 0px, 230px"
+                    quality={88}
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: "linear-gradient(to top, rgba(26,18,8,0.88) 0%, rgba(26,18,8,0.05) 50%, transparent 70%)" }}
+                  />
+                  <span
+                    className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-[0.16em] px-2 py-1"
+                    style={{ background: "rgba(26,71,49,0.90)", color: "#F5F0E6", borderRadius: "3px" }}
                   >
-                    <Image
-                      src={card.src}
-                      alt={card.alt}
-                      fill
-                      style={{ objectPosition: card.pos }}
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 1023px) 0px, 230px"
-                      quality={88}
-                    />
-                    <div
-                      className="absolute inset-0"
-                      style={{ background: "linear-gradient(to top, rgba(26,18,8,0.85) 0%, rgba(26,18,8,0.05) 50%, transparent 70%)" }}
-                    />
+                    Export Grade
+                  </span>
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p style={{
+                      fontFamily:    "'Outfit', sans-serif",
+                      fontWeight:    700,
+                      fontSize:      "0.9rem",
+                      letterSpacing: "-0.02em",
+                      color:         "#F5F0E6",
+                      lineHeight:    1.1,
+                      marginBottom:  "3px",
+                    }}>
+                      Wooden Fork 160mm
+                    </p>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(245,240,230,0.5)" }}>
+                      MOQ 500 pcs · FSC® Certified
+                    </p>
+                  </div>
+                  <div
+                    className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    style={{ background: "#E97316" }}
+                  >
+                    <ArrowUpRight size={11} color="#fff" strokeWidth={2.5} />
+                  </div>
+                </Link>
+
+                {/* Card 3 — CERTIFICATIONS (editorial, cream, no image) */}
+                <Link
+                  href="/certifications"
+                  className="group relative overflow-hidden flex flex-col justify-between p-5"
+                  style={{ borderRadius: "16px", background: "#EDE5D4", flex: "1 1 0", minHeight: 0, border: "1px solid rgba(26,71,49,0.1)" }}
+                >
+                  <div className="flex items-center justify-between">
                     <span
-                      className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-[0.16em] px-2 py-1"
-                      style={{ background: "rgba(26,71,49,0.90)", color: "#F5F0E6", borderRadius: "3px" }}
+                      className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] px-2 py-1"
+                      style={{ background: "rgba(26,71,49,0.1)", color: "#1A4731", borderRadius: "3px" }}
                     >
-                      {card.tag}
+                      Certifications
                     </span>
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <p style={{
-                        fontFamily:    "'Outfit', sans-serif",
-                        fontWeight:    700,
-                        fontSize:      "0.9rem",
-                        letterSpacing: "-0.02em",
-                        color:         "#F5F0E6",
-                        lineHeight:    1.1,
-                        marginBottom:  "2px",
-                      }}>
-                        {card.name}
-                      </p>
-                      <p className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(245,240,230,0.5)" }}>
-                        {card.sub}
-                      </p>
+                    <div
+                      className="w-6 h-6 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      style={{ background: "#1A4731" }}
+                    >
+                      <ArrowUpRight size={10} color="#F5F0E6" strokeWidth={2.5} />
                     </div>
-                    <div className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ background: "#E97316" }}>
-                      <ArrowUpRight size={11} color="#fff" strokeWidth={2.5} />
+                  </div>
+
+                  <div>
+                    <p style={{
+                      fontFamily:    "'Outfit', sans-serif",
+                      fontWeight:    900,
+                      fontSize:      "clamp(0.8rem, 1.3vw, 0.95rem)",
+                      lineHeight:    1.1,
+                      letterSpacing: "-0.02em",
+                      color:         "#1A1208",
+                      marginBottom:  "10px",
+                    }}>
+                      CERTIFIED FOR<br />
+                      <span style={{ color: "#1A4731" }}>GLOBAL EXPORT</span>
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {EXPORT_CERTS.map((c) => (
+                        <span
+                          key={c}
+                          className="font-mono text-[9px] font-bold uppercase tracking-[0.1em] px-2 py-1"
+                          style={{
+                            background:   "rgba(26,71,49,0.08)",
+                            color:        "#1A4731",
+                            borderRadius: "3px",
+                            border:       "1px solid rgba(26,71,49,0.15)",
+                          }}
+                        >
+                          {c}
+                        </span>
+                      ))}
                     </div>
-                  </Link>
-                ))}
+                  </div>
+
+                  <p className="font-mono text-[9px] uppercase tracking-[0.16em]" style={{ color: "#7A6B54" }}>
+                    Airlines · Hotels · QSR Chains
+                  </p>
+                </Link>
               </div>
             </div>
 
