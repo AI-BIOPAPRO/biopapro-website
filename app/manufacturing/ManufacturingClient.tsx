@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import Link from "next/link";
 import { ArrowUpRight, CheckCircle2, Leaf, Shield, Users, Globe, Factory } from "lucide-react";
@@ -14,14 +14,6 @@ const STATS = [
   { value: "2019",  label: "Established",     sub: "Mumbai, India",      Icon: Leaf    },
 ];
 
-const STEPS = [
-  { n: "01", title: "Certified Timber",    body: "FSC®-certified birchwood sourced from responsible forests. Every log traced to its origin." },
-  { n: "02", title: "Log Slitting",        body: "High-precision band saws cut logs into uniform billets. Tolerances held to ±0.3 mm." },
-  { n: "03", title: "Stamping & Shaping",  body: "100M+ units per month stamped on automated presses. Each die set for exact cutlery geometry." },
-  { n: "04", title: "Precision Finishing", body: "Multi-stage sanding lines deliver natural-smooth and birch-grain finishes. 100% splinter-free." },
-  { n: "05", title: "Quality Checkpoint",  body: "Optical sorting + AQL 2.5 inspection. Defect rate below 0.08%. Every batch documented." },
-  { n: "06", title: "Export Packaging",    body: "FSSAI, FDA, and EU-compliant packaging. FCL / LCL container dispatch from JNPT, Mumbai." },
-];
 
 const CERTS = [
   { code: "FSC® 100%",        name: "Forest Stewardship Council",   desc: "Responsible birchwood sourcing" },
@@ -50,7 +42,6 @@ const MUTED   = "#7A6B54";
 export default function ManufacturingClient() {
   const heroRef    = useRef<HTMLElement>(null);
   const heroInView = useInView(heroRef, { once: true });
-  const [activeStep, setActiveStep] = useState(0);
 
   return (
     <main style={{ background: CREAM }}>
@@ -195,79 +186,6 @@ export default function ManufacturingClient() {
         </div>
       </section>
 
-      {/* ── PRODUCTION PROCESS ───────────────────────────── */}
-      <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-36">
-
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: E }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-[0.18em] mb-6"
-          style={{ background: "rgba(26,71,49,0.1)", color: GREEN }}
-        >
-          <Leaf size={10} /> Process · Timber to Table
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1, duration: 0.65, ease: E }}
-          style={{
-            fontFamily:    "'Outfit', sans-serif",
-            fontWeight:    900,
-            fontSize:      "clamp(2.5rem, 5vw, 5rem)",
-            lineHeight:    0.92,
-            letterSpacing: "-0.03em",
-            color:         INK,
-            marginBottom:  "3.5rem",
-          }}
-        >
-          FROM FOREST<br /><span style={{ color: GREEN }}>TO YOUR FORK.</span>
-        </motion.h2>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {STEPS.map((step, i) => (
-            <motion.div
-              key={step.n}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.55, ease: E }}
-              className="p-7 rounded-2xl cursor-pointer transition-all duration-300"
-              style={{
-                background:  activeStep === i ? GREEN    : CREAM2,
-                border:      `1px solid ${activeStep === i ? GREEN : "rgba(26,71,49,0.12)"}`,
-                boxShadow:   activeStep === i ? "0 8px 32px rgba(26,71,49,0.15)" : "none",
-              }}
-              onClick={() => setActiveStep(i)}
-            >
-              <div
-                className="text-[12px] font-black uppercase tracking-[0.22em] mb-4 inline-flex items-center justify-center w-9 h-9 rounded-full"
-                style={{
-                  background: activeStep === i ? "rgba(255,255,255,0.15)" : "rgba(26,71,49,0.1)",
-                  color:      activeStep === i ? CREAM : GREEN,
-                }}
-              >
-                {step.n}
-              </div>
-              <h3
-                className="font-bold text-[16px] mb-3"
-                style={{ fontFamily: "'Outfit', sans-serif", color: activeStep === i ? CREAM : INK }}
-              >
-                {step.title}
-              </h3>
-              <p
-                className="text-[14px] leading-relaxed"
-                style={{ color: activeStep === i ? "rgba(245,240,230,0.75)" : MUTED }}
-              >
-                {step.body}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
       {/* ── CERTIFICATIONS ───────────────────────────────── */}
       <section style={{ background: CREAM2, borderTop: `1px solid rgba(26,71,49,0.1)`, borderBottom: `1px solid rgba(26,71,49,0.1)` }}>

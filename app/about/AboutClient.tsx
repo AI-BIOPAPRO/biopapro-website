@@ -418,13 +418,26 @@ export default function AboutClient() {
       </section>
 
       {/* ── THREE PILLARS ── */}
-      <section className="relative overflow-hidden" style={{ background: "#F5F0E6" }}>
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28">
+      <section className="relative overflow-hidden">
+        {/* Background image */}
+        <Image
+          src="https://biopapro.com/cdn/shop/files/clair-VYJdGvp05V4-unsplash.jpg"
+          alt="Birchwood cutlery rows"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        {/* Dark overlay so text is readable */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "rgba(26,18,8,0.72)" }}
+        />
+        <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28">
           <FadeUp className="mb-14">
             <div className="flex items-center gap-2 mb-5">
               <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em]" style={{ color: "#E97316" }}>03</span>
-              <span className="w-5 h-px" style={{ background: "rgba(233,115,22,0.3)" }} />
-              <span className="font-mono text-[11px] uppercase tracking-[0.28em]" style={{ color: "#1A1208" }}>Our Mission</span>
+              <span className="w-5 h-px" style={{ background: "rgba(233,115,22,0.4)" }} />
+              <span className="font-mono text-[11px] uppercase tracking-[0.28em]" style={{ color: "rgba(245,240,230,0.6)" }}>Our Mission</span>
             </div>
             <h2
               style={{
@@ -433,7 +446,7 @@ export default function AboutClient() {
                 fontSize: "clamp(2.4rem,5vw,5rem)",
                 lineHeight: 0.92,
                 letterSpacing: "-0.03em",
-                color: "#1A1208",
+                color: "#F5F0E6",
               }}
             >
               WHY
@@ -448,8 +461,10 @@ export default function AboutClient() {
                 <div
                   className="p-8 h-full flex flex-col"
                   style={{
-                    border: "1px solid rgba(26,71,49,0.14)",
+                    background: "rgba(245,240,230,0.07)",
+                    border: "1px solid rgba(245,240,230,0.14)",
                     borderRadius: "6px",
+                    backdropFilter: "blur(6px)",
                   }}
                 >
                   <span
@@ -463,13 +478,13 @@ export default function AboutClient() {
                       fontFamily: "'Outfit', sans-serif",
                       fontWeight: 800,
                       fontSize: "1.3rem",
-                      color: "#1A1208",
+                      color: "#F5F0E6",
                       marginBottom: "16px",
                     }}
                   >
                     {title}
                   </h3>
-                  <p style={{ fontSize: "0.9rem", lineHeight: 1.7, color: "#3D2E22" }}>
+                  <p style={{ fontSize: "0.9rem", lineHeight: 1.7, color: "rgba(245,240,230,0.65)" }}>
                     {body}
                   </p>
                 </div>
