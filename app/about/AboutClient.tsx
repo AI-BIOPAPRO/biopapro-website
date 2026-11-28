@@ -394,28 +394,6 @@ export default function AboutClient() {
         </div>
       </section>
 
-      {/* ── FULL-WIDTH PRODUCT IMAGE ── */}
-      <section className="relative overflow-hidden" style={{ background: "#1A4731", height: "clamp(240px,40vw,520px)" }}>
-        <Image
-          src="https://biopapro.com/cdn/shop/files/clair-VYJdGvp05V4-unsplash.jpg"
-          alt="Biopapro wooden cutlery — spoons and forks laid out in rows"
-          fill
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, rgba(26,71,49,0.55) 0%, rgba(26,71,49,0.1) 60%, transparent 100%)" }}
-        />
-        <div className="relative z-10 h-full flex items-end px-6 md:px-12 lg:px-20 pb-10">
-          <span
-            className="font-mono text-[10px] uppercase tracking-[0.26em]"
-            style={{ color: "rgba(245,240,230,0.55)" }}
-          >
-            Birchwood cutlery — crafted at our Mumbai facility
-          </span>
-        </div>
-      </section>
 
       {/* ── THREE PILLARS ── */}
       <section className="relative overflow-hidden">
